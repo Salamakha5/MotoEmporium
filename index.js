@@ -3,20 +3,32 @@ const config = require("config")
 const mongoose = require("mongoose")
 const app = express()
 require('dotenv').config()
+const User = require("./models/User.js")
+
+
+
+
 const PORT = process.env.PORT || 4000
 
-app.use("/home",(req,res)=>{
-    res.json({massage:"Home Page"})
+app.post("/registration",async(req,res)=>{
+    try {
+        const user = User({email:"test121@gmail.com",password:"VladFjajs"})
+        await user.save()
+        return res.json({massage:"Створено нового юзера"})
+    } catch (e) {
+        res.json({massage:"Error Registration"})
+    }
 })
 
 app.use("/about",(req,res)=>{
     res.json({massage:"About Page"})
 })
 
-const start= async ()=>{
+const start = async ()=>{
     try {
-    console.log(PORT);
-    
+    await mongoose.connect(process.env.URL_MONGO_DB).then(()=>{
+        console.log("MongoDB Connect");
+    })
     app.listen(PORT,()=>{
         console.log("Server Run PORT-"+PORT);
     })
