@@ -1,8 +1,15 @@
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+
 import './Login.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
 import language_img from '../../images/icons/choice_flag-en.png';
 import show_password from '../../images/icons/show_password.png';
+
+import Register from '../Register/Register'
+import Home from '../Home/Home'
+
+
 
 function Login() {
     return (
@@ -21,10 +28,13 @@ function Login() {
 
                 <div className="form-wrap">
                     <div className="login-form__title">Log in</div>
-                    <div className="login-form__suptitle">New visitor? <a className="main-link" href="/register">Create your account</a> here</div>
+                    <div className="login-form__suptitle">New visitor?
+                        <NavLink to='/register' element={<Register />}>
+                            <a className="main-link"> Create your account </a>
+                        </NavLink>here</div>
                     {/* =============== */}
                     <input type="text" name="logEmail" id="logEmail" className="form-control forms_bot_line login-form__email" placeholder="Email" />
-                    
+
                     <div className="password-wrap">
                         <input type="password" name="logPassword" id="logPassword" className="form-control forms_bot_line login-form__password" placeholder="Password" />
                         <button className="btn-show_password"><img src={show_password} /></button>
@@ -32,7 +42,11 @@ function Login() {
                     {/* =============== */}
                     <div className="login-form__forgot">Click <a className="main-link" href="#">here</a> in case you forgot your password</div>
                     <div className="btn-cont">
-                        <button className="default-btn_1 login-form__submit" type="submit">Login <a className="default" href="/">(на головну)</a></button>
+                        <NavLink to='/' element={<Home />}>
+                            <button className="default-btn_1 login-form__submit" type="submit">
+                                Login (на головну)
+                            </button>
+                        </NavLink>
                     </div>
                 </div>
 

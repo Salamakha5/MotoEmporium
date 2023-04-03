@@ -5,6 +5,11 @@ import moto_bg from '../../images/logReg_bg.png';
 import language_img from '../../images/icons/choice_flag-en.png';
 import show_password from '../../images/icons/show_password.png';
 
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+
+import Login from '../Login/Login'
+import Home from '../Home/Home'
+
 function Register() {
     return (
         <div className="register">
@@ -22,7 +27,11 @@ function Register() {
 
                 <div className="form-wrap">
                     <div className="register-form__title">Create on account</div>
-                    <div className="register-form__suptitle">Already have an account? <a className="main-link" href="/login">Login</a> here</div>
+                    <div className="register-form__suptitle">Already have an account?
+                        <NavLink to='/login' element={<Login />}>
+                            <a className="main-link"> Login </a>
+                        </NavLink>
+                        here</div>
                     {/* =============== */}
                     <input type="text" name="firstName" id="firstName" className="form-control forms_bot_line register-form__firstName" placeholder="Full name" />
 
@@ -44,7 +53,11 @@ function Register() {
                     </div>
                     {/* =============== */}
                     <div className="btn-cont">
-                        <button className="default-btn_1 register-form__submit" type="submit">Register Account <a href="/">(на головну)</a></button>
+                        <NavLink to='/' element={<Home />}>
+                            <button className="default-btn_1 register-form__submit" type="submit">
+                                Register Account (на головну)
+                            </button>
+                        </NavLink>
                     </div>
                 </div>
 
