@@ -1,0 +1,56 @@
+@import '../../scss/variables';
+
+.notFound {
+    position: relative;
+
+    &__bg {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 60%;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    &__wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40%;
+        height: 100vh;
+        padding-left: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: white;
+        box-shadow: 100px 0px 100px 100px white;
+    }
+
+    &__title {
+        @include fontSettings($mainFont, 55px, 700);
+        line-height: 66px;
+    }
+
+    &__suptitle {
+        @include fontSettings($mainFont, 40px, 400);
+        line-height: 48px;
+    }
+    
+    &__text {
+        @include fontSettings($mainFont, 24px, 400);
+        line-height: 29px;
+        padding-top: 50px;
+    }
+
+    &__back {
+        @include fontSettings($mainFont, 24px, 400);
+        line-height: 29px;
+        padding-top: 60px;
+        text-decoration: underline;
+        display: flex;
+        justify-content: center;
+    }
+
+}

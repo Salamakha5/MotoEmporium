@@ -1,0 +1,111 @@
+@import '../../scss/variables';
+
+.login {
+    position: relative;
+
+    &__img-title {
+        @include fontSettings($mainFont, 26px, 700);
+        line-height: 31px;
+        position: absolute;
+        top: 28px;
+        left: 36px;
+        color: white;
+    }
+
+    &__bg-img {
+        position: relative;
+        z-index: -1;
+        height: 100vh;
+        width: 70%;
+        object-fit: cover;
+    }
+
+    &-form {
+        position: relative;
+        background-color: white;
+        height: 100vh;
+        width: 50%;
+        border-radius: 85px 0 0 85px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .choose-language {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            @include fontSettings($mainFont, 20px, 500);
+            line-height: 24px;
+
+            img {
+                width: 25px;
+                height: 25px;
+                margin-right: 5px;
+            }
+
+            &__select {
+                border: 0;
+            }
+        }
+
+        .form-wrap {
+            min-width: 400px;
+            width: 70%;
+        }
+
+        &__title {
+            @include fontSettings($mainFont, 32px, 400);
+            line-height: 38px;
+        }
+
+        &__suptitle {
+            @include fontSettings($mainFont, 18px, 400);
+            line-height: 21px;
+            padding-bottom: 40px;
+        }
+
+        &__email {
+            margin-bottom: 20px;
+        }
+
+        .password-wrap {
+            position: relative;
+
+            .login-form__password {
+                padding-right: 40px;
+            }
+
+            .btn-show_password {
+                background-color: white;
+                position: absolute;
+                right: 8px;
+                top: 8px;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+
+        &__forgot {
+            @include fontSettings($mainFont, 14px, 400);
+            line-height: 17px;
+            text-align: right;
+            padding-top: 7px;
+        }
+
+        .btn-cont {
+            display: flex;
+            justify-content: center;
+            margin-top: 115px;
+        }
+
+    }
+}

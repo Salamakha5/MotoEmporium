@@ -1,0 +1,15 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+$mainColor: rgb(211, 175, 55);
+// $mainColor: lime;
+// $mainColor: rgb(162, 229, 145);
+$mainColorDarken: rgb(190, 158, 50);
+
+$mainFont: Inter;
+
+@mixin fontSettings($font-family, $font-size, $font-weight) {
+    font-family: $font-family, sans-serif;
+    font-size: $font-size;
+    font-weight: $font-weight;
+}
