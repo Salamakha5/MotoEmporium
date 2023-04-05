@@ -5,12 +5,24 @@ import moto_bg from '../../images/logReg_bg.png';
 import language_img from '../../images/icons/choice_flag-en.png';
 import show_password from '../../images/icons/show_password.png';
 
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
-
 import Login from '../Login/Login'
 import Home from '../Home/Home'
 
-function Register() {
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+import { useRef } from 'react';
+import serverStore from '../../store/serverStore';
+import { observer } from 'mobx-react-lite';
+
+const Register = observer(() => {
+
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    function requestToStore() {
+        serverStore.registerUser(nameRef.current.value, emailRef.current.value, passwordRef.current.value)
+    }
+
     return (
         <div className="register">
             <div className="register__img-title">two wheelers</div>
@@ -29,41 +41,49 @@ function Register() {
                     <div className="register-form__title">Create on account</div>
                     <div className="register-form__suptitle">Already have an account?
                         <NavLink to='/login' element={<Login />}>
-                            <a className="main-link"> Login </a>
+                            <span className="main-link"> Login </span>
                         </NavLink>
                         here</div>
                     {/* =============== */}
-                    <input type="text" name="firstName" id="firstName" className="form-control forms_bot_line register-form__firstName" placeholder="Full name" />
+                    <form>
 
-                    <input type="email" name="regEmail" id="regEmail" className="form-control forms_bot_line register-form__email" placeholder="Email" />
+                        <input type="text" name="firstName" id="firstName" className="form-control forms_bot_line register-form__firstName" placeholder="Full name"
+                            ref={nameRef} />
 
-                    <div className="password-wrap">
-                        <input type="password" name="regPassword" id="regPassword" className="form-control forms_bot_line register-form__password" placeholder="Password" />
-                        <button className="btn-show_password"><img src={show_password} /></button>
-                    </div>
+                        <input type="email" name="regEmail" id="regEmail" className="form-control forms_bot_line register-form__email" placeholder="Email"
+                            ref={emailRef} />
 
-                    <div className="password-wrap">
-                        <input type="password" name="confirmPassword" id="confirmPassword" className="form-control forms_bot_line register-form__confirmPassword" placeholder="Confirm Password" />
-                        <button className="btn-show_password"><img src={show_password} /></button>
-                    </div>
+                        <div className="password-wrap">
+                            <input type="password" name="regPassword" id="regPassword" className="form-control forms_bot_line register-form__password" placeholder="Password"
+                                ref={passwordRef} />
+                            <button className="btn-show_password"><img src={show_password} /></button>
+                        </div>
 
-                    <div class="iAgree-wrap">
-                        <input class="form-check-input" type="checkbox" id="iAgree" />
-                        <label class="form-check-label" for="iAgree">I agree to store’s Terms and Conditions</label>
-                    </div>
-                    {/* =============== */}
-                    <div className="btn-cont">
-                        <NavLink to='/' element={<Home />}>
-                            <button className="default-btn_1 register-form__submit" type="submit">
-                                Register Account (на головну)
+                        <div className="password-wrap">
+                            <input type="password" name="confirmPassword" id="confirmPassword" className="form-control forms_bot_line register-form__confirmPassword" placeholder="Confirm Password" />
+                            <button className="btn-show_password"><img src={show_password} /></button>
+                        </div>
+
+                        <div className="iAgree-wrap">
+                            <input className="form-check-input" type="checkbox" id="iAgree" />
+                            <label className="form-check-label" htmlFor="iAgree">I agree to store’s Terms and Conditions</label>
+                        </div>
+                        {/* =============== */}
+                        <div className="btn-cont">
+                            {/* <NavLink to='/' element={<Home />}> */}
+                            <button className="default-btn_1 register-form__submit" type="submit"
+                                onClick={requestToStore}>
+                                Register Account
                             </button>
-                        </NavLink>
-                    </div>
+                            {/* </NavLink> */}
+                        </div>
+                    </form>
+
                 </div>
 
             </div>
         </div>
     );
-}
+})
 
 export default Register;
