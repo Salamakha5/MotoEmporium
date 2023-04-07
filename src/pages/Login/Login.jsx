@@ -6,25 +6,41 @@ import language_img from '../../images/icons/choice_flag-en.png';
 import show_password from '../../images/icons/show_password.png';
 
 import Register from '../Register/Register'
-import Home from '../Home/Home'
 
 import { BrowserRouter as Router, NavLink } from 'react-router-dom'
 import serverStore from '../../store/serverStore';
 import { observer } from 'mobx-react-lite';
-import { useRef } from 'react';
-
+import { useState } from 'react';
+import {useFormik} from "formik";
+import * as Yup from "yup"
 
 
 const Login = observer(() => {
-
-    const emailRef = useRef();
-    const passwordRef = useRef();
-
+    const [iconsLock1, setIconsLock1] = useState("bi bi-lock-fill")
+    const formik = useFormik({
+        initialValues:{
+            email: '',
+            password: '',
+        },
+        onSubmit: function(value){
+          alert("Submit!")
+          console.log(formik);
+        },
+        validationSchema:Yup.object({
+          email: Yup.string().required("Не заповнене").email("Eлектронна адреса має бути дійсною!"),
+          password:Yup.string().required("Не заповнене").min(3,"Пароль має містити від 3 сим.")
+        })
+        
+      })
     function requestToStore() {
-        serverStore.loginUser(emailRef.current.value, passwordRef.current.value)
+        console.log(serverStore.userIsAuth);
+        const {email,password}=formik.values
+        serverStore.loginUser(email,password)
     }
 
-
+    function changeIconsClass(e){
+        if(e.target.id == "button1"){iconsLock1 == "bi bi-lock-fill"?setIconsLock1("bi bi-unlock-fill"):setIconsLock1("bi bi-lock-fill")}
+    }   
     return (
         <div className="login" >
             <div className="login__img-title">two wheelers</div>
@@ -39,33 +55,29 @@ const Login = observer(() => {
                     </select>
                 </div>
 
-                <div className="form-wrap">
+                <form className="form-wrap" onSubmit={formik.handleSubmit}>
                     <div className="login-form__title">Log in</div>
                     <div className="login-form__suptitle">New visitor?
                         <NavLink to='/register' element={<Register />}>
                             <span className="main-link"> Create your account </span>
                         </NavLink>here</div>
                     {/* =============== */}
-                    <input type="text" name="logEmail" id="logEmail" className="form-control forms_bot_line login-form__email" placeholder="Email"
-                        ref={emailRef} />
-
+                    <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Email"
+                    onChange={formik.handleChange} value={formik.values.email}/>
+                    <label className='error'>{formik.errors.email?formik.errors.email:""}</label>
                     <div className="password-wrap">
-                        <input type="password" name="logPassword" id="logPassword" className="form-control forms_bot_line login-form__password" placeholder="Password"
-                            ref={passwordRef} />
-
-                        <button className="btn-show_password"><img src={show_password} /></button>
+                        <input  type={iconsLock1 == "bi bi-lock-fill"?"password":"text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder="Password"
+                       onChange={formik.handleChange} value={formik.values.password} />
+                        <button type='button' onClick={changeIconsClass} className="btn-show_password"><i id="button1" class={"fs-3 "+iconsLock1}></i></button>
                     </div>
+                    <label className='error'>{formik.errors.password?formik.errors.password:""}</label>
                     {/* =============== */}
                     <div className="login-form__forgot">Click <span className="main-link">here</span> in case you forgot your password</div>
-                    <div className="btn-cont">
-                        {/* <NavLink to='/' element={<Home />}> */}
-                        <button className="default-btn_1 login-form__submit" type="submit"
-                            onClick={requestToStore}>
-                            Login
-                        </button>
-                        {/* </NavLink> */}
+                    <div className='ErrorApi'>{serverStore.loginError}</div>
+                    <div className="btn-cont mt-4">
+                    <NavLink to="/home" onClick={requestToStore} className={formik.isValid&&formik.dirty?" btn default-btn_1 register-form__submit ":" btn default-btn_1 register-form__submit disabled "} aria-disabled="true" role="submit" data-bs-toggle="button">Register Account</NavLink>
                     </div>
-                </div>
+                </form>
 
             </div>
         </div>

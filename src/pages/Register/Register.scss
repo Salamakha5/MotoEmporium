@@ -1,6 +1,17 @@
 @import '../../scss/variables';
 
 .register {
+    .ErrorApi{
+        margin-top:20px;
+        color: red;
+        font-weight: 900;
+        font-size: 20px;
+        text-align: center;
+    }
+    .error{
+        color: brown;
+        font-size: 12px;
+    }
     position: relative;
 
     &__img-title {
@@ -71,7 +82,7 @@
         }
 
         &__firstName, &__email, &__password, &__confirmPassword {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .password-wrap {

@@ -1,6 +1,20 @@
 @import '../../scss/variables';
 
 .login {
+    .default-btn_1{
+        background-color: rgb(211, 175, 55);
+    }
+    .ErrorApi{
+        margin-top:20px;
+        color: red;
+        font-weight: 900;
+        font-size: 20px;
+        text-align: center;
+    }
+    .error{
+        color: brown;
+        font-size: 12px;
+    }
     position: relative;
 
     &__img-title {
@@ -71,7 +85,7 @@
         }
 
         &__email {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .password-wrap {
