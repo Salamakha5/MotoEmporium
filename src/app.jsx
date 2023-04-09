@@ -25,16 +25,18 @@ const App = observer(() => {
                         <Routes>
                             <Route path='*' element={<NotFound />} />
                             <Route path="/" element={<Layot />}>
+                                <Route path='/' element={<Home />} />
                                 <Route path='home' element={<Home />} />
                                 <Route path='shop' element={<Shop />} />
                             </Route>
                         </Routes>
                         :
                         <Routes>
-                            <Route path='*' element={<Login />} />
                             <Route path="/" element={<Layot />}>
-                                <Route path='home' element={<Home />} />
+                                <Route path='/' element={<Home />} />
+                                <Route path='/home' element={<Home />} />
                             </Route>
+                            <Route path='*' element={<Login />} />
                             <Route path='/login' element={<Login />} />
                             <Route path='/register' element={<Register />} />
                         </Routes>

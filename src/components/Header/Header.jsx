@@ -12,36 +12,24 @@ const Header = observer(() => {
     return (
         <header className="header">
             <div className="header__logo">two wheels</div>
-            <div className="header__wrap">
+            
+            <div className="header__wrap d-flex align-items-center">
 
-                <ul className='header__nav'>
+                <ul className='header__nav d-flex align-items-center'>
                     <span>
-                        <NavLink className='nav-item main-link for-dev' to='/login' element={<Login />}>Login</NavLink>
-                        <NavLink className='nav-item main-link for-dev' to='/register' element={<Login />}>Register</NavLink>
+                        <NavLink className='nav-item main-link for-dev' to='/login' element={<Login />}>Логін</NavLink>
+                        <NavLink className='nav-item main-link for-dev' to='/register' element={<Login />}>Реєстрація</NavLink>
                     </span>
-                    <NavLink className='nav-item main-link' to='/home' element={<Home />}>Home</NavLink>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle main-link disabled" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Motocycles
-                        </a>
-                        <ul className="dropdown-menu dropdown-menu-dark">
-                            <li><a className="dropdown-item" href="#">Action</a></li>
-                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <NavLink className='nav-item main-link disabled' disable to='/home' element={<Home />}>Our Blog</NavLink>
-                    <NavLink className='nav-item main-link disabled' disable to='/home' element={<Home />}>Contact us</NavLink>
+                    <NavLink className='nav-item main-link' to='/home' element={<Home />}>Головна</NavLink>
+                    <NavLink className='nav-item main-link' to='/home' element={<Home />}>Каталог</NavLink>
+                    <NavLink className='nav-item main-link disabled' disable to='/home' element={<Home />}>Блог</NavLink>
+                    
+                    <a onClick={()=>serverStore.exit()} className='nav-item main-link disabled'>Вийти <i class="fs-4 bi bi-door-open-fill"></i> </a>
                 </ul>
+                
                 <div className='header__user'>
                     <div className="decoration"></div>
-
-                    {
-                        serverStore.userIsAuth == true ?
-                            <span>User is auth</span>
-                            :
-                            <span>User is NOT auth</span>
-                    }
+                    <div className='pb-1'>{serverStore.UserName}</div>
                 </div>
             </div>
 

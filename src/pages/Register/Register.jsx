@@ -53,27 +53,27 @@ const Register = observer(() => {
                 </div>
 
                 <div className="form-wrap">
-                    <div className="register-form__title">Create on account</div>
-                    <div className="register-form__suptitle">Already have an account?
+                    <div className="register-form__title">Створити новий обліковий запис</div>
+                    <div className="register-form__suptitle">Вже є аккаунт?
                         <NavLink to='/login' element={<Login />}>
-                            <span className="main-link"> Login </span>
+                            <span className="main-link"> Авторизація </span>
                         </NavLink>
-                        here</div>
+                        тут</div>
                     <form onSubmit={formik.handleSubmit}>
 
-                        <input type="text" onChange={formik.handleChange} name="name" id="name" className="form-control forms_bot_line register-form__firstName" placeholder="Full name"
+                        <input type="text" onChange={formik.handleChange} name="name" id="name" className="form-control forms_bot_line register-form__firstName" placeholder="Повне ім'я"
                             value={formik.values.name}
                         />
                         <label className='error'>{formik.errors.name ? formik.errors.name : ""}</label>
 
-                        <input type="email" name="email" id="email" className="form-control forms_bot_line register-form__email" placeholder="Email"
+                        <input type="email" name="email" id="email" className="form-control forms_bot_line register-form__email" placeholder="Електронна пошта"
                             onChange={formik.handleChange}
                             value={formik.values.email}
                         />
                         <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
 
                         <div className="password-wrap">
-                            <input type={iconsLock1 == "bi bi-eye-slash-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line register-form__password" placeholder="Password"
+                            <input type={iconsLock1 == "bi bi-eye-slash-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line register-form__password" placeholder="Пароль"
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
                             />
@@ -82,11 +82,11 @@ const Register = observer(() => {
                         </div>
                         <div className="iAgree-wrap">
                             <input className="form-check-input" type="checkbox" id="iAgree" />
-                            <label className="form-check-label" htmlFor="iAgree">I agree to store’s Terms and Conditions</label>
+                            <label className="form-check-label" htmlFor="iAgree">Я погоджуюсь на умови зберігання</label>
                         </div>
                         <div className='ErrorApi'>{serverStore.registerError}</div>
                         <div className="btn-cont">
-                            <button onClick={requestToStore} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit" : "btn register-form__submit disabled default-btn_1"} aria-disabled="true" role="submit" data-bs-toggle="button">Register Account</button>
+                            <button onClick={requestToStore} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit" : "btn register-form__submit disabled default-btn_1"} aria-disabled="true" role="submit" data-bs-toggle="button">Реєстрація</button>
                         </div>
                     </form>
 

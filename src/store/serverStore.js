@@ -6,8 +6,16 @@ class ServerStore {
     userIsAuth = false
     registerError = ""
     loginError = ""
+    UserName = "Гість"
     constructor() {
         makeAutoObservable(this)
+    }
+
+
+    exit(){
+        localStorage.removeItem("IsAuthMOTO")
+        this.userIsAuth = false    
+        this.UserName = "Гість" 
     }
 
     loginUser(emailL, passwordL) {
@@ -32,11 +40,11 @@ class ServerStore {
     decodedToken(token1) {
         if (token1) {
             axios.post(this.URL + "/decoded", {
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXNzYWdlIjoi0KPRgdC_0ZbRiNC90LjQuSDQstGF0ZbQtCIsImlzQXV0aCI6dHJ1ZSwidXNlciI6eyJuYW1lIjoiVmxhZCIsImlkIjoiNjQzMDM1ZmViNzczMTc2NGZhMWY3OTg0IiwiZW1haWwiOiJBZG1pbkBnbWFpbC5jb20ifSwiaWF0IjoxNjgwODg2NjA4LCJleHAiOjE2ODA5NzMwMDh9.EIpuCBaLoXWoJoanHnUaXM-SSrSkHTUyudeACxhSCNM"
+                token:token1
             })
                 .then((response) => {
-                    console.log(response.data.IsAuth);
-                    this.userIsAuth = response.data.IsAuth
+                    this.userIsAuth = response.data.isAuth
+                    this.UserName = response.data.user.name
                 })
                 .catch((error) => {
                     this.userIsAuth = false
@@ -46,6 +54,7 @@ class ServerStore {
     }
 
     registerUser(nameR, emailR, passwordR) {
+        console.log(nameR,emailR,passwordR);
         axios.post(this.URL + '/registration', {
             name: nameR,
             email: emailR,

@@ -57,27 +57,27 @@ const Login = observer(() => {
                 </div>
 
                 <form className="form-wrap" onSubmit={formik.handleSubmit}>
-                    <div className="login-form__title">Log in</div>
-                    <div className="login-form__suptitle">New visitor?
+                    <div className="login-form__title">Авторизація</div>
+                    <div className="login-form__suptitle">Новий відвідувач?
                         <NavLink to='/register' element={<Register />}>
-                            <span className="main-link"> Create your account </span>
-                        </NavLink>here</div>
+                            <span className="main-link"> Створити новий обліковий запис </span>
+                        </NavLink>тут</div>
                     {/* =============== */}
-                    <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Email"
+                    <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Пошта"
                         onChange={formik.handleChange} value={formik.values.email} />
                     <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
                     <div className="password-wrap">
-                        <input type={iconsLock1 == "bi bi-eye-slash-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder="Password"
+                        <input type={iconsLock1 == "bi bi-eye-slash-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder="Пароль"
                             onChange={formik.handleChange} value={formik.values.password} />
                         
                         <button type='button' onClick={changeIconsClass} className="btn-show_password"><i id="button1" class={"fs-3 " + iconsLock1}></i></button>
                     </div>
                     <label className='error'>{formik.errors.password ? formik.errors.password : ""}</label>
                     {/* =============== */}
-                    <div className="login-form__forgot">Click <span className="main-link">here</span> in case you forgot your password</div>
+                    <div className="login-form__forgot">Клацніть <span className="main-link">тут</span> якщо ви забули свій пароль</div>
                     <div className='ErrorApi'>{serverStore.loginError}</div>
                     <div className="btn-cont mt-4">
-                        <NavLink to="/home" onClick={requestToStore} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "} aria-disabled="true" role="submit" data-bs-toggle="button">Login</NavLink>
+                        <NavLink to="/home" onClick={requestToStore} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "} aria-disabled="true" role="submit" data-bs-toggle="button">Авторизація</NavLink>
                     </div>
                 </form>
 

@@ -22,30 +22,30 @@ const Home = () => {
             <div className="hero">
                 <img className='hero__bg' src={hero_bg} alt="biker in hills" />
                 <div className="hero__info">
-                    <div className="title">Find your dream motorcycle here!</div>
-                    <div className="text">We have 100+ collections of new and used motorcycles from big names such as Honda, Kawasaki, Yamaha, Ducati, etc. We will give the best price you can get and great quality motorcycle.</div>
+                    <div className="title">Знайдіть тут мотоцикл своєї мрії!</div>
+                    <div className="text">У нас є 100+ колекцій нових та вживаних мотоциклів з великих імен, таких як Honda, Kawasaki, Yamaha, Ducati тощо.</div>
                     <div className="link-cont">
-                        <NavLink to={'/home'} element={<Home />}><span className='main-link link'>Let's find one</span></NavLink>
+                        <NavLink to={'/home'} element={<Home />}><span className='main-link link'>Давайте знайдемо його</span></NavLink>
                     </div>
                 </div>
             </div>
             <div className="sales">
                 <img className='sales__bg' src={sales_bg} alt="#" />
-                <div className="sales__title">GET READY FOR YOUR SUMMER RIDE</div>
-                <div className="sales__text">Save yourself up to 20% off on your purchase this summer</div>
-                <div className="sales__date">Valid until August 31, 2022</div>
+                <div className="sales__title">Будьте готові до літньої їзди</div>
+                <div className="sales__text">Збережіть себе до 20% знижки на покупці цього літа</div>
+                <div className="sales__date">Дійсна до 31 серпня 2022 року</div>
             </div>
             <div className="why-us">
                 <div className="why-us__img-cont">
                     <img src={why_us} alt="#" />
                 </div>
                 <div>
-                    <div className="why-us__title">Why us?</div>
+                    <div className="why-us__title">Чому ми?</div>
                     <div className="why-us__p">
-                        Since 2019, twowheelers sells hundreds of motorcycles that are hot for the roads for a reasonable price. From low engine size to bigger engine, we have all. Want to enjoy the sunset on the road or you’re just a speed freak who likes to race against your friends on the racetrack? You’ll find the motorcycle that suits you.
+                        Починаючи з 2019 року, Twowelers продає сотні мотоциклів, які гарячі для дорог за розумну ціну.Від низького розміру двигуна до більшого двигуна, у нас є все.Хочете насолодитися заходом сонця на дорозі, або ви просто швидкісна виродка, яка любить змагатися проти своїх друзів на іподромі?Ви знайдете мотоцикл, який вам підходить.
                     </div>
                     <div className="why-us__p">
-                        Our employees are the best on the field with many experiences on a motorcycle and tons of knowledge about it, so come visit us and do not hesitate to ask us questions. We welcome those who are new with a motorcycle and wonder how it feels to explore places on a motorcycle.
+                       Наші співробітники - найкращі на полі з багатьма досвідом на мотоциклі та тоннам знань про це, тому приходьте до нас і не соромтеся задавати нам питання.Ми вітаємо тих, хто новачок з мотоциклом, і дивуємось, як почуватися досліджувати місця на мотоциклі.
                     </div>
                 </div>
             </div>
