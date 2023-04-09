@@ -1,0 +1,56 @@
+@import '../../scss/variables';
+
+.header {
+    background-color: $mainColor2;
+    color: $mainColor;
+    padding: 28px 0 28px 40px;
+    display: flex;
+    justify-content: space-between;
+
+    &__logo {
+        @include fontSettings($mainFont, 26px, 700);
+        line-height: 31px;
+    }
+
+    &__wrap {
+        display: flex;
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: space-around;
+
+        .nav-item {
+            padding: 0 35px;
+        }
+    }
+
+    &__user {
+        padding: 0 40px 0 40px;
+        @include fontSettings($mainFont, 20px, 700);
+        line-height: 25px;
+        text-decoration: underline;
+        position: relative;
+
+        .decoration {
+            // clip-path: polygon(0 0, 100% 0, 74% 22%, 24% 22%);
+            clip-path: polygon(49% 54%, 0 0, 100% 0);
+            background-color: $mainColor;
+            width: 70px;
+            height: 20px;
+            position: absolute;
+            bottom: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .for-dev {
+        color: khaki;
+        text-shadow: 0 0 10px yellow;
+    }
+
+    .disabled {
+        color: crimson;
+    }
+}

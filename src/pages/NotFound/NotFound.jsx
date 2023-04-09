@@ -16,7 +16,7 @@ const NotFound = () => {
                     <div className="notFound__suptitle">Page not found</div>
                     <div className="notFound__text">Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.</div>
                     <div className="notFound__back">
-                        <NavLink to='/' element={<Home />}>Go back to Home</NavLink>
+                        <NavLink to='/home' element={<Home />}>Go back to Home</NavLink>
                     </div>
                 </div>
             </div>
