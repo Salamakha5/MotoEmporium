@@ -21,7 +21,7 @@ const Header = observer(() => {
                         <NavLink className='nav-item main-link for-dev' to='/register' element={<Login />}>Реєстрація</NavLink>
                     </span>
                     <NavLink className='nav-item main-link' to='/home' element={<Home />}>Головна</NavLink>
-                    <NavLink className='nav-item main-link' to='/home' element={<Home />}>Каталог</NavLink>
+                    <NavLink className='nav-item main-link' to='/shop' element={<Shop/>}>Каталог</NavLink>
                     <NavLink className='nav-item main-link disabled' disable to='/home' element={<Home />}>Блог</NavLink>
                     
                     <a onClick={()=>serverStore.exit()} className='nav-item main-link disabled'>Вийти <i class="fs-4 bi bi-door-open-fill"></i> </a>

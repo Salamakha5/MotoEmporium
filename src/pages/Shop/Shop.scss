@@ -1,3 +1,29 @@
 .shop {
     background-color: pink;
 }
+.shop_container{
+    padding-top:50px;
+    padding-bottom:50px;
+    background-image: url("../../images/shop_bg.png");
+    background-color: rgba(0,0,0,0.5);
+}
+.main_cont{
+    background-color: white;
+}
+.select_block{
+    background-color: #252C33;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px;
+}
+.select_block h4{
+    color:#D3AF37 ;
+    font-size:20px;
+    font-weight: 900;
+}
+.line_cont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+}

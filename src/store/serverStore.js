@@ -3,13 +3,30 @@ import axios from 'axios';
 import { decodeToken, useJwt } from "react-jwt";
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
-    userIsAuth = false
+    userIsAuth = true
+    MotoData = []
     registerError = ""
     loginError = ""
     UserName = "Гість"
+    spinerShop = "d-block"
     constructor() {
         makeAutoObservable(this)
     }
+    
+    
+    getAllMoto(){
+        this.spinerShop = "d-block"
+        axios.get(this.URL + "/getAllMoto")
+        .then((response) => {
+            console.log("this.getAllMoto"); 
+            this.MotoData = response.data
+            this.spinerShop = "d-none"
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
 
 
     exit(){

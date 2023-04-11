@@ -1,0 +1,19 @@
+.oneCard_count{
+    .imgCont{
+        height:220px;
+    }
+    .cardMoto{
+        padding: 10px;
+        border-radius: 10px;
+        background-color:#252C33;
+        color:#D3AF37 ;
+        min-height: max-content;
+        img{
+            border-radius: 10px;
+        }
+    }
+    .oneCard_price{
+        font-weight: 900;
+        font-size: 20px;
+    }
+}
