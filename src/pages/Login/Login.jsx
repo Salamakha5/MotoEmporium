@@ -15,7 +15,6 @@ import * as Yup from "yup"
 
 
 const Login = observer(() => {
-    // const [iconsLock1, setIconsLock1] = useState("bi bi-lock-fill")
     const [iconsLock1, setIconsLock1] = useState("bi bi-eye-fill")
     const formik = useFormik({
         initialValues: {
@@ -24,7 +23,7 @@ const Login = observer(() => {
         },
         onSubmit: function (value) {
             alert("Submit!")
-            console.log(formik);
+            // console.log(formik);
         },
         validationSchema: Yup.object({
             email: Yup.string().required("Не заповнене").email("Eлектронна адреса має бути дійсною!"),
@@ -36,15 +35,15 @@ const Login = observer(() => {
         console.log(serverStore.userIsAuth);
         const { email, password } = formik.values
         serverStore.loginUser(email, password)
+        console.log(serverStore.loginError);
     }
 
     function changeIconsClass(e) {
-        // if (e.target.id == "button1") { iconsLock1 == "bi bi-lock-fill" ? setIconsLock1("bi bi-unlock-fill") : setIconsLock1("bi bi-lock-fill") }
         if (e.target.id == "button1") { iconsLock1 == "bi bi-eye-slash-fill" ? setIconsLock1("bi bi-eye-fill") : setIconsLock1("bi bi-eye-slash-fill") }
     }
     return (
         <div className="login" >
-            <div className="login__img-title">two wheelers</div>
+            <div className="login__img-title">MotoEmporium</div>
             <img className="login__bg-img" src={moto_bg} alt='biker in offroad' />
             <div className="login-form">
 
@@ -67,9 +66,9 @@ const Login = observer(() => {
                         onChange={formik.handleChange} value={formik.values.email} />
                     <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
                     <div className="password-wrap">
-                        <input type={iconsLock1 == "bi bi-eye-slash-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder="Пароль"
+                        <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder="Пароль"
                             onChange={formik.handleChange} value={formik.values.password} />
-                        
+
                         <button type='button' onClick={changeIconsClass} className="btn-show_password"><i id="button1" class={"fs-3 " + iconsLock1}></i></button>
                     </div>
                     <label className='error'>{formik.errors.password ? formik.errors.password : ""}</label>

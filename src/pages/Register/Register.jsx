@@ -28,19 +28,17 @@ const Register = observer(() => {
         })
 
     })
-    // const [iconsLock1, setIconsLock1] = useState("bi bi-lock-fill")
     const [iconsLock1, setIconsLock1] = useState("bi bi-eye-fill")
     function requestToStore() {
         const { email, name, password } = formik.values
         serverStore.registerUser(name, email, password)
     }
     function changeIconsClass(e) {
-        // if(e.target.id == "button1"){iconsLock1 == "bi bi-lock-fill"?setIconsLock1("bi bi-unlock-fill"):setIconsLock1("bi bi-lock-fill")}
         if (e.target.id == "button1") { iconsLock1 == "bi bi-eye-slash-fill" ? setIconsLock1("bi bi-eye-fill") : setIconsLock1("bi bi-eye-slash-fill") }
     }
     return (
         <div className="register">
-            <div className="register__img-title">two wheelers</div>
+            <div className="register__img-title">MotoEmporium</div>
             <img className="register__bg-img" src={moto_bg} alt='biker in offroad' />
             <div className="register-form">
 
@@ -73,7 +71,7 @@ const Register = observer(() => {
                         <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
 
                         <div className="password-wrap">
-                            <input type={iconsLock1 == "bi bi-eye-slash-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line register-form__password" placeholder="Пароль"
+                            <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line register-form__password" placeholder="Пароль"
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
                             />

@@ -7,7 +7,7 @@ const Footer = () => {
             <div className='footer__nav'>
                 <div className='footer__item'>
                     <ul>
-                        <li className='footer__title'>two wheelers</li>
+                        <li className='footer__title'>MotoEmporium</li>
                         <li className='pb-3 small__lineHeigth'>2005 Broken Dream Blvd <br /> Daytona Beach, FL 32122</li>
                         <li><a className='main-link' href='tel:34375092453'>(343)-7509-2453</a></li>
                     </ul>

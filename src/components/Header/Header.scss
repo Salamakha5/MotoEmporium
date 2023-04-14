@@ -10,15 +10,18 @@
     &__logo {
         @include fontSettings($mainFont, 26px, 700);
         line-height: 31px;
+        cursor: pointer;
     }
 
     &__wrap {
         display: flex;
+        align-items: center;
     }
 
     &__nav {
         display: flex;
         justify-content: space-around;
+        align-items: center;
 
         .nav-item {
             padding: 0 35px;
@@ -39,11 +42,19 @@
             width: 70px;
             height: 20px;
             position: absolute;
-            bottom: -11px;
+            bottom: -17px;
             left: 50%;
             transform: translateX(-50%);
         }
+
+        // .text {}
+
+        .header__login {
+            color: black;
+        }
     }
+
+
 
     .for-dev {
         color: khaki;

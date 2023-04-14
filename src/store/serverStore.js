@@ -7,12 +7,11 @@ class ServerStore {
     MotoData = []
     registerError = ""
     loginError = ""
-    UserName = "Гість"
+    UserName = "Дефолт"
     spinerShop = "d-block"
     constructor() {
         makeAutoObservable(this)
     }
-    
     
     getAllMoto(){
         this.spinerShop = "d-block"
@@ -27,12 +26,10 @@ class ServerStore {
             });
     }
 
-
-
-    exit(){
+    unLogin(){
         localStorage.removeItem("IsAuthMOTO")
         this.userIsAuth = false    
-        this.UserName = "Гість" 
+        this.UserName = "після унлогін" 
     }
 
     loginUser(emailL, passwordL) {

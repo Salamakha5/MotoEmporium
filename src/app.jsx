@@ -23,12 +23,12 @@ const App = observer(() => {
                 {
                     serverStore.userIsAuth == true ?
                         <Routes>
-                            <Route path='*' element={<NotFound />} />
                             <Route path="/" element={<Layot />}>
                                 <Route path='/' element={<Home />} />
                                 <Route path='home' element={<Home />} />
                                 <Route path='shop' element={<Shop />} />
                             </Route>
+                            <Route path='*' element={<NotFound />} />
                         </Routes>
                         :
                         <Routes>
