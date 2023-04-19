@@ -1,7 +1,9 @@
 import './Register.scss';
+
 import moto_bg from '../../images/logReg_bg.png';
 import language_img from '../../images/icons/choice_flag-en.png';
 import Login from '../Login/Login'
+
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
 import { useState, useRef } from 'react';
 import serverStore from '../../store/serverStore.js';
@@ -36,15 +38,13 @@ const Register = observer(() => {
     const [iAgree, setiAgree] = useState(false)
     function iAgreeHandler() { iAgree == true ? setiAgree(false) : setiAgree(true) }
 
+    const loaderClass = serverStore.showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
+
     function requestToStore() {
         const { name, email, password, confirmPassword } = formik.values
 
-        // console.log(formik.isValid && (password !== confirmPassword) && (iAgree == true));
-        // console.log(formik.isValid);
-        // console.log(password == confirmPassword);
-        // console.log(iAgree == true);
-
         if (formik.isValid && (password == confirmPassword) && (iAgree == true)) {
+            serverStore.showPageLoader = true
             serverStore.registerUser(name, email, password)
         } else if (password !== confirmPassword) {
             alertify.alert('Помилка', 'Паролі не збігаються!');
@@ -55,7 +55,15 @@ const Register = observer(() => {
 
     return (
         <div className="register">
-            <div className="register__img-title">MotoEmporium</div>
+            <div className={loaderClass}>
+                <div className="loader active" id="loader-2">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div className="register__img-logo">MotoEmporium</div>
             <img className="register__bg-img" src={moto_bg} alt='biker in offroad' />
             <div className="register-form">
 

@@ -1,23 +1,26 @@
 @import '../../scss/variables';
 
 .login {
-    .default-btn_1{
+
+    .default-btn_1 {
+        // використовуються стилі бутстрапу для виключення кнопки, тому він зїдає бакграунд
         background-color: rgb(211, 175, 55);
     }
-    .ErrorApi{
-        margin-top:20px;
-        color: red;
+
+    .ErrorApi {
+        margin-top: 20px;
+        color: crimson;
         font-weight: 900;
         font-size: 20px;
         text-align: center;
     }
-    .error{
+
+    .error {
         color: brown;
         font-size: 12px;
     }
-    position: relative;
 
-    &__img-title {
+    &__img-logo {
         @include fontSettings($mainFont, 26px, 700);
         line-height: 31px;
         position: absolute;
@@ -29,6 +32,7 @@
     &__bg-img {
         position: relative;
         z-index: -1;
+        min-height: 700px;
         height: 100vh;
         width: 70%;
         object-fit: cover;
@@ -37,6 +41,7 @@
     &-form {
         position: relative;
         background-color: white;
+        min-height: 700px;
         height: 100vh;
         width: 50%;
         border-radius: 85px 0 0 85px;
@@ -69,7 +74,7 @@
         }
 
         .form-wrap {
-            min-width: 400px;
+            min-width: 200px;
             width: 70%;
         }
 
@@ -121,5 +126,59 @@
             margin-top: 115px;
         }
 
+    }
+
+    // adaptive 
+    @media (max-width: 768px) {
+
+        &__img-logo {
+            color: black;
+            z-index: 1;
+        }
+
+        &__bg-img {
+            height: 100vh;
+            width: 100%;
+        }
+
+        &-form {
+            background-color: rgba(255, 255, 255, 0.7);
+            height: 100vh;
+            width: 100%;
+            border-radius: 0 0 0 0;
+
+            .choose-language {
+                top: 20px;
+                right: 30px;
+
+                @media (max-width: 400px) {
+                    top: 80px;
+                    right: 30px;
+                    // right: auto;
+                }
+            }
+        }
+
+        .form-wrap {
+            width: 100%;
+            padding: 0 30px;
+
+            .login-form__forgot {
+                @media (max-width: 344px) {
+                    text-align: left;
+                }
+            }
+        }
+
+        .default-btn_1 {
+
+            @media (max-width: 768px) {
+                font-size: 20px;
+            }
+
+            @media (max-width: 576px) {
+                font-size: 14px;
+            }
+        }
     }
 }

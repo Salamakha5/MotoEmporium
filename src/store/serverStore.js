@@ -11,6 +11,7 @@ class ServerStore {
     loginError = ""
     UserName = "Дефолт"
     spinerShop = "d-block"
+    showPageLoader = false
 
     constructor() {
         makeAutoObservable(this)
@@ -43,13 +44,14 @@ class ServerStore {
             .then((response) => {
                 this.userIsAuth = response.data.isAuth
                 this.loginError = ""
-                window.location.href = "/home"
+                this.showPageLoader = false
                 localStorage.setItem("IsAuthMOTO", response.data.token)
+                // сумніваюсь що так правильно переходити
+                window.location.href = "/home"
             }, (error) => {
+                this.showPageLoader = false
                 this.loginError = error.response.data.massage
             });
-
-
     }
 
     decodedToken(decToken) {
@@ -69,7 +71,7 @@ class ServerStore {
     }
 
     registerUser(nameR, emailR, passwordR) {
-        console.log(nameR, emailR, passwordR);
+        // console.log(nameR, emailR, passwordR);
         axios.post(this.URL + '/registration', {
             name: nameR,
             email: emailR,
@@ -77,9 +79,9 @@ class ServerStore {
         })
             .then((response) => {
                 this.registerAnswer = response.data.massage
-                console.log(response.data.massage);
 
                 if (this.registerAnswer == 'Успішна реєстрація!') {
+                    this.showPageLoader = false
                     alertify.alert('Успіх', `Користувач ${nameR} зареєстрований успішно!`, function () {
                         window.location.href = "/login"
                     });
@@ -87,8 +89,15 @@ class ServerStore {
             })
             .catch((error) => {
                 this.registerAnswer = error.response.data.massage
-                if (this.registerAnswer == 'Користувач з такою поштою вже є') { alertify.alert('Помилка', 'Користувач з такою поштою вже існує!'); }
-                if (this.registerAnswer == 'Помилка:') { alertify.alert(`Помилка`, `${error.response.data.error}`); }
+
+                if (this.registerAnswer == 'Користувач з такою поштою вже є') {
+                    this.showPageLoader = false
+                    alertify.alert('Помилка', 'Користувач з такою поштою вже існує!');
+                }
+                if (this.registerAnswer == 'Помилка:') {
+                    this.showPageLoader = false
+                    alertify.alert(`Помилка`, `${error.response.data.error}`);
+                }
             });
     }
 

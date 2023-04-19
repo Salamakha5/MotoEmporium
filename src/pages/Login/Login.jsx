@@ -31,18 +31,29 @@ const Login = observer(() => {
 
     function changeIconsClass(e) { if (e.target.id == "button1") { iconsLock1 == "bi bi-eye-slash-fill" ? setIconsLock1("bi bi-eye-fill") : setIconsLock1("bi bi-eye-slash-fill") } }
 
+    const loaderClass = serverStore.showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
+
     function requestToStore() {
         const { email, password } = formik.values
+        serverStore.showPageLoader = true
         serverStore.loginUser(email, password)
     }
 
     function forgotHandler() {
         alertify.alert('Співчуття', `Пом'янем :(`);
-    } 
+    }
 
     return (
         <div className="login" >
-            <div className="login__img-title">MotoEmporium</div>
+            <div className={loaderClass}>
+                <div className="loader active" id="loader-2">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div className="login__img-logo">MotoEmporium</div>
             <img className="login__bg-img" src={moto_bg} alt='biker in offroad' />
             <div className="login-form">
 
