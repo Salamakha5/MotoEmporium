@@ -1,17 +1,19 @@
 @import '../../scss/variables';
 
 .register {
-    .ErrorApi{
-        margin-top:20px;
+    .ErrorApi {
+        margin-top: 20px;
         color: red;
         font-weight: 900;
         font-size: 20px;
         text-align: center;
     }
-    .error{
+
+    .error {
         color: brown;
         font-size: 12px;
     }
+
     position: relative;
 
     &__img-title {
@@ -81,18 +83,21 @@
             padding-bottom: 40px;
         }
 
-        &__firstName, &__email, &__password, &__confirmPassword {
-            margin-bottom: 10px;
+        &__firstName,
+        &__email,
+        &__password,
+        &__confirmPassword {
+            margin-top: 15px;
         }
 
-        .password-wrap {
+        .password-wrap, .confirmPassword-wrap {
             position: relative;
 
-            .register-form__password {
+            .register-form__password, .register-form__confirmPassword {
                 padding-right: 40px;
             }
 
-            .btn-show_password {
+            .btn-show_password, .btn-show_confirmPassword {
                 background-color: white;
                 position: absolute;
                 right: 8px;
@@ -108,7 +113,7 @@
         .iAgree-wrap {
             display: flex;
             align-items: center;
-            @include fontSettings($mainFont, 20px, 400);
+            @include fontSettings($mainFont, 16px, 400);
             line-height: 24px;
             user-select: none;
 

@@ -13,7 +13,7 @@ import alertify from 'alertifyjs'
 const Header = observer(() => {
 
     function ggg() {
-        alertify.alert('Ну кайф же нє?', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore, officiis! In obcaecati fugit reprehenderit consequuntur eos iste accusamus perspiciatis, inventore voluptatum quis necessitatibus facere accusantium repellendus, doloremque ipsa mollitia repellat', function () { alertify.success('фокус покус'); });
+        alertify.alert('', 'пасхалка', function () { alertify.success('фокус покус'); });
     }
 
     return (
@@ -31,7 +31,7 @@ const Header = observer(() => {
                     </span> */}
                     <NavLink className='nav-item main-link' to='/home' element={<Home />}>Головна</NavLink>
                     <NavLink className='nav-item main-link' to='/shop' element={<Shop />}>Каталог</NavLink>
-                    <button style={{ display: serverStore.userIsAuth == true ? 'block' : 'none' }} onClick={() => serverStore.unLogin()} className='nav-item main-link disabled'>Вийти <i class="fs-4 bi bi-door-open-fill"></i> </button>
+                    <button style={{ display: serverStore.userIsAuth == true ? 'block' : 'none' }} onClick={() => serverStore.unLogin()} className='nav-item main-link disabled'>Вийти <i className="fs-4 bi bi-door-open-fill"></i> </button>
                 </ul>
 
                 <div className='header__user'>

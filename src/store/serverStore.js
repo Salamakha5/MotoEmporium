@@ -1,35 +1,38 @@
 import { makeAutoObservable } from "mobx"
 import axios from 'axios';
 import { decodeToken, useJwt } from "react-jwt";
+import alertify from 'alertifyjs'
+
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
-    userIsAuth = true
+    userIsAuth = false
     MotoData = []
-    registerError = ""
+    registerAnswer = ''
     loginError = ""
     UserName = "Дефолт"
     spinerShop = "d-block"
+
     constructor() {
         makeAutoObservable(this)
     }
-    
-    getAllMoto(){
+
+    getAllMoto() {
         this.spinerShop = "d-block"
         axios.get(this.URL + "/getAllMoto")
-        .then((response) => {
-            console.log("this.getAllMoto"); 
-            this.MotoData = response.data
-            this.spinerShop = "d-none"
+            .then((response) => {
+                console.log("this.getAllMoto");
+                this.MotoData = response.data
+                this.spinerShop = "d-none"
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    unLogin(){
+    unLogin() {
         localStorage.removeItem("IsAuthMOTO")
-        this.userIsAuth = false    
-        this.UserName = "після унлогін" 
+        this.userIsAuth = false
+        this.UserName = "після унлогін"
     }
 
     loginUser(emailL, passwordL) {
@@ -38,23 +41,21 @@ class ServerStore {
             password: `${passwordL}`
         })
             .then((response) => {
-                console.log(response.data.isAuth);
                 this.userIsAuth = response.data.isAuth
                 this.loginError = ""
                 window.location.href = "/home"
                 localStorage.setItem("IsAuthMOTO", response.data.token)
             }, (error) => {
-                console.log(error);
                 this.loginError = error.response.data.massage
             });
 
 
     }
 
-    decodedToken(token1) {
-        if (token1) {
+    decodedToken(decToken) {
+        if (decToken) {
             axios.post(this.URL + "/decoded", {
-                token:token1
+                token: decToken
             })
                 .then((response) => {
                     this.userIsAuth = response.data.isAuth
@@ -68,18 +69,26 @@ class ServerStore {
     }
 
     registerUser(nameR, emailR, passwordR) {
-        console.log(nameR,emailR,passwordR);
+        console.log(nameR, emailR, passwordR);
         axios.post(this.URL + '/registration', {
             name: nameR,
             email: emailR,
             password: passwordR
         })
             .then((response) => {
-                this.registerError = ""
-                window.location.href = "/login"
+                this.registerAnswer = response.data.massage
+                console.log(response.data.massage);
+
+                if (this.registerAnswer == 'Успішна реєстрація!') {
+                    alertify.alert('Успіх', `Користувач ${nameR} зареєстрований успішно!`, function () {
+                        window.location.href = "/login"
+                    });
+                }
             })
             .catch((error) => {
-                this.registerError = error.response.data.massage
+                this.registerAnswer = error.response.data.massage
+                if (this.registerAnswer == 'Користувач з такою поштою вже є') { alertify.alert('Помилка', 'Користувач з такою поштою вже існує!'); }
+                if (this.registerAnswer == 'Помилка:') { alertify.alert(`Помилка`, `${error.response.data.error}`); }
             });
     }
 
