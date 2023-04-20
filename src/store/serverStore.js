@@ -1,7 +1,9 @@
 import { makeAutoObservable } from "mobx"
 import axios from 'axios';
-import { decodeToken, useJwt } from "react-jwt";
+// import { decodeToken, useJwt } from "react-jwt";
 import alertify from 'alertifyjs'
+import { BrowserRouter } from 'react-router-dom'
+
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
@@ -21,7 +23,7 @@ class ServerStore {
         this.spinerShop = "d-block"
         axios.get(this.URL + "/getAllMoto")
             .then((response) => {
-                console.log("this.getAllMoto");
+                // console.log("this.getAllMoto");
                 this.MotoData = response.data
                 this.spinerShop = "d-none"
             })
@@ -37,6 +39,7 @@ class ServerStore {
     }
 
     loginUser(emailL, passwordL) {
+
         axios.post(`${this.URL}/login`, {
             email: `${emailL}`,
             password: `${passwordL}`
@@ -46,8 +49,8 @@ class ServerStore {
                 this.loginError = ""
                 this.showPageLoader = false
                 localStorage.setItem("IsAuthMOTO", response.data.token)
-                // сумніваюсь що так правильно переходити
-                window.location.href = "/home"
+
+                window.location.href = "/"
             }, (error) => {
                 this.showPageLoader = false
                 this.loginError = error.response.data.massage

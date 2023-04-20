@@ -5,14 +5,15 @@ import moto_bg from '../../images/logReg_bg.png';
 import language_img from '../../images/icons/choice_flag-en.png';
 
 import Register from '../Register/Register'
-
-import { BrowserRouter as Router, NavLink } from 'react-router-dom'
 import serverStore from '../../store/serverStore';
+
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import alertify from 'alertifyjs'
+import { useNavigate } from "react-router-dom";
 
 
 const Login = observer(() => {
@@ -20,18 +21,18 @@ const Login = observer(() => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            password: '',
+            password: ''
         },
         validationSchema: Yup.object({
             email: Yup.string().required("Не заповнене").email("Eлектронна адреса має бути дійсною!"),
             password: Yup.string().required("Не заповнене").min(5, "Пароль має містити від 5 сим.")
         })
-
     })
 
     function changeIconsClass(e) { if (e.target.id == "button1") { iconsLock1 == "bi bi-eye-slash-fill" ? setIconsLock1("bi bi-eye-fill") : setIconsLock1("bi bi-eye-slash-fill") } }
 
     const loaderClass = serverStore.showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
+    const navigate = useNavigate()
 
     function requestToStore() {
         const { email, password } = formik.values
@@ -42,6 +43,7 @@ const Login = observer(() => {
     function forgotHandler() {
         alertify.alert('Співчуття', `Пом'янем :(`);
     }
+
 
     return (
         <div className="login" >
@@ -68,9 +70,9 @@ const Login = observer(() => {
                 <form className="form-wrap">
                     <div className="login-form__title">Авторизація</div>
                     <div className="login-form__suptitle">Новий відвідувач?
-                        <NavLink to='/register' element={<Register />}>
+                        <Link to='/register' element={<Register />}>
                             <span className="main-link"> Створити новий обліковий запис </span>
-                        </NavLink>тут</div>
+                        </Link>тут</div>
                     {/* =============== */}
                     <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Пошта"
                         onChange={formik.handleChange} value={formik.values.email} />
@@ -86,7 +88,10 @@ const Login = observer(() => {
                     <div className="login-form__forgot">Клацніть <span className="main-link" onClick={forgotHandler}>тут</span> якщо ви забули свій пароль</div>
                     <div className='ErrorApi'>{serverStore.loginError}</div>
                     <div className="btn-cont mt-4">
-                        <NavLink to="/home" onClick={requestToStore} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "} aria-disabled="true" role="submit" data-bs-toggle="button">Авторизація</NavLink>
+                        <button
+                            onClick={requestToStore}
+                            className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "} aria-disabled="true" role="submit" data-bs-toggle="button"
+                        >Авторизація</button>
                     </div>
                 </form>
 
