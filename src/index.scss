@@ -12,13 +12,11 @@ body {
 .main-link {
     transition: all 0.3s;
     color: $mainColor;
+    text-decoration: none;
     cursor: pointer;
-    border-radius: 15px;
 
     &:hover {
         color: $mainColorDarken;
-        background-color: rgba(0, 0, 0, 0.2);
-        box-shadow: 0 0 3px 1px black;
     }
 }
 

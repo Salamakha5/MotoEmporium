@@ -17,11 +17,7 @@ import { useEffect } from "react";
 const App = observer(() => {
 
     useEffect(() => {
-        if (localStorage.getItem("IsAuthMOTO") != null) {
-            serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"))
-        } else {
-            console.log('not have token');
-        }
+        if (localStorage.getItem("IsAuthMOTO") != null) serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
     }, [])
 
     return (

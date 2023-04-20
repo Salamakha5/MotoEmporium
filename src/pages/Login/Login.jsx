@@ -14,10 +14,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import alertify from 'alertifyjs'
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 const Login = observer(() => {
+    const [showPageLoader, setShowPageLoader] = useState(false)
+    const [loginAnswer, setLoginAnswer] = useState('')
+    // const loaderClass = showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
+    const navigate = useNavigate()
     const [iconsLock1, setIconsLock1] = useState("bi bi-eye-fill")
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -31,13 +37,25 @@ const Login = observer(() => {
 
     function changeIconsClass(e) { if (e.target.id == "button1") { iconsLock1 == "bi bi-eye-slash-fill" ? setIconsLock1("bi bi-eye-fill") : setIconsLock1("bi bi-eye-slash-fill") } }
 
-    const loaderClass = serverStore.showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
-    const navigate = useNavigate()
-
-    function requestToStore() {
+    function loginUser() {
         const { email, password } = formik.values
-        serverStore.showPageLoader = true
-        serverStore.loginUser(email, password)
+        setShowPageLoader(true);
+
+        axios.post(`${serverStore.URL}/login`, {
+            email: `${email}`,
+            password: `${password}`
+        })
+            .then((response) => {
+                serverStore.userIsAuth = response.data.isAuth
+                setShowPageLoader(false);
+                localStorage.setItem("IsAuthMOTO", response.data.token)
+                navigate('/')
+                serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
+            }, (error) => {
+                setShowPageLoader(false);
+                setLoginAnswer(error.response.data.massage)
+                // loginError = error.response.data.massage
+            });
     }
 
     function forgotHandler() {
@@ -47,7 +65,7 @@ const Login = observer(() => {
 
     return (
         <div className="login" >
-            <div className={loaderClass}>
+            <div className={showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'}>
                 <div className="loader active" id="loader-2">
                     <span></span>
                     <span></span>
@@ -70,9 +88,7 @@ const Login = observer(() => {
                 <form className="form-wrap">
                     <div className="login-form__title">Авторизація</div>
                     <div className="login-form__suptitle">Новий відвідувач?
-                        <Link to='/register' element={<Register />}>
-                            <span className="main-link"> Створити новий обліковий запис </span>
-                        </Link>тут</div>
+                        <Link to='/register' element={<Register />} className="main-link"><span> Створити новий обліковий запис </span></Link>тут</div>
                     {/* =============== */}
                     <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Пошта"
                         onChange={formik.handleChange} value={formik.values.email} />
@@ -86,11 +102,12 @@ const Login = observer(() => {
                     <label className='error'>{formik.errors.password ? formik.errors.password : ""}</label>
                     {/* =============== */}
                     <div className="login-form__forgot">Клацніть <span className="main-link" onClick={forgotHandler}>тут</span> якщо ви забули свій пароль</div>
-                    <div className='ErrorApi'>{serverStore.loginError}</div>
+                    <div className='ErrorApi'>{loginAnswer}</div>
                     <div className="btn-cont mt-4">
                         <button
-                            onClick={requestToStore}
-                            className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "} aria-disabled="true" role="submit" data-bs-toggle="button"
+                            onClick={loginUser}
+                            className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "}
+                            aria-disabled="true" role="submit" data-bs-toggle="button"
                         >Авторизація</button>
                     </div>
                 </form>

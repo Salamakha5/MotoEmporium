@@ -2,18 +2,22 @@ import './Register.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
 import language_img from '../../images/icons/choice_flag-en.png';
+
 import Login from '../Login/Login'
 
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
-import { useState, useRef } from 'react';
 import serverStore from '../../store/serverStore.js';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import alertify from 'alertifyjs'
-
+import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 
 const Register = observer(() => {
+
+    const [showPageLoader, setShowPageLoader] = useState(false)
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -38,14 +42,41 @@ const Register = observer(() => {
     const [iAgree, setiAgree] = useState(false)
     function iAgreeHandler() { iAgree == true ? setiAgree(false) : setiAgree(true) }
 
-    const loaderClass = serverStore.showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
-
-    function requestToStore() {
+    function registerUser() {
         const { name, email, password, confirmPassword } = formik.values
+        let registerAnswer = ''
 
         if (formik.isValid && (password == confirmPassword) && (iAgree == true)) {
-            serverStore.showPageLoader = true
-            serverStore.registerUser(name, email, password)
+            setShowPageLoader(true);
+
+            axios.post(serverStore.URL + '/registration', {
+                name: name,
+                email: email,
+                password: password
+            })
+                .then((response) => {
+                    registerAnswer = response.data.massage
+
+                    if (registerAnswer == 'Успішна реєстрація!') {
+                        setShowPageLoader(false)
+                        alertify.alert('Успіх', `Користувач ${name} зареєстрований успішно!`, function () {
+                            navigate('/login')
+                        });
+                    }
+                })
+                .catch((error) => {
+                    registerAnswer = error.response.data.massage
+
+                    if (registerAnswer == 'Користувач з такою поштою вже є') {
+                        setShowPageLoader(false)
+                        alertify.alert('Помилка', 'Користувач з такою поштою вже існує!');
+                    }
+                    if (registerAnswer == 'Помилка:') {
+                        setShowPageLoader(false)
+                        alertify.alert(`Помилка`, `${error.response.data.error}`);
+                    }
+                });
+
         } else if (password !== confirmPassword) {
             alertify.alert('Помилка', 'Паролі не збігаються!');
         } else if (iAgree == false) {
@@ -55,7 +86,7 @@ const Register = observer(() => {
 
     return (
         <div className="register">
-            <div className={loaderClass}>
+            <div className={showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'}>
                 <div className="loader active" id="loader-2">
                     <span></span>
                     <span></span>
@@ -78,9 +109,7 @@ const Register = observer(() => {
                 <div className="form-wrap">
                     <div className="register-form__title">Створити новий обліковий запис</div>
                     <div className="register-form__suptitle">Вже є аккаунт?
-                        <NavLink to='/login' element={<Login />}>
-                            <span className="main-link"> Авторизація </span>
-                        </NavLink>
+                        <Link to='/login' element={<Login />} className="main-link"> <span>Авторизація</span> </Link>
                         тут
                     </div>
 
@@ -123,7 +152,9 @@ const Register = observer(() => {
                         </div>
 
                         <div className="btn-cont">
-                            <button onClick={requestToStore} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit" : "btn register-form__submit default-btn_1 disabled"} aria-disabled="true" role="submit" data-bs-toggle="button">Реєстрація</button>
+                            <button onClick={registerUser} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit" : "btn register-form__submit default-btn_1 disabled"}
+                                aria-disabled="true" role="submit" data-bs-toggle="button"
+                            >Реєстрація</button>
                         </div>
                     </form>
 
