@@ -1,6 +1,11 @@
 import React from 'react'
+import { useEffect } from 'react'
 
 const Blog = () => {
+    useEffect(() => {
+        document.title = "Blog - MotoEmporium";
+    }, [])
+
     return (
         <div style={{minHeight: "100vh"}}>
             <br></br>

@@ -1,12 +1,13 @@
 import './Register.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
-import language_img from '../../images/icons/choice_flag-en.png';
+import flag_en from '../../images/icons/choice_flag-en.png';
+import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Login from '../Login/Login'
 
 import serverStore from '../../store/serverStore.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFormik } from "formik";
 import * as Yup from "yup"
@@ -18,6 +19,10 @@ const Register = observer(() => {
 
     const [showPageLoader, setShowPageLoader] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        document.title = "Register - MotoEmporium";
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -99,10 +104,10 @@ const Register = observer(() => {
             <div className="register-form">
 
                 <div className="choose-language">
-                    <img src={language_img} alt="flag" />
+                    <img src={flag_ua} alt="flag" />
                     <select className="form-select choose-language__select" name="choose-language">
-                        <option value="en">ENG</option>
                         <option value="ua">UA</option>
+                        <option value="en">ENG</option>
                     </select>
                 </div>
 

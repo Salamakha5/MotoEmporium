@@ -9,6 +9,12 @@ body {
     @include fontSettings($mainFont, 16px, 500)
 }
 
+.mainButton {
+    background-color: $mainColor;
+    @include fontSettings($mainFont, 16px, 700);
+    line-height: 18px;
+}
+
 .main-link {
     transition: all 0.3s;
     color: $mainColor;

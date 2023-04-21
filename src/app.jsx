@@ -11,7 +11,7 @@ import Contact from "./pages/Contact/Contact";
 import serverStore from './store/serverStore';
 
 import { observer } from 'mobx-react-lite';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from "react";
 
 const App = observer(() => {
@@ -23,33 +23,27 @@ const App = observer(() => {
     return (
         <div>
             <Router>
-                {
-                    serverStore.userIsAuth == true ?
-                        // auth routes
-                        <Routes>
+                <Routes>
+                    <Route path="/" element={<Layot />}>
+                        <Route index element={<Home />} />
+                        {/* <Route path='shop' element={<Shop />} /> */}
+                        <Route path='Blog' element={<Blog />} />
+                        <Route path='contact' element={<Contact />} />
+                    </Route>
+                    <Route path='*' element={<NotFound />} />
+                    {
+                        serverStore.userIsAuth === true ?
                             <Route path="/" element={<Layot />}>
-                                <Route index element={<Home />} />
-                                {/* <Route path='home' element={<Home />} /> */}
                                 <Route path='shop' element={<Shop />} />
-                                <Route path='blog' element={<Blog />} />
-                                <Route path='contact' element={<Contact />} />
                             </Route>
-                            <Route path='*' element={<NotFound />} />
-                        </Routes>
-                        :
-                        // not auth routes
-                        <Routes>
-                            <Route path="/" element={<Layot />}>
-                                <Route index element={<Home />} />
-                                {/* <Route path='home' element={<Home />} /> */}
-                                <Route path='Blog' element={<Blog />} />
-                                <Route path='contact' element={<Contact />} />
+                            :
+                            <Route>
+                                <Route path='shop' element={<Login />} />
+                                <Route path='login' element={<Login />} />
+                                <Route path='register' element={<Register />} />
                             </Route>
-                            <Route path='*' element={<Login />} />
-                            <Route path='/login' element={<Login />} />
-                            <Route path='/register' element={<Register />} />
-                        </Routes>
-                }
+                    }
+                </Routes>
             </Router>
         </div>
     );

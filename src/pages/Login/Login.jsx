@@ -2,27 +2,32 @@
 import './Login.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
-import language_img from '../../images/icons/choice_flag-en.png';
+import flag_en from '../../images/icons/choice_flag-en.png';
+import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Register from '../Register/Register'
 import serverStore from '../../store/serverStore';
 
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import alertify from 'alertifyjs'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Home from '../Home/Home';
 
 
 const Login = observer(() => {
     const [showPageLoader, setShowPageLoader] = useState(false)
     const [loginAnswer, setLoginAnswer] = useState('')
-    // const loaderClass = showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'
     const navigate = useNavigate()
     const [iconsLock1, setIconsLock1] = useState("bi bi-eye-fill")
+
+    useEffect(() => {
+        document.title = "Login - MotoEmporium";
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -54,7 +59,6 @@ const Login = observer(() => {
             }, (error) => {
                 setShowPageLoader(false);
                 setLoginAnswer(error.response.data.massage)
-                // loginError = error.response.data.massage
             });
     }
 
@@ -78,17 +82,20 @@ const Login = observer(() => {
             <div className="login-form">
 
                 <div className="choose-language">
-                    <img src={language_img} alt="flag" />
+                    <img src={flag_ua} alt="flag" />
                     <select className="form-select choose-language__select" name="choose-language">
-                        <option value="en">ENG</option>
                         <option value="ua">UA</option>
+                        <option value="en">ENG</option>
                     </select>
                 </div>
 
                 <form className="form-wrap">
-                    <div className="login-form__title">Авторизація</div>
-                    <div className="login-form__suptitle">Новий відвідувач?
-                        <Link to='/register' element={<Register />} className="main-link"><span> Створити новий обліковий запис </span></Link>тут</div>
+                    <div className="login-form__title">Авторизація --- testpassword</div>
+                    <div className="login-form__suptitle">
+                        <span>Продовжити без реєстрації 👉 <Link to='/' element={<Home />} className="main-link"> На головну </Link></span>
+                        <hr style={{ height: "1px", margin: "5px 0" }}></hr>
+                        <span>Новий відвідувач? <Link to='/register' element={<Register />} className="main-link"> Створити акаунт </Link> тут</span>
+                    </div>
                     {/* =============== */}
                     <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Пошта"
                         onChange={formik.handleChange} value={formik.values.email} />
@@ -98,10 +105,16 @@ const Login = observer(() => {
                             onChange={formik.handleChange} value={formik.values.password} />
 
                         <button type='button' onClick={changeIconsClass} className="btn-show_password"><i id="button1" className={"fs-3 " + iconsLock1}></i></button>
+                        <label className='error'>{formik.errors.password ? formik.errors.password : ""}</label>
                     </div>
-                    <label className='error'>{formik.errors.password ? formik.errors.password : ""}</label>
                     {/* =============== */}
-                    <div className="login-form__forgot">Клацніть <span className="main-link" onClick={forgotHandler}>тут</span> якщо ви забули свій пароль</div>
+                    <div className="login-form__hints">
+                        {/* <span>Продовжити без реєстрації? <Link to='/' element={<Home />} className="main-link"> На головну </Link></span> */}
+                        {/* <br/> */}
+                        <span>Клацніть <span className="main-link" onClick={forgotHandler}>тут</span> якщо ви забули свій пароль </span>
+                        {/* або */}
+                        {/* <Link to='/' element={<Home />} className="main-link"> На головну </Link> */}
+                    </div>
                     <div className='ErrorApi'>{loginAnswer}</div>
                     <div className="btn-cont mt-4">
                         <button

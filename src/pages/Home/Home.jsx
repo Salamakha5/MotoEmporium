@@ -9,14 +9,14 @@ import our_service from '../../images/our_service.png'
 import custom_parts from '../../images/custom_parts.png'
 import our_finance from '../../images/finance.png'
 
-// import Register from '../Register/Register.jsx';
-// import Login from '../Login/Login.jsx';
-// import NotFound from '../NotFound/NotFound.jsx';
-// import Layot from '../../components/Layot/Layot.jsx';
-
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Home = () => {
+    useEffect(() => {
+        document.title = "Home - MotoEmporium";
+    }, [])
+
     return (
         <div className="home">
             <div className="hero">

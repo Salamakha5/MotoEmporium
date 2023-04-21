@@ -1,19 +1,42 @@
-.oneCard_count{
-    .imgCont{
-        height:220px;
-    }
-    .cardMoto{
-        padding: 10px;
-        border-radius: 10px;
-        background-color:#252C33;
-        color:#D3AF37 ;
-        min-height: max-content;
-        img{
+@import "../../scss/variables";
+
+.oneCard {
+    background-color: $mainColor2;
+    color: $mainColor;
+    border-radius: 10px;
+
+    &__img {
+        img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
             border-radius: 10px;
         }
     }
-    .oneCard_price{
-        font-weight: 900;
-        font-size: 20px;
+
+    &__title {
+        @include fontSettings($mainFont, 20px, 500);
+        line-height: 24px;
+    }
+
+    &__type {
+        @include fontSettings($mainFont, 16px, 500);
+        line-height: 20px;
+    }
+
+    &__priceCont {
+        @include fontSettings($mainFont, 24px, 700);
+        line-height: 29px;
+        display: flex;
+        justify-content: end;
+    }
+
+    &__btnCont {
+        display: flex;
+        justify-content: center;
+
+        .btn {
+            border-radius: 10px;
+        }
     }
 }

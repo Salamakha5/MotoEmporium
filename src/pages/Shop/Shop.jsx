@@ -1,81 +1,98 @@
-import React, { useEffect, useState } from 'react'
 import './Shop.scss'
-import { observer } from 'mobx-react-lite'
+
 import OneProduct from '../../components/OneProduct/OneProduct'
 import serverStore from '../../store/serverStore'
+
+import { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 
-const Shop = observer(()=>{
-    useEffect(()=>{
+const Shop = observer(() => {
+
+    useEffect(() => {
+        document.title = "Shop - MotoEmporium";
         serverStore.getAllMoto()
-    },[])
-    return <div className='shop_container'>
-        <div className='container p-4 main_cont'>
-            <div className='select_block'>
-                <div>
-                    <h4 className='p-4 pb-1'>SEARCH INVENTORY</h4>
-                    <div className='row d-flex  align-items-center'>
+    }, [])
+
+
+    return (
+
+        <div className='moto-shop | pt-5 pb-3'>
+            <div className='moto-shop__container | container p-4'>
+                <div className='moto-shop__controlsWrap | p-4'>
+                    <div className='controlsWrap-title'>НАЛАШТУВАННЯ ПОШУКУ</div>
+
+                    <div className='row d-flex align-items-center'>
                         <div className='col'>
-                        <input type="text" class="form-control m-3" placeholder="Пошук по назві моделі"/>
-                        <input type="number" class="form-control m-3" placeholder="Пошук по ціні"/>
+                            {/* inputs */}
+                            <input type="text" className="form-control mt-3 mb-3" placeholder="Пошук по назві моделі" />
+                            <input type="number" className="form-control mt-4 mb-3" placeholder="Пошук по ціні" min='0' />
                         </div>
+
                         <div className='col'>
-                        <select className="form-select m-3" aria-label="Default select example">
-                          <option selected>Пошук по категоріям</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
-                        <select className="form-select m-3" aria-label="Default select example">
-                          <option selected>Пошук по моделі</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
+                            {/* selects */}
+                            <select className="form-select mt-3 mb-3" aria-label="Default select example">
+                                <option defaultValue>Пошук по категоріям</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <select className="form-select mt-4 mb-3" aria-label="Default select example">
+                                <option defaultValue>Пошук по моделі</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
                         </div>
+
                         <div className='col'>
+                            {/* buttons */}
                             <div className='d-flex justify-content-center'>
-                            <button type="button" class="m-3 btn btn-warning">Пошук</button>
-                            <button type="button" class="m-3 btn btn-warning">Очистити фільтри</button>
+                                <button type="button" className="btn btn-warning mainButton me-4 py-2 px-4">Пошук</button>
+                                <button type="button" className="btn btn-warning mainButton px-4 py-2">Очистити фільтри</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='line_cont'>
-                <div>
-                    <span>Displaying 1 of {toJS(serverStore.MotoData).length}</span>
-                </div>
-                
-                <div className='d-flex justify-content-end align-items-center'>
-                <select className="form-select m-3" aria-label="Default select example">
-                          <option selected>По популярності</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+
+                <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
+                    <div className='col'>
+                        <span>Відображається 1 із {toJS(serverStore.MotoData).length} сторінок</span>
+                    </div>
+
+                    <div className='col col-4 d-flex justify-content-end'>
+                        <select className="form-select me-4">
+                            <option defaultValue>По популярності</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
                         </select>
-                <select className="form-select m-3" aria-label="Default select example">
-                          <option selected>По ціні</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                        <select className="form-select">
+                            <option defaultValue>По ціні</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
                         </select>
+                    </div>
                 </div>
-            </div>
-            <div className={'d-flex justify-content-center mt-5 '+serverStore.spinerShop}>
-                <div class="spinner-border text-warning" role="status">
-                    <span class="visually-hidden">Loading...</span>
+
+                {/* loader */}
+                <div className={'d-flex justify-content-center mt-5 ' + serverStore.spinerShop}>
+                    <div className="spinner-border text-warning" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-            </div>
-            <div className='row d-flex justify-content-evenly mt-2'>
-                {
-                    toJS(serverStore.MotoData).map((p)=>{
-                       return <OneProduct key={p.id} data={p}></OneProduct>
-                    })
-                }
+
+                <div className='moto-shop__showcase | row'>
+                    {
+                        toJS(serverStore.MotoData).map((p) => {
+                            return <OneProduct key={p.id} data={p}></OneProduct>
+                        })
+                    }
+                </div>
             </div>
         </div>
-    </div>
+    )
 })
 
 export default Shop
