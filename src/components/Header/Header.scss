@@ -17,20 +17,25 @@
     }
 
     &__wrap {
+        width: 100%;
         display: flex;
         align-items: center;
+        justify-content: end;
     }
 
     &__nav {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        flex-wrap: wrap;
 
         .nav-item {
             padding: 10px 35px;
             position: relative;
             z-index: 2;
             transition: all 0.3s;
+            @include fontSettings($mainFont, 20px, 600);
+            line-height: 24px;
 
             &:hover {
                 border-radius: 15px;
@@ -68,13 +73,55 @@
                 }
             }
         }
+
+        .header__nav-dropdown {
+            position: relative;
+
+            .dropdown-menu {
+                background-color: $mainColor;
+                border-radius: 0;
+                padding: 0;
+
+                .dropdown-item {
+                    cursor: pointer;
+                    transition: 0.3s;
+                    padding: 10px;
+
+                    &:hover {
+                        background-color: $mainColorDarken;
+                    }
+                }
+
+                li {
+                    @include fontSettings($mainFont, 22px, 500);
+                    line-height: 26px;
+                    display: flex;
+                    align-items: center;
+
+                    &:not(:last-child) {
+                        border-bottom: 1px solid black;
+                    }
+                }
+
+                .exitButton {
+                    color: crimson;
+                    position: relative;
+                    padding: 10px 0;
+
+                    &:hover {
+                        background-color: $mainColorDarken;
+                    }
+                }
+            }
+        }
     }
 
     &__user {
-        padding: 0 40px 0 40px;
+        padding: 0 30px 0 30px;
         @include fontSettings($mainFont, 20px, 700);
         line-height: 25px;
         position: relative;
+        max-width: 200px;
 
         .decoration {
             // clip-path: polygon(0 0, 100% 0, 74% 22%, 24% 22%);
@@ -88,21 +135,94 @@
             transform: translateX(-50%);
         }
 
-        // .text {}
-
-        .header__login {
+        .header__login-btn {
             color: black;
         }
     }
+}
 
+@media (max-width: 1199px) {
+    .header {
+        padding: 20px;
 
+        &__logo {
+            @include fontSettings($mainFont, 26px, 700);
+            line-height: 31px;
+        }
 
-    .for-dev {
-        color: khaki;
-        text-shadow: 0 0 10px yellow;
-    }
+        &__mobileBtn {
+            background-color: $mainColor;
+        }
 
-    .disabled {
-        color: crimson;
+        &__wrap {
+            width: 100%;
+            padding-top: 60px;
+        }
+
+        &__nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .nav-item {
+                padding: 20px 35px;
+                border-radius: 15px 15px 0 0;
+                width: 100%;
+
+                &:hover {
+                    border-radius: 15px 15px 0 0;
+                }
+
+                &.active {
+                    background-color: rgba(0, 0, 0, 0.2);
+
+                    &::before {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .header__nav-dropdown {
+                position: relative;
+                width: 100%;
+                padding-top: 5px;
+
+                .header__nav-dropdownBtn {
+                    width: 100%;
+                    background-color: $mainColor;
+                    color: black;
+                    border-radius: 0 0 15px 15px;
+                }
+
+                .dropdown-menu {
+                    background-color: $mainColor;
+                    border-radius: 0;
+                    padding: 0;
+                    width: 100%;
+
+                    .dropdown-item {
+                        padding: 20px;
+                    }
+
+                    li {
+                        @include fontSettings($mainFont, 27px, 500);
+                        line-height: 33px;
+
+                        &:not(:last-child) {
+                            border-bottom: 1px solid black;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__user {
+            @include fontSettings($mainFont, 23px, 700);
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }

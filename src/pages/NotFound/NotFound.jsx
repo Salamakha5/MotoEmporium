@@ -4,7 +4,7 @@ import notFound_bg from '../../images/notFound.png'
 
 import Home from '../Home/Home'
 
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const NotFound = () => {

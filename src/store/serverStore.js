@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import axios from 'axios';
 // import { decodeToken, useJwt } from "react-jwt";
-import alertify from 'alertifyjs'
+// import alertify from 'alertifyjs'
 
 
 class ServerStore {

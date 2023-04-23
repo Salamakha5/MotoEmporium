@@ -2,7 +2,7 @@
 import './Login.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
-import flag_en from '../../images/icons/choice_flag-en.png';
+// import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Register from '../Register/Register'

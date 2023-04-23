@@ -14,7 +14,6 @@ const Shop = observer(() => {
         serverStore.getAllMoto()
     }, [])
 
-
     return (
 
         <div className='moto-shop | pt-5 pb-3'>

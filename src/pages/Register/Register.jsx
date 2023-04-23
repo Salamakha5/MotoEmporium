@@ -1,7 +1,7 @@
 import './Register.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
-import flag_en from '../../images/icons/choice_flag-en.png';
+// import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Login from '../Login/Login'
@@ -45,13 +45,13 @@ const Register = observer(() => {
     function changeEye2(e) { if (e.target.id == "showConfirmPassword") { eye2 == "bi bi-eye-slash-fill" ? setEye2("bi bi-eye-fill") : setEye2("bi bi-eye-slash-fill") } }
 
     const [iAgree, setiAgree] = useState(false)
-    function iAgreeHandler() { iAgree == true ? setiAgree(false) : setiAgree(true) }
+    function iAgreeHandler() { iAgree === true ? setiAgree(false) : setiAgree(true) }
 
     function registerUser() {
         const { name, email, password, confirmPassword } = formik.values
         let registerAnswer = ''
 
-        if (formik.isValid && (password == confirmPassword) && (iAgree == true)) {
+        if (formik.isValid && (password === confirmPassword) && (iAgree === true)) {
             setShowPageLoader(true);
 
             axios.post(serverStore.URL + '/registration', {
@@ -72,11 +72,11 @@ const Register = observer(() => {
                 .catch((error) => {
                     registerAnswer = error.response.data.massage
 
-                    if (registerAnswer == 'Користувач з такою поштою вже є') {
+                    if (registerAnswer === 'Користувач з такою поштою вже є') {
                         setShowPageLoader(false)
                         alertify.alert('Помилка', 'Користувач з такою поштою вже існує!');
                     }
-                    if (registerAnswer == 'Помилка:') {
+                    if (registerAnswer === 'Помилка:') {
                         setShowPageLoader(false)
                         alertify.alert(`Помилка`, `${error.response.data.error}`);
                     }
@@ -91,7 +91,7 @@ const Register = observer(() => {
 
     return (
         <div className="register">
-            <div className={showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'}>
+            <div className={showPageLoader === true ? 'loader-pageWrap active' : 'loader-pageWrap'}>
                 <div className="loader active" id="loader-2">
                     <span></span>
                     <span></span>
