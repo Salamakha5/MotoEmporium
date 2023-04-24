@@ -8,6 +8,10 @@
 
     &__container {
         background-color: white;
+
+        @media (max-width: 768px) {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
     }
 
     &__controlsWrap {
@@ -19,9 +23,25 @@
             @include fontSettings($mainFont, 24px, 600);
             line-height: 29px;
         }
+
+        .moto-shop__controls-btnFind {
+            margin: 0 10px 0 0;
+
+            @media (max-width: 575px) {
+                margin: 10px 0 20px 0;
+
+            }
+        }
     }
 
     &__supControls {
+
+        &-nowDisplay {
+            @media (max-width: 768px) {
+                padding-bottom: 20px;
+            }
+        }
+
         position: relative;
 
         &::before {

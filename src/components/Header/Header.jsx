@@ -25,11 +25,11 @@ const Header = observer(() => {
 
             <div className="header__logo" onClick={ggg}>Moto Emporium</div>
 
-            <button class="header__mobileBtn | navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerToggler" aria-controls="headerToggler" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button className="header__mobileBtn | navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerToggler" aria-controls="headerToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse " id="headerToggler">
+            <div className="collapse navbar-collapse " id="headerToggler">
                 <div className="header__wrap">
                     <div className='header__nav'>
                         <NavLink className={activeLink} to='/' element={<Home />}>Головна</NavLink>
@@ -37,12 +37,12 @@ const Header = observer(() => {
                         <NavLink className={activeLink} to='/blog' element={<Blog />}>Блог</NavLink>
                         <NavLink className={activeLink} to='/contact' element={<Contact />}>Контакти</NavLink>
                         <div className='header__nav-dropdown'>
-                            <button type="button" class="header__nav-dropdownBtn main-link nav-item | btn dropdown-toggle"
+                            <button type="button" className="header__nav-dropdownBtn main-link nav-item | btn dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
                             >Дії</button>
-                            <ul class="dropdown-menu">
-                                <li className='dropdown-item'> <i class="bi bi-cart3 pe-2"></i> Корзина </li>
-                                <li className='dropdown-item'> <i class="bi bi-gear pe-2"></i> Налаштування </li>
+                            <ul className="dropdown-menu">
+                                <li className='dropdown-item'> <i className="bi bi-cart3 pe-2"></i> Корзина </li>
+                                <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> Налаштування </li>
                                 <li className='d-flex justify-content-center'>
                                     <button className='main-link exitButton | w-100'
                                         style={{ display: serverStore.userIsAuth == true ? 'block' : 'none' }}

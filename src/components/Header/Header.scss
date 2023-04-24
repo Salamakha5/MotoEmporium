@@ -150,7 +150,7 @@
 
 @media (max-width: 1199px) {
     .header {
-        padding: 20px;
+        padding: 10px;
 
         &__logo {
             @include fontSettings($mainFont, 20px, 700);

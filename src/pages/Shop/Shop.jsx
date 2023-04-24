@@ -22,13 +22,13 @@ const Shop = observer(() => {
                     <div className='controlsWrap-title'>НАЛАШТУВАННЯ ПОШУКУ</div>
 
                     <div className='row d-flex align-items-center'>
-                        <div className='col'>
+                        <div className='col-12 col-lg-12 col-xl-4'>
                             {/* inputs */}
                             <input type="text" className="form-control mt-3 mb-3" placeholder="Пошук по назві моделі" />
                             <input type="number" className="form-control mt-4 mb-3" placeholder="Пошук по ціні" min='0' />
                         </div>
 
-                        <div className='col'>
+                        <div className='col-12 col-md-6 col-xl-4'>
                             {/* selects */}
                             <select className="form-select mt-3 mb-3" aria-label="Default select example">
                                 <option defaultValue>Пошук по категоріям</option>
@@ -44,22 +44,22 @@ const Shop = observer(() => {
                             </select>
                         </div>
 
-                        <div className='col'>
+                        <div className='col-12 col-md-6 col-xl-4'>
                             {/* buttons */}
-                            <div className='d-flex justify-content-center'>
-                                <button type="button" className="btn btn-warning mainButton me-4 py-2 px-4">Пошук</button>
-                                <button type="button" className="btn btn-warning mainButton px-4 py-2">Очистити фільтри</button>
+                            <div className='d-flex justify-content-center row'>
+                                <button type="button" className="moto-shop__controls-btnFind | btn btn-warning col-sm-5  mainButton px-4 py-2">Пошук</button>
+                                <button type="button" className="btn btn-warning col-sm-5  mainButton px-4 py-2">Очистити фільтри</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
-                    <div className='col'>
+                    <div className='col moto-shop__supControls-nowDisplay'>
                         <span>Відображається 1 із {toJS(serverStore.MotoData).length} сторінок</span>
                     </div>
 
-                    <div className='col col-4 d-flex justify-content-end'>
+                    <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end'>
                         <select className="form-select me-4">
                             <option defaultValue>По популярності</option>
                             <option value="1">One</option>

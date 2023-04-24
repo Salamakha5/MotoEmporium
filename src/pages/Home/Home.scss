@@ -5,13 +5,15 @@
 }
 
 .hero {
+    $heroMinHeigth: 700px;
+
     position: relative;
-    height: 100vh;
+    min-height: $heroMinHeigth;
     overflow: hidden;
 
     &__info {
         background-color: $mainColor2;
-        height: 100vh;
+        min-height: $heroMinHeigth;
         width: 40%;
         box-shadow: 100px 0 70px 100px $mainColor2;
         z-index: -1;
@@ -46,7 +48,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        height: 100vh;
+        min-height: $heroMinHeigth;
         width: 60%;
         z-index: -2;
         object-fit: cover;
@@ -54,7 +56,7 @@
 }
 
 .sales {
-    height: 550px;
+    min-height: 550px;
     width: 100%;
     background-image: radial-gradient(at bottom left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.01));
     color: $mainColor2;
@@ -68,21 +70,24 @@
     }
 
     &__title {
-        padding: 100px 0 0 77px;
+        padding-left: 77px;
+        padding-top: 100px;
         width: 50%;
         @include fontSettings($mainFont, 55px, 700);
         line-height: 66px;
     }
 
     &__text {
-        padding: 50px 0 0 77px;
+        padding-left: 77px;
+        padding-top: 50px;
         width: 50%;
         @include fontSettings($mainFont, 35px, 500);
         line-height: 42px;
     }
 
     &__date {
-        padding: 50px 0 0 77px;
+        padding-left: 77px;
+        padding-top: 50px;
         width: 50%;
         @include fontSettings($mainFont, 25px, 500);
         line-height: 30px;
@@ -93,14 +98,16 @@
     background-color: $mainColor2;
     padding: 40px 50px;
     display: flex;
+    overflow: hidden;
+    margin: 0;
 
     &__img-cont {
         padding-right: 90px;
 
         img {
-            width: 580px;
-            height: 440px;
-            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            object-fit: auto;
             border-radius: 15px;
         }
     }
@@ -165,7 +172,7 @@
             grid-template-columns: repeat(2, 50%);
             grid-template-rows: repeat(2, 50%);
 
-            .small-img {
+            .small-imgCont {
                 width: 200px;
                 height: 125px;
                 margin: 0 50px 50px 0;
@@ -185,6 +192,213 @@
                     border-radius: 15px;
                     @include fontSettings($mainFont, 22px, 700);
                     line-height: 26px;
+                }
+            }
+        }
+    }
+}
+
+// !!adaptive ================================================================================================
+
+.hero {
+    @media (max-width: 1200px) {
+        $heroMinHeigth: 700px;
+
+        position: relative;
+        min-height: $heroMinHeigth;
+        overflow: hidden;
+
+        @media (max-width: 1024px) {
+
+            &__info {
+                min-height: $heroMinHeigth;
+                box-shadow: 100px 0 70px 100px $mainColor2;
+                padding-left: 50px;
+
+                .title {
+                    padding: 70px 0 30px 0;
+                }
+
+                .link-cont {
+                    padding-top: 70px;
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            &__info {
+                background-color: rgba(0, 0, 0, 0.7);
+                min-height: $heroMinHeigth;
+                width: 100%;
+                box-shadow: 0;
+                z-index: -1;
+                background-image: radial-gradient(circle at left bottom, #1d1c1e 70px 10px, rgba(0, 0, 0, 0) 40px);
+                padding: 20px;
+
+                .title {
+                    padding: 90px 0 60px 0;
+                }
+
+                .link-cont {
+                    padding-top: 90px;
+                }
+            }
+
+            &__bg {
+                min-height: $heroMinHeigth;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+.sales {
+    @media (max-width: 1000px) {
+        &__title {
+            width: 100%;
+
+            @media (max-width: 700px) {
+                padding-left: 30px;
+            }
+
+            @media (max-width: 530px) {
+                padding-top: 60px;
+                @include fontSettings($mainFont, 50px, 500);
+                line-height: 53px;
+            }
+        }
+
+        &__text {
+            width: 100%;
+
+            @media (max-width: 700px) {
+                padding-left: 30px;
+            }
+
+            @media (max-width: 530px) {
+                padding-top: 30px;
+                @include fontSettings($mainFont, 25px, 500);
+                line-height: 28px;
+            }
+        }
+
+        &__date {
+            width: 100%;
+
+            @media (max-width: 700px) {
+                padding-left: 30px;
+            }
+
+            @media (max-width: 530px) {
+                padding-top: 30px;
+                @include fontSettings($mainFont, 15px, 500);
+                line-height: 18px;
+            }
+        }
+    }
+}
+
+.why-us {
+    background-color: $mainColor2;
+    padding: 40px 50px;
+    display: flex;
+
+    @media (max-width: 991px) {
+        padding: 40px 25px;
+    }
+
+    &__img-cont {
+
+        @media (max-width: 991px) {
+            padding-right: 0;
+            padding-bottom: 20px;
+        }
+    }
+}
+
+.our-showroom {
+
+    @media (max-width: 1050px) {
+
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 0 0 0;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        &__left {
+            padding: 0 50px 10px 50px;
+            width: 100%;
+
+            @media (max-width: 576px) {
+                padding: 0 20px 10px 20px;
+            }
+
+            .big-img {
+                width: 100%;
+                height: 300px;
+                position: relative;
+
+                @media (max-width: 768px) {
+                    height: 200px;
+                }
+
+                @media (max-width: 512px) {
+                    height: 150px;
+
+                    &::before {
+                        @include fontSettings($mainFont, 28px, 700);
+                        line-height: 31px;
+
+                        @media (max-width: 320px) {
+                            @include fontSettings($mainFont, 18px, 700);
+                            line-height: 21px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__right {
+            width: 100%;
+            padding: 0 50px 25px 50px;
+
+            @media (max-width: 576px) {
+                padding: 0 20px 10px 20px;
+            }
+
+            .small-imgGroup {
+                display: grid;
+                grid-template-columns: repeat(2, 50%);
+                grid-template-rows: repeat(2, 50%);
+                grid-column-gap: 10px;
+                grid-row-gap: 10px;
+
+                @media (max-width: 576px) {
+                    grid-template-columns: repeat(1, 100%);
+                    grid-template-rows: repeat(4, auto);
+                }
+
+                .small-imgCont {
+                    width: 100%;
+                    height: 175px;
+                    margin: 0;
+
+                    @media (max-width: 768px) {
+                        height: 120px;
+                    }
+
+                    &::before {
+                        @include fontSettings($mainFont, 15px, 700);
+                        line-height: 18px;
+                    }
                 }
             }
         }

@@ -25,8 +25,7 @@ const App = observer(() => {
             <Router>
                 <Routes>
                     <Route path="/" element={<Layot />}>
-                        {/* <Route index element={<Home />} /> */}
-                        {/* <Route path='shop' element={<Shop />} /> */}
+                        <Route index element={<Home />} />
                         <Route path='Blog' element={<Blog />} />
                         <Route path='contact' element={<Contact />} />
                     </Route>

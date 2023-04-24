@@ -11,7 +11,7 @@ const OneProduct = observer((props) => {
     }
 
     return (
-        <div className="oneCardWrap | col col-3 p-3">
+        <div className="oneCardWrap | p-3 col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
             <div className="oneCard | p-3">
                 <div className="oneCard__img | mb-4"><img src={imgURL[1]} /></div>
                 <div className="oneCard__title | mb-2">{brand} - {model}</div>
