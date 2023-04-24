@@ -157,7 +157,7 @@ const Register = observer(() => {
                         </div>
 
                         <div className="btn-cont">
-                            <button onClick={registerUser} className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit" : "btn register-form__submit default-btn_1 disabled"}
+                            <button onClick={registerUser} className={formik.isValid && formik.dirty ? "btn mainButton register-form__submit py-3 px-5" : "btn mainButton default-btn_1 py-3 px-5 disabled"}
                                 aria-disabled="true" role="submit" data-bs-toggle="button"
                             >Реєстрація</button>
                         </div>

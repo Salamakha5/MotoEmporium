@@ -32,7 +32,7 @@ const Login = observer(() => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            password: ''
+            password: 'testpassword'
         },
         validationSchema: Yup.object({
             email: Yup.string().required("Не заповнене").email("Eлектронна адреса має бути дійсною!"),
@@ -90,7 +90,7 @@ const Login = observer(() => {
                 </div>
 
                 <form className="form-wrap">
-                    <div className="login-form__title">Авторизація --- testpassword</div>
+                    <div className="login-form__title">Авторизація</div>
                     <div className="login-form__suptitle">
                         <span>Продовжити без реєстрації 👉 <Link to='/' element={<Home />} className="main-link"> На головну </Link></span>
                         <hr style={{ height: "1px", margin: "5px 0" }}></hr>
@@ -119,7 +119,7 @@ const Login = observer(() => {
                     <div className="btn-cont mt-4">
                         <button
                             onClick={loginUser}
-                            className={formik.isValid && formik.dirty ? "btn default-btn_1 register-form__submit " : " btn default-btn_1 register-form__submit disabled "}
+                            className={formik.isValid && formik.dirty ? "btn mainButton register-form__submit py-3 px-5" : "btn mainButton register-form__submit py-3 px-5 disabled "}
                             aria-disabled="true" role="submit" data-bs-toggle="button"
                         >Авторизація</button>
                     </div>

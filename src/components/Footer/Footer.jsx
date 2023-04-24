@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Footer.scss'
+import './Footer.scss'
 
 const Footer = () => {
     return (
@@ -40,7 +40,8 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer__copyright">
-                <div className='text'>©2021 TwoWheelers.com. All rights reserved
+                <div className='text'>
+                    <span>©2021 TwoWheelers.com. All rights reserved</span>
 
                     <div className="socials">
                         <div className="socials__item"><i className="bi bi-facebook"></i></div>

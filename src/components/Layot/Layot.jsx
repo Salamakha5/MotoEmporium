@@ -8,7 +8,7 @@ const Layot = () => {
         <div>
             <Header />
             <Outlet></Outlet>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }

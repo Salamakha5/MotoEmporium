@@ -121,7 +121,7 @@
         @include fontSettings($mainFont, 20px, 700);
         line-height: 25px;
         position: relative;
-        max-width: 200px;
+        max-width: 250px;
 
         .decoration {
             // clip-path: polygon(0 0, 100% 0, 74% 22%, 24% 22%);
@@ -138,16 +138,23 @@
         .header__login-btn {
             color: black;
         }
+
+        .text {
+            max-height: 54px;
+            overflow: hidden;
+        }
     }
 }
+
+// !!adaptive ================================================================================================
 
 @media (max-width: 1199px) {
     .header {
         padding: 20px;
 
         &__logo {
-            @include fontSettings($mainFont, 26px, 700);
-            line-height: 31px;
+            @include fontSettings($mainFont, 20px, 700);
+            line-height: 23px;
         }
 
         &__mobileBtn {
@@ -156,7 +163,7 @@
 
         &__wrap {
             width: 100%;
-            padding-top: 60px;
+            padding-top: 75px;
         }
 
         &__nav {
@@ -202,7 +209,7 @@
                     width: 100%;
 
                     .dropdown-item {
-                        padding: 20px;
+                        padding: 10px;
                     }
 
                     li {
@@ -223,6 +230,14 @@
             top: 75px;
             left: 50%;
             transform: translateX(-50%);
+            text-align: center;
+            max-width: 100%;
+            width: 100%;
+
+            .text {
+                max-height: 54px;
+                overflow: 'hidden';
+            }
         }
     }
 }

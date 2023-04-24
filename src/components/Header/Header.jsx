@@ -21,37 +21,11 @@ const Header = observer(() => {
 
     return (
 
-        // <nav class="navbar navbar-expand-lg bg-light">
-        //         <div class="container-fluid">
-        //             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        //                 <span class="navbar-toggler-icon"></span>
-        //             </button>
-        //             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        //                 <a class="navbar-brand" href="#">Hidden brand</a>
-        //                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        //                     <li class="nav-item">
-        //                         <a class="nav-link active" aria-current="page" href="#">Home</a>
-        //                     </li>
-        //                     <li class="nav-item">
-        //                         <a class="nav-link" href="#">Link</a>
-        //                     </li>
-        //                     <li class="nav-item">
-        //                         <a class="nav-link disabled">Disabled</a>
-        //                     </li>
-        //                 </ul>
-        //                 <form class="d-flex" role="search">
-        //                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        //                     <button class="btn btn-outline-success" type="submit">Search</button>
-        //                 </form>
-        //             </div>
-        //         </div>
-        //     </nav>
-
         <header className="header navbar navbar-expand-xl">
 
             <div className="header__logo" onClick={ggg}>Moto Emporium</div>
 
-            <button class="header__mobileBtn | navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#headerToggler" aria-controls="headerToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="header__mobileBtn | navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerToggler" aria-controls="headerToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -78,22 +52,22 @@ const Header = observer(() => {
                             </ul>
                         </div>
                     </div>
-                    <div className='header__user'>
-                        {
-                            serverStore.userIsAuth == true ?
-                                <div>
-                                    <div className="decoration"></div>
-                                    <div className='text'>{serverStore.UserName}</div>
-                                    {/* <div className='text'>Lorem ipsum dolor sit amet.</div> */}
-                                </div>
-                                :
+                    {
+                        serverStore.userIsAuth == true ?
+                            <div className='header__user'>
+                                <div className="decoration"></div>
+                                <div className='text'>{serverStore.UserName}</div>
+                                {/* <div className='text'>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem Lorem.Lorem..</div> */}
+                            </div>
+                            :
+                            <div style={{ maxWidth: "350px" }} className='header__user'>
                                 <NavLink to='/login' element={<Login />}>
-                                    <button className='default-btn_1 header__login-btn'>
+                                    <button className='mainButton header__login-btn py-3 px-5'>
                                         Login
                                     </button>
                                 </NavLink>
-                        }
-                    </div>
+                            </div>
+                    }
                 </div>
             </div>
 

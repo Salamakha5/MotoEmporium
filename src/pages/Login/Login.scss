@@ -120,6 +120,10 @@
             display: flex;
             justify-content: center;
             margin-top: 115px;
+
+            button {
+                background-color: $mainColor;
+            }
         }
 
     }
