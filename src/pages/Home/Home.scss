@@ -58,7 +58,7 @@
 .sales {
     min-height: 550px;
     width: 100%;
-    background-image: radial-gradient(at bottom left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.01));
+    background-image: radial-gradient(at bottom left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
     color: $mainColor2;
 
     &__bg {
@@ -293,8 +293,8 @@
 
             @media (max-width: 530px) {
                 padding-top: 30px;
-                @include fontSettings($mainFont, 15px, 500);
-                line-height: 18px;
+                @include fontSettings($mainFont, 18px, 500);
+                line-height: 21px;
             }
         }
     }

@@ -1,0 +1,13 @@
+@import '../../scss/variables';
+
+.blog {
+    background-image: url("../../images/shop_bg.png");
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    &__container {
+        background-color: white;
+    }
+
+    &__items {}
+}
