@@ -1,0 +1,57 @@
+{
+    "header": {
+        "homeLink": "Home",
+        "shopLink": "Shop",
+        "blogLink": "Blog",
+        "contactsLink": "Contact",
+        "actions": {
+            "actionsBtnName": "Actions",
+            "actionsCart": "Cart",
+            "actionsSettings": "Settings",
+            "actionsExit": "Exit"
+        },
+        "loginBtn": "Login"
+    },
+    "footer": {
+        "address": "2005 Broken Dream Blvd Daytona Beach, FL 32122",
+        "link1": "New Inventory",
+        "link2": "Used Inventory",
+        "link3": "Service Center",
+        "link4": "Custom Parts",
+        "link5": "Riding Tips",
+        "link6": "Test Ride",
+        "link7": "Finance",
+        "link8": "Our Blog",
+        "link9": "About Us",
+        "link10": "Media",
+        "storeHours": "STORE HOURS",
+        "weekdays": "Weekdays: 8 AM - 3 PM",
+        "saturday": "Saturday: 8 AM - 2 PM",
+        "whenClosed": "Sunday/National Holiday: Closed",
+        "copyright": "©{{year}} MotoEmporium.com. All rights reserved"
+    },
+    "home_page": {
+        "hero": {
+            "title": "Find your dream motorcycle here!",
+            "text": "We have 100+ collections of new and used motorcycles from companies whose names start with a capital letter, such as Honda, Kawasaki, Yamaha, Ducati, etc.",
+            "link": "Let's find him"
+        },
+        "sales": {
+            "title": "Get ready for summer driving",
+            "text": "Save yourself up to {{sale}} discounts for purchases this summer",
+            "date": "Valid until 31.06.{{date}} of the year"
+        },
+        "whyUs": {
+            "title": "Why we are?",
+            "paragraph1": "Since 2019, MotoEmporium has been selling hundreds of motorcycles that are relevant on the road at a reasonable price. From the smallest engine size to the largest - we have it all. Do you want to enjoy the sunset on the road, or do you just like to go fast, or maybe you want to compete with your friends at the speedway? We have the right motorcycle for you!",
+            "paragraph2": "Our staff are the best on the market with lots of experience on a motorcycle and tons of knowledge about it, so come see us and don't hesitate to ask us questions.We welcome those who are new to motorcycling and are excited to see how quickly you start riding with pleasure."
+        },
+        "ourShowroom": {
+            "link1": "Our showroom",
+            "link2": "Test drive",
+            "link3": "Our service",
+            "link4": "Custom details",
+            "link5": "Finance"
+        }
+    }
+}

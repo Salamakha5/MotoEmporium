@@ -45,7 +45,7 @@ class ServerStore {
                 })
                 .catch((error) => {
                     this.userIsAuth = false
-                    console.log(error);
+                    // console.log(error);
                 });
         }
     }

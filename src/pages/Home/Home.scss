@@ -162,6 +162,7 @@
                 border-radius: 15px;
                 @include fontSettings($mainFont, 36px, 700);
                 line-height: 43px;
+                text-transform: uppercase;
             }
         }
     }
@@ -192,6 +193,7 @@
                     border-radius: 15px;
                     @include fontSettings($mainFont, 22px, 700);
                     line-height: 26px;
+                    text-transform: uppercase;
                 }
             }
         }

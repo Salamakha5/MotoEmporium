@@ -10,11 +10,17 @@ import { NavLink } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import alertify from 'alertifyjs'
 import Contact from '../../pages/Contact/Contact'
+import { useTranslation } from 'react-i18next';
 
 const Header = observer(() => {
 
+    const { t, i18n } = useTranslation();
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    }
+
     function ggg() {
-        alertify.alert('', 'пасхалка', function () { alertify.success('фокус покус'); });
+        alertify.alert('', 'шось', function () { alertify.success('фокус покус'); });
     }
 
     const activeLink = ({ isActive }) => (isActive ? 'nav-item main-link active' : 'nav-item main-link')
@@ -32,22 +38,26 @@ const Header = observer(() => {
             <div className="collapse navbar-collapse " id="headerToggler">
                 <div className="header__wrap">
                     <div className='header__nav'>
-                        <NavLink className={activeLink} to='/' element={<Home />}>Головна</NavLink>
-                        <NavLink className={activeLink} to='/shop' element={<Shop />}>Каталог</NavLink>
-                        <NavLink className={activeLink} to='/blog' element={<Blog />}>Блог</NavLink>
-                        <NavLink className={activeLink} to='/contact' element={<Contact />}>Контакти</NavLink>
+                        <NavLink className={activeLink} to='/' element={<Home />}>{t('header.homeLink')}</NavLink>
+                        <NavLink className={activeLink} to='/shop' element={<Shop />}>{t('header.shopLink')}</NavLink>
+                        <NavLink className={activeLink} to='/blog' element={<Blog />}>{t('header.blogLink')}</NavLink>
+                        <NavLink className={activeLink} to='/contact' element={<Contact />}>{t('header.contactsLink')}</NavLink>
                         <div className='header__nav-dropdown'>
                             <button type="button" className="header__nav-dropdownBtn main-link nav-item | btn dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
-                            >Дії</button>
+                            >{t('header.actions.actionsBtnName')}</button>
                             <ul className="dropdown-menu">
-                                <li className='dropdown-item'> <i className="bi bi-cart3 pe-2"></i> Корзина </li>
-                                <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> Налаштування </li>
+                                <li className='dropdown-item'> <i className="bi bi-cart3 pe-2"></i> {t('header.actions.actionsCart')} </li>
+                                <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> {t('header.actions.actionsSettings')} </li>
+                                <li className='d-flex justify-content-center'>
+                                    <button className='py-2 px-3 me-1' onClick={() => changeLanguage("ua")}>UA</button>
+                                    <button className='py-2 px-3' onClick={() => changeLanguage("en")}>EN</button>
+                                </li>
                                 <li className='d-flex justify-content-center'>
                                     <button className='main-link exitButton | w-100'
                                         style={{ display: serverStore.userIsAuth == true ? 'block' : 'none' }}
                                         onClick={() => serverStore.unLogin()}
-                                    >Вийти <i className="fs-4 bi bi-door-open-fill"></i> </button>
+                                    >{t('header.actions.actionsExit')} <i className="fs-4 bi bi-door-open-fill"></i> </button>
                                 </li>
                             </ul>
                         </div>
@@ -62,9 +72,7 @@ const Header = observer(() => {
                             :
                             <div style={{ maxWidth: "350px" }} className='header__user'>
                                 <NavLink to='/login' element={<Login />}>
-                                    <button className='mainButton header__login-btn py-3 px-5'>
-                                        Login
-                                    </button>
+                                    <button className='mainButton header__login-btn py-3 px-5'>{t('header.loginBtn')}</button>
                                 </NavLink>
                             </div>
                     }

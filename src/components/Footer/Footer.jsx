@@ -1,47 +1,54 @@
-import React from 'react'
 import './Footer.scss'
 
+import { useTranslation } from 'react-i18next';
+
+
 const Footer = () => {
+    const { t } = useTranslation();
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+
     return (
         <div className='footer'>
             <div className='footer__nav'>
                 <div className='footer__item'>
                     <ul>
-                        <li className='footer__title'>MotoEmporium</li>
-                        <li className='pb-3 small__lineHeigth'>2005 Broken Dream Blvd <br /> Daytona Beach, FL 32122</li>
-                        <li><a className='main-link' href='tel:34375092453'>(343)-7509-2453</a></li>
+                        <li className='footer__titles logo'>MotoEmporium</li>
+                        <li className='small__lineHeigth pb-3 pe-5'>{t('footer.address')}</li>
+                        <li><a className='main-link' href='tel:12345678910'>(123)-4567-8910</a></li>
                     </ul>
                 </div>
                 <div className='footer__item'>
                     <ul>
-                        <li>New Inventory</li>
-                        <li>Used Inventory</li>
-                        <li>Service Center</li>
-                        <li>Custom Parts</li>
-                        <li>Riding Tips</li>
+                        <li>{t('footer.link1')}</li>
+                        <li>{t('footer.link2')}</li>
+                        <li>{t('footer.link3')}</li>
+                        <li>{t('footer.link4')}</li>
+                        <li>{t('footer.link5')}</li>
                     </ul>
                 </div>
                 <div className='footer__item'>
                     <ul>
-                        <li>Test Ride</li>
-                        <li>Finance</li>
-                        <li>Our Blog</li>
-                        <li>About Us</li>
-                        <li>Media</li>
+                        <li>{t('footer.link6')}</li>
+                        <li>{t('footer.link7')}</li>
+                        <li>{t('footer.link8')}</li>
+                        <li>{t('footer.link9')}</li>
+                        <li>{t('footer.link10')}</li>
                     </ul>
                 </div>
                 <div className='footer__item'>
                     <ul>
-                        <li className='footer__title'>STORE HOURS</li>
-                        <li>Weekdays: 8 AM - 3 PM</li>
-                        <li>Saturday: 8 AM - 2 PM</li>
-                        <li>Sunday/National Holiday: Closed</li>
+                        <li className='footer__titles'>{t('footer.storeHours')}</li>
+                        <li>{t('footer.weekdays')}</li>
+                        <li>{t('footer.saturday')}</li>
+                        <li>{t('footer.whenClosed')}</li>
                     </ul>
                 </div>
             </div>
             <div className="footer__copyright">
                 <div className='text'>
-                    <span>©2021 TwoWheelers.com. All rights reserved</span>
+                    <span>{t("footer.copyright", {year: currentYear})}</span>
 
                     <div className="socials">
                         <div className="socials__item"><i className="bi bi-facebook"></i></div>
