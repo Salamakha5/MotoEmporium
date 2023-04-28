@@ -13,7 +13,7 @@ const OneProduct = observer((props) => {
     return (
         <div className="oneCardWrap | p-3 col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
             <div className="oneCard | p-3">
-                <div className="oneCard__img | mb-4"><img src={imgURL[1]} /></div>
+                <div className="oneCard__img | mb-4"><img src={imgURL[0]} /></div>
                 <div className="oneCard__title | mb-2">{brand} - {model}</div>
                 <div className="oneCard__type | pb-2">Тип: {collectionType}</div>
                 <div className="oneCard__horsePower | pb-2">Потужність: {horsepower}</div>

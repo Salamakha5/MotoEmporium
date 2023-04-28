@@ -30,6 +30,9 @@
         }
 
         .moto-shop__controls-btnFind {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 0 10px 0 0;
 
             @media (max-width: 575px) {
@@ -60,5 +63,12 @@
             left: 50%;
             transform: translateX(-50%);
         }
+    }
+    .error-shop{
+        color: brown;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        
     }
 }
