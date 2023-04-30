@@ -6,12 +6,36 @@ import serverStore from '../../store/serverStore'
 import { createRef, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
+import Pagination from '../../components/Pagination/Pagination'
 
 const Shop = observer(() => {
     useEffect(() => {
         document.title = "Shop - MotoEmporium";
+        setLoading(true)
         serverStore.getAllMoto()
+        setLoading(false)
     }, [])
+    const [Loading,setLoading] = useState(false)
+    const [currentPage,setcurrentPage] = useState(1)
+    const [MotoPerPage] = useState(8) 
+    
+    const lastMotoIndex = currentPage * MotoPerPage 
+    const firstMotoIndex = lastMotoIndex - MotoPerPage
+    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)  
+
+    const paginate = pageNumber => setcurrentPage(pageNumber)
+    const nextPage = () => {
+        if(currentPage<serverStore.lengthPagNumber){
+            setcurrentPage(currentPage + 1)
+        }
+    }
+    const prevPage = () => {
+        if(currentPage>1){
+            setcurrentPage(currentPage - 1)
+        }
+    }
+
+
     let BrandValue = createRef()
     let ModelValue = createRef()
     let SelectType = createRef()
@@ -26,6 +50,7 @@ const Shop = observer(() => {
         serverStore.getMotoNameToType(SelectType.current.value)
     }
     function sortData(){
+        setcurrentPage(1)
         let obj = {
             SortToBrand:BrandValue.current.value,
             SortToModel:ModelValue.current.value,
@@ -40,6 +65,7 @@ const Shop = observer(() => {
         ModelValue.current.value = ""
         SelectType.current.value = "0"
         SelectModel.current.value = "0"
+        setcurrentPage(1)
     
     }
 
@@ -93,7 +119,7 @@ const Shop = observer(() => {
                 <div className='error-shop'>{serverStore.ErrorMotoSort}</div>
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
                     <div className='col moto-shop__supControls-nowDisplay'>
-                        <span>Відображається 1 із {toJS(serverStore.MotoData).length} сторінок</span>
+                        <span>Відображається {currentPage} із {serverStore.lengthPagNumber} сторінок</span>
                     </div>
 
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end'>
@@ -114,10 +140,20 @@ const Shop = observer(() => {
 
                 <div className='moto-shop__showcase | row'>
                     {
-                        toJS(serverStore.MotoDataCopy).map((p) => {
+                        currentMoto.map((p) => {
                             return <OneProduct key={p.id} data={p}></OneProduct>
                         })
                     }
+                </div>
+                
+                <div className='d-flex justify-content-center align-items-center'>
+                <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i class="bi fs-5 bi-arrow-left-short"></i></button>
+                <Pagination
+                    MotoPerPage={MotoPerPage}
+                    totalMoto={serverStore.MotoDataCopy.length}
+                    paginate={paginate}
+                ></Pagination>
+                <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i class="bi fs-5 bi-arrow-right-short"></i></button>
                 </div>
             </div>
         </div>

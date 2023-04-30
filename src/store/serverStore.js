@@ -6,16 +6,20 @@ import axios from 'axios';
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
-    userIsAuth = true
+    userIsAuth = false
     MotoData = []
     MotoDataCopy = []
     ErrorMotoSort = ""
+    lengthPagNumber = 0
     ArrTypeName = []
     UserName = "Дефолт"
     spinerShop = "d-block"
 
     constructor() {
         makeAutoObservable(this)
+    }
+    setlengthPagNumber(number){
+        this.lengthPagNumber = number
     }
 
     getAllMoto() {
