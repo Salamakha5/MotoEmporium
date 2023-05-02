@@ -7,50 +7,71 @@ class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
     userIsAuth = false
     MotoData = []
+    OneMoto = []
     MotoDataCopy = []
+    threeMotoCard = []
+
+
     ErrorMotoSort = ""
     lengthPagNumber = 0
     ArrTypeName = []
     UserName = "Дефолт"
     spinerShop = "d-block"
-
+    spinerInfo = "d-block"
     constructor() {
         makeAutoObservable(this)
     }
-    setlengthPagNumber(number){
+    setlengthPagNumber(number) {
         this.lengthPagNumber = number
+    }
+
+    getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    getIdUrl() {
+        let idIndex = window.location.href.search("id")
+        let idValue = window.location.href.substr(idIndex + 3);
+        this.getMotoById(idValue)
+    }
+
+    getMotoById(id) {
+        this.spinerInfo = "d-block"
+        // axios.post("http://localhost:4000/api" + "/getMotoById", { id: id })
+            axios.post(this.URL + "/getMotoById", { id: id })
+            .then((response) => {
+                this.OneMoto = response.data
+                this.spinerInfo = "d-none"
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     getAllMoto() {
         this.ErrorMotoSort = ""
         console.log("getAllMoto");
-
-        // localHost
-        // this.spinerShop = "d-block"
-        // axios.get("http://localhost:4000/api" + "/getAllMoto")
-        //     .then((response) => {
-        //         // console.log("this.getAllMoto");
-        //         this.MotoData = response.data
-        //         this.MotoDataCopy = this.MotoData
-        //         this.spinerShop = "d-none"
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
-        // localHost
-
-        // SERVER
         this.spinerShop = "d-block"
-        axios.get(this.URL + "/getAllMoto")
+        // axios.get("http://localhost:4000/api" + "/getAllMoto")
+            axios.get(this.URL + "/getAllMoto")
             .then((response) => {
                 this.MotoData = response.data
                 this.MotoDataCopy = this.MotoData
                 this.spinerShop = "d-none"
+                for (let i = 0; i < 3; i++) {
+                    if (this.threeMotoCard.length <= 2) {
+                        let randomObj = this.MotoData[this.getRandomNumber(0, this.MotoData.length - 1)]
+                        let checkId = this.threeMotoCard.some(obj => obj['_id'] === randomObj._id)
+                        if(!checkId){
+                            this.threeMotoCard.push(randomObj)
+                        }else{i--
+                        }
+                    }
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
-        // SERVER
     }
     getMotoNameToType(type) {
         let arr = toJS(this.MotoData).filter(moto => moto.collectionType == type)
@@ -59,7 +80,6 @@ class ServerStore {
             res.push(arr[i].model)
         }
         this.ArrTypeName = res
-        console.log(this.ArrTypeName);
     }
 
     unLogin() {
@@ -79,7 +99,6 @@ class ServerStore {
                 })
                 .catch((error) => {
                     this.userIsAuth = false
-                    // console.log(error);
                 });
         }
     }

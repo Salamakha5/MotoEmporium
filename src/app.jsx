@@ -13,6 +13,7 @@ import serverStore from './store/serverStore';
 import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from "react";
+import OneMoto from "./pages/OneMoto/OneMoto";
 
 const App = observer(() => {
 
@@ -34,6 +35,7 @@ const App = observer(() => {
                         serverStore.userIsAuth === true ?
                             <Route path="/" element={<Layot />}>
                                 <Route path='shop' element={<Shop />} />
+                                <Route path='moto' element={<OneMoto />} />
                             </Route>
                             :
                             <Route>
