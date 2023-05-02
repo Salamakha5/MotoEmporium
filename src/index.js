@@ -20,7 +20,6 @@ import './i18n'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        {/* <Suspense fallback="loading..."> */}
         <Suspense fallback={
             <div className='loader-pageWrap active'>
                 <div className="loader active" id="loader-2">

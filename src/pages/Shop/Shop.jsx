@@ -15,22 +15,22 @@ const Shop = observer(() => {
         serverStore.getAllMoto()
         setLoading(false)
     }, [])
-    const [Loading,setLoading] = useState(false)
-    const [currentPage,setcurrentPage] = useState(1)
-    const [MotoPerPage] = useState(8) 
-    
-    const lastMotoIndex = currentPage * MotoPerPage 
+    const [Loading, setLoading] = useState(false)
+    const [currentPage, setcurrentPage] = useState(1)
+    const [MotoPerPage] = useState(8)
+
+    const lastMotoIndex = currentPage * MotoPerPage
     const firstMotoIndex = lastMotoIndex - MotoPerPage
-    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)  
+    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
 
     const paginate = pageNumber => setcurrentPage(pageNumber)
     const nextPage = () => {
-        if(currentPage<serverStore.lengthPagNumber){
+        if (currentPage < serverStore.lengthPagNumber) {
             setcurrentPage(currentPage + 1)
         }
     }
     const prevPage = () => {
-        if(currentPage>1){
+        if (currentPage > 1) {
             setcurrentPage(currentPage - 1)
         }
     }
@@ -42,33 +42,32 @@ const Shop = observer(() => {
     let SelectModel = createRef()
     let SortCash = createRef()
 
-    function sortCash(){
+    function sortCash() {
         serverStore.SortCash(SortCash.current.value)
     }
 
-    function getMotoNameToType(){
+    function getMotoNameToType() {
         serverStore.getMotoNameToType(SelectType.current.value)
     }
-    function sortData(){
+    function sortData() {
         setcurrentPage(1)
         let obj = {
-            SortToBrand:BrandValue.current.value,
-            SortToModel:ModelValue.current.value,
-            SortSelectCatigories:SelectType.current.value,
-            SortSelectModel:SelectModel.current.value,
+            SortToBrand: BrandValue.current.value,
+            SortToModel: ModelValue.current.value,
+            SortSelectCatigories: SelectType.current.value,
+            SortSelectModel: SelectModel.current.value,
         }
         serverStore.sortMotoData(obj)
     }
-    function ClearSort(){
+    function ClearSort() {
         serverStore.getAllMoto()
         BrandValue.current.value = ""
         ModelValue.current.value = ""
         SelectType.current.value = "0"
         SelectModel.current.value = "0"
         setcurrentPage(1)
-    
-    }
 
+    }
 
     return (
         <div className='moto-shop | pt-5 pb-3'>
@@ -79,13 +78,13 @@ const Shop = observer(() => {
                     <div className='row d-flex align-items-center'>
                         <div className='col-12 col-lg-12 col-xl-4'>
                             {/* inputs */}
-                            <input type="text" className="form-control mt-3 mb-3" placeholder="Пошук по марці" ref={BrandValue}/>
-                            <input type="text" className="form-control mt-4 mb-3" placeholder="Пошук по назві моделі" ref={ModelValue}/>
+                            <input type="text" className="form-control mt-3 mb-3" placeholder="Пошук по марці" ref={BrandValue} />
+                            <input type="text" className="form-control mt-4 mb-3" placeholder="Пошук по назві моделі" ref={ModelValue} />
                         </div>
 
                         <div className='col-12 col-md-6 col-xl-4'>
                             {/* selects */}
-                            <select ref={SelectType} onChange={getMotoNameToType}  className="form-select mt-3 mb-3">
+                            <select ref={SelectType} onChange={getMotoNameToType} className="form-select mt-3 mb-3">
                                 <option defaultValue value="0">Пошук по категоріям/Всі</option>
                                 <option value="Sport">Спорт</option>
                                 <option value="Adventure">Подорожі</option>
@@ -94,19 +93,19 @@ const Shop = observer(() => {
                                 <option value="Motard">Мотард</option>
                                 <option value="Naked">Найкед</option>
                                 <option value="Scrambler">Скремблер</option>
-                                <option value="Retro">Cтарі</option>
+                                <option value="Retro">Ретро</option>
                             </select>
                             <select ref={SelectModel} className="form-select mt-4 mb-3">
                                 {
-                                    serverStore.ArrTypeName.map((i)=>{
+                                    serverStore.ArrTypeName.map((i) => {
                                         return <option key={i} value={i}>{i}</option>
-                                        
                                     })
                                 }
-                                <option defaultValue value="0">Пошук по моделі/Всі</option>
+                                {/* <option defaultValue value="0">Пошук по моделі/Всі</option> */}
+                                <option defaultValue value="0">Тут будуть відображатися мотоцикли по моделі і категорії</option>
                             </select>
                         </div>
-                                
+
                         <div className='col-12 col-md-6 col-xl-4'>
                             {/* buttons */}
                             <div className='d-flex justify-content-center row'>
@@ -145,15 +144,15 @@ const Shop = observer(() => {
                         })
                     }
                 </div>
-                
+
                 <div className='d-flex justify-content-center align-items-center'>
-                <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i class="bi fs-5 bi-arrow-left-short"></i></button>
-                <Pagination
-                    MotoPerPage={MotoPerPage}
-                    totalMoto={serverStore.MotoDataCopy.length}
-                    paginate={paginate}
-                ></Pagination>
-                <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i class="bi fs-5 bi-arrow-right-short"></i></button>
+                    <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i class="bi fs-5 bi-arrow-left-short"></i></button>
+                    <Pagination
+                        MotoPerPage={MotoPerPage}
+                        totalMoto={serverStore.MotoDataCopy.length}
+                        paginate={paginate}
+                    ></Pagination>
+                    <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i class="bi fs-5 bi-arrow-right-short"></i></button>
                 </div>
             </div>
         </div>

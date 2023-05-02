@@ -15,21 +15,30 @@ import { useTranslation } from 'react-i18next';
 const Header = observer(() => {
 
     const { t, i18n } = useTranslation();
-    const changeLanguage = (language) => {
-        i18n.changeLanguage(language);
-    }
+    const changeLanguage = (language) => { i18n.changeLanguage(language) }
 
-    function ggg() {
-        alertify.alert('', 'шось', function () { alertify.success('фокус покус'); });
+    // * то секрет жоский
+    const logoLink = () => {
+        alertify.alert(t('header.modal_windows.top_secret-title'),
+            `<span style="font-size: 124px;">🕵️‍♀️</span> ${t('header.modal_windows.top_secret-text')}`,
+            function () { alertify.success('+--(-_-)--+'); });
     }
 
     const activeLink = ({ isActive }) => (isActive ? 'nav-item main-link active' : 'nav-item main-link')
+
+    const langSwitchHandler = () => { (i18n.language == 'en') ? changeLanguage("ua") : changeLanguage("en") };
+
+    function exitHandler() {
+        alertify.confirm(t('header.modal_windows.exit-title'), t('header.modal_windows.exit-text')
+            , function () { serverStore.unLogin() }
+            , function () { alertify.success(t('header.modal_windows.exit-notify')) });
+    }
 
     return (
 
         <header className="header navbar navbar-expand-xl">
 
-            <div className="header__logo" onClick={ggg}>Moto Emporium</div>
+            <div className="header__logo" onClick={logoLink}>Moto Emporium</div>
 
             <button className="header__mobileBtn | navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerToggler" aria-controls="headerToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -50,13 +59,17 @@ const Header = observer(() => {
                                 <li className='dropdown-item'> <i className="bi bi-cart3 pe-2"></i> {t('header.actions.actionsCart')} </li>
                                 <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> {t('header.actions.actionsSettings')} </li>
                                 <li className='d-flex justify-content-center'>
-                                    <button className='py-2 px-3 me-1' onClick={() => changeLanguage("ua")}>UA</button>
-                                    <button className='py-2 px-3' onClick={() => changeLanguage("en")}>EN</button>
+                                    <div className="lang-switcher | form-check form-switch">
+                                        <div className='lang lang-en'>EN</div>
+                                        <input className="form-check-input" id='headerLangSwitcher' type="checkbox" role="switch"
+                                            onClick={langSwitchHandler} defaultChecked={i18n.language != 'en'} />
+                                        <div className='lang lang-ua'>UA</div>
+                                    </div>
                                 </li>
                                 <li className='d-flex justify-content-center'>
                                     <button className='main-link exitButton | w-100'
                                         style={{ display: serverStore.userIsAuth == true ? 'block' : 'none' }}
-                                        onClick={() => serverStore.unLogin()}
+                                        onClick={exitHandler}
                                     >{t('header.actions.actionsExit')} <i className="fs-4 bi bi-door-open-fill"></i> </button>
                                 </li>
                             </ul>
@@ -67,7 +80,6 @@ const Header = observer(() => {
                             <div className='header__user'>
                                 <div className="decoration"></div>
                                 <div className='text'>{serverStore.UserName}</div>
-                                {/* <div className='text'>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem Lorem.Lorem..</div> */}
                             </div>
                             :
                             <div style={{ maxWidth: "350px" }} className='header__user'>

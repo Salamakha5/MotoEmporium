@@ -103,6 +103,24 @@
                     }
                 }
 
+                .lang-switcher {
+                    position: relative;
+
+                    .lang {
+                        position: absolute;
+                    }
+
+                    .lang-ua {
+                        top: 3px;
+                        right: -30px;
+                    }
+
+                    .lang-en {
+                        top: 3px;
+                        left: -40px;
+                    }
+                }
+
                 .exitButton {
                     color: crimson;
                     position: relative;
