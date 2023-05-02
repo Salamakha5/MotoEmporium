@@ -1,10 +1,10 @@
+import { NavLink } from "react-router-dom";
 import "./oneProduct.scss"
-
 import { observer } from "mobx-react-lite";
 
 const OneProduct = observer((props) => {
 
-    const { imgURL, brand, model, price, collectionType, horsepower } = props.data;
+    const { imgURL, brand, model, price, collectionType, horsepower,_id } = props.data;
 
     function formatPrice(price) {
         return '$' + price.toLocaleString('en-US', { currency: 'USD' });
@@ -19,7 +19,7 @@ const OneProduct = observer((props) => {
                 <div className="oneCard__horsePower | pb-2">Потужність: {horsepower}</div>
                 <div className="oneCard__priceCont | pt-2">{formatPrice(price)}</div>
                 <div className="oneCard__btnCont | pt-5">
-                    <button className="mainButton | btn btn-warning px-4 py-2">Детальніше</button>
+                    <NavLink to={`/moto/?id=${_id}`} className="mainButton | btn btn-warning px-4 py-2">Детальніше</NavLink>
                 </div>
             </div>
         </div>
