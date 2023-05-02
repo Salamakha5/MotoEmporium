@@ -1,7 +1,7 @@
 import './Register.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
-// import flag_en from '../../images/icons/choice_flag-en.png';
+import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Login from '../Login/Login'
@@ -14,6 +14,7 @@ import * as Yup from "yup"
 import alertify from 'alertifyjs'
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 const Register = observer(() => {
 
@@ -24,6 +25,9 @@ const Register = observer(() => {
         document.title = "Register - MotoEmporium";
     }, [])
 
+    const { t, i18n } = useTranslation();
+    const changeLanguage = (language) => { i18n.changeLanguage(language) }
+
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -32,10 +36,10 @@ const Register = observer(() => {
             confirmPassword: ''
         },
         validationSchema: Yup.object({
-            name: Yup.string().required("Не заповнене").min(4, "Поле має містити мін. 4 символа!"),
-            email: Yup.string().required("Не заповнене").email("Eлектронна адреса має бути дійсною!"),
-            password: Yup.string().required("Не заповнене").min(5, "Пароль має містити від 5 символів!"),
-            confirmPassword: Yup.string().required("Не заповнене").min(5, "Пароль має містити від 5 символів!"),
+            name: Yup.string().required(t('yupErrors.required')).min(4, t('yupErrors.valid-name')),
+            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')),
+            password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password')),
+            confirmPassword: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password')),
         })
     })
 
@@ -75,6 +79,7 @@ const Register = observer(() => {
                     if (registerAnswer === 'Користувач з такою поштою вже є') {
                         setShowPageLoader(false)
                         alertify.alert('Помилка', 'Користувач з такою поштою вже існує!');
+                        // TODO Доробити обробники на помилки
                     }
                     if (registerAnswer === 'Помилка:') {
                         setShowPageLoader(false)
@@ -88,6 +93,8 @@ const Register = observer(() => {
             alertify.alert('Помилка', 'Ви не погоджуєтесь із умовами нашого сервісу :(');
         }
     }
+
+    function chooseLangHandler(e) { changeLanguage(`${e.target.value}`) }
 
     return (
         <div className="register">
@@ -104,35 +111,36 @@ const Register = observer(() => {
             <div className="register-form">
 
                 <div className="choose-language">
-                    <img src={flag_ua} alt="flag" />
-                    <select className="form-select choose-language__select" name="choose-language">
+                    <img src={localStorage.i18nextLng == "ua" ? flag_ua : flag_en} alt="flag" />
+                    <select className="form-select choose-language__select" name="choose-language"
+                        onChange={chooseLangHandler} defaultValue={localStorage.i18nextLng}>
                         <option value="ua">UA</option>
                         <option value="en">ENG</option>
                     </select>
                 </div>
 
                 <div className="form-wrap">
-                    <div className="register-form__title">Створити новий обліковий запис</div>
-                    <div className="register-form__suptitle">Вже є аккаунт?
-                        <Link to='/login' element={<Login />} className="main-link"> <span>Авторизація</span> </Link>
-                        тут
+                    <div className="register-form__title">{t('register.title')}</div>
+                    <div className="register-form__suptitle"> {t('register.suptitle')}
+                        <Link to='/login' element={<Login />} className="main-link"> <span>{t('register.suptitle_link')}</span> </Link>
+                        {t('register.suptitle_p2')}
                     </div>
 
                     <form>
 
-                        <input type="text" onChange={formik.handleChange} name="name" id="name" className="form-control forms_bot_line register-form__firstName" placeholder="Повне ім'я"
+                        <input type="text" onChange={formik.handleChange} name="name" id="name" className="form-control forms_bot_line register-form__firstName" placeholder={t('register.form.name-placeholder')}
                             value={formik.values.name}
                         />
                         <label className='error'>{formik.errors.name ? formik.errors.name : ""}</label>
 
-                        <input type="email" name="email" id="email" className="form-control forms_bot_line register-form__email" placeholder="Електронна пошта"
+                        <input type="email" name="email" id="email" className="form-control forms_bot_line register-form__email" placeholder={t('register.form.email-placeholder')}
                             onChange={formik.handleChange}
                             value={formik.values.email}
                         />
                         <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
 
                         <div className="password-wrap">
-                            <input type={eye1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line register-form__password" placeholder="Пароль"
+                            <input type={eye1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line register-form__password" placeholder={t('register.form.password-placeholder')}
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
                             />
@@ -141,7 +149,7 @@ const Register = observer(() => {
                         </div>
 
                         <div className="confirmPassword-wrap">
-                            <input type={eye2 == "bi bi-eye-fill" ? "password" : "text"} name="confirmPassword" id="confirmPassword" className="form-control forms_bot_line register-form__confirmPassword" placeholder="Підтвердіть пароль"
+                            <input type={eye2 == "bi bi-eye-fill" ? "password" : "text"} name="confirmPassword" id="confirmPassword" className="form-control forms_bot_line register-form__confirmPassword" placeholder={t('register.form.confirmPassword-placeholder')}
                                 onChange={formik.handleChange}
                                 value={formik.values.confirmPassword}
                             />
@@ -153,13 +161,13 @@ const Register = observer(() => {
                             <input className="form-check-input" type="checkbox" id="iAgree"
                                 onChange={iAgreeHandler}
                             />
-                            <label className="form-check-label" htmlFor="iAgree">Я погоджуюсь на умови зберігання моїх данних</label>
+                            <label className="form-check-label" htmlFor="iAgree">{t('register.form.iAgree')}</label>
                         </div>
 
                         <div className="btn-cont">
                             <button onClick={registerUser} className={formik.isValid && formik.dirty ? "btn mainButton register-form__submit py-3 px-5" : "btn mainButton default-btn_1 py-3 px-5 disabled"}
                                 aria-disabled="true" role="submit" data-bs-toggle="button"
-                            >Реєстрація</button>
+                            >{t('register.form.submitBtn')}</button>
                         </div>
                     </form>
 

@@ -10,7 +10,14 @@
             "actionsSettings": "Settings",
             "actionsExit": "Exit"
         },
-        "loginBtn": "Login"
+        "loginBtn": "Login",
+        "modal_windows": {
+            "top_secret-title": "Top secret",
+            "top_secret-text": "👈 its you",
+            "exit-title": "Clarification.",
+            "exit-text": "Are you sure you want to leave?",
+            "exit-notify": "The exit is canceled!"
+        }
     },
     "footer": {
         "address": "2005 Broken Dream Blvd Daytona Beach, FL 32122",
@@ -53,5 +60,46 @@
             "link4": "Custom details",
             "link5": "Finance"
         }
+    },
+    "login": {
+        "title": "Authorization",
+        "suptitle-1": "Continue without registration 👉",
+        "suptitle-toMain": "To main page",
+        "suptitle-2": "New visitor?",
+        "suptitle-2_link": "Create account",
+        "suptitle-2_p2": "here",
+        "email-placeholder": "Email",
+        "password-placeholder": "Password",
+        "form": {
+            "hint": "Click",
+            "hint_link": "here",
+            "hint_p2": "if you have forgotten your password",
+            "submitBtn": "Authorization"
+        },
+        "forgot-alert-title": "Condolences",
+        "forgot-alert-text": "For now, let's remember :("
+    },
+    "register": {
+        "title": "Create a new account",
+        "suptitle": "Already have an account?",
+        "suptitle_link": "Authorization",
+        "suptitle_p2": "here",
+        "form": {
+            "name-placeholder": "Full name",
+            "email-placeholder": "Email",
+            "password-placeholder": "Password",
+            "confirmPassword-placeholder": "Confirm your password",
+            "iAgree": "I agree to the terms of storage of my data",
+            "submitBtn": "Registration"
+        },
+        "apiAnswers": {
+            
+        }
+    },
+    "yupErrors": {
+        "required": "Not filled in",
+        "valid-name": "The field must contain min. 4 characters!",
+        "valid-email": "The email address must be valid!",
+        "valid-password": "The password must contain at least 5 characters!"
     }
 }

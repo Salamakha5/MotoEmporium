@@ -2,7 +2,7 @@
 import './Login.scss';
 
 import moto_bg from '../../images/logReg_bg.png';
-// import flag_en from '../../images/icons/choice_flag-en.png';
+import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Register from '../Register/Register'
@@ -17,6 +17,7 @@ import alertify from 'alertifyjs'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Home from '../Home/Home';
+import { useTranslation } from 'react-i18next';
 
 
 const Login = observer(() => {
@@ -29,14 +30,18 @@ const Login = observer(() => {
         document.title = "Login - MotoEmporium";
     }, [])
 
+    const { t, i18n } = useTranslation();
+    const changeLanguage = (language) => { i18n.changeLanguage(language) }
+
     const formik = useFormik({
         initialValues: {
             email: '',
+            // password: ''
             password: 'testpassword'
         },
         validationSchema: Yup.object({
-            email: Yup.string().required("Не заповнене").email("Eлектронна адреса має бути дійсною!"),
-            password: Yup.string().required("Не заповнене").min(5, "Пароль має містити від 5 сим.")
+            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')),
+            password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password'))
         })
     })
 
@@ -58,13 +63,14 @@ const Login = observer(() => {
                 serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
             }, (error) => {
                 setShowPageLoader(false);
+                // TODO Добавити іфи, для локалізації
                 setLoginAnswer(error.response.data.massage)
             });
     }
 
-    function forgotHandler() {
-        alertify.alert('Співчуття', `Пом'янем :(`);
-    }
+    function chooseLangHandler(e) { changeLanguage(`${e.target.value}`) }
+
+    function forgotHandler() { alertify.alert(t('login.forgot-alert-title'), t('login.forgot-alert-text')); }
 
 
     return (
@@ -82,26 +88,27 @@ const Login = observer(() => {
             <div className="login-form">
 
                 <div className="choose-language">
-                    <img src={flag_ua} alt="flag" />
-                    <select className="form-select choose-language__select" name="choose-language">
-                        <option value="ua">UA</option>
+                    <img src={localStorage.i18nextLng == "ua" ? flag_ua : flag_en} alt="flag" />
+                    <select className="form-select choose-language__select" name="choose-language"
+                        onChange={chooseLangHandler} defaultValue={localStorage.i18nextLng}>
                         <option value="en">ENG</option>
+                        <option value="ua">UA</option>
                     </select>
                 </div>
 
                 <form className="form-wrap">
-                    <div className="login-form__title">Авторизація</div>
+                    <div className="login-form__title">{t('login.title')}</div>
                     <div className="login-form__suptitle">
-                        <span>Продовжити без реєстрації 👉 <Link to='/' element={<Home />} className="main-link"> На головну </Link></span>
+                        <span>{t('login.suptitle-1')} <Link to='/' element={<Home />} className="main-link"> {t('login.suptitle-toMain')} </Link></span>
                         <hr style={{ height: "1px", margin: "5px 0" }}></hr>
-                        <span>Новий відвідувач? <Link to='/register' element={<Register />} className="main-link"> Створити акаунт </Link> тут</span>
+                        <span>{t('login.suptitle-2')} <Link to='/register' element={<Register />} className="main-link"> {t('login.suptitle-2_link')} </Link> {t('login.suptitle-2_p2')}</span>
                     </div>
-                    {/* =============== */}
-                    <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder="Пошта"
+                    {/* fields */}
+                    <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder={t('login.email-placeholder')}
                         onChange={formik.handleChange} value={formik.values.email} />
                     <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
                     <div className="password-wrap">
-                        <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder="Пароль"
+                        <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder={t('login.password-placeholder')}
                             onChange={formik.handleChange} value={formik.values.password} />
 
                         <button type='button' onClick={changeIconsClass} className="btn-show_password"><i id="button1" className={"fs-3 " + iconsLock1}></i></button>
@@ -109,11 +116,7 @@ const Login = observer(() => {
                     </div>
                     {/* =============== */}
                     <div className="login-form__hints">
-                        {/* <span>Продовжити без реєстрації? <Link to='/' element={<Home />} className="main-link"> На головну </Link></span> */}
-                        {/* <br/> */}
-                        <span>Клацніть <span className="main-link" onClick={forgotHandler}>тут</span> якщо ви забули свій пароль </span>
-                        {/* або */}
-                        {/* <Link to='/' element={<Home />} className="main-link"> На головну </Link> */}
+                        <span>{t('login.form.hint')} <span className="main-link" onClick={forgotHandler}>{t('login.form.hint_link')}</span> {t('login.form.hint_p2')} </span>
                     </div>
                     <div className='ErrorApi'>{loginAnswer}</div>
                     <div className="btn-cont mt-4">
@@ -121,7 +124,7 @@ const Login = observer(() => {
                             onClick={loginUser}
                             className={formik.isValid && formik.dirty ? "btn mainButton register-form__submit py-3 px-5" : "btn mainButton register-form__submit py-3 px-5 disabled "}
                             aria-disabled="true" role="submit" data-bs-toggle="button"
-                        >Авторизація</button>
+                        >{t('login.form.submitBtn')}</button>
                     </div>
                 </form>
 

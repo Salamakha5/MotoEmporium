@@ -3,7 +3,6 @@ import axios from 'axios';
 // import { decodeToken, useJwt } from "react-jwt";
 // import alertify from 'alertifyjs'
 
-
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
     userIsAuth = false
@@ -81,7 +80,6 @@ class ServerStore {
             res.push(arr[i].model)
         }
         this.ArrTypeName = res
-        console.log(this.ArrTypeName);
     }
 
     unLogin() {
