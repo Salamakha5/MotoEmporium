@@ -68,7 +68,7 @@ const Register = observer(() => {
 
                     if (registerAnswer == 'Успішна реєстрація!') {
                         setShowPageLoader(false)
-                        alertify.alert('Успіх', `Користувач ${name} зареєстрований успішно!`, function () {
+                        alertify.alert(t('register.apiAnswers.success-title'), t('register.apiAnswers.success-text', { name }), function () {
                             navigate('/login')
                         });
                     }
@@ -78,19 +78,18 @@ const Register = observer(() => {
 
                     if (registerAnswer === 'Користувач з такою поштою вже є') {
                         setShowPageLoader(false)
-                        alertify.alert('Помилка', 'Користувач з такою поштою вже існує!');
-                        // TODO Доробити обробники на помилки
+                        alertify.alert(t('register.apiAnswers.error-title'), t('register.apiAnswers.email-alreadyExists'));
                     }
                     if (registerAnswer === 'Помилка:') {
                         setShowPageLoader(false)
-                        alertify.alert(`Помилка`, `${error.response.data.error}`);
+                        alertify.alert(t('register.apiAnswers.error-title'), `${error.response.data.error}`);
                     }
                 });
 
         } else if (password !== confirmPassword) {
-            alertify.alert('Помилка', 'Паролі не збігаються!');
+            alertify.alert(t('register.apiAnswers.error-title'), t('register.apiAnswers.password-notMatch'));
         } else if (iAgree == false) {
-            alertify.alert('Помилка', 'Ви не погоджуєтесь із умовами нашого сервісу :(');
+            alertify.alert(t('register.apiAnswers.error-title'), t('register.apiAnswers.notAgree'));
         }
     }
 

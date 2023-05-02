@@ -77,7 +77,11 @@
             "hint_p2": "якщо ви забули свій пароль"
         },
         "forgot-alert-title": "Співчуття",
-        "forgot-alert-text": "Покищо, пом'янем :("
+        "forgot-alert-text": "Покищо, пом'янем :(",
+        "apiAnswers": {
+            "password-wrong": "Не правильний пароль",
+            "user-notFound": "Такого користувача не знайдено"
+        }
     },
     "register": {
         "title": "Створити новий обліковий запис",
@@ -96,7 +100,9 @@
             "success-title": "Успіх",
             "success-text": "Користувач {{name}} зареєстрований успішно!",
             "error-title": "Помилка",
-            "email-alreadyExists": "Користувач з такою поштою вже існує!"
+            "email-alreadyExists": "Користувач з такою поштою вже існує!",
+            "password-notMatch": "Паролі не збігаються!",
+            "notAgree": "Ви не погоджуєтесь із умовами нашого сервісу :("
         }
     },
     "yupErrors": {

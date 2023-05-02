@@ -63,8 +63,20 @@ const Login = observer(() => {
                 serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
             }, (error) => {
                 setShowPageLoader(false);
-                // TODO Добавити іфи, для локалізації
-                setLoginAnswer(error.response.data.massage)
+
+                console.log(error.response.data.massage);
+
+                switch (error.response.data.massage) {
+                    case 'Не правильний пароль':
+                        setLoginAnswer(t('login.apiAnswers.password-wrong'))
+                        break;
+                    case 'Такого користувача не знайдено':
+                        setLoginAnswer(t('login.apiAnswers.user-notFound'))
+                        break;
+                    default:
+                        setLoginAnswer('')
+                        break;
+                }
             });
     }
 

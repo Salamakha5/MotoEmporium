@@ -77,7 +77,11 @@
             "submitBtn": "Authorization"
         },
         "forgot-alert-title": "Condolences",
-        "forgot-alert-text": "For now, let's remember :("
+        "forgot-alert-text": "For now, let's remember :(",
+        "apiAnswers": {
+            "password-wrong": "Wrong password",
+            "user-notFound": "No such user found"
+        }
     },
     "register": {
         "title": "Create a new account",
@@ -93,7 +97,12 @@
             "submitBtn": "Registration"
         },
         "apiAnswers": {
-            
+            "success-title": "Success",
+            "success-text": "User {{name}} registered successfully!",
+            "error-title": "Error",
+            "email-alreadyExists": "A user with this email already exists!",
+            "password-notMatch": "Passwords do not match!",
+            "notAgree": "You do not agree to the terms of our service :("
         }
     },
     "yupErrors": {
