@@ -1,12 +1,12 @@
 import './Shop.scss'
 
 import OneProduct from '../../components/OneProduct/OneProduct'
+import Pagination from '../../components/Pagination/Pagination'
 import serverStore from '../../store/serverStore'
 
 import { createRef, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
-import Pagination from '../../components/Pagination/Pagination'
+// import { toJS } from 'mobx'
 
 const Shop = observer(() => {
     useEffect(() => {
@@ -15,6 +15,7 @@ const Shop = observer(() => {
         serverStore.getAllMoto()
         setLoading(false)
     }, [])
+
     const [Loading, setLoading] = useState(false)
     const [currentPage, setcurrentPage] = useState(1)
     const [MotoPerPage] = useState(8)
@@ -25,7 +26,7 @@ const Shop = observer(() => {
 
     const paginate = pageNumber => setcurrentPage(pageNumber)
     const nextPage = () => {
-        if (currentPage < serverStore.lengthPagNumber) {
+        if (currentPage < serverStore.lengthPageNumber) {
             setcurrentPage(currentPage + 1)
         }
     }
@@ -34,7 +35,6 @@ const Shop = observer(() => {
             setcurrentPage(currentPage - 1)
         }
     }
-
 
     let BrandValue = createRef()
     let ModelValue = createRef()
@@ -66,7 +66,6 @@ const Shop = observer(() => {
         SelectType.current.value = "0"
         SelectModel.current.value = "0"
         setcurrentPage(1)
-
     }
 
     return (
@@ -118,7 +117,7 @@ const Shop = observer(() => {
                 <div className='error-shop'>{serverStore.ErrorMotoSort}</div>
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
                     <div className='col moto-shop__supControls-nowDisplay'>
-                        <span>Відображається {currentPage} із {serverStore.lengthPagNumber} сторінок</span>
+                        <span>Відображається {currentPage} із {serverStore.lengthPageNumber} сторінок</span>
                     </div>
 
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end'>

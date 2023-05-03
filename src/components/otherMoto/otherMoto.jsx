@@ -1,6 +1,6 @@
-import { observer } from 'mobx-react-lite'
-import React from 'react'
 import "./otherMoto.scss"
+
+import { observer } from 'mobx-react-lite'
 import { NavLink } from 'react-router-dom'
 import serverStore from '../../store/serverStore'
 

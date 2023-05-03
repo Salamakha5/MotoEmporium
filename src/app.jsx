@@ -11,7 +11,7 @@ import Contact from "./pages/Contact/Contact";
 import serverStore from './store/serverStore';
 
 import { observer } from 'mobx-react-lite';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react";
 import OneMoto from "./pages/OneMoto/OneMoto";
 
@@ -23,11 +23,11 @@ const App = observer(() => {
 
     return (
         <div>
-            <Router>
+            <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layot />}>
                         <Route index element={<Home />} />
-                        <Route path='Blog' element={<Blog />} />
+                        <Route path='blog' element={<Blog />} />
                         <Route path='contact' element={<Contact />} />
                     </Route>
                     <Route path='*' element={<NotFound />} />
@@ -45,7 +45,7 @@ const App = observer(() => {
                             </Route>
                     }
                 </Routes>
-            </Router>
+            </BrowserRouter>
         </div>
     );
 })

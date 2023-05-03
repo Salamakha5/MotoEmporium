@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-// main
 $mainColor: rgb(211, 175, 55);
-$mainColorDarken: rgb(182, 145, 39);
 // violet
 // $mainColor: #6d67e4;
-// $mainColorDarken: #413e89;
+$mainColorDarken: mix(black, $mainColor, 10%);
+
 
 $mainColor2: #252C33;
 
@@ -16,3 +15,12 @@ $mainFont: Inter;
     font-size: $font-size;
     font-weight: $font-weight;
 }
+
+@mixin position($position, $top, $right, $bottom, $left) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+

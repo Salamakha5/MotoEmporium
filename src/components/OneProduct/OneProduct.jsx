@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
 import "./oneProduct.scss"
+
+import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 const OneProduct = observer((props) => {
