@@ -1,7 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx"
 import axios from 'axios';
 // import { decodeToken, useJwt } from "react-jwt";
-// import alertify from 'alertifyjs'
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
@@ -10,7 +9,6 @@ class ServerStore {
     OneMoto = []
     MotoDataCopy = []
     threeMotoCard = []
-
 
     ErrorMotoSort = ""
     lengthPageNumber = 0
@@ -21,20 +19,15 @@ class ServerStore {
     constructor() {
         makeAutoObservable(this)
     }
+
+    // * global  methods
     setlengthPagNumber(number) {
+        // 
         this.lengthPageNumber = number
     }
 
     getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
-        // getRandomNumber(10, 200) | 0.002 * (200 - 10 + 1) + 10 
-    }
-
-    getIdUrl() {
-        let idIndex = window.location.href.search("id")
-        // ! substr - deprecated
-        let idValue = window.location.href.substring(idIndex + 3);
-        this.getMotoById(idValue)
     }
 
     getMotoById(id) {
@@ -50,9 +43,44 @@ class ServerStore {
             });
     }
 
+    // * через ім'я getIdUrl я подумав що ця просто функція повертає айдішку з URL 
+    // * а воно також оновлює один мотик
+    getIdUrl() {
+        let idIndex = window.location.href.search("id")
+        // ! substr - deprecated
+        let idValue = window.location.href.substring(idIndex + 3);
+        this.getMotoById(idValue)
+    }
+
+    unLogin() {
+        localStorage.removeItem("IsAuthMOTO")
+        this.userIsAuth = false
+        this.UserName = ""
+    }
+
+    decodedToken(decToken) {
+        if (decToken) {
+            axios.post(this.URL + "/decoded", {
+                token: decToken
+            })
+                .then((response) => {
+                    this.userIsAuth = response.data.isAuth
+                    this.UserName = response.data.user.name
+                })
+                .catch((error) => {
+                    this.userIsAuth = false
+                });
+        }
+    }
+    // * end global methods
+
+    // Shop
     getAllMoto() {
+        // ? функція яка має повертати всі мотики, повертає також рандомні 
+        // ? ну коду менше але рішення незовсім правильне
+
         this.ErrorMotoSort = ""
-        console.log("getAllMoto");
+        // console.log("getAllMoto");
         this.spinerShop = "d-block"
         // axios.get("http://localhost:4000/api" + "/getAllMoto")
         axios.get(this.URL + "/getAllMoto")
@@ -77,6 +105,7 @@ class ServerStore {
                 console.log(error);
             });
     }
+
     getMotoNameToType(type) {
         let arr = toJS(this.MotoData).filter(moto => moto.collectionType == type)
         let res = []
@@ -86,28 +115,6 @@ class ServerStore {
         this.ArrTypeName = res
     }
 
-    unLogin() {
-        localStorage.removeItem("IsAuthMOTO")
-        this.userIsAuth = false
-        this.UserName = ""
-    }
-
-    decodedToken(decToken) {
-        if (decToken) {
-            axios.post(this.URL + "/decoded", {
-                token: decToken
-            })
-                .then((response) => {
-                    this.userIsAuth = response.data.isAuth
-                    this.UserName = response.data.user.name
-                })
-                .catch((error) => {
-                    this.userIsAuth = false
-                });
-        }
-    }
-
-    // Shop
     SortCash(value) {
         switch (value) {
             case "upper":
@@ -163,7 +170,7 @@ class ServerStore {
 
         }
     }
-    // Shop
+    // end Shop
 
 
 }

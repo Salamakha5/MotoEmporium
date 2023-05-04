@@ -1,5 +1,5 @@
 @import '../../scss/variables.scss';
-@import '../../scss/custom_elements.scss';
+// @import '../../scss/custom_elements.scss';
 
 .oneMoto {
 
@@ -18,7 +18,7 @@
                 width: 100%;
                 height: 550px;
                 border-radius: 20px;
-                // TODO треба вибрати
+                // TODO треба вибрати contain або cover
                 object-fit: cover;
             }
         }
@@ -42,16 +42,96 @@
             .goBack {
                 background-color: transparent;
                 border: 2px solid $mainColor;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.1);
+                }
             }
         }
 
     }
 
+    &__rightPart {
 
+        .infoBLock {
+            margin: 0 170px;
+            min-height: 550px;
+            @include fontSettings($mainFont, 24px, 400);
+            line-height: 29px;
+            position: relative;
 
-}
+            .background-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                width: 100%;
+                height: 550px;
+            }
 
-.oneMoto_rightBlock {
-    background-color: blanchedalmond;
+            &__brand-model {
+                padding: 65px 0 35px 0;
+                @include fontSettings($mainFont, 30px, 700);
+                line-height: 36px;
+            }
 
+            .small-items {
+
+                // (its __status, __collection, __power)
+                span {
+                    @include fontSettings($mainFont, 24px, 700);
+                }
+            }
+
+            .infoBLock__price {
+                @include fontSettings($mainFont, 36px, 700);
+                line-height: 44px;
+                padding: 25px 0;
+            }
+
+            &__collection {
+                padding: 0 0 25px 0;
+            }
+
+            .buttonsCont {
+                padding: 100px 0 0 0;
+                display: flex;
+                @include fontSettings($mainFont, 18px, 700);
+                line-height: 21px;
+
+                .addToFavorite {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 10px;
+                    transition: all 0.3s;
+                    margin-right: 40px;
+                    padding: 10px;
+
+                    .bi {
+                        font-size: 35px;
+                        margin: 0 10px;
+                    }
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                // .addToCart {}
+            }
+        }
+
+        .check-more {
+            padding: 0 100px;
+            &__title {
+                text-align: center;
+                @include fontSettings($mainFont, 32px, 700);
+                line-height: 38px;
+                padding: 20px 0 15px 0;
+            }
+
+            // &__content {}
+        }
+    }
 }

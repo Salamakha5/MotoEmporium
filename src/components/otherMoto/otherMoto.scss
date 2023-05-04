@@ -1,6 +1,52 @@
-.OtherMoto_Img{
-    height: 150px;
-    width: 90%;
-    border-radius: 20px;
-    box-shadow:3px 3px 14px ;
+@import '../../scss/variables';
+
+.OtherMoto {
+    @include fontSettings($mainFont, 18px, 400);
+    line-height: 21px;
+    transition: all 0.3s;
+    border-radius: 10px;
+    position: relative;
+
+    &::before {
+        content: attr(data-hover-text);
+        position: absolute;
+        background-color: mix(rgb(255, 255, 255, 0.4), $mainColor, 40%);
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s;
+        @include fontSettings($mainFont, 25px, 700);
+        line-height: 23px;
+    }
+
+    &:hover {
+        color: black;
+        &::before {
+            opacity: 1;
+        }
+
+    }
+
+    &__imgCont {
+
+        img {
+            width: 100%;
+            min-height: 160px;
+            border-radius: 10px;
+        }
+    }
+
+    &__title {
+        font-weight: 700;
+        padding: 10px 10px 0 10px;
+    }
+
+    &__price {
+        padding: 0 10px 10px 10px;
+    }
+
 }

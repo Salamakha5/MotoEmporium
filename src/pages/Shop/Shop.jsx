@@ -1,6 +1,6 @@
 import './Shop.scss'
 
-import OneProduct from '../../components/OneProduct/OneProduct'
+import OneCard from '../../components/OneCard/OneCard'
 import Pagination from '../../components/Pagination/Pagination'
 import serverStore from '../../store/serverStore'
 
@@ -139,19 +139,19 @@ const Shop = observer(() => {
                 <div className='moto-shop__showcase | row'>
                     {
                         currentMoto.map((p) => {
-                            return <OneProduct key={p.id} data={p}></OneProduct>
+                            return <OneCard key={p._id} data={p}></OneCard>
                         })
                     }
                 </div>
 
                 <div className='d-flex justify-content-center align-items-center'>
-                    <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i class="bi fs-5 bi-arrow-left-short"></i></button>
+                    <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i className="bi fs-5 bi-arrow-left-short"></i></button>
                     <Pagination
                         MotoPerPage={MotoPerPage}
                         totalMoto={serverStore.MotoDataCopy.length}
                         paginate={paginate}
                     ></Pagination>
-                    <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i class="bi fs-5 bi-arrow-right-short"></i></button>
+                    <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i className="bi fs-5 bi-arrow-right-short"></i></button>
                 </div>
             </div>
         </div>

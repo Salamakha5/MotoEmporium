@@ -1,14 +1,18 @@
-import "./oneProduct.scss"
+import "./OneCard.scss"
+
+import clientStore from "../../store/clientStore";
 
 import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-const OneProduct = observer((props) => {
+const OneCard = observer((props) => {
 
     const { imgURL, brand, model, price, collectionType, horsepower,_id } = props.data;
 
-    function formatPrice(price) {
-        return '$' + price.toLocaleString('en-US', { currency: 'USD' });
+    function formatPrice(num) {
+        // * то функція від чату gpt працює супер,
+        // * АЛЕ я пробував перенести її в сторінку одного мотика не виходить 🤷‍♂️
+        return '$' + num.toLocaleString('en-US', { currency: 'USD' });
     }
 
     return (
@@ -26,4 +30,4 @@ const OneProduct = observer((props) => {
         </div>
     )
 })
-export default OneProduct
+export default OneCard

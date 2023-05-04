@@ -40,7 +40,7 @@ $bg-color: #eeeeee !default;
     &:before,
     &:after {
         content: '';
-        @include position(absolute, 0, 0, 0, 0);
+        @include TRBL(0, 0, 0, 0);
         border-top: $btn-height/2 solid $mainColorDarken;
         border-bottom: $btn-height/2 solid $mainColorDarken;
         opacity: 0;

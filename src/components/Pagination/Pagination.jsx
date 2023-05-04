@@ -9,6 +9,8 @@ const Pagination = ({ MotoPerPage, totalMoto, paginate }) => {
             pageNumbers.push(i)
         }
     }
+    // ! Warning: Cannot update a component (`observerComponent`) while rendering a different component (`Pagination`).
+    // ! To locate the bad setState() call inside `Pagination`, follow the stack trace as described in
     serverStore.setlengthPagNumber(pageNumbers.length)
     return (
         <div>

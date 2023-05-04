@@ -1,6 +1,8 @@
-import "./oneMoto.scss"
+import "./OneMoto.scss"
 
-import OtherMoto from '../../components/otherMoto/otherMoto';
+import ducatiImg from '../../images/ducati_back_ground.png'
+
+import OtherMoto from '../../components/OtherMoto/OtherMoto';
 import serverStore from '../../store/serverStore';
 
 import React, { useEffect, useState } from 'react'
@@ -11,15 +13,21 @@ import { NavLink } from "react-router-dom";
 const OneMoto = observer(() => {
     useEffect(() => {
         serverStore.getIdUrl()
+        // ? якщо я все правильно поняв то тут треба функція рандомних 3 мотиків 
         serverStore.getAllMoto()
     }, [])
 
     const [modalWindowIsShow, setmodalWindowIsShow] = useState("d-none")
     const [imgNum, setImgNum] = useState(0)
-    let { brand, model, price, collectionType, displacement, borexStroke,
+    const { brand, model, price, collectionType, displacement, borexStroke,
         compressionRatio, horsepower, torque, fuelSystem, gearbox } = serverStore.OneMoto
 
     brand != '' ? document.title = `${brand} - ${model} - MotoEmporium` : document.title = `Motocycle - MotoEmporium`;
+
+    function formatPrice(num) {
+        let copy = num
+        return '$' + copy.toLocaleString('en-US', { currency: 'USD' });
+    }
 
     return (
         <div>
@@ -85,31 +93,38 @@ const OneMoto = observer(() => {
                             <button className='specifications mainButton | btn btn-warning p-3' onClick={() => setmodalWindowIsShow("d-flex")}>Технічні характеристики</button>
                             <NavLink className='goBack mainButton | btn btn-warning p-3 mt-4' to={"/shop"} >Назад до магазину</NavLink>
 
-                            <a class="ggg btn-3 mb-3 mt-3" href="#"><span>можливо я дороблю такі кнопки</span></a>
-                            <a class="ggg btn-7" href="#"><span>Alternate</span></a>
+                            {/* <a class="ggg btn-3 mb-3 mt-3" href="#"><span>можливо я дороблю такі кнопки</span></a> */}
                         </div>
                     </div>
 
-                    <div className="oneMoto_rightBlock | ps-5 col-7">
-                        <div className='infoBLock'>
-                            <h1>{serverStore.OneMoto.brand} - {serverStore.OneMoto.model}</h1>
-                            <h3 className='mt-5'>Стан: Новий</h3>
-                            <h2 className='price'>${serverStore.OneMoto.price - 500} - ${serverStore.OneMoto.price}</h2>
-                            <h2 className='mt-5'>Колекція: <span className='fs-4'>{serverStore.OneMoto.collectionType}</span></h2>
-                            <h2 className='mt-4'>Потужність : <span className='fs-4'>{serverStore.OneMoto.horsepower}</span></h2>
-
-                            <div className='mt-5 mb-5 d-flex justify-content-center align-items-center'>
-                                <button className='OneMoto_btn1'>Добавити до корзини</button>
+                    <div className="oneMoto__rightPart | col-7">
+                        <div className='infoBLock' data-bgImage={ducatiImg}>
+                            <img className="background-image" src={ducatiImg} />
+                            <h1 className="infoBLock__brand-model">{brand} - {model}</h1>
+                            <h2 className='infoBLock__status small-items'>
+                                {
+                                    price > 11000 ?
+                                        <div>Стан: <span>Новий</span> </div> :
+                                        <div>Стан: <span>Вживаний</span> </div>
+                                }
+                            </h2>
+                            <h2 className='infoBLock__price'><span> ${price - 1000} - ${price} </span></h2>
+                            <h2 className='infoBLock__collection small-items'>Колекція: <span>{collectionType}</span></h2>
+                            <h2 className='infoBLock__power small-items'>Потужність: <span>{horsepower}</span></h2>
+                            <div className='buttonsCont'>
+                                <button className='addToFavorite'>
+                                    <i class="bi bi-heart"></i>
+                                    {/* bi-heart-fill ==> active btn */}
+                                    Добавити до списку бажань</button>
+                                <button className='addToCart mainButton | btn btn-warning'>Добавити до корзини</button>
                             </div>
                         </div>
-                        <div>
-                            <h1 className='text-center fs-2'>
-                                Перевірте інші мотоцикли
-                            </h1>
+                        <div className="check-more">
                             {
                                 serverStore.MotoData.length > 2 ?
-                                    <div className=''>
-                                        <div className='row m-0 mt-4'>
+                                    <div>
+                                        <h4 className='check-more__title'>Перевірте інші мотоцикли</h4>
+                                        <div className='check-more__content | row'>
                                             {
                                                 serverStore.threeMotoCard.map((p) => {
                                                     return <OtherMoto key={p._id} data={p}></OtherMoto>
