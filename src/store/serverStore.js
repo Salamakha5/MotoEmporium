@@ -22,7 +22,6 @@ class ServerStore {
 
     // * global  methods
     setlengthPagNumber(number) {
-        // 
         this.lengthPageNumber = number
     }
 
@@ -43,11 +42,8 @@ class ServerStore {
             });
     }
 
-    // * через ім'я getIdUrl я подумав що ця просто функція повертає айдішку з URL 
-    // * а воно також оновлює один мотик
     getIdUrl() {
         let idIndex = window.location.href.search("id")
-        // ! substr - deprecated
         let idValue = window.location.href.substring(idIndex + 3);
         this.getMotoById(idValue)
     }
@@ -76,9 +72,6 @@ class ServerStore {
 
     // Shop
     getAllMoto() {
-        // ? функція яка має повертати всі мотики, повертає також рандомні 
-        // ? ну коду менше але рішення незовсім правильне
-
         this.ErrorMotoSort = ""
         // console.log("getAllMoto");
         this.spinerShop = "d-block"

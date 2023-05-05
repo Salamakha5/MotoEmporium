@@ -1,6 +1,7 @@
 import "./OtherMoto.scss"
 
 import serverStore from '../../store/serverStore'
+import clientStore from '../../store/clientStore';
 
 import { observer } from 'mobx-react-lite'
 import { NavLink } from 'react-router-dom'
@@ -16,7 +17,7 @@ const OtherMoto = observer((props) => {
                                 <img src={props.data.imgURL[1]} />
                             </div>
                             <div className='OtherMoto__title'>{props.data.model}</div>
-                            <div className='OtherMoto__price'>${props.data.price}</div>
+                            <div className='OtherMoto__price'>{clientStore.formatPrice(props.data.price)}</div>
                         </div>
                     </NavLink>
                     : false

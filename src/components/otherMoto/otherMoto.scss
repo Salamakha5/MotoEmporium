@@ -17,16 +17,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0;
         transition: all 0.3s;
-        @include fontSettings($mainFont, 25px, 700);
+        @include fontSettings($mainFont, 30px, 700);
         line-height: 23px;
+        transform: scale(0);
     }
 
     &:hover {
         color: black;
         &::before {
-            opacity: 1;
+            transform: scale(0.7, 0.6) translateY(-50px);
         }
 
     }

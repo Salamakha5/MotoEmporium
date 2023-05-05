@@ -100,7 +100,6 @@ const Shop = observer(() => {
                                         return <option key={i} value={i}>{i}</option>
                                     })
                                 }
-                                {/* <option defaultValue value="0">Пошук по моделі/Всі</option> */}
                                 <option defaultValue value="0">Тут будуть відображатися мотоцикли по моделі і категорії</option>
                             </select>
                         </div>
