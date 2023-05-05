@@ -1,16 +1,16 @@
 import React from 'react'
-import serverStore from '../../store/serverStore'
+import newsStore from '../../store/newsStore'
 
-const Pagination = ({ MotoPerPage, totalMoto, paginate }) => {
+const NewsPagination = ({ NewsPerPage, totalNews, paginate }) => {
     const pageNumbers = []
 
-    for (let i = 0; i <= Math.ceil(totalMoto / MotoPerPage); i++) {
+    for (let i = 0; i <= Math.ceil(totalNews / NewsPerPage); i++) {
         if(i !== 0){
             pageNumbers.push(i)
         }
     }
 
-    serverStore.setlengthPagNumber(pageNumbers.length)
+    newsStore.setlengthPagNumber(pageNumbers.length)
     return (
         <div>
             <ul className='pagination w-100 d-flex justify-content-center'>
@@ -26,4 +26,4 @@ const Pagination = ({ MotoPerPage, totalMoto, paginate }) => {
     )
 }
 
-export default Pagination
+export default NewsPagination

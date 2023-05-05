@@ -1,20 +1,20 @@
-import "./OneMoto.scss"
+import "./oneMoto.scss"
 
 import ducatiImg from '../../images/ducati_back_ground.png'
 
-import OtherMoto from '../../components/OtherMoto/OtherMoto';
 import serverStore from '../../store/serverStore';
 
 import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite';
 import { NavLink } from "react-router-dom";
+import OtherMoto from "../../components/OtherMoto/OtherMoto";
 // import { toJS } from 'mobx';
 
 const OneMoto = observer(() => {
     useEffect(() => {
         serverStore.getIdUrl()
         // ? якщо я все правильно поняв то тут треба функція рандомних 3 мотиків 
-        serverStore.getAllMoto()
+        serverStore.getAllMoto() 
     }, [])
 
     const [modalWindowIsShow, setmodalWindowIsShow] = useState("d-none")

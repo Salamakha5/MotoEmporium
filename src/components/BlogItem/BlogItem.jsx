@@ -1,19 +1,42 @@
 import './BlogItem.scss'
 
 import test_img from "../../images/logReg_bg.png"
+import { useState } from 'react'
 
-const BlogItem = () => {
-
-    
+const BlogItem = (props) => {
+    let {img,text,header,data} = props.data
+    const [btnOpenNews, SetbtnOpenNews] = useState(false)
     return (
-        <div className='blogItem'>
+        <div className='blogItem border-bottom border-2 border-dark'>
             <div className="row">
-                <div className="col-2 pt-3 pe-4">
-                    <img className='blogItem__img' src={test_img} />
-                </div>
-                <div className="col-10">
-                    <div className="blogItem__title">Blog Title</div>
-                    <div className="blogItem__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, cumque? Quae, incidunt modi recusandae tenetur voluptatem exercitationem delectus amet impedit eaque maxime dignissimos eius laboriosam odit dolor harum? Et in assumenda, nesciunt molestias quo ratione iure sequi nihil! Mollitia esse accusantium natus illo debitis voluptatum cumque rerum vero. Ullam at cum, nam quo optio quam officiis quibusdam nihil excepturi rerum beatae. Et eum ea laboriosam voluptatibus labore commodi. Quasi, accusamus.</div>
+                {
+                    btnOpenNews
+                    ?
+                    <div className="col-4 col-img d-flex align-items-center justify-content-center">
+                        <img src={img} alt="" />
+                    </div>
+                    :
+                    <div className="col-3  col-img d-flex align-items-center justify-content-center">
+                        <img src={img} alt="" />
+                    </div>
+                }
+                <div className="col ">
+                    <div className="row m-0">
+                        <div className="col text-start fs-3 blogTitle">{header}</div>
+                        <div className="col text-end">{data}</div>
+                    </div>
+                    <div>
+                        {
+                            btnOpenNews
+                                ?
+                                <p className='fullText'>{text}</p>
+                                :
+                                <p className='news_text'>{text.substring(0, 300)}...</p>
+                        }
+                    </div>
+                    <div className='d-flex justify-content-end'>
+                        <button onClick={() => SetbtnOpenNews(!btnOpenNews)}><strong>{btnOpenNews ? "Приховати" : "Читати повністю"}</strong></button>
+                    </div>
                 </div>
             </div>
         </div>
