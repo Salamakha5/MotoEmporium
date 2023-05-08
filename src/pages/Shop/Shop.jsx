@@ -7,7 +7,7 @@ import serverStore from '../../store/serverStore'
 import { createRef, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next';
-// import { toJS } from 'mobx'
+import { toJS } from 'mobx'
 
 const Shop = observer(() => {
     useEffect(() => {

@@ -20,6 +20,7 @@ const Blog = observer(() => {
         setcurrentPage(pageNumber)
         newsStore.setActiveLink(pageNumber)
     }
+    const { t } = useTranslation();
 
     useEffect(() => {
         newsStore.getAllNews()
