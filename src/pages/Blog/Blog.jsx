@@ -6,6 +6,7 @@ import BlogItem from '../../components/BlogItem/BlogItem'
 import { observer } from 'mobx-react-lite'
 import newsStore from '../../store/newsStore'
 import NewsPagination from '../../components/Pagination/NewsPagination'
+import { useTranslation } from 'react-i18next'
 
 const Blog = observer(() => {
     const [Loading, setLoading] = useState(false)
@@ -65,8 +66,8 @@ const Blog = observer(() => {
                             <div className="col">
                                 <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
                                     <option value="default">За датою</option>
-                                    <option value={"new"}>Найновіші</option>
-                                    <option value={"old"}>Старіші</option>
+                                    <option value={"new"}>{t('blog_page.selectSort-new')}</option>
+                                    <option value={"old"}>{t('blog_page.selectSort-old')}</option>
                                 </select>
                             </div>
                             <div className="col">

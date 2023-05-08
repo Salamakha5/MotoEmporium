@@ -110,5 +110,70 @@
         "valid-name": "Поле має містити мін. 4 символа!",
         "valid-email": "Eлектронна адреса має бути дійсною!",
         "valid-password": "Пароль має містити від 5 символів!"
+    },
+    "shop_page": {
+        "controls": {
+            "title": "НАЛАШТУВАННЯ ПОШУКУ",
+            "input-brand-placeholder": "Пошук по марці",
+            "input-model-placeholder": "Пошук по назві моделі",
+            "select-defaultValue": "Пошук по категоріям/Всі",
+            "select-sport": "Спорт",
+            "select-adventure": "Подорожі",
+            "select-cruiser": "Крейсер",
+            "select-classic": "Класичні",
+            "select-motard": "Мотард",
+            "select-naked": "Найкед",
+            "select-scrambler": "Скрамблер",
+            "select-retro": "Ретро",
+            "select_2-defaultValue": "Тут будуть відображатися мотоцикли по моделі і категорії",
+            "btn_1-title": "Пошук",
+            "btn_2-title": "Очистити фільтри"
+        },
+        "shop-errors": {},
+        "sup-controls": {
+            "isDisplayed": "Відображається {{ currentPage }} із {{ allPages }} сторінок",
+            "selectPrice-defaultValue": "Сортувати по ціні",
+            "selectPrice-ascending": "За зростанням",
+            "selectPrice-descending": "За спаданням"
+        },
+        "oneCard": {
+            "type": "Тип",
+            "power": "Потужність",
+            "btn-title": "Детальніше"
+        }
+    },
+    "oneMoto_page": {
+        "techChar": {
+            "btn-title": "Технічні характеристики",
+            "brand": "Бренд",
+            "model": "Модель",
+            "type": "Тип",
+            "engineCapacity": "Кубатура двигуна",
+            "pistonDiameter": "Діаметр поршнів",
+            "compressionRatio": "Коефіцієнт стиснення",
+            "horsePower": "Кількість кіньських сил",
+            "torque": "Крутний момент",
+            "fuelSystem": "Паливна система",
+            "gearbox": "Коробка передач"
+        },
+        "btn-goBack": "Назад до магазину",
+        "status": "Стан",
+        "status_new": "Новий",
+        "status_used": "Вживаний",
+        "infoBlock": {
+            "type": "Тип",
+            "power": "Потужність",
+            "btn-addToWishList": "Добавити до списку бажань",
+            "btn-addToCart": "Добавити до корзини",
+            "checkMore-title": "Перегляньте інші мотоцикли"
+        },
+        "img-data-text-choose": "Вибрати",
+        "img-data-text-goTo": "Дивитись"
+    },
+    "blog_page": {
+        "selectSort-new": "Найновіші",
+        "selectSort-old": "Старіші",
+        "readBtn-hide": "Приховати",
+        "readBtn-readInFull": "Читати повністю"
     }
 }

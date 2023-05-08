@@ -2,10 +2,12 @@ import './BlogItem.scss'
 
 import test_img from "../../images/logReg_bg.png"
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 
 const BlogItem = (props) => {
     let { img, text, header, data,status } = props.data
     const [btnOpenNews, SetbtnOpenNews] = useState(false)
+    const { t } = useTranslation();
     return (
         <div className='blogItem border-bottom border-2 border-dark'>
             <div className="row">
@@ -38,7 +40,7 @@ const BlogItem = (props) => {
                         }
                     </div>
                     <div className='d-flex justify-content-end'>
-                        <button onClick={() => SetbtnOpenNews(!btnOpenNews)}><strong>{btnOpenNews ? "Приховати" : "Читати повністю"}</strong></button>
+                        <button onClick={() => SetbtnOpenNews(!btnOpenNews)}><strong>{btnOpenNews ? t('blog_page.readBtn-hide') : t('blog_page.readBtn-readInFull')}</strong></button>
                     </div>
                 </div>
             </div>

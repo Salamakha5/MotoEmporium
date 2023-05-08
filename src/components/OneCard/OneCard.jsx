@@ -4,9 +4,11 @@ import clientStore from "../../store/clientStore";
 
 import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import { useTranslation } from 'react-i18next';
 
 const OneCard = observer((props) => {
 
+    const { t } = useTranslation();
     const { imgURL, brand, model, price, collectionType, horsepower,_id } = props.data;
 
     return (
@@ -14,11 +16,11 @@ const OneCard = observer((props) => {
             <div className="oneCard | p-3">
                 <div className="oneCard__img | mb-4"><img src={imgURL[0]} /></div>
                 <div className="oneCard__title | mb-2">{brand} - {model}</div>
-                <div className="oneCard__type | pb-2">Тип: {collectionType}</div>
-                <div className="oneCard__horsePower | pb-2">Потужність: {horsepower}</div>
+                <div className="oneCard__type | pb-2">{t('shop_page.oneCard.type')}: {collectionType}</div>
+                <div className="oneCard__horsePower | pb-2">{t('shop_page.oneCard.power')}: {horsepower}</div>
                 <div className="oneCard__priceCont | pt-2">{clientStore.formatPrice(price)}</div>
                 <div className="oneCard__btnCont | pt-5">
-                    <NavLink to={`/moto/?id=${_id}`} className="mainButton | btn btn-warning px-4 py-2">Детальніше</NavLink>
+                    <NavLink to={`/moto/?id=${_id}`} className="mainButton | btn btn-warning px-4 py-2">{t('shop_page.oneCard.btn-title')}</NavLink>
                 </div>
             </div>
         </div>
