@@ -6,17 +6,18 @@ import serverStore from '../../store/serverStore'
 
 import { createRef, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
 // import { toJS } from 'mobx'
 
 const Shop = observer(() => {
     useEffect(() => {
+        setSpinerShop("d-block")
         document.title = "Shop - MotoEmporium";
-        setLoading(true)
-        serverStore.getAllMoto()
-        setLoading(false)
+        serverStore.getAllMoto(()=>{
+            setSpinerShop("d-none")
+        })
     }, [])
 
-    const [Loading, setLoading] = useState(false)
 
     let BrandValue = createRef()
     let ModelValue = createRef()
@@ -24,22 +25,83 @@ const Shop = observer(() => {
     let SelectModel = createRef()
     let SortCash = createRef()
 
+    const [ErrorMotoSort,setErrorMotoSort] = useState("")
+    const [spinerShop,setSpinerShop] = useState([])
+
     function sortCash() {
-        serverStore.SortCash(SortCash.current.value)
+        switch (SortCash.current.value) {
+            case "upper":
+                serverStore.MotoDataCopy.sort((a, b) => a.price - b.price)
+                break;
+            case "lower":
+                serverStore.MotoDataCopy.sort((a, b) => b.price - a.price)
+                break;
+        }
     }
 
     function getMotoNameToType() {
-        serverStore.getMotoNameToType(SelectType.current.value)
-    }
-    function sortData() {
-        setcurrentPage(1)
-        let obj = {
-            SortToBrand: BrandValue.current.value,
-            SortToModel: ModelValue.current.value,
-            SortSelectCatigories: SelectType.current.value,
-            SortSelectModel: SelectModel.current.value,
+        let arr = toJS(serverStore.MotoData).filter(moto => moto.collectionType == SelectType.current.value)
+        let res = []
+        for (let i = 0; i < arr.length; i++) {
+            res.push(arr[i].model)
         }
-        serverStore.sortMotoData(obj)
+        serverStore.ArrTypeName = res
+    }
+
+
+    function sortData() {
+        //Пагінація на першу сторінку
+        setcurrentPage(1)
+
+        let SortToBrand = BrandValue.current.value
+        let SortToModel = ModelValue.current.value
+        let SortSelectCatigories = SelectType.current.value
+        let SortSelectModel = SelectModel.current.value
+
+        // Сортування по назві бренду
+        serverStore.MotoDataCopy = serverStore.MotoData.filter(moto => moto.brand.includes(SortToBrand))
+        if (serverStore.MotoDataCopy == false) {
+            setErrorMotoSort("Такого бренду немає") 
+        } else {setErrorMotoSort("")}
+         
+
+        // Сортування по назві моделі
+        if (SortToModel) {
+            serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.model.includes(SortToModel))
+            if (serverStore.MotoDataCopy == false) {
+                setErrorMotoSort("Такої моделі не існує")
+            }
+        }
+
+        // Сортування по катигоріям
+        if (SortSelectCatigories) {
+            console.log("SortSelectCatigories");
+            if (SortSelectCatigories == "0") {
+                serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(p => true)
+            } else {
+                serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.collectionType == SortSelectCatigories)
+                if (serverStore.MotoDataCopy == false) {
+                setErrorMotoSort("Мотоциклу такого типу немає")
+                }
+            }
+        }
+
+        // Сортування по моделі
+        if (SortSelectModel) {
+            if (SortSelectCatigories !== "0") {
+                console.log("SortSelectModel");
+                if (SortSelectModel == "0") {
+                    serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.collectionType == SortSelectCatigories)
+                } else {
+                    serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.model == SortSelectModel)
+                    if (serverStore.MotoDataCopy == false) {
+                        setErrorMotoSort("Мотоциклу з такою назвою у цій категорії немає")
+                    }
+                }
+            }
+        }
+
+
     }
     function ClearSort() {
         serverStore.getAllMoto()
@@ -121,7 +183,7 @@ const Shop = observer(() => {
                         </div>
                     </div>
                 </div>
-                <div className='error-shop'>{serverStore.ErrorMotoSort}</div>
+                <div className='error-shop'>{ErrorMotoSort}</div>
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
                     <div className='col moto-shop__supControls-nowDisplay'>
                         <span>Відображається {currentPage} із {serverStore.lengthPageNumber} сторінок</span>
@@ -137,7 +199,7 @@ const Shop = observer(() => {
                 </div>
 
                 {/* loader */}
-                <div className={'d-flex justify-content-center mt-5 ' + serverStore.spinerShop}>
+                <div className={'d-flex justify-content-center mt-5 ' + spinerShop}>
                     <div className="spinner-border text-warning" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>

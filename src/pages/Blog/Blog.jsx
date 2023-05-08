@@ -26,9 +26,21 @@ const Blog = observer(() => {
         document.title = "Blog - MotoEmporium";
     }, [])
     let selectSort = createRef()
+    let selectSortStatus = createRef()
 
     function sortNews() {
-        newsStore.sortNews(selectSort.current.value)
+        if (selectSort.current.value == "new") {
+            newsStore.newsData.sort((a, b) => (+b.indexData) - (+a.indexData))
+        }
+        if (selectSort.current.value == "old") {
+            newsStore.newsData.sort((a, b) => (+a.indexData) - (+b.indexData))
+        }
+        if (selectSortStatus.current.value == "maxStatus") {
+            newsStore.newsData.sort((a, b) => b.status - a.status)
+        }
+        if (selectSortStatus.current.value == "minStatus") {
+            newsStore.newsData.sort((a, b) => a.status - b.status)
+        }
     }
     const nextPage = () => {
         if (currentPage < newsStore.lengthPageNumber) {
@@ -52,8 +64,16 @@ const Blog = observer(() => {
                         <div className="row">
                             <div className="col">
                                 <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
+                                    <option value="default">За датою</option>
                                     <option value={"new"}>Найновіші</option>
                                     <option value={"old"}>Старіші</option>
+                                </select>
+                            </div>
+                            <div className="col">
+                                <select ref={selectSortStatus} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
+                                    <option value="default">За статусом</option>
+                                    <option value={"maxStatus"}>Найпопулярніші</option>
+                                    <option value={"minStatus"}>Менш популярі</option>
                                 </select>
                             </div>
 
