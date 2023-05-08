@@ -1,7 +1,7 @@
 import './Shop.scss'
 
 import OneCard from '../../components/OneCard/OneCard'
-import Pagination from '../../components/Pagination/Pagination'
+import ShopPagination from '../../components/Pagination/ShopPagination'
 import serverStore from '../../store/serverStore'
 
 import { createRef, useEffect, useState } from 'react'
@@ -17,24 +17,6 @@ const Shop = observer(() => {
     }, [])
 
     const [Loading, setLoading] = useState(false)
-    const [currentPage, setcurrentPage] = useState(1)
-    const [MotoPerPage] = useState(8)
-
-    const lastMotoIndex = currentPage * MotoPerPage
-    const firstMotoIndex = lastMotoIndex - MotoPerPage
-    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
-
-    const paginate = pageNumber => setcurrentPage(pageNumber)
-    const nextPage = () => {
-        if (currentPage < serverStore.lengthPageNumber) {
-            setcurrentPage(currentPage + 1)
-        }
-    }
-    const prevPage = () => {
-        if (currentPage > 1) {
-            setcurrentPage(currentPage - 1)
-        }
-    }
 
     let BrandValue = createRef()
     let ModelValue = createRef()
@@ -67,6 +49,32 @@ const Shop = observer(() => {
         SelectModel.current.value = "0"
         setcurrentPage(1)
     }
+
+    // pagination
+    const [currentPage, setcurrentPage] = useState(1)
+    const [MotoPerPage] = useState(8)
+
+    const lastMotoIndex = currentPage * MotoPerPage
+    const firstMotoIndex = lastMotoIndex - MotoPerPage
+    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
+
+    const paginate = pageNumber => {
+        setcurrentPage(pageNumber)
+        serverStore.setActiveLink(pageNumber)
+    }
+    const nextPage = () => {
+        if (currentPage < serverStore.lengthPageNumber) {
+            setcurrentPage(currentPage + 1)
+            serverStore.setActiveLink(serverStore.activeLink + 1)
+        }
+    }
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setcurrentPage(currentPage - 1)
+            serverStore.setActiveLink(serverStore.activeLink - 1)
+        }
+    }
+
 
     return (
         <div className='moto-shop | pt-5 pb-3'>
@@ -144,13 +152,13 @@ const Shop = observer(() => {
                 </div>
 
                 <div className='d-flex justify-content-center align-items-center'>
-                    <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i className="bi fs-5 bi-arrow-left-short"></i></button>
-                    <Pagination
+                    <ShopPagination
                         MotoPerPage={MotoPerPage}
                         totalMoto={serverStore.MotoDataCopy.length}
                         paginate={paginate}
-                    ></Pagination>
-                    <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i className="bi fs-5 bi-arrow-right-short"></i></button>
+                        nextPage={nextPage}
+                        prevPage={prevPage}
+                    ></ShopPagination>
                 </div>
             </div>
         </div>

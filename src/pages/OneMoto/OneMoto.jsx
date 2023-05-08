@@ -1,4 +1,4 @@
-import "./oneMoto.scss"
+import "./OneMoto.scss"
 
 import ducatiImg from '../../images/ducati_background.png'
 

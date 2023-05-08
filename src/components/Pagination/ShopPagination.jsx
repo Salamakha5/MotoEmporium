@@ -1,30 +1,27 @@
 import './paginationStyle.scss'
 
-import newsStore from '../../store/newsStore'
+import serverStore from '../../store/serverStore'
 
-const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }) => {
-
+const ShopPagination = ({ MotoPerPage, totalMoto, paginate, prevPage, nextPage }) => {
     const pageNumbers = []
-    for (let i = 0; i <= Math.ceil(totalNews / NewsPerPage); i++) {
+
+    for (let i = 0; i <= Math.ceil(totalMoto / MotoPerPage); i++) {
         if (i !== 0) {
             pageNumbers.push(i)
         }
     }
 
-    newsStore.setlengthPagNumber(pageNumbers.length)
-
+    serverStore.setlengthPagNumber(pageNumbers.length)
     return (
         <div>
-            <ul className='pagination w-100 d-flex justify-content-center my-3'>
+            <ul className='pagination w-100 d-flex justify-content-center'>
                 <li class="page-item"><a class="page-link"
                     onClick={prevPage}
                 ><i className="bi bi-arrow-left-short"></i></a></li>
                 {
                     pageNumbers.map((number) => (
                         <li className='page-item' key={number}>
-                            <a
-                                className={newsStore.activeLink == number ? 'page-link active' : 'page-link'}
-                                onClick={() => paginate(number)}>{number}</a>
+                            <a className={serverStore.activeLink == number ? 'page-link active' : 'page-link'} onClick={() => paginate(number)}>{number}</a>
                         </li>
                     ))
                 }
@@ -36,4 +33,4 @@ const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }
     )
 }
 
-export default NewsPagination
+export default ShopPagination

@@ -163,6 +163,12 @@ class ServerStore {
 
         }
     }
+
+    // shop, pagination
+    activeLink = 1
+    setActiveLink(number) {
+        this.activeLink = number
+    }
     // end Shop
 
 

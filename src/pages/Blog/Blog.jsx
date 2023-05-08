@@ -15,26 +15,31 @@ const Blog = observer(() => {
     const lastNewsIndex = currentPage * NewsPerPage
     const firstNewsIndex = lastNewsIndex - NewsPerPage
     const currentNews = newsStore.newsData.slice(firstNewsIndex, lastNewsIndex)
-    const paginate = pageNumber => setcurrentPage(pageNumber)
-    useEffect(() => {
+    const paginate = (pageNumber) => {
+        setcurrentPage(pageNumber)
+        newsStore.setActiveLink(pageNumber)
+    }
 
+    useEffect(() => {
         newsStore.getAllNews()
         setLoading(false)
         document.title = "Blog - MotoEmporium";
     }, [])
-    let selectSort = createRef() 
-    
-    function sortNews(){
+    let selectSort = createRef()
+
+    function sortNews() {
         newsStore.sortNews(selectSort.current.value)
     }
     const nextPage = () => {
         if (currentPage < newsStore.lengthPageNumber) {
             setcurrentPage(currentPage + 1)
+            newsStore.setActiveLink(newsStore.activeLink + 1)
         }
     }
     const prevPage = () => {
         if (currentPage > 1) {
             setcurrentPage(currentPage - 1)
+            newsStore.setActiveLink(newsStore.activeLink - 1)
         }
     }
 
@@ -47,31 +52,31 @@ const Blog = observer(() => {
                         <div className="row">
                             <div className="col">
                                 <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
-                                    <option value={"1"}>Найновіші</option>
-                                    <option value={"2"}>Старіші</option>
+                                    <option value={"new"}>Найновіші</option>
+                                    <option value={"old"}>Старіші</option>
                                 </select>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
                 <div className="blog__items">
                     {
-                        currentNews.map((p)=>{
+                        currentNews.map((p) => {
                             return <BlogItem key={p._id} data={p}></BlogItem>
                         })
                     }
                 </div>
-                
-                    <div className='d-flex justify-content-center align-items-center mt-2'>
-                    <button className='btn btn-warning p-1 m-1' onClick={prevPage}><i className="bi fs-5 bi-arrow-left-short"></i></button>
-                <NewsPagination
-                    NewsPerPage={NewsPerPage}
-                    totalNews={newsStore.newsData.length} 
-                    paginate={paginate}
-                ></NewsPagination>
-                <button className='btn btn-warning p-1 m-1' onClick={nextPage}><i className="bi fs-5 bi-arrow-right-short"></i></button>
-                    </div>
+
+                <div className='d-flex justify-content-center align-items-center'>
+                    <NewsPagination
+                        NewsPerPage={NewsPerPage}
+                        totalNews={newsStore.newsData.length}
+                        paginate={paginate}
+                        nextPage={nextPage}
+                        prevPage={prevPage}
+                    ></NewsPagination>
+                </div>
             </div>
         </div>
     )
