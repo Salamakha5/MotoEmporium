@@ -110,5 +110,70 @@
         "valid-name": "The field must contain min. 4 characters!",
         "valid-email": "The email address must be valid!",
         "valid-password": "The password must contain at least 5 characters!"
+    },
+    "shop_page": {
+        "controls": {
+            "title": "SEARCH SETTINGS",
+            "input-brand-placeholder": "Search by brand",
+            "input-model-placeholder": "Search by model name",
+            "select-defaultValue": "Search by category/All",
+            "select-sport": "Sport",
+            "select-adventure": "Traveling",
+            "select-cruiser": "Cruiser",
+            "select-classic": "Classic",
+            "select-motard": "Motard",
+            "select-naked": "Nikeed",
+            "select-scrambler": "Scrambler",
+            "select-retro": "Retro",
+            "select_2-defaultValue": "Here you will see motorcycles by model and category",
+            "btn_1-title": "Search",
+            "btn_2-title": "Clean the filters"
+        },
+        "shop-errors": {},
+        "sup-controls": {
+            "isDisplayed": "Displayed {{ currentPage }} out of {{ allPages }} pages",
+            "selectPrice-defaultValue": "Sort by price",
+            "selectPrice-ascending": "In order of growth",
+            "selectPrice-descending": "In descending order"
+        },
+        "oneCard": {
+            "type": "Type",
+            "power": "Power",
+            "btn-title": "Read more"
+        }
+    },
+    "oneMoto_page": {
+        "techChar": {
+            "btn-title": "Technical characteristics",
+            "brand": "Brand",
+            "model": "Model",
+            "type": "Type",
+            "engineCapacity": "Engine capacity",
+            "pistonDiameter": "Piston diameter",
+            "compressionRatio": "Compression ratio",
+            "horsePower": "Number of horsepower",
+            "torque": "Torque",
+            "fuelSystem": "Fuel system",
+            "gearbox": "Gearbox"
+        },
+        "btn-goBack": "Back to the shop",
+        "status": "Status",
+        "status_new": "New",
+        "status_used": "Used",
+        "infoBlock": {
+            "type": "Type",
+            "power": "Horse power",
+            "btn-addToWishList": "Add to wish list",
+            "btn-addToCart": "Add to cart",
+            "checkMore-title": "See other motorcycles"
+        },
+        "img-data-text-choose": "Choose",
+        "img-data-text-goTo": "Watch"
+    },
+    "blog_page": {
+        "selectSort-new": "The latest",
+        "selectSort-old": "Older",
+        "readBtn-hide": "Hide",
+        "readBtn-readInFull": "Read the full"
     }
 }

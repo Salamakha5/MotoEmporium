@@ -6,17 +6,19 @@ import serverStore from '../../store/serverStore'
 
 import { createRef, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next';
 // import { toJS } from 'mobx'
 
 const Shop = observer(() => {
     useEffect(() => {
         document.title = "Shop - MotoEmporium";
-        setLoading(true)
         serverStore.getAllMoto()
-        setLoading(false)
+
+        // ! при переході на інший роут в нас скидаються елементи пагінації, цей рядок для скидання стилів 
+        serverStore.setActiveLink(1)
     }, [])
 
-    const [Loading, setLoading] = useState(false)
+    const { t, i18n } = useTranslation();
 
     let BrandValue = createRef()
     let ModelValue = createRef()
@@ -80,27 +82,27 @@ const Shop = observer(() => {
         <div className='moto-shop | pt-5 pb-3'>
             <div className='moto-shop__container | container p-4'>
                 <div className='moto-shop__controlsWrap | p-4'>
-                    <div className='controlsWrap-title'>НАЛАШТУВАННЯ ПОШУКУ</div>
+                    <div className='controlsWrap-title'> {t('shop_page.controls.title')} </div>
 
                     <div className='row d-flex align-items-center'>
                         <div className='col-12 col-lg-12 col-xl-4'>
                             {/* inputs */}
-                            <input type="text" className="form-control mt-3 mb-3" placeholder="Пошук по марці" ref={BrandValue} />
-                            <input type="text" className="form-control mt-4 mb-3" placeholder="Пошук по назві моделі" ref={ModelValue} />
+                            <input type="text" className="form-control mt-3 mb-3" placeholder={t('shop_page.controls.input-brand-placeholder')} ref={BrandValue} />
+                            <input type="text" className="form-control mt-4 mb-3" placeholder={t('shop_page.controls.input-model-placeholder')} ref={ModelValue} />
                         </div>
 
                         <div className='col-12 col-md-6 col-xl-4'>
                             {/* selects */}
                             <select ref={SelectType} onChange={getMotoNameToType} className="form-select mt-3 mb-3">
-                                <option defaultValue value="0">Пошук по категоріям/Всі</option>
-                                <option value="Sport">Спорт</option>
-                                <option value="Adventure">Подорожі</option>
-                                <option value="Cruiser">Крейсер</option>
-                                <option value="Classic">Класичний</option>
-                                <option value="Motard">Мотард</option>
-                                <option value="Naked">Найкед</option>
-                                <option value="Scrambler">Скремблер</option>
-                                <option value="Retro">Ретро</option>
+                                <option defaultValue value="0">{t('shop_page.controls.select-defaultValue')}</option>
+                                <option value="Sport">{t('shop_page.controls.select-sport')}</option>
+                                <option value="Adventure">{t('shop_page.controls.select-adventure')}</option>
+                                <option value="Cruiser">{t('shop_page.controls.select-cruiser')}</option>
+                                <option value="Classic">{t('shop_page.controls.select-classic')}</option>
+                                <option value="Motard">{t('shop_page.controls.select-motard')}</option>
+                                <option value="Naked">{t('shop_page.controls.select-naked')}</option>
+                                <option value="Scrambler">{t('shop_page.controls.select-scrambler')}</option>
+                                <option value="Retro">{t('shop_page.controls.select-retro')}</option>
                             </select>
                             <select ref={SelectModel} className="form-select mt-4 mb-3">
                                 {
@@ -108,15 +110,15 @@ const Shop = observer(() => {
                                         return <option key={i} value={i}>{i}</option>
                                     })
                                 }
-                                <option defaultValue value="0">Тут будуть відображатися мотоцикли по моделі і категорії</option>
+                                <option defaultValue value="0"> {t('shop_page.controls.select_2-defaultValue')} </option>
                             </select>
                         </div>
 
                         <div className='col-12 col-md-6 col-xl-4'>
                             {/* buttons */}
                             <div className='d-flex justify-content-center row'>
-                                <a className="btn  moto-shop__controls-btnFind | btn btn-warning col-sm-5  mainButton px-4 py-2" role="button" onClick={sortData}>Пошук</a>
-                                <button type="button" className="btn btn-warning col-sm-5  mainButton px-4 py-2" onClick={ClearSort}>Очистити фільтри</button>
+                                <a className="btn  moto-shop__controls-btnFind | btn btn-warning col-sm-5  mainButton px-4 py-2" role="button" onClick={sortData}>{t('shop_page.controls.btn_1-title')}</a>
+                                <button type="button" className="btn btn-warning col-sm-5  mainButton px-4 py-2" onClick={ClearSort}>{t('shop_page.controls.btn_2-title')}</button>
                             </div>
                         </div>
                     </div>
@@ -124,14 +126,15 @@ const Shop = observer(() => {
                 <div className='error-shop'>{serverStore.ErrorMotoSort}</div>
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
                     <div className='col moto-shop__supControls-nowDisplay'>
-                        <span>Відображається {currentPage} із {serverStore.lengthPageNumber} сторінок</span>
+                        {/* <span>!ttt {currentPage} із {serverStore.lengthPageNumber} сторінок</span> */}
+                        <span>{t('shop_page.sup-controls.isDisplayed', { currentPage: currentPage, allPages: serverStore.lengthPageNumber })}</span>
                     </div>
 
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end'>
                         <select ref={SortCash} onChange={sortCash} className="form-select">
-                            <option defaultValue value="0">По ціні</option>
-                            <option value="upper">За зростанням</option>
-                            <option value="lower">За спаданням</option>
+                            <option defaultValue value="0">{t('shop_page.sup-controls.selectPrice-defaultValue')}</option>
+                            <option value="upper">{t('shop_page.sup-controls.selectPrice-ascending')}</option>
+                            <option value="lower">{t('shop_page.sup-controls.selectPrice-descending')}</option>
                         </select>
                     </div>
                 </div>

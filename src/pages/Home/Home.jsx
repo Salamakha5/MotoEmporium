@@ -40,7 +40,7 @@ const Home = () => {
             <div className="sales">
                 <img className='sales__bg' src={sales_bg} alt="#" />
                 <div className="sales__title">{t('home_page.sales.title')}</div>
-                <div className="sales__text">{t('home_page.sales.text', {sale: '40%'})}</div>
+                <div className="sales__text">{t('home_page.sales.text', { sale: '40%' })}</div>
                 <div className="sales__date">{t('home_page.sales.date', { date: currentYear })}</div>
             </div>
 

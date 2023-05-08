@@ -9,13 +9,15 @@ import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite';
 import { NavLink } from "react-router-dom";
 import OtherMoto from "../../components/OtherMoto/OtherMoto";
-// import { toJS } from 'mobx';
+import { useTranslation } from 'react-i18next';
 
 const OneMoto = observer(() => {
     useEffect(() => {
         serverStore.getIdUrl()
         serverStore.getAllMoto()
     }, [])
+
+    const { t } = useTranslation();
 
     const [imgNum, setImgNum] = useState(0)
     const { brand, model, price, collectionType, displacement, borexStroke,
@@ -44,13 +46,13 @@ const OneMoto = observer(() => {
                                         <img src={serverStore.OneMoto.imgURL[imgNum]} />
                                     </div>
                                     <div className='row'>
-                                        <div className="miniImgCont | col" onClick={() => setImgNum(0)} data-hover-text='Вибрати'>
+                                        <div className="miniImgCont | col" onClick={() => setImgNum(0)} data-hover-text={t('oneMoto_page.img-data-text-choose')}>
                                             <img src={serverStore.OneMoto.imgURL[0]} />
                                         </div>
-                                        <div className="miniImgCont | col" onClick={() => setImgNum(1)} data-hover-text='Вибрати'>
+                                        <div className="miniImgCont | col" onClick={() => setImgNum(1)} data-hover-text={t('oneMoto_page.img-data-text-choose')}>
                                             <img src={serverStore.OneMoto.imgURL[1]} />
                                         </div>
-                                        <div className="miniImgCont | col" onClick={() => setImgNum(2)} data-hover-text='Вибрати'>
+                                        <div className="miniImgCont | col" onClick={() => setImgNum(2)} data-hover-text={t('oneMoto_page.img-data-text-choose')}>
                                             <img src={serverStore.OneMoto.imgURL[2]} />
                                         </div>
                                     </div>
@@ -59,32 +61,32 @@ const OneMoto = observer(() => {
                         }
                         <div className='buttons-cont | py-5'>
                             <button class="btn mainButton | btn btn-warning p-3" type="button" data-bs-toggle="collapse" data-bs-target="#specificationsCollapse" aria-expanded="false" aria-controls="specificationsCollapse">
-                                Технічні характеристики</button>
+                            {t('oneMoto_page.techChar.btn-title')}</button>
                             <div class="collapse pt-3" id="specificationsCollapse">
                                 <ul class="list-group">
-                                    <li class="list-group-item"><span className="item-title">Бренд:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.brand')}:</span>
                                         <span>{brand}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Модель:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.model')}:</span>
                                         <span>{model}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Тип:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.type')}:</span>
                                         <span>{collectionType}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Кубатура двигуна:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.engineCapacity')}:</span>
                                         <span>{displacement}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Діаметр поршнів:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.pistonDiameter')}:</span>
                                         <span>{borexStroke}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Коефіцієнт стиснення:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.compressionRatio')}:</span>
                                         <span>{compressionRatio}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Кінських сил:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.horsePower')}:</span>
                                         <span>{horsepower}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Крутний момент:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.torque')}:</span>
                                         <span>{torque}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Паливна система:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.fuelSystem')}:</span>
                                         <span>{fuelSystem}</span></li>
-                                    <li class="list-group-item"><span className="item-title">Коробка передач:</span>
+                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.gearbox')}:</span>
                                         <span>{gearbox}</span></li>
                                 </ul>
                             </div>
-                            <NavLink className='goBack mainButton | btn btn-warning p-3 mt-4' to={"/shop"} >Назад до магазину</NavLink>
+                            <NavLink className='goBack mainButton | btn btn-warning p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
                         </div>
                     </div>
 
@@ -95,27 +97,27 @@ const OneMoto = observer(() => {
                             <h2 className='infoBLock__status small-items'>
                                 {
                                     price > 11000 ?
-                                        <div>Стан: <span>Новий</span> </div> :
-                                        <div>Стан: <span>Вживаний</span> </div>
+                                        <div>{t('oneMoto_page.status')}: <span>{t('oneMoto_page.status_new')}</span> </div> :
+                                        <div>{t('oneMoto_page.status')}: <span>{t('oneMoto_page.status_used')}</span> </div>
                                 }
                             </h2>
                             {/* <h2 className='infoBLock__price'><span> ${price - 1000} - ${price} </span></h2> */}
                             <h2 className='infoBLock__price'><span>{clientStore.formatPrice(price - 1509)} - {clientStore.formatPrice(price)}</span></h2>
-                            <h2 className='infoBLock__collection small-items'>Тип: <span>{collectionType}</span></h2>
-                            <h2 className='infoBLock__power small-items'>Потужність: <span>{horsepower}</span></h2>
+                            <h2 className='infoBLock__collection small-items'>{t('oneMoto_page.infoBlock.type')}: <span>{collectionType}</span></h2>
+                            <h2 className='infoBLock__power small-items'>{t('oneMoto_page.infoBlock.power')}: <span>{horsepower}</span></h2>
                             <div className='buttonsCont'>
                                 <button className='addToFavorite'>
                                     <i className="bi bi-heart"></i>
                                     {/* bi-heart-fill ==> active btn */}
-                                    Добавити до списку бажань</button>
-                                <button className='addToCart mainButton | btn btn-warning'>Добавити до корзини</button>
+                                    {t('oneMoto_page.infoBlock.btn-addToWishList')}</button>
+                                <button className='addToCart mainButton | btn btn-warning'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
                             </div>
                         </div>
                         <div className="check-more">
                             {
                                 serverStore.MotoData.length > 2 ?
                                     <div>
-                                        <h4 className='check-more__title'>Перевірте інші мотоцикли</h4>
+                                        <h4 className='check-more__title'>{t('oneMoto_page.infoBlock.btn-addToCart')}</h4>
                                         <div className='check-more__content | row'>
                                             {
                                                 serverStore.threeMotoCard.map((p) => {

@@ -6,8 +6,27 @@ import BlogItem from '../../components/BlogItem/BlogItem'
 import { observer } from 'mobx-react-lite'
 import newsStore from '../../store/newsStore'
 import NewsPagination from '../../components/Pagination/NewsPagination'
+import { useTranslation } from 'react-i18next'
 
 const Blog = observer(() => {
+
+    useEffect(() => {
+        newsStore.getAllNews()
+        setLoading(false)
+        document.title = "Blog - MotoEmporium";
+        // ! при переході на інший роут в нас скидаються елементи пагінації, цей рядок для скидання стилів 
+        newsStore.setActiveLink(1)
+    }, [])
+
+    const { t } = useTranslation();
+
+    let selectSort = createRef()
+
+    function sortNews() {
+        newsStore.sortNews(selectSort.current.value)
+    }
+
+    // pagination
     const [Loading, setLoading] = useState(false)
     const [currentPage, setcurrentPage] = useState(1)
     const [NewsPerPage] = useState(3)
@@ -18,17 +37,6 @@ const Blog = observer(() => {
     const paginate = (pageNumber) => {
         setcurrentPage(pageNumber)
         newsStore.setActiveLink(pageNumber)
-    }
-
-    useEffect(() => {
-        newsStore.getAllNews()
-        setLoading(false)
-        document.title = "Blog - MotoEmporium";
-    }, [])
-    let selectSort = createRef()
-
-    function sortNews() {
-        newsStore.sortNews(selectSort.current.value)
     }
     const nextPage = () => {
         if (currentPage < newsStore.lengthPageNumber) {
@@ -52,8 +60,8 @@ const Blog = observer(() => {
                         <div className="row">
                             <div className="col">
                                 <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
-                                    <option value={"new"}>Найновіші</option>
-                                    <option value={"old"}>Старіші</option>
+                                    <option value={"new"}>{t('blog_page.selectSort-new')}</option>
+                                    <option value={"old"}>{t('blog_page.selectSort-old')}</option>
                                 </select>
                             </div>
 

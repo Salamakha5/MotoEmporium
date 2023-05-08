@@ -69,7 +69,8 @@
         color: brown;
         display: flex;
         justify-content: center;
-        margin-top: 10px;
-
+        margin: 10px 0;
+        @include fontSettings($mainFont, 35px, 700);
+        line-height: 50px;
     }
 }
