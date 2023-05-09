@@ -10,14 +10,21 @@ import { NavLink } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import alertify from 'alertifyjs'
 import Contact from '../../pages/Contact/Contact'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
+import { useEffect } from 'react'
 
 const Header = observer(() => {
 
     const { t, i18n } = useTranslation();
     const changeLanguage = (language) => { i18n.changeLanguage(language) }
 
-    // * то секрет жоский
+    useEffect(() => {
+        if (localStorage.i18nextLng !== 'ua') {
+            // ! цей іф потрібен, щоб мова змінювалась із першого кліку
+            changeLanguage("en")
+        }
+    }, [])
+
     const logoLink = () => {
         alertify.alert(t('header.modal_windows.top_secret-title'),
             `<span style="font-size: 124px;">🕵️‍♀️</span> ${t('header.modal_windows.top_secret-text')}`,
@@ -59,10 +66,11 @@ const Header = observer(() => {
                                 <li className='dropdown-item'> <i className="bi bi-cart3 pe-2"></i> {t('header.actions.actionsCart')} </li>
                                 <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> {t('header.actions.actionsSettings')} </li>
                                 <li className='d-flex justify-content-center'>
-                                    <div className="lang-switcher | form-check form-switch">
+                                    <div className="lang-switcher | form-switch">
                                         <div className='lang lang-en'>EN</div>
                                         <input className="form-check-input" id='headerLangSwitcher' type="checkbox" role="switch"
-                                            onClick={langSwitchHandler} defaultChecked={i18n.language != 'en'} />
+                                            // onClick={langSwitchHandler} defaultChecked={i18n.language != 'en'} />
+                                            onClick={langSwitchHandler} defaultChecked={localStorage.i18nextLng == 'ua'} />
                                         <div className='lang lang-ua'>UA</div>
                                     </div>
                                 </li>

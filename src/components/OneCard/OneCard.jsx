@@ -20,7 +20,7 @@ const OneCard = observer((props) => {
                 <div className="oneCard__horsePower | pb-2">{t('shop_page.oneCard.power')}: {horsepower}</div>
                 <div className="oneCard__priceCont | pt-2">{clientStore.formatPrice(price)}</div>
                 <div className="oneCard__btnCont | pt-5">
-                    <NavLink to={`/moto/?id=${_id}`} className="mainButton | btn btn-warning px-4 py-2">{t('shop_page.oneCard.btn-title')}</NavLink>
+                    <NavLink to={`/moto/?id=${_id}`} className="mainButton | btn px-4 py-2">{t('shop_page.oneCard.btn-title')}</NavLink>
                 </div>
             </div>
         </div>

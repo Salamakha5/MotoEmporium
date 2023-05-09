@@ -60,33 +60,33 @@ const OneMoto = observer(() => {
                                 : false
                         }
                         <div className='buttons-cont | py-5'>
-                            <button class="btn mainButton | btn btn-warning p-3" type="button" data-bs-toggle="collapse" data-bs-target="#specificationsCollapse" aria-expanded="false" aria-controls="specificationsCollapse">
+                            <button className="btn mainButton | btn p-3" type="button" data-bs-toggle="collapse" data-bs-target="#specificationsCollapse" aria-expanded="false" aria-controls="specificationsCollapse">
                             {t('oneMoto_page.techChar.btn-title')}</button>
-                            <div class="collapse pt-3" id="specificationsCollapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.brand')}:</span>
+                            <div className="collapse pt-3" id="specificationsCollapse">
+                                <ul className="list-group">
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.brand')}:</span>
                                         <span>{brand}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.model')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.model')}:</span>
                                         <span>{model}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.type')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.type')}:</span>
                                         <span>{collectionType}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.engineCapacity')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.engineCapacity')}:</span>
                                         <span>{displacement}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.pistonDiameter')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.pistonDiameter')}:</span>
                                         <span>{borexStroke}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.compressionRatio')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.compressionRatio')}:</span>
                                         <span>{compressionRatio}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.horsePower')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.horsePower')}:</span>
                                         <span>{horsepower}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.torque')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.torque')}:</span>
                                         <span>{torque}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.fuelSystem')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.fuelSystem')}:</span>
                                         <span>{fuelSystem}</span></li>
-                                    <li class="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.gearbox')}:</span>
+                                    <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.gearbox')}:</span>
                                         <span>{gearbox}</span></li>
                                 </ul>
                             </div>
-                            <NavLink className='goBack mainButton | btn btn-warning p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
+                            <NavLink className='goBack mainButton | btn p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
                         </div>
                     </div>
 
@@ -110,7 +110,7 @@ const OneMoto = observer(() => {
                                     <i className="bi bi-heart"></i>
                                     {/* bi-heart-fill ==> active btn */}
                                     {t('oneMoto_page.infoBlock.btn-addToWishList')}</button>
-                                <button className='addToCart mainButton | btn btn-warning'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
+                                <button className='addToCart mainButton | btn'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
                             </div>
                         </div>
                         <div className="check-more">

@@ -38,7 +38,7 @@
             line-height: 24px;
 
             &:hover {
-                border-radius: 15px;
+                border-radius: 5px;
                 background-color: rgba(0, 0, 0, 0.2);
             }
 
@@ -105,6 +105,10 @@
 
                 .lang-switcher {
                     position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding-bottom: 5px;
 
                     .lang {
                         position: absolute;
@@ -112,7 +116,7 @@
 
                     .lang-ua {
                         top: 3px;
-                        right: -30px;
+                        right: -40px;
                     }
 
                     .lang-en {
@@ -142,7 +146,6 @@
         max-width: 250px;
 
         .decoration {
-            // clip-path: polygon(0 0, 100% 0, 74% 22%, 24% 22%);
             clip-path: polygon(49% 54%, 0 0, 100% 0);
             background-color: $mainColor;
             width: 70px;
@@ -164,7 +167,7 @@
     }
 }
 
-// !!adaptive ================================================================================================
+// ! adaptive ================================================================================================
 
 @media (max-width: 1199px) {
     .header {

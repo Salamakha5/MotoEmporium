@@ -117,8 +117,8 @@ const Shop = observer(() => {
                         <div className='col-12 col-md-6 col-xl-4'>
                             {/* buttons */}
                             <div className='d-flex justify-content-center row'>
-                                <a className="btn  moto-shop__controls-btnFind | btn btn-warning col-sm-5  mainButton px-4 py-2" role="button" onClick={sortData}>{t('shop_page.controls.btn_1-title')}</a>
-                                <button type="button" className="btn btn-warning col-sm-5  mainButton px-4 py-2" onClick={ClearSort}>{t('shop_page.controls.btn_2-title')}</button>
+                                <a className="mainButton moto-shop__controls-btnFind | btn col-sm-5 px-4 py-2" role="button" onClick={sortData}>{t('shop_page.controls.btn_1-title')}</a>
+                                <button type="button" className="btn col-sm-5  mainButton px-4 py-2" onClick={ClearSort}>{t('shop_page.controls.btn_2-title')}</button>
                             </div>
                         </div>
                     </div>

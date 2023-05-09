@@ -1,19 +1,19 @@
 import "./app.scss"
 
-import Login from './pages/Login/Login.jsx';
-import Register from './pages/Register/Register.jsx';
-import NotFound from './pages/NotFound/NotFound.jsx';
-import Home from './pages/Home/Home.jsx';
-import Layot from "./components/Layot/Layot";
-import Shop from "./pages/Shop/Shop";
-import Blog from "./pages/Blog/Blog";
-import Contact from "./pages/Contact/Contact";
-import serverStore from './store/serverStore';
+import Login from './pages/Login/Login.jsx'
+import Register from './pages/Register/Register.jsx'
+import NotFound from './pages/NotFound/NotFound.jsx'
+import Home from './pages/Home/Home.jsx'
+import Layot from "./components/Layot/Layot"
+import Shop from "./pages/Shop/Shop"
+import Blog from "./pages/Blog/Blog"
+import Contact from "./pages/Contact/Contact"
+import serverStore from './store/serverStore'
+import OneMoto from "./pages/OneMoto/OneMoto"
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useEffect } from "react";
-import OneMoto from "./pages/OneMoto/OneMoto";
+import { useEffect } from "react"
 
 const App = observer(() => {
 

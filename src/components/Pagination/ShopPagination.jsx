@@ -1,9 +1,14 @@
 import './paginationStyle.scss'
 
 import serverStore from '../../store/serverStore'
+import { useEffect } from 'react'
 
 const ShopPagination = ({ MotoPerPage, totalMoto, paginate, prevPage, nextPage }) => {
     const pageNumbers = []
+
+    useEffect(() => {
+        serverStore.setlengthPagNumber(pageNumbers.length)
+    }, [])
 
     for (let i = 0; i <= Math.ceil(totalMoto / MotoPerPage); i++) {
         if (i !== 0) {
@@ -11,11 +16,11 @@ const ShopPagination = ({ MotoPerPage, totalMoto, paginate, prevPage, nextPage }
         }
     }
 
-    serverStore.setlengthPagNumber(pageNumbers.length)
+
     return (
         <div>
             <ul className='pagination w-100 d-flex justify-content-center'>
-                <li class="page-item"><a class="page-link"
+                <li className="page-item"><a className="page-link"
                     onClick={prevPage}
                 ><i className="bi bi-arrow-left-short"></i></a></li>
                 {
@@ -25,7 +30,7 @@ const ShopPagination = ({ MotoPerPage, totalMoto, paginate, prevPage, nextPage }
                         </li>
                     ))
                 }
-                <li class="page-item"><a class="page-link"
+                <li className="page-item"><a className="page-link"
                     onClick={nextPage}
                 ><i className="bi bi-arrow-right-short"></i></a></li>
             </ul>

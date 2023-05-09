@@ -16,7 +16,7 @@ const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }
     return (
         <div>
             <ul className='pagination w-100 d-flex justify-content-center my-3'>
-                <li class="page-item"><a class="page-link"
+                <li className="page-item"><a className="page-link"
                     onClick={prevPage}
                 ><i className="bi bi-arrow-left-short"></i></a></li>
                 {
@@ -28,7 +28,7 @@ const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }
                         </li>
                     ))
                 }
-                <li class="page-item"><a class="page-link"
+                <li className="page-item"><a className="page-link"
                     onClick={nextPage}
                 ><i className="bi bi-arrow-right-short"></i></a></li>
             </ul>
