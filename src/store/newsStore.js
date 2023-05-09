@@ -12,6 +12,7 @@ class NewsStore {
         axios.get(this.URL + "/getAllNews")
             .then((response) => {
                 this.newsData = toJS(response.data)
+                console.log(toJS(response.data));
 
             })
             .catch((error) => {
@@ -21,14 +22,7 @@ class NewsStore {
     setlengthPagNumber(number) {
         this.lengthPageNumber = number
     }
-    sortNews(type) {
-        if (type === "new") {
-            this.newsData = this.newsData.reverse()
-        }
-        if (type === "old") {
-            this.newsData = this.newsData.reverse()
-        }
-    }
+    
 
     activeLink = 1
     setActiveLink(number) {

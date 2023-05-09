@@ -18,7 +18,7 @@ import { useEffect } from "react"
 const App = observer(() => {
 
     useEffect(() => {
-        if (localStorage.getItem("IsAuthMOTO") != null) serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
+        // if (localStorage.getItem("IsAuthMOTO") != null) serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
     }, [])
 
     return (

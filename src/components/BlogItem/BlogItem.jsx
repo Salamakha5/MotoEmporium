@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
 const BlogItem = (props) => {
-    let { img, text, header, data } = props.data
+    let { img, text, header, data,status } = props.data
     const [btnOpenNews, SetbtnOpenNews] = useState(false)
     const { t } = useTranslation();
     return (
@@ -25,7 +25,10 @@ const BlogItem = (props) => {
                 <div className="col ">
                     <div className="textInfo row m-0">
                         <div className="col-10 text-start fs-3 blogTitle">{header}</div>
-                        <div className="col-2 text-end">{data}</div>
+                        <div className="col-2 text-end">
+                        <div>{data}</div>
+                        <div className='mt-1'>Статус:{status}</div>
+                        </div>
                     </div>
                     <div>
                         {
