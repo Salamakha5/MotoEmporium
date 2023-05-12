@@ -84,7 +84,6 @@ const Login = observer(() => {
 
     function forgotHandler() { alertify.alert(t('login.forgot-alert-title'), t('login.forgot-alert-text')); }
 
-
     return (
         <div className="login" >
             <div className={showPageLoader == true ? 'loader-pageWrap active' : 'loader-pageWrap'}>

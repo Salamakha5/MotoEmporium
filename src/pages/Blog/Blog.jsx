@@ -67,8 +67,8 @@ const Blog = observer(() => {
                             <div className="col">
                                 <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
                                     <option value="default">{t('blog_page.selectDate-dafault')}</option>
-                                    <option value={"new"}>{t('blog_page.selectSort-new')}</option>
-                                    <option value={"old"}>{t('blog_page.selectSort-old')}</option>
+                                    <option value={"new"}>{t('blog_page.selectDate-new')}</option>
+                                    <option value={"old"}>{t('blog_page.selectDate-old')}</option>
                                 </select>
                             </div>
                             <div className="col">

@@ -1,11 +1,11 @@
 import './BlogItem.scss'
 
-import test_img from "../../images/logReg_bg.png"
+// import test_img from "../../images/logReg_bg.png"
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
 const BlogItem = (props) => {
-    let { img, text, header, data,status } = props.data
+    let { img, text, header, data, status } = props.data
     const [btnOpenNews, SetbtnOpenNews] = useState(false)
     const { t } = useTranslation();
     return (
@@ -15,19 +15,19 @@ const BlogItem = (props) => {
                     btnOpenNews
                         ?
                         <div className="col-4 col-img d-flex align-items-center justify-content-center">
-                            <img src={img} alt="" />
+                            <img src={img} alt='news img'/>
                         </div>
                         :
                         <div className="col-3  col-img d-flex align-items-center justify-content-center">
-                            <img src={img} alt="" />
+                            <img src={img} alt='news img'/>
                         </div>
                 }
                 <div className="col ">
                     <div className="textInfo row m-0">
                         <div className="col-10 text-start fs-3 blogTitle">{header}</div>
                         <div className="col-2 text-end">
-                        <div>{data}</div>
-                        <div className='mt-1'>Статус:{status}</div>
+                            <div>{data}</div>
+                            <div className='mt-1'>rating:{status}</div>
                         </div>
                     </div>
                     <div>

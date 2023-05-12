@@ -25,22 +25,24 @@ const Shop = observer(() => {
             serverStore.getAllMoto(() => {
                 setSpinerShop("d-none")
             })
-        } else if (serverStore.userIsAuth == false && (localStorage.getItem("IsAuthMOTO") == null)) {
+        } else if (serverStore.userIsAuth == false || localStorage.getItem("IsAuthMOTO") == null) {
             youNeedToLogin();
         }
 
     }, [])
 
     function youNeedToLogin() {
+        if (serverStore.userIsAuth == false) {
 
-        alertify.confirm('Попередження', 'Щоб перейти до магазину потрібно увійти!',
-            function () {
-                navigate('/login')
-            },
-            function () {
-                alertify.error('Нажаль ви не авторизовані')
-                navigate('/')
-            });
+            alertify.confirm('Попередження', 'Щоб перейти до магазину потрібно увійти!',
+                function () {
+                    navigate('/login')
+                },
+                function () {
+                    alertify.error('Нажаль ви не авторизовані')
+                    navigate('/')
+                });
+        }
 
     }
 

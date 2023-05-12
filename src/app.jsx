@@ -11,6 +11,7 @@ import Contact from "./pages/Contact/Contact"
 import serverStore from './store/serverStore'
 import OneMoto from "./pages/OneMoto/OneMoto"
 
+import alertify from 'alertifyjs'
 import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react"
@@ -18,7 +19,11 @@ import { useEffect } from "react"
 const App = observer(() => {
 
     useEffect(() => {
-        if (localStorage.getItem("IsAuthMOTO") != null) serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
+        if (localStorage.getItem("IsAuthMOTO") != null) {
+            serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), () => {
+                alertify.alert('Попередження', 'Час дії вашого токену минув, авторизуйтесь ще раз');
+            })
+        };
     }, [])
 
     return (

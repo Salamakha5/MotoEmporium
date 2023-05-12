@@ -55,7 +55,7 @@ class ServerStore {
         this.UserName = ""
     }
 
-    decodedToken(decToken) {
+    decodedToken(decToken, callback) {
         if (decToken) {
             axios.post(this.URL + "/decoded", {
                 token: decToken
@@ -66,6 +66,10 @@ class ServerStore {
                 })
                 .catch((error) => {
                     this.userIsAuth = false
+                    localStorage.removeItem('IsAuthMOTO')
+                    
+                    // callback in app.jsx
+                    callback()
                 });
         }
     }
@@ -76,6 +80,7 @@ class ServerStore {
         axios.get(this.URL + "/getAllMoto")
         .then((response) => {
             this.MotoData = response.data
+            console.log(this.MotoData);
             this.MotoDataCopy = this.MotoData
                 for (let i = 0; i < 3; i++) {
                     if (this.threeMotoCard.length <= 2) {
