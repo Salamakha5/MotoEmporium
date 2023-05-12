@@ -3,6 +3,8 @@ import './BlogItem.scss'
 // import test_img from "../../images/logReg_bg.png"
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
+import clientStore from '../../store/clientStore';
+import { observer } from 'mobx-react-lite';
 
 const BlogItem = (props) => {
     let { img, text, header, data, status } = props.data
@@ -24,19 +26,19 @@ const BlogItem = (props) => {
                 }
                 <div className="col ">
                     <div className="textInfo row m-0">
-                        <div className="col-10 text-start fs-3 blogTitle">{header}</div>
+                        <div className="col-10 text-start fs-3 blogTitle">{clientStore.currentLang == "ua"?header.ua : header.en}</div>
                         <div className="col-2 text-end">
-                            <div>{data}</div>
-                            <div className='mt-1'>rating:{status}</div>
+                        <div>{data}</div>
+                        <div className='mt-1'>{clientStore.currentLang == "ua"?"Статус" : "Status"}:{status}</div>
                         </div>
                     </div>
                     <div>
                         {
                             btnOpenNews
                                 ?
-                                <p className='fullText'>{text}</p>
+                                <p className='fullText'>{clientStore.currentLang == "ua"?text.ua : text.en}</p>
                                 :
-                                <p className='news_text'>{text.substring(0, 300)}...</p>
+                                <p className='news_text'>{clientStore.currentLang == "ua"?text.ua.substring(0, 300) : text.en.substring(0, 300)}...</p>
                         }
                     </div>
                     <div className='d-flex justify-content-end'>
@@ -46,6 +48,6 @@ const BlogItem = (props) => {
             </div>
         </div>
     )
-}
+})
 
 export default BlogItem

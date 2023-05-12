@@ -1,9 +1,10 @@
 import { makeAutoObservable, toJS } from "mobx"
 class ClientStore {
-
     constructor() {
         makeAutoObservable(this)
     }
+    
+    currentLang = localStorage.getItem("i18nextLng")
 
     // function formatPrice(num) {
     //     let copy = num
