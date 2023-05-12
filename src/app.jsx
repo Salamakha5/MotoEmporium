@@ -15,13 +15,15 @@ import alertify from 'alertifyjs'
 import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react"
+import { useTranslation } from 'react-i18next';
 
 const App = observer(() => {
 
+    const { t } = useTranslation();
     useEffect(() => {
         if (localStorage.getItem("IsAuthMOTO") != null) {
             serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), () => {
-                alertify.alert('Попередження', 'Час дії вашого токену минув, авторизуйтесь ще раз');
+                alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
             })
         };
     }, [])

@@ -9,7 +9,7 @@ import NewsPagination from '../../components/Pagination/NewsPagination'
 import { useTranslation } from 'react-i18next'
 
 const Blog = observer(() => {
-    const [Loading, setLoading] = useState(false)
+    const [showPageLoader, setShowPageLoader] = useState(false)
     const [currentPage, setcurrentPage] = useState(1)
     const [NewsPerPage] = useState(3)
 
@@ -23,8 +23,12 @@ const Blog = observer(() => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        newsStore.getAllNews()
-        setLoading(false)
+        setShowPageLoader(true)
+        console.log(showPageLoader);
+        newsStore.getAllNews(() => {
+            setShowPageLoader(false)
+            console.log(showPageLoader);
+        })
         document.title = "Blog - MotoEmporium";
     }, [])
     let selectSort = createRef()
@@ -83,6 +87,13 @@ const Blog = observer(() => {
                     </div>
                 </div>
                 <div className="blog__items">
+                    <div className={showPageLoader === true ? 'd-flex justify-content-center my-5' : 'd-none'}>
+                        <div className="loader active" id="loader-2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                     {
                         currentNews.map((p) => {
                             return <BlogItem key={p._id} data={p}></BlogItem>
@@ -100,7 +111,7 @@ const Blog = observer(() => {
                     ></NewsPagination>
                 </div>
             </div>
-        </div>
+        </div >
     )
 })
 

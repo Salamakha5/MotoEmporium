@@ -1,8 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx"
 import axios from 'axios';
 // import { decodeToken, useJwt } from "react-jwt";
-import { useTranslation } from 'react-i18next';
-
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
@@ -56,7 +54,7 @@ class ServerStore {
         this.UserName = ""
     }
 
-    decodedToken(decToken, callback) {
+    decodedToken(decToken, appCallback) {
         if (decToken) {
             axios.post(this.URL + "/decoded", {
                 token: decToken
@@ -70,7 +68,7 @@ class ServerStore {
                     localStorage.removeItem('IsAuthMOTO')
                     
                     // callback in app.jsx
-                    callback()
+                    appCallback()
                 });
         }
     }

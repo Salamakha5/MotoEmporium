@@ -1,4 +1,4 @@
-import "./oneMoto.scss"
+import "./OneMoto.scss"
 
 import ducatiImg from '../../images/ducati_background.png'
 
@@ -8,7 +8,7 @@ import clientStore from '../../store/clientStore';
 import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite';
 import { NavLink } from "react-router-dom";
-import OtherMoto from "../../components/OtherMoto/otherMoto";
+import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import { useTranslation } from 'react-i18next';
 
 const OneMoto = observer(() => {
