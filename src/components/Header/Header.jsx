@@ -12,11 +12,15 @@ import alertify from 'alertifyjs'
 import Contact from '../../pages/Contact/Contact'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
+import clientStore from '../../store/clientStore'
 
 const Header = observer(() => {
 
     const { t, i18n } = useTranslation();
-    const changeLanguage = (language) => { i18n.changeLanguage(language) }
+    const changeLanguage = (language) => {
+        clientStore.currentLang = language
+        i18n.changeLanguage(language) 
+        }
     const navigate = useNavigate()
 
     useEffect(() => {

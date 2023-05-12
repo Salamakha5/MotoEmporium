@@ -11,6 +11,7 @@ class ServerStore {
     MotoDataCopy=[]
     OneMoto = []
     threeMotoCard = []
+    
 
 
     lengthPageNumber = 0
