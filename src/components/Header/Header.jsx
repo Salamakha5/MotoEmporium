@@ -6,7 +6,7 @@ import Shop from '../../pages/Shop/Shop'
 import serverStore from '../../store/serverStore.js'
 import Blog from '../../pages/Blog/Blog'
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import alertify from 'alertifyjs'
 import Contact from '../../pages/Contact/Contact'
@@ -17,6 +17,7 @@ const Header = observer(() => {
 
     const { t, i18n } = useTranslation();
     const changeLanguage = (language) => { i18n.changeLanguage(language) }
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (localStorage.i18nextLng !== 'ua') {
@@ -36,9 +37,12 @@ const Header = observer(() => {
     const langSwitchHandler = () => { (i18n.language == 'en') ? changeLanguage("ua") : changeLanguage("en") };
 
     function exitHandler() {
-        alertify.confirm(t('header.modal_windows.exit-title'), t('header.modal_windows.exit-text')
-            , function () { serverStore.unLogin() }
-            , function () { alertify.success(t('header.modal_windows.exit-notify')) });
+        alertify.confirm(t('header.modal_windows.exit-title'), t('header.modal_windows.exit-text'),
+            function () {
+                serverStore.unLogin()
+                navigate('/')
+            },
+            function () { alertify.success(t('header.modal_windows.exit-notify')) });
     }
 
     return (
@@ -69,7 +73,6 @@ const Header = observer(() => {
                                     <div className="lang-switcher | form-switch">
                                         <div className='lang lang-en'>EN</div>
                                         <input className="form-check-input" id='headerLangSwitcher' type="checkbox" role="switch"
-                                            // onClick={langSwitchHandler} defaultChecked={i18n.language != 'en'} />
                                             onClick={langSwitchHandler} defaultChecked={localStorage.i18nextLng == 'ua'} />
                                         <div className='lang lang-ua'>UA</div>
                                     </div>

@@ -18,7 +18,7 @@ import { useEffect } from "react"
 const App = observer(() => {
 
     useEffect(() => {
-        // if (localStorage.getItem("IsAuthMOTO") != null) serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
+        if (localStorage.getItem("IsAuthMOTO") != null) serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
     }, [])
 
     return (
@@ -39,7 +39,9 @@ const App = observer(() => {
                             </Route>
                             :
                             <Route>
-                                <Route path='shop' element={<Login />} />
+                                <Route path="/" element={<Layot />}>
+                                    <Route path='shop' element={<Shop />} />
+                                </Route>
                                 <Route path='login' element={<Login />} />
                                 <Route path='register' element={<Register />} />
                             </Route>

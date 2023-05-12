@@ -66,16 +66,16 @@ const Blog = observer(() => {
                         <div className="row">
                             <div className="col">
                                 <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
-                                    <option value="default">За датою</option>
+                                    <option value="default">{t('blog_page.selectDate-dafault')}</option>
                                     <option value={"new"}>{t('blog_page.selectSort-new')}</option>
                                     <option value={"old"}>{t('blog_page.selectSort-old')}</option>
                                 </select>
                             </div>
                             <div className="col">
                                 <select ref={selectSortStatus} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
-                                    <option value="default">За статусом</option>
-                                    <option value={"maxStatus"}>Найпопулярніші</option>
-                                    <option value={"minStatus"}>Менш популярі</option>
+                                    <option value="default">{t('blog_page.selectRating-dafault')}</option>
+                                    <option value={"maxStatus"}>{t('blog_page.selectRating-mostPopular')}</option>
+                                    <option value={"minStatus"}>{t('blog_page.selectRating-lessPopular')}</option>
                                 </select>
                             </div>
 

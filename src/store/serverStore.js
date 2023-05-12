@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
-    userIsAuth = true
+    userIsAuth = false
     MotoData = []
     MotoDataCopy=[]
     OneMoto = []
@@ -72,8 +72,8 @@ class ServerStore {
 
     // Shop
     getAllMoto(callback) {
-        axios.get("http://localhost:4000/api" + "/getAllMoto")
-        // axios.get(this.URL + "/getAllMoto")
+        // axios.get("http://localhost:4000/api" + "/getAllMoto")
+        axios.get(this.URL + "/getAllMoto")
         .then((response) => {
             this.MotoData = response.data
             this.MotoDataCopy = this.MotoData
@@ -91,10 +91,11 @@ class ServerStore {
                 callback()
             })
             .catch((error) => {
-                callback()
-                console.log(error);
+                // callback()
+                // console.log(error);
             });
     }
+
     // shop, pagination
     activeLink = 1
     setActiveLink(number) {

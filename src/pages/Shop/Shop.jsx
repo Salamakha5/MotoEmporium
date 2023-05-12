@@ -4,22 +4,45 @@ import OneCard from '../../components/OneCard/OneCard'
 import ShopPagination from '../../components/Pagination/ShopPagination'
 import serverStore from '../../store/serverStore'
 
+import alertify from 'alertifyjs'
 import { createRef, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next';
 import { toJS } from 'mobx'
+import { useNavigate } from "react-router-dom";
 
 const Shop = observer(() => {
+
+    const navigate = useNavigate()
+    const { t } = useTranslation();
+
     useEffect(() => {
-        setSpinerShop("d-block")
-        serverStore.setActiveLink(1)
-        document.title = "Shop - MotoEmporium";
-        serverStore.getAllMoto(()=>{
-            setSpinerShop("d-none")
-        })
+
+        if (serverStore.userIsAuth == true) {
+            setSpinerShop("d-block")
+            serverStore.setActiveLink(1)
+            document.title = "Shop - MotoEmporium";
+            serverStore.getAllMoto(() => {
+                setSpinerShop("d-none")
+            })
+        } else if (serverStore.userIsAuth == false && (localStorage.getItem("IsAuthMOTO") == null)) {
+            youNeedToLogin();
+        }
+
     }, [])
 
-    const { t, i18n } = useTranslation();
+    function youNeedToLogin() {
+
+        alertify.confirm('Попередження', 'Щоб перейти до магазину потрібно увійти!',
+            function () {
+                navigate('/login')
+            },
+            function () {
+                alertify.error('Нажаль ви не авторизовані')
+                navigate('/')
+            });
+
+    }
 
     let BrandValue = createRef()
     let ModelValue = createRef()
@@ -27,8 +50,8 @@ const Shop = observer(() => {
     let SelectModel = createRef()
     let SortCash = createRef()
 
-    const [ErrorMotoSort,setErrorMotoSort] = useState("")
-    const [spinerShop,setSpinerShop] = useState([])
+    const [ErrorMotoSort, setErrorMotoSort] = useState("")
+    const [spinerShop, setSpinerShop] = useState([])
 
     function sortCash() {
         switch (SortCash.current.value) {
@@ -63,9 +86,9 @@ const Shop = observer(() => {
         // Сортування по назві бренду
         serverStore.MotoDataCopy = serverStore.MotoData.filter(moto => moto.brand.includes(SortToBrand))
         if (serverStore.MotoDataCopy == false) {
-            setErrorMotoSort("Такого бренду немає") 
-        } else {setErrorMotoSort("")}
-         
+            setErrorMotoSort("Такого бренду немає")
+        } else { setErrorMotoSort("") }
+
 
         // Сортування по назві моделі
         if (SortToModel) {
@@ -75,15 +98,15 @@ const Shop = observer(() => {
             }
         }
 
-        // Сортування по катигоріям
+        // Сортування по категоріям
         if (SortSelectCatigories) {
-            console.log("SortSelectCatigories");
+            // console.log("SortSelectCatigories");
             if (SortSelectCatigories == "0") {
                 serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(p => true)
             } else {
                 serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.collectionType == SortSelectCatigories)
                 if (serverStore.MotoDataCopy == false) {
-                setErrorMotoSort("Мотоциклу такого типу немає")
+                    setErrorMotoSort("Мотоциклу такого типу немає")
                 }
             }
         }
@@ -120,7 +143,7 @@ const Shop = observer(() => {
 
     const lastMotoIndex = currentPage * MotoPerPage
     const firstMotoIndex = lastMotoIndex - MotoPerPage
-    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
+    let currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
 
     const paginate = pageNumber => {
         setcurrentPage(pageNumber)
@@ -188,7 +211,6 @@ const Shop = observer(() => {
                 <div className='error-shop'>{ErrorMotoSort}</div>
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
                     <div className='col moto-shop__supControls-nowDisplay'>
-                        {/* <span>!ttt {currentPage} із {serverStore.lengthPageNumber} сторінок</span> */}
                         <span>{t('shop_page.sup-controls.isDisplayed', { currentPage: currentPage, allPages: serverStore.lengthPageNumber })}</span>
                     </div>
 
@@ -202,9 +224,11 @@ const Shop = observer(() => {
                 </div>
 
                 {/* loader */}
-                <div className={'d-flex justify-content-center mt-5 ' + spinerShop}>
-                    <div className="spinner-border text-warning" role="status">
-                        <span className="visually-hidden">Loading...</span>
+                <div className={'d-flex justify-content-center my-5 ' + spinerShop}>
+                    <div className="loader active" id="loader-2">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
 
