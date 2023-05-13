@@ -36,6 +36,9 @@ const BlogItem = observer((props) => {
                             <div className='mt-1'>{clientStore.currentLang == "ua" ? "Рейтинг" : "Rating"}:{status}</div>
                         </div>
                     </div>
+                    <div className="d-block d-lg-none col-12  col-img d-flex align-items-center justify-content-center">
+                            <img src={img} alt="" />
+                        </div>
                     <div>
                         {
                             btnOpenNews
