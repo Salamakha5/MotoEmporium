@@ -1,4 +1,4 @@
-import "./otherMoto.scss"
+import "./OtherMoto.scss"
 
 import serverStore from '../../store/serverStore'
 import clientStore from '../../store/clientStore'

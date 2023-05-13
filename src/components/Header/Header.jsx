@@ -63,8 +63,8 @@ const Header = observer(() => {
                 <div className="header__wrap">
                     <div className='header__nav'>
                         <NavLink className={activeLink} to='/' element={<Home />}>{t('header.homeLink')}</NavLink>
-                        <NavLink className={activeLink} to='/shop' element={<Shop />}>{t('header.shopLink')}</NavLink>
                         <NavLink className={activeLink} to='/blog' element={<Blog />}>{t('header.blogLink')}</NavLink>
+                        <NavLink className={activeLink} to='/shop' element={<Shop />}>{t('header.shopLink')}</NavLink>
                         <NavLink className={activeLink} to='/contact' element={<Contact />}>{t('header.contactsLink')}</NavLink>
                         <div className='header__nav-dropdown'>
                             <button type="button" className="header__nav-dropdownBtn main-link nav-item | btn dropdown-toggle"

@@ -1,4 +1,8 @@
 {
+    "app": {
+        "alert-warning": "Попередження",
+        "alert-oldToken": "Час дії вашого токену минув, авторизуйтесь ще раз"
+    },
     "header": {
         "homeLink": "Головна",
         "shopLink": "Магазин",
@@ -129,7 +133,12 @@
             "btn_1-title": "Пошук",
             "btn_2-title": "Очистити фільтри"
         },
-        "shop-errors": {},
+        "shop-sortErrors": {
+            "notHaveBrand": "Такого бренду немає",
+            "notHaveModel": "Такої моделі не існує",
+            "notHaveMotoThisType": "Мотоциклу такого типу немає",
+            "notHaveMotoThisNameCategory": "Мотоциклу з такою назвою у цій категорії немає"
+        },
         "sup-controls": {
             "isDisplayed": "Відображається {{ currentPage }} із {{ allPages }} сторінок",
             "selectPrice-defaultValue": "Сортувати по ціні",
@@ -140,6 +149,11 @@
             "type": "Тип",
             "power": "Потужність",
             "btn-title": "Детальніше"
+        },
+        "youNeedToLogin": {
+            "title": "Попередження",
+            "text": "Щоб перейти до магазину потрібно увійти!",
+            "cancel-notify": "Нажаль ви не авторизовані"
         }
     },
     "oneMoto_page": {

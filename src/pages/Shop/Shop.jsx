@@ -25,7 +25,7 @@ const Shop = observer(() => {
             serverStore.getAllMoto(() => {
                 setSpinerShop("d-none")
             })
-        } else if (serverStore.userIsAuth == false && (localStorage.getItem("IsAuthMOTO") == null)) {
+        } else if (localStorage.getItem("IsAuthMOTO") == null) {
             youNeedToLogin();
         }
 
@@ -33,15 +33,14 @@ const Shop = observer(() => {
 
     function youNeedToLogin() {
 
-        alertify.confirm('Попередження', 'Щоб перейти до магазину потрібно увійти!',
+        alertify.confirm(t('shop_page.youNeedToLogin.title'), t('shop_page.youNeedToLogin.text'),
             function () {
                 navigate('/login')
             },
             function () {
-                alertify.error('Нажаль ви не авторизовані')
+                alertify.error(t('shop_page.youNeedToLogin.cancel-notify'))
                 navigate('/')
-            });
-
+            })
     }
 
     let BrandValue = createRef()
@@ -86,7 +85,7 @@ const Shop = observer(() => {
         // Сортування по назві бренду
         serverStore.MotoDataCopy = serverStore.MotoData.filter(moto => moto.brand.includes(SortToBrand))
         if (serverStore.MotoDataCopy == false) {
-            setErrorMotoSort("Такого бренду немає")
+            setErrorMotoSort(t('shop_page.shop-sortErrors.notHaveBrand'))
         } else { setErrorMotoSort("") }
 
 
@@ -94,7 +93,7 @@ const Shop = observer(() => {
         if (SortToModel) {
             serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.model.includes(SortToModel))
             if (serverStore.MotoDataCopy == false) {
-                setErrorMotoSort("Такої моделі не існує")
+                setErrorMotoSort(t('shop_page.shop-sortErrors.notHaveModel'))
             }
         }
 
@@ -106,7 +105,7 @@ const Shop = observer(() => {
             } else {
                 serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.collectionType == SortSelectCatigories)
                 if (serverStore.MotoDataCopy == false) {
-                    setErrorMotoSort("Мотоциклу такого типу немає")
+                    setErrorMotoSort(t('shop_page.shop-sortErrors.notHaveMotoThisType'))
                 }
             }
         }
@@ -120,7 +119,8 @@ const Shop = observer(() => {
                 } else {
                     serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.model == SortSelectModel)
                     if (serverStore.MotoDataCopy == false) {
-                        setErrorMotoSort("Мотоциклу з такою назвою у цій категорії немає")
+                        // я скорочував як міг
+                        setErrorMotoSort(t('shop_page.shop-sortErrors.notHaveMotoThisNameCategory'))
                     }
                 }
             }

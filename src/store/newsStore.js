@@ -8,14 +8,15 @@ class NewsStore {
     URL = 'https://moto-server.onrender.com/api'
     newsData = []
     lengthPageNumber = 0
-    getAllNews() {
+    getAllNews(callback) {
         axios.get(this.URL + "/getAllNews")
             .then((response) => {
                 this.newsData = toJS(response.data)
-                console.log(toJS(response.data));
+                callback()
             })
             .catch((error) => {
                 console.log(error);
+                callback()
             })
     }
     setlengthPagNumber(number) {

@@ -7,7 +7,8 @@ import clientStore from '../../store/clientStore';
 import { observer } from 'mobx-react-lite';
 
 const BlogItem = observer((props) => {
-    let { img, text, header, data,status } = props.data
+
+    let { img, text, header, data, status } = props.data
     const [btnOpenNews, SetbtnOpenNews] = useState(false)
     const { t } = useTranslation();
     useEffect(()=>{
@@ -31,17 +32,17 @@ const BlogItem = observer((props) => {
                     <div className="textInfo row m-0">
                         <div className="col-10 text-start blogTitle">{clientStore.currentLang == "ua"?header.ua : header.en}</div>
                         <div className="col-2 text-end">
-                        <div>{data}</div>
-                        <div className='mt-1'>{clientStore.currentLang == "ua"?"Статус" : "Status"}:{status}</div>
+                            <div>{data}</div>
+                            <div className='mt-1'>{clientStore.currentLang == "ua" ? "Рейтинг" : "Rating"}:{status}</div>
                         </div>
                     </div>
                     <div>
                         {
                             btnOpenNews
                                 ?
-                                <p className='fullText'>{clientStore.currentLang == "ua"?text.ua : text.en}</p>
+                                <p className='fullText'>{clientStore.currentLang == "ua" ? text.ua : text.en}</p>
                                 :
-                                <p className='news_text'>{clientStore.currentLang == "ua"?text.ua.substring(0, 300) : text.en.substring(0, 300)}...</p>
+                                <p className='news_text'>{clientStore.currentLang == "ua" ? text.ua.substring(0, 300) : text.en.substring(0, 300)}...</p>
                         }
                     </div>
                     <div className='d-flex justify-content-end'>

@@ -1,8 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx"
 import axios from 'axios';
 // import { decodeToken, useJwt } from "react-jwt";
-import { useTranslation } from 'react-i18next';
-
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
@@ -56,7 +54,7 @@ class ServerStore {
         this.UserName = ""
     }
 
-    decodedToken(decToken) {
+    decodedToken(decToken, appCallback) {
         if (decToken) {
             axios.post(this.URL + "/decoded", {
                 token: decToken
@@ -67,6 +65,10 @@ class ServerStore {
                 })
                 .catch((error) => {
                     this.userIsAuth = false
+                    localStorage.removeItem('IsAuthMOTO')
+                    
+                    // callback in app.jsx
+                    appCallback()
                 });
         }
     }
@@ -77,6 +79,7 @@ class ServerStore {
         axios.get(this.URL + "/getAllMoto")
         .then((response) => {
             this.MotoData = response.data
+            console.log(this.MotoData);
             this.MotoDataCopy = this.MotoData
                 for (let i = 0; i < 3; i++) {
                     if (this.threeMotoCard.length <= 2) {

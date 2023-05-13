@@ -1,4 +1,8 @@
 {
+    "app": {
+        "alert-warning": "Warning",
+        "alert-oldToken": "Your token has expired, please log in again"
+    },
     "header": {
         "homeLink": "Home",
         "shopLink": "Shop",
@@ -129,7 +133,12 @@
             "btn_1-title": "Search",
             "btn_2-title": "Clean the filters"
         },
-        "shop-errors": {},
+        "shop-sortErrors": {
+            "notHaveBrand": "There is no such brand",
+            "notHaveModel": "There is no such model",
+            "notHaveMotoThisType": "There is no motorcycle of this type",
+            "notHaveMotoThisNameCategory": "There is no motorcycle with this name in this category"
+        },
         "sup-controls": {
             "isDisplayed": "Displayed {{ currentPage }} out of {{ allPages }} pages",
             "selectPrice-defaultValue": "Sort by price",
@@ -140,6 +149,11 @@
             "type": "Type",
             "power": "Power",
             "btn-title": "Read more"
+        },
+        "youNeedToLogin": {
+            "title": "Warning",
+            "text": "To go to the store you need to log in!",
+            "cancel-notify": "Sorry, you are not logged in"
         }
     },
     "oneMoto_page": {
@@ -176,6 +190,6 @@
         "selectRating-mostPopular":"Popular",
         "selectSort-old": "Older",
         "readBtn-hide": "Hide",
-        "readBtn-readInFull": "Read the full"
+        "readBtn-readInFull": "read the full"
     }
 }
