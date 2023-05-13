@@ -3,13 +3,16 @@
     margin-top: 20px;
 
     .textInfo {
-        .col-10, .col-2 {
+
+        .col-10,
+        .col-2 {
             padding: 0;
         }
     }
 
     .blogTitle {
         font-weight: 900;
+        font-size: 25px;
     }
 
     .news_text {
@@ -29,6 +32,35 @@
 
     .col-img {
         transition: 0.4s;
+    }
+
+    @media(max-width:810px) {
+        .blogTitle {
+            font-size: 21px;
+        }
+
+        .news_text {
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        
+        .fullText {
+            font-size: 15px;
+        }
+    }
+
+    @media(max-width:409px) {
+        .blogTitle {
+            font-size: 15px;
+        }
+        
+        .news_text {
+            font-size: 10px;
+        }
+        
+        .fullText {
+            font-size: 10px;
+        }
     }
 
 }

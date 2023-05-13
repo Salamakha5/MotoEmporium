@@ -171,7 +171,9 @@
         "img-data-text-goTo": "Watch"
     },
     "blog_page": {
-        "selectSort-new": "The latest",
+        "selectDate-dafault":"Sort by...",
+        "selectSort-new": "Date",
+        "selectRating-mostPopular":"Popular",
         "selectSort-old": "Older",
         "readBtn-hide": "Hide",
         "readBtn-readInFull": "Read the full"

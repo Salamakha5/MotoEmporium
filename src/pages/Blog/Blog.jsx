@@ -28,20 +28,13 @@ const Blog = observer(() => {
         document.title = "Blog - MotoEmporium";
     }, [])
     let selectSort = createRef()
-    let selectSortStatus = createRef()
 
     function sortNews() {
-        if (selectSort.current.value == "new") {
+        if(selectSort.current.value == "new"){
             newsStore.newsData.sort((a, b) => (+b.indexData) - (+a.indexData))
         }
-        if (selectSort.current.value == "old") {
-            newsStore.newsData.sort((a, b) => (+a.indexData) - (+b.indexData))
-        }
-        if (selectSortStatus.current.value == "maxStatus") {
-            newsStore.newsData.sort((a, b) => b.status - a.status)
-        }
-        if (selectSortStatus.current.value == "minStatus") {
-            newsStore.newsData.sort((a, b) => a.status - b.status)
+        if(selectSort.current.value == "maxStatus"){
+            newsStore.newsData.sort((a, b) => (+b.status) - (+a.status))
         }
     }
     const nextPage = () => {
@@ -60,26 +53,13 @@ const Blog = observer(() => {
     return (
         <div className='blog | pt-5'>
             <div className="blog__container | container px-5">
-                <div className="row pt-4">
-                    <div className="col-7"></div>
-                    <div className="col-5">
-                        <div className="row">
-                            <div className="col">
-                                <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
-                                    <option value="default">{t('blog_page.selectDate-dafault')}</option>
-                                    <option value={"new"}>{t('blog_page.selectSort-new')}</option>
-                                    <option value={"old"}>{t('blog_page.selectSort-old')}</option>
-                                </select>
-                            </div>
-                            <div className="col">
-                                <select ref={selectSortStatus} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
-                                    <option value="default">{t('blog_page.selectRating-dafault')}</option>
-                                    <option value={"maxStatus"}>{t('blog_page.selectRating-mostPopular')}</option>
-                                    <option value={"minStatus"}>{t('blog_page.selectRating-lessPopular')}</option>
-                                </select>
-                            </div>
-
-                        </div>
+                <div className="row pt-4 d-flex justify-content-end">
+                    <div className="col-12 col-lg-4">
+                        <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
+                            <option value="default">{t('blog_page.selectDate-dafault')}</option>
+                            <option value={"new"}>{t('blog_page.selectSort-new')}</option>
+                            <option value={"maxStatus"}>{t('blog_page.selectRating-mostPopular')}</option>
+                        </select>
                     </div>
                 </div>
                 <div className="blog__items">

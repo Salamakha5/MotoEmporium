@@ -171,13 +171,14 @@
         "img-data-text-goTo": "Дивитись"
     },
     "blog_page": {
-        "selectDate-dafault": "За датою",
+        "selectDate-dafault": "Сортувати за...",
         "selectDate-new": "Найновіші",
         "selectDate-old": "Старіші",
         "selectRating-dafault": "За рейтингом",
-        "selectRating-mostPopular": "Найпопулярніші",
+        "selectRating-mostPopular": "Рейтингом",
         "selectRating-lessPopular": "Менш популярні",
         "readBtn-hide": "Приховати",
-        "readBtn-readInFull": "Читати повністю"
+        "readBtn-readInFull": "Читати повністю",
+        "selectSort-new":"Датою"
     }
 }

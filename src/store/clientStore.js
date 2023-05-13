@@ -4,7 +4,7 @@ class ClientStore {
         makeAutoObservable(this)
     }
     
-    currentLang = localStorage.getItem("i18nextLng")
+    currentLang = localStorage.getItem("i18nextLng")||"ua"
 
     // function formatPrice(num) {
     //     let copy = num

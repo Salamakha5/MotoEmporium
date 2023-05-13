@@ -12,7 +12,7 @@ class NewsStore {
         axios.get(this.URL + "/getAllNews")
             .then((response) => {
                 this.newsData = toJS(response.data)
-                // console.log(toJS(response.data));
+                console.log(toJS(response.data));
             })
             .catch((error) => {
                 console.log(error);

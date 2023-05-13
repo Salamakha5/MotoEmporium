@@ -1,7 +1,7 @@
 import './BlogItem.scss'
 
 import test_img from "../../images/logReg_bg.png"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import clientStore from '../../store/clientStore';
 import { observer } from 'mobx-react-lite';
@@ -10,23 +10,26 @@ const BlogItem = observer((props) => {
     let { img, text, header, data,status } = props.data
     const [btnOpenNews, SetbtnOpenNews] = useState(false)
     const { t } = useTranslation();
+    useEffect(()=>{
+        console.log("Blog Item - Reload");
+    },[])
     return (
         <div className='blogItem border-bottom border-2 border-dark'>
             <div className="row">
                 {
                     btnOpenNews
                         ?
-                        <div className="col-4 col-img d-flex align-items-center justify-content-center">
+                        <div className="d-none d-lg-flex col-4 col-img d-flex align-items-center justify-content-center">
                             <img src={img} alt="" />
                         </div>
                         :
-                        <div className="col-3  col-img d-flex align-items-center justify-content-center">
+                        <div className="d-none d-lg-flex col-3  col-img d-flex align-items-center justify-content-center">
                             <img src={img} alt="" />
                         </div>
                 }
                 <div className="col ">
                     <div className="textInfo row m-0">
-                        <div className="col-10 text-start fs-3 blogTitle">{clientStore.currentLang == "ua"?header.ua : header.en}</div>
+                        <div className="col-10 text-start blogTitle">{clientStore.currentLang == "ua"?header.ua : header.en}</div>
                         <div className="col-2 text-end">
                         <div>{data}</div>
                         <div className='mt-1'>{clientStore.currentLang == "ua"?"Статус" : "Status"}:{status}</div>
