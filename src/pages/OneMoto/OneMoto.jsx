@@ -1,4 +1,3 @@
-import "./oneMoto.scss"
 
 import ducatiImg from '../../images/ducati_background.png'
 
@@ -8,7 +7,7 @@ import clientStore from '../../store/clientStore';
 import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite';
 import { NavLink } from "react-router-dom";
-import OtherMoto from "../../components/OtherMoto/otherMoto";
+// import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import { useTranslation } from 'react-i18next';
 
 const OneMoto = observer(() => {
@@ -16,6 +15,12 @@ const OneMoto = observer(() => {
         serverStore.getIdUrl()
         serverStore.getAllMoto()
     }, [])
+
+    // ! Try change file
+    const rofl = 'asdfasdf'
+    function roflFunction(rofl) {
+        alert('rofl')
+    }
 
     const { t } = useTranslation();
 
@@ -119,11 +124,11 @@ const OneMoto = observer(() => {
                                     <div>
                                         <h4 className='check-more__title'>{t('oneMoto_page.infoBlock.btn-addToCart')}</h4>
                                         <div className='check-more__content | row'>
-                                            {
+                                            {/* {
                                                 serverStore.threeMotoCard.map((p) => {
                                                     return <OtherMoto key={p._id} data={p}></OtherMoto>
                                                 })
-                                            }
+                                            } */}
                                         </div>
                                     </div>
                                     : false

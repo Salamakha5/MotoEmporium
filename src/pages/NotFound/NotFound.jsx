@@ -6,8 +6,12 @@ import Home from '../Home/Home'
 
 import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
+
+    const { t } = useTranslation();
+
     useEffect(() => {
         document.title = "Page Not Found - MotoEmporium";
     }, [])
@@ -17,12 +21,12 @@ const NotFound = () => {
         <div className="notFound">
             <div className="notFound__wrap">
                 <div>
-                    <div className="notFound__title">Oops...</div>
-                    <div className="notFound__suptitle">Page not found</div>
-                    <div className="notFound__text">Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.</div>
-                    <div className="notFound__back">
-                        <NavLink to='/' element={<Home />}>Go back to Home</NavLink>
-                    </div>
+                    <div className="notFound__title">{t('notFound_page.title')}</div>
+                    <div className="notFound__suptitle">{t('notFound_page.suptitle')}</div>
+                    <div className="notFound__text">{t('notFound_page.text')}</div>
+                    <NavLink to='/' element={<Home />}>
+                        <div className="notFound__back">{t('notFound_page.btn-back')}</div>
+                    </NavLink>
                 </div>
             </div>
             <img className="notFound__bg" src={notFound_bg} alt="fallen driver :(" />

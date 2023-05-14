@@ -191,5 +191,11 @@
         "selectSort-old": "Older",
         "readBtn-hide": "Hide",
         "readBtn-readInFull": "read the full"
+    },
+    "notFound_page": {
+        "title": "Oops...",
+        "suptitle": "Page not found",
+        "text": "Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.",
+        "btn-back": "Go back to Home"
     }
 }
