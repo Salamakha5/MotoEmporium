@@ -7,9 +7,9 @@
     display: flex;
     justify-content: space-between;
     // ? test fixed header
-    width: 100%;
-    position: fixed;
-    z-index: 999;
+    // width: 100%;
+    // position: fixed;
+    // z-index: 999;
 
     &__logo {
         @include fontSettings($mainFont, 26px, 700);

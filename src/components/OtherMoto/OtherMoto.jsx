@@ -12,7 +12,7 @@ const OtherMoto = observer((props) => {
     const { t } = useTranslation();
 
     return (
-        <div className='col-4'>
+        <div className='col-12 col-sm-6 col-md-4 '>
             {
                 props.data ?
                     <NavLink onClick={() => serverStore.getMotoById(props.data._id)} to={`/moto/?id=${props.data._id}`} >

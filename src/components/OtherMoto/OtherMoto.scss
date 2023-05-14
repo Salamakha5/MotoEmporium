@@ -7,6 +7,10 @@
     border-radius: 10px;
     position: relative;
 
+    @media (max-width: 600px) {
+        margin-bottom: 30px;
+    }
+
     &::before {
         content: attr(data-hover-text);
         position: absolute;
@@ -21,10 +25,18 @@
         @include fontSettings($mainFont, 30px, 700);
         line-height: 23px;
         transform: scale(0);
+
+        @media (max-width: 600px) {
+            content: '✔';
+            width: 90%;
+            height: 90%;
+            left: 10px;
+        }
     }
 
     &:hover {
         color: black;
+
         &::before {
             transform: scale(0.7, 0.6) translateY(-50px);
         }
@@ -37,6 +49,14 @@
             width: 100%;
             min-height: 160px;
             border-radius: 10px;
+
+            @media (max-width: 600px) {
+                max-height: 280px;
+
+                @media (max-width: 300px) {
+                    max-height: 180px;
+                }
+            }
         }
     }
 
