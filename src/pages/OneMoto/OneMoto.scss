@@ -1,0 +1,173 @@
+@import '../../scss/variables.scss';
+
+.oneMoto {
+
+    &__contentCont {
+        padding: 50px 50px 0 50px;
+        margin: 0;
+    }
+
+    &__leftPart {
+        padding: 0;
+
+        .mainImgCont {
+            border-radius: 20px;
+
+            img {
+                width: 100%;
+                height: 550px;
+                border-radius: 20px;
+                object-fit: cover;
+            }
+        }
+
+        .miniImgCont {
+            position: relative;
+
+            &::before {
+                content: attr(data-hover-text);
+                position: absolute;
+                left: 0px;
+                background-color: mix(rgb(255, 255, 255, 0.4), $mainColor, 40%);
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+                @include fontSettings($mainFont, 25px, 700);
+                line-height: 23px;
+                transform: scale(0) rotate(360deg);
+            }
+
+            &:hover {
+                cursor: pointer;
+
+                &::before {
+                    transform: scale(0.8) rotate(0deg);
+                }
+            }
+
+            img {
+                width: 100%;
+                height: 160px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+        }
+
+        #specificationsCollapse {
+            @include fontSettings($mainFont, 25px, 400);
+            line-height: 28px;
+
+            .item-title {
+                font-weight: 700;
+                padding-right: 10px;
+            }
+        }
+
+        .buttons-cont {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            .goBack {
+                background-color: transparent;
+                border: 2px solid $mainColor;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+
+    }
+
+    &__rightPart {
+
+        .infoBLock {
+            margin: 0 170px;
+            min-height: 550px;
+            @include fontSettings($mainFont, 24px, 400);
+            line-height: 29px;
+            position: relative;
+
+            .background-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                width: 100%;
+                height: 550px;
+                opacity: 0.7;
+            }
+
+            &__brand-model {
+                padding: 65px 0 35px 0;
+                @include fontSettings($mainFont, 30px, 700);
+                line-height: 36px;
+            }
+
+            .small-items {
+
+                // (its __status, __collection, __power)
+                span {
+                    @include fontSettings($mainFont, 24px, 700);
+                }
+            }
+
+            .infoBLock__price {
+                @include fontSettings($mainFont, 36px, 700);
+                line-height: 44px;
+                padding: 25px 0;
+            }
+
+            &__collection {
+                padding: 0 0 25px 0;
+            }
+
+            .buttonsCont {
+                padding: 100px 0 0 0;
+                display: flex;
+                @include fontSettings($mainFont, 18px, 700);
+                line-height: 21px;
+
+                .addToFavorite {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 10px;
+                    transition: all 0.3s;
+                    margin-right: 40px;
+                    padding: 10px;
+
+                    .bi {
+                        font-size: 35px;
+                        margin: 0 10px;
+                    }
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                // .addToCart {}
+            }
+        }
+
+        .check-more {
+            padding: 0 100px;
+
+            &__title {
+                text-align: center;
+                @include fontSettings($mainFont, 32px, 700);
+                line-height: 38px;
+                padding: 20px 0 15px 0;
+            }
+
+            // &__content {}
+        }
+    }
+}
