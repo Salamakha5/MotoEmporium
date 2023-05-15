@@ -3,13 +3,9 @@ class ClientStore {
     constructor() {
         makeAutoObservable(this)
     }
-    
-    currentLang = localStorage.getItem("i18nextLng")||"ua"
 
-    // function formatPrice(num) {
-    //     let copy = num
-    //     return '$' + copy.toLocaleString('en-US', { currency: 'USD' });
-    // }
+    // по дефолту англійська
+    currentLang = localStorage.getItem("i18nextLng") || "en"
 
     formatPrice(price) {
         // Отримуємо цілу та дробову частини
@@ -32,6 +28,9 @@ class ClientStore {
 
         return formattedPrice;
     }
+
+    
+
 
 }
 

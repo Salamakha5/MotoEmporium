@@ -24,10 +24,8 @@ const Blog = observer(() => {
 
     useEffect(() => {
         setShowPageLoader(true)
-        console.log(showPageLoader);
         newsStore.getAllNews(() => {
             setShowPageLoader(false)
-            console.log(showPageLoader);
         })
         document.title = "Blog - MotoEmporium";
     }, [])
