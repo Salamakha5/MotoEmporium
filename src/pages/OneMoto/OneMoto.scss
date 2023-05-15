@@ -68,7 +68,7 @@
                 @include fontSettings($mainFont, 25px, 700);
                 line-height: 23px;
                 transform: scale(0) rotate(360deg);
-                
+
                 @media (max-width: 600px) {
                     content: '✔';
                     width: 80%;
@@ -189,7 +189,7 @@
                 @include fontSettings($mainFont, 36px, 700);
                 line-height: 44px;
                 padding: 25px 0;
-                
+
                 @media (max-width: 350px) {
                     @include fontSettings($mainFont, 26px, 700);
                     line-height: 30px;
@@ -262,7 +262,7 @@
                 @include fontSettings($mainFont, 32px, 700);
                 line-height: 38px;
                 padding: 20px 0 15px 0;
-                
+
                 @media (max-width: 600px) {
                     padding: 100px 0 15px 0;
                     @include fontSettings($mainFont, 25px, 700);
@@ -286,14 +286,11 @@
             border: 2px solid $mainColor;
             margin-bottom: 30px;
             width: 50%;
+            display: none;
 
             @media (max-width: 1024px) {
                 display: block;
-
-                @media (max-width: 500px) {
-                    display: block;
-                    width: 100%;
-                }
+                width: 100%;
             }
 
             &:hover {

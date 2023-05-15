@@ -88,7 +88,6 @@ const Shop = observer(() => {
             setErrorMotoSort(t('shop_page.shop-sortErrors.notHaveBrand'))
         } else { setErrorMotoSort("") }
 
-
         // Сортування по назві моделі
         if (SortToModel) {
             serverStore.MotoDataCopy = serverStore.MotoDataCopy.filter(moto => moto.model.includes(SortToModel))

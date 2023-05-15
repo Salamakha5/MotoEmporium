@@ -6,15 +6,13 @@ class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
     userIsAuth = false
     MotoData = []
-    MotoDataCopy=[]
+    MotoDataCopy = []
     OneMoto = []
     threeMotoCard = []
-    
-
 
     lengthPageNumber = 0
     ArrTypeName = []
-    UserName = "Дефолт"
+    UserName = "dafault"
     spinerInfo = "d-block"
     constructor() {
         makeAutoObservable(this)
@@ -66,7 +64,7 @@ class ServerStore {
                 .catch((error) => {
                     this.userIsAuth = false
                     localStorage.removeItem('IsAuthMOTO')
-                    
+
                     // callback in app.jsx
                     appCallback()
                 });
@@ -74,33 +72,39 @@ class ServerStore {
     }
 
     // Shop
-    getAllMoto(callback) {
+    getAllMoto(callbackAfterDownloading) {
+
         // axios.get("http://localhost:4000/api" + "/getAllMoto")
         axios.get(this.URL + "/getAllMoto")
-        .then((response) => {
-            this.MotoData = response.data
-            console.log(this.MotoData);
-            this.MotoDataCopy = this.MotoData
-                for (let i = 0; i < 3; i++) {
-                    if (this.threeMotoCard.length <= 2) {
-                        let randomObj = this.MotoData[this.getRandomNumber(0, this.MotoData.length - 1)]
-                        let checkId = this.threeMotoCard.some(obj => obj['_id'] === randomObj._id)
-                        if (!checkId) {
-                            this.threeMotoCard.push(randomObj)
-                        } else {
-                            i--
-                        }
-                    }
-                }
-                callback()
+            .then((response) => {
+                this.MotoData = response.data
+                // MotoDataCopy using in shop.jsx
+                this.MotoDataCopy = this.MotoData
+                this.updateThreeMotos(this.MotoData)
+                callbackAfterDownloading()
             })
             .catch((error) => {
-                // callback()
-                // console.log(error);
+                callbackAfterDownloading()
             });
     }
 
-    // shop, pagination
+    updateThreeMotos(MotoData) {
+
+        this.threeMotoCard = []
+        for (let i = 0; i < 3; i++) {
+            if (this.threeMotoCard.length <= 2) {
+                let randomMoto = MotoData[this.getRandomNumber(0, MotoData.length - 1)]
+                let checkId = this.threeMotoCard.some(obj => obj['_id'] === randomMoto._id)
+                if (!checkId) {
+                    this.threeMotoCard.push(randomMoto)
+                } else {
+                    i--
+                }
+            }
+        }
+    }
+
+    // shop pagination
     activeLink = 1
     setActiveLink(number) {
         this.activeLink = number

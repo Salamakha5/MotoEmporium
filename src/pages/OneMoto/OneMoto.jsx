@@ -14,7 +14,9 @@ import { useTranslation } from 'react-i18next';
 const OneMoto = observer(() => {
     useEffect(() => {
         serverStore.getIdUrl()
-        serverStore.getAllMoto()
+        serverStore.getAllMoto(() => {
+            serverStore.updateThreeMotos(serverStore.MotoData)
+        })
     }, [])
 
     const { t } = useTranslation();
@@ -120,7 +122,7 @@ const OneMoto = observer(() => {
                                         <div className='check-more__content | row'>
                                             {
                                                 serverStore.threeMotoCard.map((p) => {
-                                                    return <OtherMoto key={p._id} data={p}></OtherMoto>
+                                                    return <OtherMoto key={p._id} data={p} onClick={''}></OtherMoto>
                                                 })
                                             }
                                         </div>
