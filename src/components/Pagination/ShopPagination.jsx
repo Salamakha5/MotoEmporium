@@ -25,7 +25,7 @@ const ShopPagination = ({ MotoPerPage, totalMoto, paginate, prevPage, nextPage }
                 ><i className="bi bi-arrow-left-short"></i></a></li>
                 {
                     pageNumbers.map((number) => (
-                        <li className='page-item' key={number}>
+                        <li className={serverStore.activeLink == number ? 'page-item active' : 'page-item'} key={number}>
                             <a className={serverStore.activeLink == number ? 'page-link active' : 'page-link'} onClick={() => paginate(number)}>{number}</a>
                         </li>
                     ))

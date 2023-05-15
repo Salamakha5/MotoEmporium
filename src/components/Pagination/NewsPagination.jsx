@@ -4,7 +4,7 @@ import newsStore from '../../store/newsStore'
 
 const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }) => {
 
-    const pageNumbers = []
+    let pageNumbers = []
     for (let i = 0; i <= Math.ceil(totalNews / NewsPerPage); i++) {
         if (i !== 0) {
             pageNumbers.push(i)
@@ -15,13 +15,13 @@ const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }
 
     return (
         <div>
-            <ul className='pagination w-100 d-flex justify-content-center my-3'>
+            <ul className='pagination pagination_short w-100 d-flex justify-content-center my-3' id='pagination'>
                 <li className="page-item"><a className="page-link"
                     onClick={prevPage}
                 ><i className="bi bi-arrow-left-short"></i></a></li>
                 {
                     pageNumbers.map((number) => (
-                        <li className='page-item' key={number}>
+                        <li className={newsStore.activeLink == number ? 'page-item active' : 'page-item'} key={number}>
                             <a
                                 className={newsStore.activeLink == number ? 'page-link active' : 'page-link'}
                                 onClick={() => paginate(number)}>{number}</a>
