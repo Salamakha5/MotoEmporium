@@ -23,7 +23,6 @@ class NewsStore {
         this.lengthPageNumber = number
     }
     
-
     activeLink = 1
     setActiveLink(number) {
         this.activeLink = number

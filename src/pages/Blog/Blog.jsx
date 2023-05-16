@@ -7,8 +7,20 @@ import { observer } from 'mobx-react-lite'
 import newsStore from '../../store/newsStore'
 import NewsPagination from '../../components/Pagination/NewsPagination'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from "react-router-dom";
 
 const Blog = observer(() => {
+    const navigate = useNavigate()
+    const { t } = useTranslation();
+
+    useEffect(() => {
+        setShowPageLoader(true)
+        newsStore.getAllNews(() => {
+            setShowPageLoader(false)
+        })
+        document.title = "Blog - MotoEmporium";
+    }, [])
+
     const [showPageLoader, setShowPageLoader] = useState(false)
     const [currentPage, setcurrentPage] = useState(1)
     const [NewsPerPage] = useState(3)
@@ -20,17 +32,7 @@ const Blog = observer(() => {
         setcurrentPage(pageNumber)
         newsStore.setActiveLink(pageNumber)
     }
-    const { t } = useTranslation();
 
-    useEffect(() => {
-        setShowPageLoader(true)
-        console.log(showPageLoader);
-        newsStore.getAllNews(() => {
-            setShowPageLoader(false)
-            console.log(showPageLoader);
-        })
-        document.title = "Blog - MotoEmporium";
-    }, [])
     let selectSort = createRef()
 
     function sortNews() {
@@ -45,6 +47,7 @@ const Blog = observer(() => {
         if (currentPage < newsStore.lengthPageNumber) {
             setcurrentPage(currentPage + 1)
             newsStore.setActiveLink(newsStore.activeLink + 1)
+            // navigate(`${window.location.href}/#pagination`)
         }
     }
     const prevPage = () => {

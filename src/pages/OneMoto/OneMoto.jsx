@@ -14,7 +14,9 @@ import { useTranslation } from 'react-i18next';
 const OneMoto = observer(() => {
     useEffect(() => {
         serverStore.getIdUrl()
-        serverStore.getAllMoto()
+        serverStore.getAllMoto(() => {
+            serverStore.updateThreeMotos(serverStore.MotoData)
+        })
     }, [])
 
     const { t } = useTranslation();
@@ -104,7 +106,7 @@ const OneMoto = observer(() => {
                                         <span>{gearbox}</span></li>
                                 </ul>
                             </div>
-                            <NavLink className='goBack mainButton | btn p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
+                            <NavLink className='goBack-left mainButton | btn p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
                         </div>
                     </div>
 
@@ -119,7 +121,6 @@ const OneMoto = observer(() => {
                                         <div>{t('oneMoto_page.status')}: <span>{t('oneMoto_page.status_used')}</span> </div>
                                 }
                             </h2>
-                            {/* <h2 className='infoBLock__price'><span> ${price - 1000} - ${price} </span></h2> */}
                             <h2 className='infoBLock__price'><span>{clientStore.formatPrice(price - 1509)} - {clientStore.formatPrice(price)}</span></h2>
                             <h2 className='infoBLock__collection small-items'>{t('oneMoto_page.infoBlock.type')}: <span>{collectionType}</span></h2>
                             <h2 className='infoBLock__power small-items'>{t('oneMoto_page.infoBlock.power')}: <span>{horsepower}</span></h2>
@@ -141,17 +142,20 @@ const OneMoto = observer(() => {
                             {
                                 serverStore.MotoData.length > 2 ?
                                     <div>
-                                        <h4 className='check-more__title'>{t('oneMoto_page.infoBlock.btn-addToCart')}</h4>
+                                        <h4 className='check-more__title'>{t('oneMoto_page.infoBlock.checkMore-title')}</h4>
                                         <div className='check-more__content | row'>
                                             {
                                                 serverStore.threeMotoCard.map((p) => {
-                                                    return <OtherMoto key={p._id} data={p}></OtherMoto>
+                                                    return <OtherMoto key={p._id} data={p} onClick={''}></OtherMoto>
                                                 })
                                             }
                                         </div>
                                     </div>
                                     : false
                             }
+                        </div>
+                        <div className='d-flex justify-content-center'>
+                            <NavLink className='goBack-right mainButton | btn p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
                         </div>
                     </div>
 

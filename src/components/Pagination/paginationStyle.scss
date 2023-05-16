@@ -7,9 +7,97 @@
     }
 
     .page-link.active {
-        background-color: $mainColor; 
+        background-color: $mainColor;
+        color: white;
+        border: 1px solid $mainColor;
+    }
+}
+
+.pagination_short {
+
+    .page-link {
+        color: $mainColor;
+    }
+
+    .page-link.active {
+        background-color: $mainColor;
         color: white;
         border: 1px solid $mainColor;
     }
 
+    // дрочка з укорочуванням 
+    .page-item {
+        // скриваю усі елементи
+        display: none;
+
+        // тут показую тільки потрібні елементи
+        &:nth-child(-n+2),
+        &:nth-last-child(-n+2) {
+            display: block;
+
+            .page-link {
+                display: block;
+            }
+        }
+
+        // лівий елемент з крапочками
+        &:nth-child(2) {
+
+            .page-link {
+                position: relative;
+                min-width: 65px;
+
+                &::before {
+                    content: '...';
+                    position: absolute;
+                    right: -1px;
+                    top: 0px;
+                    text-align: center;
+                    width: 33px;
+                    height: 32px;
+                    border: 1px solid #dee2e6;
+                    background-color: white;
+                    color: $mainColor;
+                }
+            }
+        }
+    }
+
+    // правий елемент з крапочками (має зявлятись тільки коли активна на 2 і не 2 з кінця)
+    .page-item.active {
+        display: block;
+
+        .page-link {
+            position: relative;
+            min-width: 67px;
+            padding-left: 10px;
+
+            &::before {
+                content: '...';
+                position: absolute;
+                right: -1px;
+                top: -1px;
+                text-align: center;
+                width: 33px;
+                height: 33px;
+                border: 1px solid #dee2e6;
+                background-color: white;
+                color: $mainColor;
+            }
+        }
+
+        // повертаю активному елементу з крапочками нормальну ширину
+        &:nth-last-child(2) {
+            .page-link {
+                min-width: 33px;
+            }
+        }
+    }
+
+    // ховаю елемент з крапочками в останньому елементі
+    .page-item:nth-last-child(2) .active {
+        &::before {
+            display: none;
+        }
+    }
 }
