@@ -8,19 +8,17 @@ import basketStore from "../../store/basketStore"
 
 const BasketCard = observer((props) => {
   const { brand, model, price, collectionType, displacement, borexStroke,
-    compressionRatio, horsepower, imgURL,torque, fuelSystem, gearbox, _id } = props.data
+    compressionRatio, horsepower, imgURL, torque, fuelSystem, gearbox, _id } = props.data
 
-
-
-  function Deletemoto(){
+  function Deletemoto() {
     let motoStorage = JSON.parse(localStorage.getItem("BasketMoto"))
-    motoStorage.splice(motoStorage.indexOf(_id),1)
-    localStorage.setItem("BasketMoto",JSON.stringify(motoStorage))
+    motoStorage.splice(motoStorage.indexOf(_id), 1)
+    localStorage.setItem("BasketMoto", JSON.stringify(motoStorage))
     basketStore.getBasketMoto()
   }
 
   return (
-      <div className="row  mb-2 BasketCard_container">
+    <div className="row  mb-2 BasketCard_container">
       <div className="col-3 p-0 card_img">
         <img className="w-100 h-100" src={imgURL[0]} alt="" />
       </div>
@@ -53,7 +51,7 @@ const BasketCard = observer((props) => {
           </div>
         </div>
       </div>
-      </div>
+    </div>
   )
 })
 

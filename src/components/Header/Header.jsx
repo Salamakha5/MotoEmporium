@@ -94,7 +94,7 @@ const Header = observer(() => {
                     <div>
                         {
                          serverStore.userIsAuth == true ?
-                         <NavLink className={activeLink} to='/basket' element={<BasketPage/>}><i class="fs-3 bi bi-cart4"></i></NavLink>
+                         <NavLink className={activeLink} to='/basket' element={<BasketPage/>}><i className="fs-3 bi bi-cart4"></i></NavLink>
                          :
                          false   
                         }
