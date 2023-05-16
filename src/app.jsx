@@ -16,6 +16,7 @@ import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react"
 import { useTranslation } from 'react-i18next';
+import BasketPage from "./pages/Basket/BasketPage"
 
 const App = observer(() => {
 
@@ -43,6 +44,7 @@ const App = observer(() => {
                             <Route path="/" element={<Layot />}>
                                 <Route path='shop' element={<Shop />} />
                                 <Route path='moto' element={<OneMoto />} />
+                                <Route path='basket' element={<BasketPage />} />
                             </Route>
                             :
                             <Route>

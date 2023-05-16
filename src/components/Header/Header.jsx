@@ -13,6 +13,7 @@ import Contact from '../../pages/Contact/Contact'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 import clientStore from '../../store/clientStore'
+import BasketPage from '../../pages/Basket/BasketPage'
 
 const Header = observer(() => {
 
@@ -89,6 +90,14 @@ const Header = observer(() => {
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div>
+                        {
+                         serverStore.userIsAuth == true ?
+                         <NavLink className={activeLink} to='/basket' element={<BasketPage/>}><i class="fs-3 bi bi-cart4"></i></NavLink>
+                         :
+                         false   
+                        }
                     </div>
                     {
                         serverStore.userIsAuth == true ?

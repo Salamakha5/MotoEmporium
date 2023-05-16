@@ -20,10 +20,28 @@ const OneMoto = observer(() => {
     const { t } = useTranslation();
 
     const [imgNum, setImgNum] = useState(0)
+    const [Basketbtn, setBasketbtn] = useState(false)
     const { brand, model, price, collectionType, displacement, borexStroke,
-        compressionRatio, horsepower, torque, fuelSystem, gearbox } = serverStore.OneMoto
+        compressionRatio, horsepower, torque, fuelSystem, gearbox, _id } = serverStore.OneMoto
 
     brand != '' ? document.title = `${brand} - ${model} - MotoEmporium` : document.title = `Motocycle - MotoEmporium`;
+
+    function AddToFavorite() {
+        console.log(_id);
+    }
+    function AddMotoToBasket() {
+        // добавлення id мото до localStorage
+        let motoBasket = JSON.parse(localStorage.getItem("BasketMoto"))
+        if (motoBasket) {
+            // Перевірка на наявність такого id у localStorage
+            if(!motoBasket.includes(_id)){
+                motoBasket.push(_id)
+                localStorage.setItem("BasketMoto",JSON.stringify(motoBasket))
+            }
+
+        } else { localStorage.setItem("BasketMoto",JSON.stringify([_id])) }
+        setBasketbtn(true)
+    }
 
     return (
         <div>
@@ -61,7 +79,7 @@ const OneMoto = observer(() => {
                         }
                         <div className='buttons-cont | py-5'>
                             <button className="btn mainButton | btn p-3" type="button" data-bs-toggle="collapse" data-bs-target="#specificationsCollapse" aria-expanded="false" aria-controls="specificationsCollapse">
-                            {t('oneMoto_page.techChar.btn-title')}</button>
+                                {t('oneMoto_page.techChar.btn-title')}</button>
                             <div className="collapse pt-3" id="specificationsCollapse">
                                 <ul className="list-group">
                                     <li className="list-group-item"><span className="item-title">{t('oneMoto_page.techChar.brand')}:</span>
@@ -106,11 +124,17 @@ const OneMoto = observer(() => {
                             <h2 className='infoBLock__collection small-items'>{t('oneMoto_page.infoBlock.type')}: <span>{collectionType}</span></h2>
                             <h2 className='infoBLock__power small-items'>{t('oneMoto_page.infoBlock.power')}: <span>{horsepower}</span></h2>
                             <div className='buttonsCont'>
-                                <button className='addToFavorite'>
+                                <button className='addToFavorite' onClick={AddToFavorite}>
                                     <i className="bi bi-heart"></i>
-                                    {/* bi-heart-fill ==> active btn */}
                                     {t('oneMoto_page.infoBlock.btn-addToWishList')}</button>
-                                <button className='addToCart mainButton | btn'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
+                                <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>
+                                    {
+                                        Basketbtn ?
+                                            t('oneMoto_page.infoBlock.btn-addingToCart')
+                                            :
+                                            t('oneMoto_page.infoBlock.btn-addToCart')
+                                    }
+                                </button>
                             </div>
                         </div>
                         <div className="check-more">

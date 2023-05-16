@@ -163,6 +163,9 @@ const Shop = observer(() => {
     }
 
 
+    
+
+
     return (
         <div className='moto-shop | pt-5 pb-3'>
             <div className='moto-shop__container | container p-4'>

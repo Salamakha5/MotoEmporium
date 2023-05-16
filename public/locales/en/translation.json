@@ -179,6 +179,7 @@
             "power": "Horse power",
             "btn-addToWishList": "Add to wish list",
             "btn-addToCart": "Add to cart",
+            "btn-addingToCart":"Adding!",
             "checkMore-title": "See other motorcycles"
         },
         "img-data-text-choose": "Choose",

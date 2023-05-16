@@ -1,0 +1,25 @@
+@import "../../scss/variables.scss";
+
+.BasketCard_container {
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    .basket_btn{
+        background-color: $mainColor;
+        margin: 5px;
+        padding: 4px 9px;
+        width: max-content;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+    .basket_btn:hover{
+        background-color: $mainColorDarken;
+        transition: 0.3s;
+    }
+    .price{
+        color: brown;
+        font-family: monospace;
+        font-weight: 900;
+        font-style: italic;
+    }
+}
