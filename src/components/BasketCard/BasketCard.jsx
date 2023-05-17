@@ -29,9 +29,11 @@ const BasketCard = observer((props) => {
           <p className="mt-2">Потужність - {horsepower}</p>
         </div>
         <div className=" w-100">
+          
           <div className="d-flex justify-content-end w-100">
-            <a onClick={Deletemoto}><i className="bi bi-x fs-2"></i></a>
+            <a className="close-btn" onClick={Deletemoto}><i className="bi bi-x fs-2"></i></a>
           </div>
+
           <div className="w-100 d-flex justify-content-center">
             <p className="text-center fs-3 price">{clientStore.formatPrice(price)}</p>
           </div>

@@ -1,41 +1,52 @@
 @import '../../scss/variables.scss';
-.BasketPage_container{
+
+.BasketPage_container {
     background-image: url(../../images/shop_bg.png);
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     padding: 20px;
-    li{
+    min-height: 90vh;
+
+    li {
         list-style-type: decimal;
     }
-    .BasketPrise_cont{
-        min-width:100%;
-        height:max-content;
-        background-color:$mainColor;
+
+    .BasketPrise_cont {
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &__title {
+            @include fontSettings($mainFont, 25px, 700);
+            line-height: 28px;
+            text-align: center;
+        }
     }
-    .Card_Container{
-        background-color:whitesmoke;
-        border-right: 3px solid black;
-    }
-    .basket_price{
+
+    .basket_price {
         font-weight: 900;
         font-family: monospace;
         font-style: italic;
         color: brown;
     }
-    .btn_basket{
+
+    .btn_basket {
         padding: 15px 15px;
-        background-color: $mainColorDarken;
-        border:2px solid $mainColor;
+        background-color: $mainColor;
+        border: 2px solid $mainColor;
         border-radius: 10px;
         font-size: 20px;
         transition: 0.4s;
     }
-    .btn_basket:hover{
-        background-color: $mainColor;
+
+    .btn_basket:hover {
+        background-color: $mainColorDarken;
         transition: 0.4s;
-        border:2px solid $mainColorDarken;
+        border: 2px solid $mainColor;
     }
-    .Allprice{
+
+    .Allprice {
         font-weight: 100;
         font-family: monospace;
         font-size: 20px;

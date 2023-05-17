@@ -1,22 +1,46 @@
 @import "../../scss/variables.scss";
 
 .BasketCard_container {
-    border: 2px solid black;
-    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
     overflow: hidden;
-    .basket_btn{
+    position: relative;
+
+    .basket_btn {
         background-color: $mainColor;
         margin: 5px;
         padding: 4px 9px;
         width: max-content;
-        border-radius: 10px;
+        border-radius: 5px;
         transition: 0.3s;
     }
-    .basket_btn:hover{
+
+    .basket_btn:hover {
         background-color: $mainColorDarken;
         transition: 0.3s;
+        color: black;
     }
-    .price{
+
+    .close-btn {
+        position: relative;
+        top: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0 0 0 5px;
+
+        &:hover {
+            color: black;
+            background-color: rgba(255, 0, 0, 0.4);
+        }
+    }
+
+    .price {
         color: brown;
         font-family: monospace;
         font-weight: 900;
