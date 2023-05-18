@@ -20,8 +20,8 @@ const Header = observer(() => {
     const { t, i18n } = useTranslation();
     const changeLanguage = (language) => {
         clientStore.currentLang = language
-        i18n.changeLanguage(language) 
-        }
+        i18n.changeLanguage(language)
+    }
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -65,14 +65,21 @@ const Header = observer(() => {
                     <div className='header__nav'>
                         <NavLink className={activeLink} to='/' element={<Home />}>{t('header.homeLink')}</NavLink>
                         <NavLink className={activeLink} to='/blog' element={<Blog />}>{t('header.blogLink')}</NavLink>
-                        <NavLink className={activeLink} to='/shop' element={<Shop />}>{t('header.shopLink')}</NavLink>
+                        <div className='shop-item'>
+                            <NavLink className={activeLink} to='/shop' element={<Shop />}>{t('header.shopLink')}</NavLink>
+                            {
+                                serverStore.userIsAuth == true ?
+                                    <NavLink className={activeLink} to='/basket' element={<BasketPage />}><i className="fs-3 bi bi-cart3"></i></NavLink>
+                                    :
+                                    false
+                            }
+                        </div>
                         <NavLink className={activeLink} to='/contact' element={<Contact />}>{t('header.contactsLink')}</NavLink>
                         <div className='header__nav-dropdown'>
                             <button type="button" className="header__nav-dropdownBtn main-link nav-item | btn dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
                             >{t('header.actions.actionsBtnName')}</button>
                             <ul className="dropdown-menu">
-                                <li className='dropdown-item'> <i className="bi bi-cart3 pe-2"></i> {t('header.actions.actionsCart')} </li>
                                 <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> {t('header.actions.actionsSettings')} </li>
                                 <li className='d-flex justify-content-center'>
                                     <div className="lang-switcher | form-switch">
@@ -90,14 +97,6 @@ const Header = observer(() => {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div>
-                        {
-                         serverStore.userIsAuth == true ?
-                         <NavLink className={activeLink} to='/basket' element={<BasketPage/>}><i className="fs-3 bi bi-cart4"></i></NavLink>
-                         :
-                         false   
-                        }
                     </div>
                     {
                         serverStore.userIsAuth == true ?

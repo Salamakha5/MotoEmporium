@@ -15,8 +15,21 @@
     @include fontSettings($mainFont, 25px, 400);
     line-height: 28px;
 
+    .map-container.col-sm-12,
+    .map-container.col-md-6 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    @media (max-width: 768px) {
+        .map-container {
+            height: 500px;
+        }
+    }
+
     .right-part {
         position: relative;
+        background-color: black;
 
         .bi {
             margin-right: 10px;
@@ -38,6 +51,14 @@
             padding: 50px 50px 0 50px;
             color: black;
 
+            @media (max-width: 400px) {
+                padding: 25px 25px 0 25px;
+
+                @media (max-width: 350px) {
+                    padding: 10px 10px 0 10px;
+                }
+            }
+
             .title {
                 @include fontSettings($mainFont, 35px, 700);
                 line-height: 33px;
@@ -45,13 +66,28 @@
             }
 
             .dev-item {
+                width: 310px;
                 margin-top: 50px;
-                background-color: rgb(255, 255, 255, 0.7);
+                background-color: rgb(255, 255, 255, 1);
                 padding: 10px;
                 border-radius: 10px;
+                opacity: 0.7;
+                transition: 0.3s all;
+
+                @media (max-width: 400px) {
+                    width: 100%;
+                }
+
+                &:hover {
+                    opacity: 1;
+                    box-shadow: 0 0 10px 5px $mainColor;
+                }
 
                 .btn-cont {
                     padding-top: 30px;
+                    @media (max-width: 400px) {
+                        padding-top: 15px;
+                    }
                 }
 
                 .github-btn {
@@ -60,6 +96,9 @@
                     transition: 0.3s;
 
                     margin-right: 70px;
+                    @media (max-width: 400px) {
+                        margin-right: 10px;
+                    }
 
                     &:hover {
                         color: $mainColor;

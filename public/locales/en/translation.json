@@ -10,7 +10,6 @@
         "contactsLink": "Contact",
         "actions": {
             "actionsBtnName": "Actions",
-            "actionsCart": "Cart",
             "actionsSettings": "Settings",
             "actionsExit": "Exit"
         },

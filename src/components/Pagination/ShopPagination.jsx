@@ -1,17 +1,17 @@
 import './paginationStyle.scss'
 
 import serverStore from '../../store/serverStore'
+import { useEffect } from 'react'
 
 const ShopPagination = ({ MotoPerPage, totalMoto, paginate, prevPage, nextPage }) => {
+
     const pageNumbers = []
-
-        for (let i = 0; i <= Math.ceil(totalMoto / MotoPerPage); i++) {
-            if (i !== 0) {
-                pageNumbers.push(i)
-            }
+    for (let i = 0; i <= Math.ceil(totalMoto / MotoPerPage); i++) {
+        if (i !== 0) {
+            pageNumbers.push(i)
         }
-        serverStore.setlengthPagNumber(pageNumbers.length)
-
+    }
+    serverStore.setlengthPagNumber(pageNumbers.length)
 
     return (
         <div>

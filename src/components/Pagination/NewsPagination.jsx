@@ -1,6 +1,7 @@
 import './paginationStyle.scss'
 
 import newsStore from '../../store/newsStore'
+import { useEffect } from 'react'
 
 const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }) => {
 
@@ -10,8 +11,8 @@ const NewsPagination = ({ NewsPerPage, totalNews, paginate, nextPage, prevPage }
             pageNumbers.push(i)
         }
     }
-
     newsStore.setlengthPagNumber(pageNumbers.length)
+
 
     return (
         <div>
