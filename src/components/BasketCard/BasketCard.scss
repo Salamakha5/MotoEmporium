@@ -39,11 +39,65 @@
             background-color: rgba(255, 0, 0, 0.4);
         }
     }
-
+    .Current_Arrow{
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+    .Current_Arrow:hover{
+        color: $mainColor;
+        transition: 0.4s;
+    }
+    .Current_Num{
+        font-size: 20px;
+    }
+    
     .price {
         color: brown;
         font-family: monospace;
         font-weight: 900;
         font-style: italic;
+    }
+    .btn_group_basket{
+        display: flex;
+        justify-content: end;
+    }
+    .imageCard{
+        width: 100%;
+        height: 100%;
+    }
+    .textModel{
+        font-size: 22px;
+    }
+    .block_info{
+        display: flex;
+        justify-content: space-between;
+    }
+    @media(max-width: 1200px) {
+        .btn_group_basket{
+            display: block;
+        }
+        .price {
+            font-weight: 200;
+            padding-right: 20px;
+        }
+        
+    }
+    @media(max-width: 435px) {
+        .imageCard{
+            width: 100%;
+        }
+        .block_info{
+            display: block;
+        }
+    }
+    @media(max-width:314px) {
+        .price {
+            padding-right: 0px;
+        }
+        .basket_btn {
+            margin: 1px;
+            padding: 1px;
+        }
     }
 }

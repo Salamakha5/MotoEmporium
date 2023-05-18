@@ -13,6 +13,7 @@
 
     .BasketPrise_cont {
         min-width: 100%;
+        height: max-content;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -53,5 +54,30 @@
         text-decoration: line-through;
         font-style: italic;
         color: brown;
+    }
+    @media(max-width: 1200px) {
+        .BasketPage_container{
+            padding: 0px;
+        }
+        
+    }
+    @media(max-width: 767px) {
+        .Card_Container{
+            width: 60%;
+        }
+        
+    }
+    @media(max-width: 512px) {
+        .Card_Container{
+            
+            width: 100%;
+        }
+        li {
+            list-style-type: none;
+        }
+        .Allprice{
+            display: flex;
+        }
+        
     }
 }

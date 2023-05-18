@@ -9,6 +9,8 @@ class ServerStore {
     MotoDataCopy = []
     OneMoto = []
     threeMotoCard = []
+    IsMotoBuy = false
+    IsStorageId = false
 
     lengthPageNumber = 0
     ArrTypeName = []
@@ -34,6 +36,8 @@ class ServerStore {
             .then((response) => {
                 this.OneMoto = response.data
                 this.spinerInfo = "d-none"
+                this.IsMotoBuy = false
+                this.IsStorageId = JSON.parse(localStorage.getItem("BasketMoto")).some(moto => moto.id === response.data._id)
             })
             .catch((error) => {
                 console.log(error);

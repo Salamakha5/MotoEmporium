@@ -22,27 +22,23 @@ const OneMoto = observer(() => {
     const { t } = useTranslation();
 
     const [imgNum, setImgNum] = useState(0)
-    const [Basketbtn, setBasketbtn] = useState(false)
     const { brand, model, price, collectionType, displacement, borexStroke,
         compressionRatio, horsepower, torque, fuelSystem, gearbox, _id } = serverStore.OneMoto
 
     brand != '' ? document.title = `${brand} - ${model} - MotoEmporium` : document.title = `Motocycle - MotoEmporium`;
 
-    function AddToFavorite() {
-        console.log(_id);
-    }
     function AddMotoToBasket() {
         // добавлення id мото до localStorage
         let motoBasket = JSON.parse(localStorage.getItem("BasketMoto"))
         if (motoBasket) {
             // Перевірка на наявність такого id у localStorage
-            if(!motoBasket.includes(_id)){
-                motoBasket.push(_id)
-                localStorage.setItem("BasketMoto",JSON.stringify(motoBasket))
+            if (!motoBasket.some(moto=>moto["id"] === _id)) {
+                motoBasket.push({id:_id,current:1})
+                localStorage.setItem("BasketMoto", JSON.stringify(motoBasket))
             }
 
-        } else { localStorage.setItem("BasketMoto",JSON.stringify([_id])) }
-        setBasketbtn(true)
+        } else { localStorage.setItem("BasketMoto", JSON.stringify([{id:_id,current:1}])) }
+        serverStore.IsMotoBuy = true
     }
 
     return (
@@ -125,17 +121,25 @@ const OneMoto = observer(() => {
                             <h2 className='infoBLock__collection small-items'>{t('oneMoto_page.infoBlock.type')}: <span>{collectionType}</span></h2>
                             <h2 className='infoBLock__power small-items'>{t('oneMoto_page.infoBlock.power')}: <span>{horsepower}</span></h2>
                             <div className='buttonsCont'>
-                                <button className='addToFavorite' onClick={AddToFavorite}>
+                                <button className='addToFavorite' >
                                     <i className="bi bi-heart"></i>
                                     {t('oneMoto_page.infoBlock.btn-addToWishList')}</button>
-                                <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>
-                                    {
-                                        Basketbtn ?
-                                            t('oneMoto_page.infoBlock.btn-addingToCart')
-                                            :
-                                            t('oneMoto_page.infoBlock.btn-addToCart')
-                                    }
-                                </button>
+
+                                {
+                                    serverStore.IsStorageId ?
+                                        <button disabled className='addToCart mainButton | btn'>
+                                            Вже в корзині
+                                        </button>
+                                        :
+                                        <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>
+                                            {
+                                                serverStore.IsMotoBuy ?
+                                                    t('oneMoto_page.infoBlock.btn-addingToCart')
+                                                    :
+                                                    t('oneMoto_page.infoBlock.btn-addToCart')
+                                            }
+                                        </button>
+                                }
                             </div>
                         </div>
                         <div className="check-more">
