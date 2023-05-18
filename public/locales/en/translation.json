@@ -197,5 +197,14 @@
         "suptitle": "Page not found",
         "text": "Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.",
         "btn-back": "Go back to Home"
+    },
+    "basket_page":{
+        "shop_cart":"Cart",
+        "allPrice":"All Price",
+        "DiscountfirstMoto":"Discount on first purchase",
+        "btn_buyMoto":"To order",
+        "current_basket":"The shopping cart is currently empty",
+        "addToFavorite":"Add to favorite",
+        "details":"Details"
     }
 }
