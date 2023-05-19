@@ -60,7 +60,16 @@ const Login = observer(() => {
                 setShowPageLoader(false);
                 localStorage.setItem("IsAuthMOTO", response.data.token)
                 navigate('/')
-                serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"));
+
+                serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), (decodedResult) => {
+                    if (decodedResult === 'succes') {
+                        serverStore.tokenDecoded = true
+                    } else {
+                        alertify.alert("Я помилка логіну");
+                    }
+                    console.log('помилка в логіні:', decodedResult);
+                });
+
             }, (error) => {
                 setShowPageLoader(false);
 

@@ -11,6 +11,7 @@ class ServerStore {
     threeMotoCard = []
     IsMotoBuy = false
     IsStorageId = false
+    tokenDecoded = false
 
     lengthPageNumber = 0
     ArrTypeName = []
@@ -57,6 +58,7 @@ class ServerStore {
     }
 
     decodedToken(decToken, appCallback) {
+        let decodedResult
         if (decToken) {
             axios.post(this.URL + "/decoded", {
                 token: decToken
@@ -64,13 +66,18 @@ class ServerStore {
                 .then((response) => {
                     this.userIsAuth = response.data.isAuth
                     this.UserName = response.data.user.name
+                    decodedResult = 'succes'
+
+                    appCallback(decodedResult)
                 })
                 .catch((error) => {
                     this.userIsAuth = false
                     localStorage.removeItem('IsAuthMOTO')
+                    decodedResult = 'error'
+                    console.log('log er');
 
                     // callback in app.jsx
-                    appCallback()
+                    appCallback(decodedResult)
                 });
         }
     }

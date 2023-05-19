@@ -6,10 +6,46 @@
     padding: 10px 0 10px 40px;
     display: flex;
     justify-content: space-between;
-    // ? test fixed header
-    // width: 100%;
-    // position: fixed;
-    // z-index: 999;
+
+    .decodedInfo-cont {
+        position: fixed;
+        top: 90px;
+        right: 10px;
+        padding: 10px 40px 10px 10px;
+        border-radius: 2px;
+        background-color: white;
+        color: black;
+        display: flex;
+        z-index: 5;
+        animation: shadowPulse 1s infinite linear;
+
+        .loader {
+            position: absolute;
+            top: -25px;
+            right: -30px;
+            transform: scale(0.3);
+        }
+
+        @keyframes shadowPulse {
+            0% {
+                box-shadow: 0 0 2px 1.5px transparent,
+                    0 0 0 0 transparent,
+                    0 0 0 0 transparent;
+            }
+    
+            10% {
+                box-shadow: 0 0 2px 1.5px $mainColor,
+                    0 0 3px 2.5px transparent,
+                    0 0 3px 1.3px $mainColor;
+            }
+    
+            100% {
+                box-shadow: 0 0 2px 1.5px transparent,
+                    0 0 0 10px transparent,
+                    0 0 0 10px transparent;
+            }
+        }
+    }
 
     &__logo {
         @include fontSettings($mainFont, 26px, 700);

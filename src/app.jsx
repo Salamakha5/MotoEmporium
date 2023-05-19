@@ -23,10 +23,19 @@ const App = observer(() => {
     const { t } = useTranslation();
     useEffect(() => {
         if (localStorage.getItem("IsAuthMOTO") != null) {
-            serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), () => {
-                alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
+            serverStore.tokenDecoded = false
+            serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), (decodedResult) => {
+                if (decodedResult === 'succes') {
+                    serverStore.tokenDecoded = true
+                } else {
+                    alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
+                }
+                
+                console.log(decodedResult);
             })
-        };
+        } else {
+            serverStore.tokenDecoded = true
+        }
     }, [])
 
     return (

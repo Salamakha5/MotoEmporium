@@ -8,6 +8,7 @@ import test_ride from '../../images/test_ride.png'
 import our_service from '../../images/our_service.png'
 import custom_parts from '../../images/custom_parts.png'
 import our_finance from '../../images/finance.png'
+import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 
 import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
@@ -26,6 +27,8 @@ const Home = () => {
 
     return (
         <div className="home">
+            <BackUpBtn></BackUpBtn>
+
             <div className="hero">
                 <img className='hero__bg' src={hero_bg} />
                 <div className="hero__info">

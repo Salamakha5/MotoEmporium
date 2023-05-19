@@ -10,7 +10,7 @@
         "contactsLink": "Контакти",
         "actions": {
             "actionsBtnName": "Дії",
-            "actionsSettings": "Налаштування",
+            "actionsAdmin": "Адмінка",
             "actionsExit": "Вийти"
         },
         "loginBtn": "Логін",
@@ -193,7 +193,7 @@
         "selectRating-lessPopular": "Менш популярні",
         "readBtn-hide": "Приховати",
         "readBtn-readInFull": "Читати повністю",
-        "selectSort-new":"Датою"
+        "selectSort-new": "Датою"
     },
     "notFound_page": {
         "title": "Упс...",
@@ -201,13 +201,13 @@
         "text": "На жаль, сторінка, яку ви шукаєте, знаходиться на технічному обслуговуванні, недоступна або на нашому сайті виникли проблеми з сервером. Будь ласка, поверніться на головну сторінку.",
         "btn-back": "Головна сторінка"
     },
-    "basket_page":{
-        "shop_cart":"Корзина",
-        "allPrice":"Разом",
-        "DiscountfirstMoto":"Знижка на першу покупку",
-        "btn_buyMoto":"Оформити замовлення",
-        "current_basket":"Наразі корзина порожня",
-        "addToFavorite":"Додати в обране",
-        "details":"Деталі"
+    "basket_page": {
+        "shop_cart": "Корзина",
+        "allPrice": "Разом",
+        "DiscountfirstMoto": "Знижка на першу покупку",
+        "btn_buyMoto": "Оформити замовлення",
+        "current_basket": "В даний момент корзина порожня",
+        "addToFavorite": "Додати в обране",
+        "details": "Деталі"
     }
 }

@@ -10,7 +10,7 @@
         "contactsLink": "Contact",
         "actions": {
             "actionsBtnName": "Actions",
-            "actionsSettings": "Settings",
+            "actionsAdmin": "Admin panel",
             "actionsExit": "Exit"
         },
         "loginBtn": "Login",
@@ -178,16 +178,16 @@
             "power": "Horse power",
             "btn-addToWishList": "Add to wish list",
             "btn-addToCart": "Add to cart",
-            "btn-addingToCart":"Adding!",
+            "btn-addingToCart": "Adding!",
             "checkMore-title": "See other motorcycles"
         },
         "img-data-text-choose": "Choose",
         "img-data-text-goTo": "Watch"
     },
     "blog_page": {
-        "selectDate-dafault":"Sort by...",
+        "selectDate-dafault": "Sort by...",
         "selectSort-new": "Date",
-        "selectRating-mostPopular":"Popular",
+        "selectRating-mostPopular": "Popular",
         "selectSort-old": "Older",
         "readBtn-hide": "Hide",
         "readBtn-readInFull": "read the full"
@@ -198,13 +198,13 @@
         "text": "Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.",
         "btn-back": "Go back to Home"
     },
-    "basket_page":{
-        "shop_cart":"Cart",
-        "allPrice":"All Price",
-        "DiscountfirstMoto":"Discount on first purchase",
-        "btn_buyMoto":"To order",
-        "current_basket":"The shopping cart is currently empty",
-        "addToFavorite":"Add to favorite",
-        "details":"Details"
+    "basket_page": {
+        "shop_cart": "Cart",
+        "allPrice": "All Price",
+        "DiscountfirstMoto": "Discount on first purchase",
+        "btn_buyMoto": "To order",
+        "current_basket": "The cart is currently empty",
+        "addToFavorite": "Add to favorite",
+        "details": "Details"
     }
 }

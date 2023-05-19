@@ -3,7 +3,7 @@
 
 .moto-shop {
     background-image: url("../../images/shop_bg.png");
-    background-size: contain;
+    background-size: cover;
     background-color: rgba(0, 0, 0, 0.7);
 
     @media (max-width: 768px) {

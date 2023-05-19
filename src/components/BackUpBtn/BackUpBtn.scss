@@ -1,0 +1,79 @@
+@import "../../scss/variables.scss";
+
+.backUpbtn {
+    display: none;
+
+    position: fixed;
+    z-index: 500;
+    right: 30px;
+    bottom: 50px;
+    width: 46px;
+    height: 46px;
+    background-color: $mainColor;
+    color: $mainColor2;
+    border-radius: 100%;
+
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    transition: 0.3s all;
+    animation: shadowPulse 1s infinite linear;
+
+    &:hover {
+        color: mix( rgba(255, 255, 255), $mainColor, 70%);
+        animation: none;
+    }
+
+    @keyframes shadowPulse {
+        0% {
+            box-shadow: 0 0 2px 1.5px transparent,
+                0 0 0 0 transparent,
+                0 0 0 0 transparent;
+        }
+
+        10% {
+            box-shadow: 0 0 2px 1.5px $mainColor,
+                0 0 3px 2.5px transparent,
+                0 0 3px 1.3px $mainColor;
+        }
+
+        100% {
+            box-shadow: 0 0 2px 1.5px transparent,
+                0 0 0 10px transparent,
+                0 0 0 10px transparent;
+        }
+    }
+
+
+    // on click
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: $mainColor;
+        transform-origin: center;
+        transform: scale(0);
+        opacity: 0;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    &:hover::after {
+        transform: scale(2);
+        opacity: 0;
+    }
+
+    &:active::after {
+        transform: scale(0);
+        opacity: 0.8;
+        transition: opacity 0s;
+    }
+
+}

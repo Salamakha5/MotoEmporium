@@ -52,7 +52,24 @@ const Header = observer(() => {
 
     return (
 
-        <header className="header navbar navbar-expand-xl">
+        <header className="header navbar navbar-expand-xl" id='headerArchor'>
+
+            {
+                serverStore.tokenDecoded == false ?
+                    <div className='decodedInfo-cont'>
+                        <div className='decodedInfo'>
+                            {
+                                clientStore.currentLang == "ua" ? "Авторизація" : "Authorization"
+                            }
+                        </div>
+                        <div className="loader active" id="loader-2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    : false
+            }
 
             <div className="header__logo" onClick={logoLink}>Moto Emporium</div>
 
@@ -66,7 +83,9 @@ const Header = observer(() => {
                         <NavLink className={activeLink} to='/' element={<Home />}>{t('header.homeLink')}</NavLink>
                         <NavLink className={activeLink} to='/blog' element={<Blog />}>{t('header.blogLink')}</NavLink>
                         <div className='shop-item'>
-                            <NavLink className={activeLink} to='/shop' element={<Shop />}>{t('header.shopLink')}</NavLink>
+                            <NavLink className={activeLink} to='/shop' element={<Shop />}
+                                style={serverStore.userIsAuth == true ? { paddingRight: "55px" } : { paddingRight: "35px" }}>
+                                {t('header.shopLink')}</NavLink>
                             {
                                 serverStore.userIsAuth == true ?
                                     <NavLink className={activeLink} to='/basket' element={<BasketPage />}><i className="fs-3 bi bi-cart3"></i></NavLink>
@@ -80,7 +99,7 @@ const Header = observer(() => {
                                 data-bs-toggle="dropdown" aria-expanded="false"
                             >{t('header.actions.actionsBtnName')}</button>
                             <ul className="dropdown-menu">
-                                <li className='dropdown-item'> <i className="bi bi-gear pe-2"></i> {t('header.actions.actionsSettings')} </li>
+                                <li className='dropdown-item'> <i className="bi bi-terminal-fill me-2"></i> {t('header.actions.actionsAdmin')} </li>
                                 <li className='d-flex justify-content-center'>
                                     <div className="lang-switcher | form-switch">
                                         <div className='lang lang-en'>EN</div>
@@ -110,12 +129,20 @@ const Header = observer(() => {
                                     <button className='mainButton header__login-btn py-3 px-5'>{t('header.loginBtn')}</button>
                                 </NavLink>
                             </div>
+
+                        // (localStorage.getItem("IsAuthMOTO") != null && serverStore.tokenDecoded == false) ?
+                        //     <NavLink to='/#' element={<Login />}>
+                        //         <button className='mainButton header__login-btn | py-3 px-5 btn disabled'>{t('header.loginBtn')}</button>
+                        //     </NavLink>
+                        //     :
+                        //     <NavLink to='/login' element={<Login />}>
+                        //         <button className='mainButton header__login-btn | py-3 px-5'>{t('header.loginBtn')}</button>
+                        //     </NavLink>
+                        // }
                     }
                 </div>
             </div>
-
-
-        </header>
+        </header >
     )
 })
 

@@ -23,7 +23,7 @@ const BasketPage = observer(() => {
     const { t } = useTranslation();
 
     // Скидка 20%
-    let tallage = 20
+    let discount = 20
 
     return (
         <div className="BasketPage_container">
@@ -61,7 +61,7 @@ const BasketPage = observer(() => {
                         </div>
 
                         <div className="pt-3 border-top border-1 border-dark">
-                            <p className="fs-3 ps-4">{t("basket_page.allPrice")}: <span className="basket_price"><span className="Allprice">{clientStore.formatPrice(basketStore.AllPriceMoto)}</span>/{clientStore.formatPrice(basketStore.AllPriceMoto - (basketStore.AllPriceMoto / 100 * tallage))}</span></p>
+                            <p className="fs-3 ps-4">{t("basket_page.allPrice")}: <span className="basket_price"><span className="Allprice">{clientStore.formatPrice(basketStore.AllPriceMoto)}</span>/{clientStore.formatPrice(basketStore.AllPriceMoto - (basketStore.AllPriceMoto / 100 * discount))}</span></p>
                             <div className="mt-3 ps-4">
                                 <strong>{t("basket_page.DiscountfirstMoto")} 20%</strong>
                             </div>

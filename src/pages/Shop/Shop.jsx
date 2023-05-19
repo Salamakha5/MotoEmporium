@@ -3,6 +3,7 @@ import './Shop.scss'
 import OneCard from '../../components/OneCard/OneCard'
 import ShopPagination from '../../components/Pagination/ShopPagination'
 import serverStore from '../../store/serverStore'
+import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 
 import alertify from 'alertifyjs'
 import { createRef, useEffect, useState } from 'react'
@@ -30,6 +31,7 @@ const Shop = observer(() => {
         }
 
     }, [])
+
 
     function youNeedToLogin() {
 
@@ -161,10 +163,6 @@ const Shop = observer(() => {
         }
     }
 
-
-    
-
-
     return (
         <div className='moto-shop | pt-5 pb-3'>
             <div className='moto-shop__container | container p-4'>
@@ -251,6 +249,8 @@ const Shop = observer(() => {
                         prevPage={prevPage}
                     ></ShopPagination>
                 </div>
+
+                <BackUpBtn></BackUpBtn>
             </div>
         </div>
     )
