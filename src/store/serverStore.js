@@ -11,6 +11,7 @@ class ServerStore {
     threeMotoCard = []
     IsMotoBuy = false
     IsStorageId = false
+    IsFavoriteMoto = false
     tokenDecoded = false
 
     lengthPageNumber = 0
@@ -39,6 +40,7 @@ class ServerStore {
                 this.spinerInfo = "d-none"
                 this.IsMotoBuy = false
                 this.IsStorageId = JSON.parse(localStorage.getItem("BasketMoto")).some(moto => moto.id === response.data._id)
+                this.IsFavoriteMoto = JSON.parse(localStorage.getItem("FavoriteMoto")).includes(response.data._id)
             })
             .catch((error) => {
                 console.log(error);

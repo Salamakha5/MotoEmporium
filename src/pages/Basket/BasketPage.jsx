@@ -8,21 +8,26 @@ import clientStore from "../../store/clientStore"
 import basketStore from "../../store/basketStore"
 import PriceList from "../../components/PriceList/PriceList"
 import { useTranslation } from 'react-i18next';
+import Favorite from "../../components/Favorite/Favorite"
 
 const BasketPage = observer(() => {
 
     useEffect(() => {
         if (serverStore.MotoData.length > 1) {
             basketStore.getBasketMoto()
+            basketStore.getFavoriteMoto()
         } else {
             serverStore.getAllMoto(() => {
                 basketStore.getBasketMoto()
+                basketStore.getFavoriteMoto()
             })
         }
     }, [])
     const { t } = useTranslation();
 
-    // Скидка 20%
+
+
+    // Знижка 20%
     let discount = 20
 
     return (
@@ -69,6 +74,53 @@ const BasketPage = observer(() => {
                                 <button className="btn_basket">{t("basket_page.btn_buyMoto")}</button>
                             </div>
                         </div>
+                        {/* Favorite */}
+
+                        <div className="accordion d-block d-lg-none mt-5" >
+                            <div className="accordion-item">
+                                <h2 className="accordion-header">
+                                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        {t("fav_page.openBtn")}
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div className="row m-0 d-flex justify-content-center align-items-start">
+                                        {
+                                            basketStore.FavData.map((moto) => {
+                                                return <Favorite key={moto._id} data={moto}></Favorite>
+                                            })
+                                        }
+                                        <div>
+                                            {
+                                                basketStore.FavData.length ?
+                                                    false
+                                                    :
+                                                    <div className="d-flex justify-content-center mt-2 mb-2 fs-2">{t("fav_page.No_chosen")}</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="text-center mt-5 fs-2 d-none d-lg-block ">{t("fav_page.favorite")}</div>
+                        <div className=" d-none d-lg-flex row m-0 justify-content-center align-items-start">
+                            {
+                                basketStore.FavData.map((moto) => {
+                                    return <Favorite key={moto._id} data={moto}></Favorite>
+                                })
+                            }
+                        </div>
+                        <div className="d-none d-lg-block">
+                            {
+                                basketStore.FavData.length ?
+                                    false
+                                    :
+                                    <div className="d-flex justify-content-center mt-5 fs-2">{t("fav_page.No_chosen")}</div>
+                            }
+                        </div>
+
+                        {/* Favorite */}
                     </div>
                 </div>
             </div>

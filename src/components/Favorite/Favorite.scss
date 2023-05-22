@@ -1,0 +1,22 @@
+@import '../../scss/variables.scss';
+
+.favorite_container {
+    background-color: aliceblue;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+    img{
+        height: 150px;
+    }
+    .close_btn{
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .close_btn:hover{
+        transition: 0.3s;
+        color:$mainColor;
+    }
+    .fav_text{
+        font-style: italic;
+    }
+}
