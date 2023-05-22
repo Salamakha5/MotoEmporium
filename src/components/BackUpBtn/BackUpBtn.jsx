@@ -1,35 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './BackUpBtn.scss'
 
-const BackUpBtn = () => {
+const BackUpBtn = ({ ...props }) => {
 
-    const btn = useRef()
+    const [scroll, setScroll] = useState(0);
+
+    const handleScroll = () => {
+        setScroll(window.scrollY);
+    };
 
     useEffect(() => {
-
-        function handleResize() {
-            // console.log(window.scrollY);
-            // console.log(btn);
-
-            // if (window.scrollY <= window.scrollY - 500) {
-            //     console.log('hi');
-            // }
-            // console.log(btn.current.className);
-
-            // console.log(
-            //     // document.documentElement.clientHeight
-            //     document.documentElement.scrollHeight
-            // );
-
-
-        }
-
-        // window.addEventListener('scroll', handleResize)
-
-        // return _ => {
-        //     window.removeEventListener('scroll', handleResize)
-        // }
-    })
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     function clickHandler() {
         window.scrollTo({
@@ -39,12 +22,16 @@ const BackUpBtn = () => {
     }
 
     return (
-
-        <a className='a' onClick={clickHandler} ref={btn}>
-            <button className='backUpbtn'>
+        <a onClick={clickHandler} >
+            {
+                props.debugLine == 'true' ?
+                    <div className='for-dev' style={{ top: `${props.whenShow}px` }}></div>
+                    : false
+            }
+            <button className={scroll > props.whenShow ? 'backUpbtn active' : 'backUpbtn'}>
                 <i title='go top' className="bi bi-arrow-up-circle-fill"></i>
             </button>
-        </a>
+        </a >
     )
 }
 

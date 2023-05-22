@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 
 const Home = () => {
     useEffect(() => {
-        document.title = "Home - MotoEmporium";
+        document.title = "Home | MotoEmporium";
 
     }, [])
 
@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            <BackUpBtn></BackUpBtn>
+            <BackUpBtn whenShow='2000' debugLine='false'></BackUpBtn>
 
             <div className="hero">
                 <img className='hero__bg' src={hero_bg} />

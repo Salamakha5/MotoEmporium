@@ -10,13 +10,13 @@ import Blog from "./pages/Blog/Blog"
 import Contact from "./pages/Contact/Contact"
 import serverStore from './store/serverStore'
 import OneMoto from "./pages/OneMoto/OneMoto"
+import BasketPage from "./pages/Basket/BasketPage"
 
 import alertify from 'alertifyjs'
 import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react"
 import { useTranslation } from 'react-i18next';
-import BasketPage from "./pages/Basket/BasketPage"
 
 const App = observer(() => {
 
@@ -25,13 +25,15 @@ const App = observer(() => {
         if (localStorage.getItem("IsAuthMOTO") != null) {
             serverStore.tokenDecoded = false
             serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), (decodedResult) => {
+
                 if (decodedResult === 'succes') {
                     serverStore.tokenDecoded = true
                 } else {
                     alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
+                    serverStore.tokenDecoded = true
                 }
                 
-                console.log(decodedResult);
+                // console.log(decodedResult);
             })
         } else {
             serverStore.tokenDecoded = true

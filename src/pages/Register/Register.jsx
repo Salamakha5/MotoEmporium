@@ -22,7 +22,7 @@ const Register = observer(() => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        document.title = "Register - MotoEmporium";
+        document.title = "Register | MotoEmporium";
     }, [])
 
     const { t, i18n } = useTranslation();

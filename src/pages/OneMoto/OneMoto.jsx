@@ -25,7 +25,7 @@ const OneMoto = observer(() => {
     const { brand, model, price, collectionType, displacement, borexStroke,
         compressionRatio, horsepower, torque, fuelSystem, gearbox, _id } = serverStore.OneMoto
 
-    brand != '' ? document.title = `${brand} - ${model} - MotoEmporium` : document.title = `Motocycle - MotoEmporium`;
+    brand != '' ? document.title = `${brand} - ${model} | MotoEmporium` : document.title = `Motocycle | MotoEmporium`;
 
     function AddMotoToBasket() {
         // добавлення id мото до localStorage

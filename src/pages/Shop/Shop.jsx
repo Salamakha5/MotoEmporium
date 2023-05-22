@@ -20,12 +20,14 @@ const Shop = observer(() => {
     useEffect(() => {
 
         if (serverStore.userIsAuth == true) {
+            document.title = "Shop | MotoEmporium";
+
             setSpinerShop("d-block")
-            serverStore.setActiveLink(1)
-            document.title = "Shop - MotoEmporium";
+
             serverStore.getAllMoto(() => {
                 setSpinerShop("d-none")
             })
+            serverStore.setActiveLink(1)
         } else if (localStorage.getItem("IsAuthMOTO") == null) {
             youNeedToLogin();
         }
@@ -165,6 +167,8 @@ const Shop = observer(() => {
 
     return (
         <div className='moto-shop | pt-5 pb-3'>
+            <BackUpBtn whenShow='1500' debugLine='false'></BackUpBtn>
+
             <div className='moto-shop__container | container p-4'>
                 <div className='moto-shop__controlsWrap | p-4'>
                     <div className='controlsWrap-title'> {t('shop_page.controls.title')} </div>
@@ -249,8 +253,6 @@ const Shop = observer(() => {
                         prevPage={prevPage}
                     ></ShopPagination>
                 </div>
-
-                <BackUpBtn></BackUpBtn>
             </div>
         </div>
     )

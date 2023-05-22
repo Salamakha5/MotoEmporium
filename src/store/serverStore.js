@@ -12,7 +12,6 @@ class ServerStore {
     IsMotoBuy = false
     IsStorageId = false
     tokenDecoded = false
-
     lengthPageNumber = 0
     ArrTypeName = []
     UserName = "dafault"
@@ -22,6 +21,7 @@ class ServerStore {
     }
 
 
+    
     setlengthPagNumber(number) {
         this.lengthPageNumber = number
     }

@@ -27,7 +27,7 @@ const Login = observer(() => {
     const [iconsLock1, setIconsLock1] = useState("bi bi-eye-fill")
 
     useEffect(() => {
-        document.title = "Login - MotoEmporium";
+        document.title = "Login | MotoEmporium";
     }, [])
 
     const { t, i18n } = useTranslation();

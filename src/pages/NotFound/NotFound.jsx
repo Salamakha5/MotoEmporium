@@ -13,7 +13,7 @@ const NotFound = () => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        document.title = "Page Not Found - MotoEmporium";
+        document.title = "Page Not Found | MotoEmporium";
     }, [])
 
     return (

@@ -14,11 +14,13 @@ const Blog = observer(() => {
     const { t } = useTranslation();
 
     useEffect(() => {
+
+        document.title = "Blog | MotoEmporium";
+        
         setShowPageLoader(true)
         newsStore.getAllNews(() => {
             setShowPageLoader(false)
         })
-        document.title = "Blog - MotoEmporium";
     }, [])
 
     const [showPageLoader, setShowPageLoader] = useState(false)
@@ -36,10 +38,10 @@ const Blog = observer(() => {
     let selectSort = createRef()
 
     function sortNews() {
-        if(selectSort.current.value == "new"){
+        if (selectSort.current.value == "new") {
             newsStore.newsData.sort((a, b) => (+b.indexData) - (+a.indexData))
         }
-        if(selectSort.current.value == "maxStatus"){
+        if (selectSort.current.value == "maxStatus") {
             newsStore.newsData.sort((a, b) => (+b.status) - (+a.status))
         }
     }

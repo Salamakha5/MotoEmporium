@@ -12,6 +12,9 @@ import { useTranslation } from 'react-i18next';
 const BasketPage = observer(() => {
 
     useEffect(() => {
+
+        document.title = "Cart | MotoEmporium";
+
         if (serverStore.MotoData.length > 1) {
             basketStore.getBasketMoto()
         } else {
