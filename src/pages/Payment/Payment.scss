@@ -1,0 +1,77 @@
+@import '../../scss/variables.scss';
+
+.payment {
+    display: flex;
+    padding: 70px;
+
+    &__datails {
+        width: 70%;
+
+        .method {
+            .title {}
+
+            .method__ul {
+                display: flex;
+
+                li {
+                    input {}
+
+                    label {
+
+                        img {}
+                    }
+                }
+            }
+        }
+
+        .details {
+
+            .title {}
+
+            .form {
+
+                .inputsCont {}
+
+                .twoInputs {
+
+                    .left .title,
+                    .right .title {}
+
+                    .left {}
+
+                    .right {}
+                }
+            }
+
+            .payment-regulations {}
+
+            .btn-container {
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                .cancel-btn {}
+
+                .confirm-btn {}
+            }
+        }
+
+
+    }
+
+    &__orderImg {
+        .order__img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .order-details {
+            .title {}
+
+            .supTitle {}
+
+            .price {}
+        }
+    }
+
+}

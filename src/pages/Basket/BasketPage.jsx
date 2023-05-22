@@ -1,16 +1,21 @@
-import { observer } from "mobx-react-lite"
-import BasketCard from "../../components/BasketCard/BasketCard"
-import serverStore from "../../store/serverStore"
 import "./BasketPage.scss"
-import React, { useEffect, useState } from 'react'
-import { toJS } from "mobx"
-import clientStore from "../../store/clientStore"
-import basketStore from "../../store/basketStore"
+
+import BasketCard from "../../components/BasketCard/BasketCard"
 import PriceList from "../../components/PriceList/PriceList"
-import { useTranslation } from 'react-i18next';
 import Favorite from "../../components/Favorite/Favorite"
 
+import serverStore from "../../store/serverStore"
+import clientStore from "../../store/clientStore"
+import basketStore from "../../store/basketStore"
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { observer } from "mobx-react-lite"
+import { useNavigate } from "react-router-dom"
+
 const BasketPage = observer(() => {
+
+    const { t } = useTranslation();
+    const navigate = useNavigate()
 
     useEffect(() => {
 
@@ -26,12 +31,13 @@ const BasketPage = observer(() => {
             })
         }
     }, [])
-    const { t } = useTranslation();
-
-
 
     // Знижка 20%
     let discount = 20
+
+    function goToPayment() {
+        navigate('/payment')
+    }
 
     return (
         <div className="BasketPage_container">
@@ -49,8 +55,6 @@ const BasketPage = observer(() => {
                             :
                             <div className="h-100 fs-4 d-flex justify-content-center align-items-center">{t("basket_page.current_basket")}</div>
                     }
-
-
                 </div>
                 <div className="col-12 col-lg-6 order-1 order-lg-2 p-0 d-flex justify-content-center">
                     <div className="BasketPrise_cont p-2">
@@ -74,11 +78,13 @@ const BasketPage = observer(() => {
                                 <strong>{t("basket_page.DiscountfirstMoto")} 20%</strong>
                             </div>
                             <div className="mt-5 d-flex justify-content-center align-items-center">
-                                <button className="btn_basket">{t("basket_page.btn_buyMoto")}</button>
+                                {/* перехід на сторінку оплати */}
+                                <button className="btn_basket"
+                                    onClick={goToPayment}>{t("basket_page.btn_buyMoto")}</button>
                             </div>
                         </div>
-                        {/* Favorite */}
 
+                        {/* Favorite */}
                         <div className="accordion d-block d-lg-none mt-5" >
                             <div className="accordion-item">
                                 <h2 className="accordion-header">

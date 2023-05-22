@@ -140,7 +140,7 @@ const OneMoto = observer(() => {
                                     serverStore.IsFavoriteMoto
                                         ?
                                         <button className='addToFavorite' onClick={AddToFavorite} >
-                                            <i className="bi bi-heart"></i>
+                                            <i className="bi bi-heart-fill"></i>
                                             {t("fav_page.added")}
                                         </button>
                                         :
