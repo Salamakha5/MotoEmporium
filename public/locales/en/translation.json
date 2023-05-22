@@ -156,6 +156,7 @@
         }
     },
     "oneMoto_page": {
+        "added":"Buyed!",
         "techChar": {
             "btn-title": "Technical characteristics",
             "brand": "Brand",
@@ -206,5 +207,11 @@
         "current_basket": "The cart is currently empty",
         "addToFavorite": "Add to favorite",
         "details": "Details"
+    },
+    "fav_page": {
+        "openBtn":"Open Favorite",
+        "added":"Added!",
+        "favorite":"Favorite",
+        "No_chosen":"The card is empty"
     }
 }

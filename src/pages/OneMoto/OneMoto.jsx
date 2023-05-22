@@ -10,6 +10,7 @@ import { observer } from 'mobx-react-lite';
 import { NavLink } from "react-router-dom";
 import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import { useTranslation } from 'react-i18next';
+import basketStore from '../../store/basketStore';
 
 const OneMoto = observer(() => {
     useEffect(() => {
@@ -32,13 +33,26 @@ const OneMoto = observer(() => {
         let motoBasket = JSON.parse(localStorage.getItem("BasketMoto"))
         if (motoBasket) {
             // Перевірка на наявність такого id у localStorage
-            if (!motoBasket.some(moto=>moto["id"] === _id)) {
-                motoBasket.push({id:_id,current:1})
+            if (!motoBasket.some(moto => moto["id"] === _id)) {
+                motoBasket.push({ id: _id, current: 1 })
                 localStorage.setItem("BasketMoto", JSON.stringify(motoBasket))
             }
 
-        } else { localStorage.setItem("BasketMoto", JSON.stringify([{id:_id,current:1}])) }
+        } else { localStorage.setItem("BasketMoto", JSON.stringify([{ id: _id, current: 1 }])) }
         serverStore.IsMotoBuy = true
+    }
+    function AddToFavorite() {
+        // добавлення id мото до localStorage
+        let motoFavorite = JSON.parse(localStorage.getItem("FavoriteMoto"))
+        if (motoFavorite) {
+            // Перевірка на наявність такого id у localStorage
+            if (!motoFavorite.includes(_id)) {
+                motoFavorite.push(_id)
+                localStorage.setItem("FavoriteMoto", JSON.stringify(motoFavorite))
+            }
+
+        } else { localStorage.setItem("FavoriteMoto", JSON.stringify([_id])) }
+        serverStore.IsFavoriteMoto = true
     }
 
     return (
@@ -121,14 +135,25 @@ const OneMoto = observer(() => {
                             <h2 className='infoBLock__collection small-items'>{t('oneMoto_page.infoBlock.type')}: <span>{collectionType}</span></h2>
                             <h2 className='infoBLock__power small-items'>{t('oneMoto_page.infoBlock.power')}: <span>{horsepower}</span></h2>
                             <div className='buttonsCont'>
-                                <button className='addToFavorite' >
-                                    <i className="bi bi-heart"></i>
-                                    {t('oneMoto_page.infoBlock.btn-addToWishList')}</button>
+                                {/* favorite */}
+                                {
+                                    serverStore.IsFavoriteMoto
+                                        ?
+                                        <button className='addToFavorite' onClick={AddToFavorite} >
+                                            <i className="bi bi-heart"></i>
+                                            {t("fav_page.added")}
+                                        </button>
+                                        :
+                                        <button className='addToFavorite' onClick={AddToFavorite} >
+                                            <i className="bi bi-heart"></i>
+                                            {t('oneMoto_page.infoBlock.btn-addToWishList')}
+                                        </button>
+                                }
 
                                 {
                                     serverStore.IsStorageId ?
                                         <button disabled className='addToCart mainButton | btn'>
-                                            Вже в корзині
+                                            {t("oneMoto_page.added")}
                                         </button>
                                         :
                                         <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>

@@ -31,7 +31,6 @@
         font-style: italic;
         color: brown;
     }
-
     .btn_basket {
         padding: 15px 15px;
         background-color: $mainColor;
@@ -40,7 +39,7 @@
         font-size: 20px;
         transition: 0.4s;
     }
-
+  
     .btn_basket:hover {
         background-color: $mainColorDarken;
         transition: 0.4s;
