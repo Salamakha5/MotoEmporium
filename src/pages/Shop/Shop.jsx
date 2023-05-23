@@ -167,7 +167,7 @@ const Shop = observer(() => {
 
     return (
         <div className='moto-shop | pt-5 pb-3'>
-            <BackUpBtn whenShow='1500' debugLine='false'></BackUpBtn>
+            <BackUpBtn whenShow='700' debugLine='false'></BackUpBtn>
 
             <div className='moto-shop__container | container p-4'>
                 <div className='moto-shop__controlsWrap | p-4'>

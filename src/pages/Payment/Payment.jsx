@@ -14,7 +14,7 @@ const Payment = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        document.title =  'Payment | MotoEmporium'
+        document.title = 'Payment | MotoEmporium'
     })
 
     function confirmPayment() {
@@ -29,17 +29,17 @@ const Payment = () => {
                     <div className='title'>Payment Method</div>
                     <ul className='method__ul'>
                         <li>
-                            <input type="radio" name='paymentMethod' id='creditCard' />
-                            <label htmlFor='creditCard'>Credit Card</label>
+                            <input className='custom-radio' type="radio" name='paymentMethod' id='creditCard' />
+                            <label htmlFor='creditCard'><span>Credit Card</span></label>
                         </li>
                         <li>
-                            <input type="radio" name='paymentMethod' id='payPal' />
+                            <input className='custom-radio' type="radio" name='paymentMethod' id='payPal' />
                             <label htmlFor='payPal'>
                                 <img src={payPalImg} alt="PayPal" />
                             </label>
                         </li>
                         <li>
-                            <input type="radio" name='paymentMethod' id='applePay' />
+                            <input className='custom-radio' type="radio" name='paymentMethod' id='applePay' />
                             <label htmlFor='applePay'>
                                 <img src={applePayImg} alt="ApplePay" />
                             </label>
@@ -54,17 +54,19 @@ const Payment = () => {
                         <div className='inputsCont'>
                             <input className='forms_bot_line' type="text" placeholder='Full Name' />
                         </div>
+
                         <div className='inputsCont'>
-                            <input className='forms_bot_line' type="number" placeholder='Number' />
+                            <input className='forms_bot_line' type="number" placeholder='Card Number' min='0' />
                         </div>
+
                         <div className='inputsCont twoInputs'>
                             <div className="left">
                                 <div className="title">Expiration</div>
-                                <input className='forms_bot_line' type="number" placeholder='Number' />
+                                <input className='forms_bot_line' type="number" placeholder='mm   dd   yy' />
                             </div>
                             <div className="right">
                                 <div className="title">CVV</div>
-                                <input className='forms_bot_line' type="number" placeholder='Number' />
+                                <input className='forms_bot_line' type="number" placeholder='nnn' />
                             </div>
                         </div>
                     </form>
@@ -75,7 +77,7 @@ const Payment = () => {
 
                     <div className="btn-container">
                         <NavLink className='cancel-btn'>Cancel</NavLink>
-                        <button className='confirm-btn' onClick={confirmPayment}>Confirm Payment</button>
+                        <button className='confirm-btn mainButton' onClick={confirmPayment}>Confirm Payment</button>
                     </div>
                 </div>
 
@@ -90,7 +92,7 @@ const Payment = () => {
                         Ducati 1199 Panigale (2012)
                     </div>
                     <div className='supTitle'>
-                        Color: S Tricolore (12DU1199PSTRIU)
+                        And: 5 motorcycles
                     </div>
                     <div className='price'>
                         {clientS.formatPrice(168468)}

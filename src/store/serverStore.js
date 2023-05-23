@@ -76,7 +76,9 @@ class ServerStore {
                     this.userIsAuth = false
                     localStorage.removeItem('IsAuthMOTO')
                     decodedResult = 'error'
-                    console.log('log er');
+                    // console.log('log er');
+
+                    console.log(error);
 
                     // callback in app.jsx
                     appCallback(decodedResult)

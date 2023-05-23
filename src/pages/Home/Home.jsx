@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            <BackUpBtn whenShow='2000' debugLine='false'></BackUpBtn>
+            <BackUpBtn whenShow='1000' debugLine='false'></BackUpBtn>
 
             <div className="hero">
                 <img className='hero__bg' src={hero_bg} />
