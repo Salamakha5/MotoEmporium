@@ -110,9 +110,10 @@
     },
     "yupErrors": {
         "required": "Not filled in",
-        "valid-name": "The field must contain min. 4 characters!",
+        "valid-name": "The field must contain min. {{num}} characters!",
         "valid-email": "The email address must be valid!",
-        "valid-password": "The password must contain at least 5 characters!"
+        "valid-password": "The password must contain at least {{num}} characters!",
+        "valid-cardNumber": "The card number has 12 digits!"
     },
     "shop_page": {
         "controls": {
@@ -156,7 +157,7 @@
         }
     },
     "oneMoto_page": {
-        "added":"Buyed!",
+        "added":"Already in the cart!",
         "techChar": {
             "btn-title": "Technical characteristics",
             "brand": "Brand",

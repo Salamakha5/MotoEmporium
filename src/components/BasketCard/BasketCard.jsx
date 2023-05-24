@@ -8,10 +8,10 @@ import basketStore from "../../store/basketStore"
 
 const BasketCard = observer((props) => {
   const { brand, model, price, collectionType, displacement, borexStroke,
-    compressionRatio, horsepower,current, imgURL, torque, fuelSystem, gearbox, _id } = props.data
-    let maxCurrent = 10
-    let minCurrent = 1
-    const { t } = useTranslation();
+    compressionRatio, horsepower, current, imgURL, torque, fuelSystem, gearbox, _id } = props.data
+  let maxCurrent = 10
+  let minCurrent = 1
+  const { t } = useTranslation();
 
   function Deletemoto() {
     let motoStorage = JSON.parse(localStorage.getItem("BasketMoto"))
@@ -23,36 +23,36 @@ const BasketCard = observer((props) => {
 
   function AddMoto() {
     let storage = JSON.parse(localStorage.getItem("BasketMoto"))
-    storage = storage.map((moto)=>{
-      if(moto.id == _id && moto.current < maxCurrent){
+    storage = storage.map((moto) => {
+      if (moto.id == _id && moto.current < maxCurrent) {
         return {
-          id:moto.id,
-          current:moto.current+1
+          id: moto.id,
+          current: moto.current + 1
         }
       }
-      return{
-        id:moto.id,
-        current:moto.current
+      return {
+        id: moto.id,
+        current: moto.current
       }
     })
-    localStorage.setItem("BasketMoto",JSON.stringify(storage))
+    localStorage.setItem("BasketMoto", JSON.stringify(storage))
     basketStore.getBasketMoto()
   }
   function MinusMoto() {
     let storage = JSON.parse(localStorage.getItem("BasketMoto"))
-    storage = storage.map((moto)=>{
-      if(moto.id == _id && moto.current > minCurrent){
+    storage = storage.map((moto) => {
+      if (moto.id == _id && moto.current > minCurrent) {
         return {
-          id:moto.id,
-          current:moto.current-1
+          id: moto.id,
+          current: moto.current - 1
         }
       }
-      return{
-        id:moto.id,
-        current:moto.current
+      return {
+        id: moto.id,
+        current: moto.current
       }
     })
-    localStorage.setItem("BasketMoto",JSON.stringify(storage))
+    localStorage.setItem("BasketMoto", JSON.stringify(storage))
     basketStore.getBasketMoto()
   }
 

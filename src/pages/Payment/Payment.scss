@@ -4,18 +4,38 @@
     display: flex;
     padding: 70px;
 
-    &__datails {
+    @media (max-width: 1200px) {
+        flex-direction: column;
+        padding: 40px;
+        width: 100%;
+
+        @media (max-width: 500px) {
+            padding: 20px;
+        }
+    }
+
+    &__details {
         width: 50%;
+
+        @media (max-width: 1200px) {
+            order: 2;
+            width: 100%;
+        }
 
         .method {
             .title {
                 @include fontSettings($mainFont, 36px, 400);
                 line-height: 44px;
                 padding-bottom: 30px;
+
+                @media (max-width: 500px) {
+                    padding-bottom: 20px;
+                }
             }
 
             .method__ul {
                 display: flex;
+                flex-wrap: wrap;
 
                 li {
                     margin-right: 40px;
@@ -41,7 +61,7 @@
 
                         border-radius: 100%;
                         transition: 0.3s;
-                        border: 3px solid rgb(27, 36, 47);
+                        border: 1px solid rgb(27, 36, 47);
                     }
 
                     .custom-radio:checked {
@@ -69,6 +89,10 @@
         .details {
             margin-top: 80px;
 
+            @media (max-width: 500px) {
+                margin-top: 40px;
+            }
+
             &>.title {
                 @include fontSettings($mainFont, 36px, 400);
                 line-height: 44px;
@@ -81,36 +105,66 @@
                     color: #5A5A5A;
                 }
 
+                // приховування стрілочок
+                input[type='number']::-webkit-inner-spin-button,
+                input[type='number']::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                .error {
+                    color: brown;
+                    font-size: 12px;
+                }
+
                 .inputsCont {
                     @include fontSettings($mainFont, 24px, 400);
                     line-height: 29px;
 
                     &>input {
-                        min-width: 300px;
                         width: 90%;
+
+
+                        @media (max-width: 500px) {
+                            width: 100%;
+                        }
                     }
 
                     &:not(:last-child) {
-                        margin-bottom: 40px;
+                        margin-bottom: 20px;
+
+                        @media (max-width: 500px) {
+                            margin-bottom: 20px;
+                        }
                     }
                 }
 
 
                 .twoInputs {
                     display: flex;
+                    flex-wrap: wrap;
 
                     .left .title,
                     .right .title {
                         @include fontSettings($mainFont, 24px, 400);
                         line-height: 29px;
                         color: #5A5A5A;
-                        padding-bottom: 15px;
+
+                        @media (max-width: 500px) {
+                            padding-bottom: 0;
+                            font-size: 18px;
+                            line-height: 21px;
+                        }
                     }
 
                     .left {
                         width: 50%;
-                        position: relative;
-                        overflow: hidden;
+
+                        @media (max-width: 400px) {
+                            width: 100%;
+                        }
+
+                        // position: relative;
 
                         // &::before,
                         // &::after {
@@ -137,6 +191,11 @@
                         input {
                             width: 166px;
 
+                            @media (max-width: 400px) {
+                                width: 100%;
+                                margin-bottom: 20px;
+                            }
+
                             // &::placeholder {
 
                             //     .left::before,
@@ -150,8 +209,16 @@
                     .right {
                         width: 50%;
 
+                        @media (max-width: 400px) {
+                            width: 100%;
+                        }
+
                         input {
                             width: 130px;
+
+                            @media (max-width: 400px) {
+                                width: 100%;
+                            }
                         }
                     }
                 }
@@ -166,6 +233,7 @@
 
             .btn-container {
                 display: flex;
+                flex-wrap: wrap;
 
                 .cancel-btn {
                     @include fontSettings($mainFont, 23px, 700);
@@ -175,11 +243,30 @@
                     border: 2px solid $mainColor;
                     border-radius: 10px;
                     transition: all .3s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
                     margin-right: 60px;
 
                     &:hover {
                         background-color: $mainColorDarken;
+                    }
+
+                    @media (max-width: 650px) {
+                        padding: 8px 20px;
+                        margin-right: 30px;
+                        font-size: 17px;
+                        line-height: 20px;
+
+                        @media (max-width: 360px) {
+                            margin-bottom: 10px;
+                        }
+
+                        @media (max-width: 355px) {
+                            margin-top: 20px;
+                            order: 2;
+                        }
                     }
                 }
 
@@ -187,6 +274,15 @@
                     @include fontSettings($mainFont, 20px, 700);
                     line-height: 23px;
                     padding: 17px 62px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    @media (max-width: 650px) {
+                        padding: 8px 20px;
+                        font-size: 17px;
+                        line-height: 20px;
+                    }
                 }
             }
         }
@@ -199,15 +295,28 @@
         display: flex;
         justify-content: end;
         position: relative;
+        margin-bottom: 70px;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+            height: 600px;
+
+            @media (max-width: 700px) {
+                height: 500px;
+            }
+        }
 
 
-        .order__img {
-            // width: 470px;
+        .img {
             width: 80%;
             height: 100%;
             object-fit: cover;
             border-radius: 30px;
-            box-shadow: 5px 7.5px 20px black;
+            box-shadow: 2.5px 3.7px 10px black;
+
+            @media (max-width: 1200px) {
+                width: 100%;
+            }
         }
 
         .order-details {
@@ -217,12 +326,17 @@
             border-radius: 0 0 30px 30px;
             width: 80%;
             min-height: 30%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, mix(rgba(0, 0, 0, 0), $mainColor, 10%) 50%, rgba(0, 0, 0, 1) 110%);
+            box-shadow: 0 -5px 10px 15px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, mix(rgba(0, 0, 0, 0), $mainColor, 10%) 50%, rgba(0, 0, 0, 1) 110%);
             color: black;
             display: flex;
             justify-content: end;
             flex-direction: column;
             padding: 0 20px 20px 20px;
+
+            @media (max-width: 1200px) {
+                width: 100%;
+            }
 
             .title {
                 @include fontSettings($mainFont, 30px, 700);
