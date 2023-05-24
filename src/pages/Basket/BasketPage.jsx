@@ -57,7 +57,7 @@ const BasketPage = observer(() => {
                     }
                 </div>
                 <div className="col-12 col-lg-6 order-1 order-lg-2 p-0 d-flex justify-content-center">
-                    <div className="BasketPrise_cont p-2">
+                    <div className="BasketPrise_cont py-2 px-1">
                         <div className="pt-1">
                             <div className="BasketPrise_cont__title pb-3">{t("basket_page.shop_cart")}</div>
                             <div className="d-flex justify-content-center align-items-center">

@@ -26,7 +26,7 @@ const Favorite = observer((props) => {
             </NavLink>
             <div className="d-flex justify-content-between align-items-center">
                 <div className="fav_text || ms-2 ">{props.data.brand}/</div>
-                <div className="close_btn ||"><i onClick={DeleteFavMoto} className="bi bi-x fs-3"></i></div>
+                <div className="close_btn" title="do you want delete?"><i onClick={DeleteFavMoto} className="bi bi-heartbreak-fill"></i></div>
             </div>
             <div>
                 <div className=" fav_text || ms-2">{props.data.model}</div>
