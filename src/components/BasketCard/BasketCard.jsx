@@ -38,7 +38,7 @@ const BasketCard = observer((props) => {
     localStorage.setItem("BasketMoto",JSON.stringify(storage))
     basketStore.getBasketMoto()
   }
-  function MinuMoto() {
+  function MinusMoto() {
     let storage = JSON.parse(localStorage.getItem("BasketMoto"))
     storage = storage.map((moto)=>{
       if(moto.id == _id && moto.current > minCurrent){
@@ -77,7 +77,7 @@ const BasketCard = observer((props) => {
           <div className="w-100 d-flex justify-content-between align-items-center">
             <p className="text-center fs-3 price">{clientStore.formatPrice(price * current)}</p>
             <div className="d-flex justify-content-center align-items-center">
-              <div onClick={MinuMoto} className="Current_Arrow"><i className="bi bi-caret-left"></i></div>
+              <div onClick={MinusMoto} className="Current_Arrow"><i className="bi bi-caret-left"></i></div>
               <div className="Current_Num">{current}</div>
               <div onClick={AddMoto} className="Current_Arrow"><i className="bi bi-caret-right"></i></div>
             </div>
