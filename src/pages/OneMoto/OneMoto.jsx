@@ -10,7 +10,6 @@ import { observer } from 'mobx-react-lite';
 import { NavLink } from "react-router-dom";
 import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import { useTranslation } from 'react-i18next';
-import basketStore from '../../store/basketStore';
 
 const OneMoto = observer(() => {
     useEffect(() => {
@@ -156,14 +155,17 @@ const OneMoto = observer(() => {
                                             {t("oneMoto_page.added")}
                                         </button>
                                         :
-                                        <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>
+
+                                        <div className='d-flex justify-content-center align-items-center'>
                                             {
                                                 serverStore.IsMotoBuy ?
-                                                    t('oneMoto_page.infoBlock.btn-addingToCart')
+                                                    <button onClick={AddMotoToBasket} className='addToCart mainButton | btn p-3' disabled>{t('oneMoto_page.infoBlock.btn-addingToCart')}</button>
                                                     :
-                                                    t('oneMoto_page.infoBlock.btn-addToCart')
+                                                    <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
+
                                             }
-                                        </button>
+                                        </div>
+
                                 }
                             </div>
                         </div>
