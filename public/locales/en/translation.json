@@ -110,7 +110,9 @@
     },
     "yupErrors": {
         "required": "Not filled in",
-        "valid-name": "The field must contain min. {{num}} characters!",
+        "valid-field": "The field must contain min. {{num}} characters!",
+        "valid-maxLength": "The field must be shorter than {{num}} characters!",
+        "valid-phoneNumber": "It's not like a phone number!",
         "valid-email": "The email address must be valid!",
         "valid-password": "The password must contain at least {{num}} characters!",
         "valid-cardNumber": "The card number has 12 digits!"
@@ -157,7 +159,7 @@
         }
     },
     "oneMoto_page": {
-        "added":"Already in the cart!",
+        "added": "Already in the cart!",
         "techChar": {
             "btn-title": "Technical characteristics",
             "brand": "Brand",
@@ -210,9 +212,9 @@
         "details": "Details"
     },
     "fav_page": {
-        "openBtn":"Open Favorite",
-        "added":"Added!",
-        "favorite":"Favorite",
-        "No_chosen":"The card is empty"
+        "openBtn": "Open Favorite",
+        "added": "Added!",
+        "favorite": "Favorite",
+        "No_chosen": "The card is empty"
     }
 }

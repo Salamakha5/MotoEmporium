@@ -36,10 +36,10 @@ const Register = observer(() => {
             confirmPassword: ''
         },
         validationSchema: Yup.object({
-            name: Yup.string().required(t('yupErrors.required')).min(4, t('yupErrors.valid-name')),
-            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')),
-            password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password')),
-            confirmPassword: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password')),
+            name: Yup.string().required(t('yupErrors.required')).min(4, t('yupErrors.valid-field', { num: 4 })).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
+            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
+            password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password', { num: 5 })).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
+            confirmPassword: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password', { num: 5 })).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
         })
     })
 
