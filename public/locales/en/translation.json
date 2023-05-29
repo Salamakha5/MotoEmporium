@@ -215,6 +215,30 @@
         "openBtn": "Open Favorite",
         "added": "Added!",
         "favorite": "Favorite",
-        "No_chosen": "The card is empty"
+        "No_chosen": "Not have favorites"
+    },
+    "payment_page": {
+        "contactDetails": {
+            "title": "Contact Details",
+            "full_name": "Full Name",
+            "number_phone": "Number phone",
+            "city": "City",
+            "department": "Department"
+        },
+        "cardDetails": {
+            "method-title": "Payment details",
+            "method-credit_card": "Credit Card",
+            "card_number": "Card Number",
+            "expiration-title": "Expiration",
+            "expiration-mm": "MM",
+            "expiration-yy": "YY"
+        },
+        "preorderDetails": {
+            "title": "Your order:",
+            "suptitle": "And {{ num }} motorcycles type",
+            "payment_regulations": "By clicking “Confirm Payment”, you agree to our store regulations.",
+            "btn-cancel": "Cancel",
+            "btn-confirm": "Confirm Payment"
+        }
     }
 }

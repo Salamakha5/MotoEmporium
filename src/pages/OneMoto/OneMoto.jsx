@@ -161,7 +161,7 @@ const OneMoto = observer(() => {
                                                 serverStore.IsMotoBuy ?
                                                     <button onClick={AddMotoToBasket} className='addToCart mainButton | btn p-3' disabled>{t('oneMoto_page.infoBlock.btn-addingToCart')}</button>
                                                     :
-                                                    <button onClick={AddMotoToBasket} className='addToCart mainButton | btn'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
+                                                    <button onClick={AddMotoToBasket} className='addToCart mainButton | btn p-3'>{t('oneMoto_page.infoBlock.btn-addToCart')}</button>
 
                                             }
                                         </div>

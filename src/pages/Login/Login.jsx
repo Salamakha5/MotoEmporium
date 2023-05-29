@@ -40,8 +40,8 @@ const Login = observer(() => {
             password: 'testpassword'
         },
         validationSchema: Yup.object({
-            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
-            password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password', { num: 5 })).max(20, t('yupErrors.valid-maxLength', { num: 20 }))
+            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
+            password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 }))
         })
     })
 

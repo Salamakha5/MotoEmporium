@@ -219,5 +219,29 @@
         "added": "Добавлено!",
         "favorite": "Обране",
         "No_chosen": "Обраних немає"
+    },
+    "payment_page": {
+        "contactDetails": {
+            "title": "Контактні дані",
+            "full_name": "Повне ім'я",
+            "number_phone": "Номер телефону",
+            "city": "Місто",
+            "department": "Відділення"
+        },
+        "cardDetails": {
+            "method-title": "Реквізити для оплати",
+            "method-credit_card": "Кредитна картка",
+            "card_number": "Номер картки",
+            "expiration-title": "Закінчення терміну дії",
+            "expiration-mm": "ММ",
+            "expiration-yy": "РР"
+        },
+        "preorderDetails": {
+            "title": "Ваше замовлення:",
+            "suptitle": "І {{ num }} типів мотоциклів",
+            "payment_regulations": "Натискаючи кнопку \"Підтвердити платіж\", ви погоджуєтеся з правилами нашого магазину.",
+            "btn-cancel": "Скасувати",
+            "btn-confirm": "Підтвердити платіж"
+        }
     }
 }
