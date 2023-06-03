@@ -11,7 +11,8 @@
         "actions": {
             "actionsBtnName": "Actions",
             "actionsAdmin": "Admin panel",
-            "actionsExit": "Exit"
+            "actionsExit": "Exit",
+            "actionsOffis":"Personal office"
         },
         "loginBtn": "Login",
         "modal_windows": {
@@ -216,5 +217,13 @@
         "added": "Added!",
         "favorite": "Favorite",
         "No_chosen": "The card is empty"
+    },
+    "office_Page":{
+        "errors":{
+            "required":"Is a required field",
+            "email":"Invalid Email",
+            "minLen":"Minimum 5 characters",
+            "maxLen":"Minimum 20 characters"
+        }
     }
 }

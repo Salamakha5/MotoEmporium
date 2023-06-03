@@ -6,6 +6,7 @@ class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
     userIsAuth = false
     MotoData = []
+    UserData = []
     MotoDataCopy = []
     OneMoto = []
     threeMotoCard = []
@@ -66,6 +67,7 @@ class ServerStore {
                 token: decToken
             })
                 .then((response) => {
+                    this.UserData = response.data
                     this.userIsAuth = response.data.isAuth
                     this.UserName = response.data.user.name
                     decodedResult = 'succes'

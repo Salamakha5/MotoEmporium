@@ -18,6 +18,7 @@ import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react"
 import { useTranslation } from 'react-i18next';
+import PersonalOffice from "./pages/PersonalOffice/PersonalOffice"
 
 const App = observer(() => {
 
@@ -57,6 +58,7 @@ const App = observer(() => {
                                 <Route path='moto' element={<OneMoto />} />
                                 <Route path='basket' element={<BasketPage />} />
                                 <Route path='payment' element={<Payment />} />
+                                <Route path='office' element={<PersonalOffice />} />
                             </Route>
                             :
                             <Route>

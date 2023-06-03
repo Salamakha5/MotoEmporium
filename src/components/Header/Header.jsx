@@ -39,7 +39,13 @@ const Header = observer(() => {
 
     const activeLink = ({ isActive }) => (isActive ? 'nav-item main-link active' : 'nav-item main-link')
 
-    const langSwitchHandler = () => { (i18n.language == 'en') ? changeLanguage("ua") : changeLanguage("en") };
+    const langSwitchHandler = () => { 
+        if(i18n.language == 'en'){
+            changeLanguage("ua")
+        }else{
+            changeLanguage("en") 
+        }
+    };
 
     function exitHandler() {
         alertify.confirm(t('header.modal_windows.exit-title'), t('header.modal_windows.exit-text'),
@@ -94,12 +100,18 @@ const Header = observer(() => {
                             }
                         </div>
                         <NavLink className={activeLink} to='/contact' element={<Contact />}>{t('header.contactsLink')}</NavLink>
-                        <div className='header__nav-dropdown'>
+                        <div className='header__nav-dropdown '>
                             <button type="button" className="header__nav-dropdownBtn main-link nav-item | btn dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
                             >{t('header.actions.actionsBtnName')}</button>
-                            <ul className="dropdown-menu">
-                                <li className='dropdown-item'> <i className="bi bi-terminal-fill me-2"></i> {t('header.actions.actionsAdmin')} </li>
+                            <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
+                                
+                            {
+                                serverStore.userIsAuth?
+                                <li className='dropdown-item d-flex justify-content-center align-items-center fs-4'><NavLink className="navlink_header" to="office" ><i className="bi bi-terminal-fill me-2"></i>{t("header.actions.actionsOffis")}</NavLink></li>
+                                :
+                                <li className='dropdown-item d-flex justify-content-center align-items-center fs-4'><NavLink className="navlink_header" to="login" ><i className="bi bi-terminal-fill me-2"></i>{t("header.actions.actionsOffis")}</NavLink></li>
+                            }
                                 <li className='d-flex justify-content-center'>
                                     <div className="lang-switcher | form-switch">
                                         <div className='lang lang-en'>EN</div>

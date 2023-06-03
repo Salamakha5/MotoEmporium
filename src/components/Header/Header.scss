@@ -6,7 +6,9 @@
     padding: 10px 0 10px 40px;
     display: flex;
     justify-content: space-between;
-
+    .navlink_header{
+        color:black;
+    }
     .decodedInfo-cont {
         position: fixed;
         top: 90px;
@@ -25,6 +27,7 @@
             right: -30px;
             transform: scale(0.3);
         }
+      
 
         @keyframes shadowPulse {
             0% {

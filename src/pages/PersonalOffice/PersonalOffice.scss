@@ -1,0 +1,35 @@
+@import '../../scss/variables';
+
+
+.PresonalOffice_container{
+    padding: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .fs-italic{
+        font-style: italic;
+        font-size: 20px;
+        font-weight: 900;
+    }
+    .input_text{
+        font-style: italic;
+    }
+    .pointer:hover{
+        cursor: pointer;
+    }
+    .pointer{
+        position: absolute;
+        right: 0px;
+    }
+    .aa{
+        position: relative;
+    }
+    .validError{
+        font-size: 15px;
+        color: brown;
+    }
+    .postError{
+        font-size: 20px;
+        color: brown;
+    }
+
+}

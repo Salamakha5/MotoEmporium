@@ -40,7 +40,7 @@ const Login = observer(() => {
             password: 'testpassword'
         },
         validationSchema: Yup.object({
-            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
+            email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
             password: Yup.string().required(t('yupErrors.required')).min(5, t('yupErrors.valid-password', { num: 5 })).max(20, t('yupErrors.valid-maxLength', { num: 20 }))
         })
     })
@@ -56,6 +56,7 @@ const Login = observer(() => {
             password: `${password}`
         })
             .then((response) => {
+                serverStore.UserData = response.data
                 serverStore.userIsAuth = response.data.isAuth
                 setShowPageLoader(false);
                 localStorage.setItem("IsAuthMOTO", response.data.token)
@@ -130,7 +131,6 @@ const Login = observer(() => {
                     <div className="password-wrap">
                         <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder={t('login.password-placeholder')}
                             onChange={formik.handleChange} value={formik.values.password} />
-
                         <button type='button' onClick={changeIconsClass} className="btn-show_password"><i id="button1" className={"fs-3 " + iconsLock1}></i></button>
                         <label className='error'>{formik.errors.password ? formik.errors.password : ""}</label>
                     </div>
