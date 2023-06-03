@@ -258,12 +258,16 @@
                 bottom: 0;
                 left: 0;
                 box-shadow: 0 -5px 10px 15px rgba(255, 255, 255, 0.3);
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, mix(rgba(0, 0, 0, 0), $mainColor, 30%) 50%, rgba(0, 0, 0, 1) 110%);
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, mix(rgba(0, 0, 0, 0), $mainColor, 20%) 50%, rgba(0, 0, 0, 1) 110%);
                 border-radius: 0 0 20px 20px;
                 padding: 0 20px 20px 20px;
                 width: 100%;
-                max-height: 50%;
+                max-height: 60%;
+                overflow: hidden;
 
+                @media (max-width: 600px) {
+                    max-height: 90%;
+                }
                 .title {
                     @include fontSettings($mainFont, 30px, 700);
                     line-height: 36px;
@@ -282,8 +286,8 @@
                     color: black;
 
                     @media (max-width: 360px) {
-                        font-size: 18px;
-                        line-height: 22px;
+                        font-size: 16px;
+                        line-height: 20px;
                         padding: 5px 0;
                     }
                 }

@@ -79,8 +79,10 @@ const BasketPage = observer(() => {
                             </div>
                             <div className="mt-5 d-flex justify-content-center align-items-center">
                                 {/* перехід на сторінку оплати */}
-                                <button className="btn_basket"
-                                    onClick={goToPayment}>{t("basket_page.btn_buyMoto")}</button>
+                                {basketStore.BasketData.length > 0 ?
+                                    <button className="btn_basket" onClick={goToPayment}>{t("basket_page.btn_buyMoto")}</button>
+                                    : <button className="btn_basket btn disabled">{t("basket_page.btn_buyMoto")}</button>
+                                }
                             </div>
                         </div>
 
