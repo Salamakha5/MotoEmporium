@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import { useTranslation } from 'react-i18next';
 import alertify from 'alertifyjs'
+import axios from 'axios';
 
 const Payment = () => {
 
@@ -74,25 +75,53 @@ const Payment = () => {
         i++
         orderNamesSemicolon += `${i}.${element.brand} - ${element.model} x${element.current}; `
     })
+    function generateRandoSerialNumber(length) {
+        let randomNum = '#'
+        for (let i = 0; i < length; i++) {
+            const digit = Math.floor(Math.random() * 10);
+            randomNum += digit;
+        }
+        return randomNum
+    }
 
     function confirmPayment() {
         const { fullName, phoneNumber, city, departament } = contactformik.values
         const { cardNumber, expirationMM, expirationYY, cvv } = cardformik.values
 
         if ((cardformik.isValid && cardformik.dirty) && (contactformik.isValid && contactformik.dirty)) {
+            let motoArr = []
+            for (let i = 0; i < basketStore.BasketData.length; i++) {
+                motoArr.push(
+                    {
+                        model: basketStore.BasketData[i].model,
+                        price: basketStore.BasketData[i].price,
+                        brand: basketStore.BasketData[i].brand,
+                        current: basketStore.BasketData[i].current,
+                    }
+                )
+            }
 
             // тут по ідеї має даватись запит до платіжної системи 
             // і якщо все добре то виконується наступний код
-            // if (pay == succes) {
+            axios.post("https://moto-server.onrender.com/api/OrderMoto",
+                {
+                    fullName: fullName,
+                    PhoneNumber: phoneNumber,
+                    City: city,
+                    PostOffice: departament,
+                    SerialNumber: generateRandoSerialNumber(7),
+                    DateOfBuy: new Date().toLocaleDateString(),
+                    UserEmail: serverStore.UserData.user.email,
+                    BuyedMoto: motoArr,
+                    AllPrice: basketStore.AllPriceMoto,
+                    CreditCard: cardNumber
+                }
+            )
+                .then((response) => {
+                    let orderNamesBr = ''
+                    toJS(basketStore.BasketData).forEach(e => orderNamesBr += `</br>${e.brand} - ${e.model} x${e.current}`)
 
-            // тут до БД надходить інформація про замовлення
-
-            // alertify.alert('Успіх', `<img src=${smileFace}>`, function () { alertify.success('navigate(/)'); });
-
-            let orderNamesBr = ''
-            toJS(basketStore.BasketData).forEach(e => orderNamesBr += `</br>${e.brand} - ${e.model} x${e.current}`)
-
-            alertify.alert('Успіх', `
+                    alertify.alert('Успіх', `
             <div class='d-flex justify-content-center'><img src=${smileFace} alt='smile face' /></div>
             </br> <span class='fs-5 fw-bold'>Контакти замовника:</span>
             </br>Ім'я: ${fullName} 
@@ -105,11 +134,17 @@ const Payment = () => {
             </br> </br>
             </br> <span class='fs-5 fw-bold'>Інформація про замовлення:</span>
             ${orderNamesBr}`,
-                function () { alertify.success('navigate(/)'); });
+                function () { 
+                    localStorage.removeItem("BasketMoto")
+                    window.location.href = "/office"
+                 });
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
 
-            // } else {
-            //          alert('not have money' or 'something else')
-            // }
+
+            // alertify.alert('Успіх', `<img src=${smileFace}>`, function () { alertify.success('navigate(/)'); });
 
         } else {
             alert('something is wrong')

@@ -15,9 +15,20 @@ const PersonalOffice = observer(() => {
 
   const [oldEye, setOldEye] = useState(false)
   const [newEye, setNewEye] = useState(false)
-  const [postErrors, setSetPostErrors] = useState({UA:"",EN:""})
+  const [postErrors, setSetPostErrors] = useState({ UA: "", EN: "" })
+  const [orderArray, setorderArray] = useState([])
   const { t } = useTranslation();
 
+  useEffect(() => {
+    axios.post("https://moto-server.onrender.com/api/getOrdersToEmail", { email: serverStore.UserData.user.email })
+      .then((response) => {
+        console.log(response);
+        setorderArray(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
 
   // Formik
   const formik = useFormik({
@@ -35,28 +46,39 @@ const PersonalOffice = observer(() => {
     }),
     onSubmit: function (value) {
       // value - дані з форм 
-      axios.post("https://moto-server.onrender.com/api/changeUserSetting",{formValue:value})
-      .then((response)=>{
-        console.log(response);
-        alert("Response")
-        setSetPostErrors({UA:"",EN:""})
-        localStorage.setItem("IsAuthMOTO","")
-        window.location.href = "/login"
-      })
-      .catch((errors)=>{
-        console.log(errors.response.data);
-        setSetPostErrors(errors.response.data)
-      })
+      axios.post("https://moto-server.onrender.com/api/changeUserSetting", { formValue: value })
+        .then((response) => {
+          console.log(response);
+          alert("Response")
+          setSetPostErrors({ UA: "", EN: "" })
+          localStorage.setItem("IsAuthMOTO", "")
+          window.location.href = "/login"
+        })
+        .catch((errors) => {
+          console.log(errors.response.data);
+          setSetPostErrors(errors.response.data)
+        })
 
     }
   })
   // Formik
+  function deleteUser(){
+    axios.post("http://localhost:4000/api/deleteUser",{id:serverStore.UserData.user.id})
+    .then((response)=>{
+      localStorage.removeItem("IsAuthMOTO")
+      serverStore.userIsAuth = false
+      window.location.href = "/login"
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  }
 
   return (
     <div className="PresonalOffice_container | row m-0">
 
 
-        {/* <input type="text" name="password" id="password" className="" placeholder={t('login.password-placeholder')}/> */}
+      {/* <input type="text" name="password" id="password" className="" placeholder={t('login.password-placeholder')}/> */}
 
 
 
@@ -66,9 +88,12 @@ const PersonalOffice = observer(() => {
         <div>
           {/* Замовлення */}
           {
-            [1, 2, 3, 4].map((data) => {
-              return <OneOrder key={data}></OneOrder>
-            })
+            orderArray.length >= 1
+              ?
+              orderArray.map((data) => {
+                return <OneOrder data={data} key={data._id}></OneOrder>
+              })
+              : <div className="text-center fs-4 mt-3">Замвлень немає..</div>
           }
           {/* Замовлення */}
         </div>
@@ -79,7 +104,7 @@ const PersonalOffice = observer(() => {
           <div className="col">
             <input id="email" name="email" type="text" className="form-control forms_bot_line login-form__password" placeholder="Ваш Email"
               value={formik.values.email}
-              onChange={()=>false}
+              onChange={() => false}
             />
             <span className="validError">{formik.errors.email}</span>
           </div>
@@ -126,17 +151,17 @@ const PersonalOffice = observer(() => {
         <div className="postError | mt-2 text-center ">
           {
             localStorage.getItem("i18nextLng") == "ua"
-            ?
-            postErrors.UA
-            :
-            postErrors.EN
+              ?
+              postErrors.UA
+              :
+              postErrors.EN
           }
         </div>
 
 
         <div className="d-flex justify-content-center align-items-center">
           <button type="submit" className="btn mainButton mt-5 p-3" >Змінити данні</button>
-          <button type="button" className="btn mainButton mt-5 p-3 ms-3">Видалити акаунт</button>
+          <button type="button" className="btn mainButton mt-5 p-3 ms-3" onClick={deleteUser}>Видалити акаунт</button>
         </div>
       </form>
     </div>
