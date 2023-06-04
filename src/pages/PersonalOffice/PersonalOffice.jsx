@@ -63,7 +63,7 @@ const PersonalOffice = observer(() => {
   })
   // Formik
   function deleteUser(){
-    axios.post("http://localhost:4000/api/deleteUser",{id:serverStore.UserData.user.id})
+    axios.post("https://moto-server.onrender.com/api/deleteUser",{id:serverStore.UserData.user.id})
     .then((response)=>{
       localStorage.removeItem("IsAuthMOTO")
       serverStore.userIsAuth = false
