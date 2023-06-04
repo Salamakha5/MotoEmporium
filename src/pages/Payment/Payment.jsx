@@ -37,7 +37,10 @@ const Payment = () => {
 
     const contactformik = useFormik({
         initialValues: {
-            // phoneNumber: ,
+            // fullName: 'Roma rozrobnik',
+            // phoneNumber: '7894561235',
+            // city: 'Шкло',
+            // departament: 'Вулиця бандери 69, відділення 1'
         },
         validationSchema: Yup.object({
             fullName: Yup.string().required(t('yupErrors.required'))
@@ -52,7 +55,10 @@ const Payment = () => {
     })
     const cardformik = useFormik({
         initialValues: {
-            // cardNumber: '',
+            // cardNumber: '458796235689',
+            // expirationMM: '02',
+            // expirationYY: '28',
+            // cvv: '123',
         },
         validationSchema: Yup.object({
             cardNumber: Yup.string().required(t('yupErrors.required'))
@@ -69,13 +75,13 @@ const Payment = () => {
     const [paymentMethod, setPaymentMethod] = useState('credit card')
     function methodHandler(e) { setPaymentMethod(e.target.value) }
 
-    let orderNamesSemicolon = 'And '
+    let orderNamesSemicolon = ''
     let i = 1
     toJS(basketStore.BasketData).slice(1).forEach(element => {
         i++
-        orderNamesSemicolon += `${i}.${element.brand} - ${element.model} x${element.current}; `
+        orderNamesSemicolon += `And ${i}.${element.brand} - ${element.model} x${element.current}; `
     })
-    function generateRandoSerialNumber(length) {
+    function generateRandomSerialNumber(length) {
         let randomNum = '#'
         for (let i = 0; i < length; i++) {
             const digit = Math.floor(Math.random() * 10);
@@ -109,7 +115,7 @@ const Payment = () => {
                     PhoneNumber: phoneNumber,
                     City: city,
                     PostOffice: departament,
-                    SerialNumber: generateRandoSerialNumber(7),
+                    SerialNumber: generateRandomSerialNumber(7),
                     DateOfBuy: new Date().toLocaleDateString(),
                     UserEmail: serverStore.UserData.user.email,
                     BuyedMoto: motoArr,
@@ -117,37 +123,36 @@ const Payment = () => {
                     CreditCard: cardNumber
                 }
             )
-                .then((response) => {
+                .then(() => {
                     let orderNamesBr = ''
                     toJS(basketStore.BasketData).forEach(e => orderNamesBr += `</br>${e.brand} - ${e.model} x${e.current}`)
 
-                    alertify.alert('Успіх', `
-            <div class='d-flex justify-content-center'><img src=${smileFace} alt='smile face' /></div>
-            </br> <span class='fs-5 fw-bold'>Контакти замовника:</span>
-            </br>Ім'я: ${fullName} 
-            </br> Номер телефону: ${phoneNumber}
-            </br>Місто: ${city}
-            </br>Відділення: ${departament}
-            </br>Спосіб оплати: ${paymentMethod} 
-            </br>Номер картки: ${cardNumber} 
-            </br>Темін дії: ${expirationMM} / ${expirationYY} | cvv: ${cvv} 
-            </br> </br>
-            </br> <span class='fs-5 fw-bold'>Інформація про замовлення:</span>
-            ${orderNamesBr}`,
-                function () { 
-                    localStorage.removeItem("BasketMoto")
-                    window.location.href = "/office"
-                 });
+                    alertify.alert(t('payment_page.payAlert.title'), `
+                            <div class='alertSmileFace-cont'><img src=${smileFace} alt='smile face' /></div>
+                            </br> <span class='fw-bold'>${t('payment_page.payAlert.suptitle')}</span> \n
+                            </br> </br>
+                            <span class='fs-5 fw-bold'>${t('payment_page.payAlert.contactsTitle')}:</span>
+                            </br> ${t('payment_page.payAlert.name')}: ${fullName} 
+                            </br> ${t('payment_page.payAlert.phoneNumber')}: ${phoneNumber}
+                            </br> ${t('payment_page.payAlert.city')}: ${city}
+                            </br> ${t('payment_page.payAlert.departament')}: ${departament}
+                            </br> ${t('payment_page.payAlert.paymentMethod')}: ${paymentMethod} 
+                            </br> ${t('payment_page.payAlert.cardNumber')}: ${cardNumber} 
+                            </br> ${t('payment_page.payAlert.expiration')}: ${expirationMM} / ${expirationYY} | cvv: ${cvv} 
+                            </br> </br>
+                            <span class='fs-5 fw-bold'>${t('payment_page.payAlert.orderTitle')}:</span>
+                            ${orderNamesBr}`,
+                        function () {
+                            localStorage.removeItem("BasketMoto")
+                            window.location.href = "/office"
+                        })
                 })
                 .catch((error) => {
                     console.log(error);
                 })
 
-
-            // alertify.alert('Успіх', `<img src=${smileFace}>`, function () { alertify.success('navigate(/)'); });
-
         } else {
-            alert('something is wrong')
+            alertify.alert("Not today", 'Something is wrong')
         }
 
     }

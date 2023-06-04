@@ -1,5 +1,7 @@
+@import "../../scss/variables.scss";
 .oneOrder_container{
-    background-color: aliceblue;
+    // цей колір відштовхується від основного кольору 
+    background-color: mix(rgba(255, 255, 255, 0), $mainColor, 85%);
     margin: 0px;
     margin-top: 6px;
     padding: 8px;
@@ -35,4 +37,9 @@
         }
     }
    
+}
+
+.ajs-button .ajs-ok {
+    color: red;
+    background-color: red;
 }

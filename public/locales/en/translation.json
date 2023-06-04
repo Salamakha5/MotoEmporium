@@ -12,7 +12,7 @@
             "actionsBtnName": "Actions",
             "actionsAdmin": "Admin panel",
             "actionsExit": "Exit",
-            "actionsOffis":"Personal office"
+            "actionsOffis": "Personal office"
         },
         "loginBtn": "Login",
         "modal_windows": {
@@ -240,14 +240,27 @@
             "payment_regulations": "By clicking “Confirm Payment”, you agree to our store regulations.",
             "btn-cancel": "Cancel",
             "btn-confirm": "Confirm Payment"
+        },
+        "payAlert": {
+            "title": "Succes",
+            "suptitle": "We have accepted your order, the manager will contact you soon!",
+            "contactsTitle": "Сustomer contact",
+            "name": "Name",
+            "phoneNumber": "Phone Number",
+            "city": "City",
+            "departament": "Departament",
+            "paymentMethod": "Payment method",
+            "cardNumber": "Card number",
+            "expiration": "Expiration",
+            "orderTitle": "Order information"
         }
     },
-    "office_Page":{
-        "errors":{
-            "required":"Is a required field",
-            "email":"Invalid Email",
-            "minLen":"Minimum 5 characters",
-            "maxLen":"Minimum 20 characters"
+    "office_Page": {
+        "errors": {
+            "required": "Is a required field",
+            "email": "Invalid Email",
+            "minLen": "Minimum 5 characters",
+            "maxLen": "Minimum 20 characters"
         }
     }
 }
