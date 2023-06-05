@@ -44,13 +44,13 @@ const Payment = () => {
         },
         validationSchema: Yup.object({
             fullName: Yup.string().required(t('yupErrors.required'))
-                .min(4, t('yupErrors.valid-field', { num: 4 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
+                .min(4, t('yupErrors.valid-field', { num: 4 })).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
             phoneNumber: Yup.string().required(t('yupErrors.required'))
                 .min(10, t('yupErrors.valid-field', { num: 10 })).max(15, t('yupErrors.valid-maxLength', { num: 15 })),
             city: Yup.string().required(t('yupErrors.required'))
-                .min(4, t('yupErrors.valid-field', { num: 4 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
+                .min(4, t('yupErrors.valid-field', { num: 4 })).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
             departament: Yup.string().required(t('yupErrors.required'))
-                .min(4, t('yupErrors.valid-field', { num: 4 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
+                .min(4, t('yupErrors.valid-field', { num: 4 })).max(10, t('yupErrors.valid-maxLength', { num: 10 })),
         })
     })
     const cardformik = useFormik({

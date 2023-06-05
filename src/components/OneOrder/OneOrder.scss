@@ -1,5 +1,6 @@
 @import "../../scss/variables.scss";
 .oneOrder_container{
+    overflow: hidden;
     // цей колір відштовхується від основного кольору 
     background-color: mix(rgba(255, 255, 255, 0), $mainColor, 85%);
     margin: 0px;
@@ -36,7 +37,6 @@
 
         }
     }
-   
 }
 
 .ajs-button .ajs-ok {

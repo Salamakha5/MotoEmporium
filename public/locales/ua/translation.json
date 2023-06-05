@@ -259,11 +259,36 @@
         }
     },
     "office_Page": {
+        "Hello":"Привіт",
+        "RecentOrders":"Останні замовлення",
+        "SettingOffice":"Налаштунки особистого кабінету",
+        "ChangeName":"Змінити і'мя",
+        "ChangePassword":"Змінити пароль",
+        "OldPass":"Старий пароль",
+        "NewPass":"Новий пароль",
+        "ChangeBtn":"Змінити дані",
+        "DeleteUser":"Видалити акаунт",
+        "noOrders":"Замовлень немає..",
         "errors": {
             "required": "Незаповнене",
             "email": "Неправильний Email",
             "minLen": "Мінімум 5 символа",
             "maxLen": "Максимум 20 символів"
         }
+    },
+    "Order_Page":{
+        "DateOfOrder":"Дата зам.",
+        "FullName":"ПІБ",
+        "Status":"Сатус",
+        "Packaging":"Пакування",
+        "City":"Місто",
+        "Phone":"Номер",
+        "OrderList":"Список замовлення",
+        "Card":"Карта",
+        "Discount":"Знижка",
+        "AllPrice":"Загальна сумма",
+        "SettPhone":"Тех. Номер",
+        "DeleteOrder":"Відмінити замовлення",
+        "Details":"Детальніше"
     }
 }

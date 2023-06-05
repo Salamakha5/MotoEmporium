@@ -90,9 +90,9 @@ const PersonalOffice = observer(() => {
     return (
         <div className="PresonalOffice_container | row m-0">
             {/* <input type="text" name="password" id="password" className="" placeholder={t('login.password-placeholder')}/> */}
-            <div className="col border-end border-2 border-dark pb-3">
-                <div className="fs-5">Привіт, <span className="fs-italic">{serverStore.UserName}</span></div>
-                <div className="pt-3 pb-1 fs-4 text-center">Останні замовлення</div>
+            <div className="col_border || col-12 col-lg-5 pb-3">
+                <div className="fs-5">{t("office_Page.Hello")}, <span className="fs-italic">{serverStore.UserName}</span></div>
+                <div className="pt-3 pb-1 fs-4 text-center">{t("office_Page.RecentOrders")}</div>
                 <div>
                     {/* Замовлення */}
                     {
@@ -101,23 +101,23 @@ const PersonalOffice = observer(() => {
                             orderArray.map((data) => {
                                 return <OneOrder data={data} key={data._id}></OneOrder>
                             })
-                            : <div className="text-center fs-4 mt-3">Замвлень немає..</div>
+                            : <div className="text-center fs-4 mt-3">{t("office_Page.noOrders")}</div>
                     }
                     {/* Замовлення */}
                 </div>
             </div>
-            <form onSubmit={formik.handleSubmit} className={"col-7 " + PersonalOfficeStore.test}>
-                <div className="pt-3 fs-4 text-center ">Налаштунки особистого кабінету</div>
+            <form onSubmit={formik.handleSubmit} className={"col-12 col-lg-7 " + PersonalOfficeStore.test}>
+                <div className="pt-3 fs-4 text-center ">{t("office_Page.SettingOffice")}</div>
                 <div className="row m-0 pt-4">
-                    <div className="col">
-                        <input id="email" name="email" type="text" className="form-control forms_bot_line login-form__password" placeholder="Ваш Email"
+                    <div className="col-12 col-md-6 pb-4">
+                        <input id="email" name="email" type="text" className="form-control forms_bot_line login-form__password" 
                             value={formik.values.email}
                             onChange={() => false}
                         />
                         <span className="validError">{formik.errors.email}</span>
                     </div>
-                    <div className="col">
-                        <input type="text" id="name" name="name" className="form-control forms_bot_line login-form__password" placeholder="Змінити Ім'я"
+                    <div className="col-12 col-md-6 pb-4">
+                        <input type="text" id="name" name="name" className="form-control forms_bot_line login-form__password" placeholder={t("office_Page.ChangeName")}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.name}
@@ -126,11 +126,11 @@ const PersonalOffice = observer(() => {
 
                     </div>
                 </div>
-                <div className="text-center fs-3 pt-5 pb-3">Змінити пароль</div>
-                <div className="row m-0 pt-4">
-                    <div className="col">
+                <div className="text-center fs-3 pt-2 pb-3">{t("office_Page.ChangePassword")}</div>
+                <div className="row m-0 pt-4 w-100">
+                    <div className="col-12 col-md-6 pb-4">
                         <div className="d-flex align-items-center position-relative">
-                            <input type={oldEye ? "text" : "password"} id="oldPass" name="oldPass" className="form-control forms_bot_line login-form__password" placeholder="Старий пароль"
+                            <input type={oldEye ? "text" : "password"} id="oldPass" name="oldPass" className="form-control forms_bot_line login-form__password" placeholder={t("office_Page.OldPass")}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.oldPass}
@@ -141,9 +141,9 @@ const PersonalOffice = observer(() => {
                         </div>
                         <span className="validError">{formik.errors.oldPass}</span>
                     </div>
-                    <div className="col">
+                    <div className="col-12 col-md-6 pb-4">
                         <div className="d-flex align-items-center position-relative">
-                            <input type={newEye ? "text" : "password"} id="newPass" name="newPass" className="form-control forms_bot_line login-form__password" placeholder="Новий пароль"
+                            <input type={newEye ? "text" : "password"} id="newPass" name="newPass" className="form-control forms_bot_line login-form__password" placeholder={t("office_Page.NewPass")}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.newPass}
@@ -168,8 +168,8 @@ const PersonalOffice = observer(() => {
 
 
                 <div className="d-flex justify-content-center align-items-center">
-                    <button type="submit" className="btn mainButton mt-5 p-3" >Змінити данні</button>
-                    <button type="button" className="btn mainButton mt-5 p-3 ms-3" onClick={sureWantDeleteAccount}>Видалити акаунт</button>
+                    <button type="submit" className="btn mainButton mt-5 p-3" >{t("office_Page.ChangeBtn")}</button>
+                    <button type="button" className="btn mainButton mt-5 p-3 ms-3" onClick={sureWantDeleteAccount}>{t("office_Page.DeleteUser")}</button>
                 </div>
             </form>
         </div>

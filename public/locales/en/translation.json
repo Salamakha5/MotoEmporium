@@ -256,11 +256,37 @@
         }
     },
     "office_Page": {
+        "Hello":"Hello",
+        "RecentOrders":"Recent Orders",
+        "SettingOffice":"Personal account settings",
+        "ChangeName":"Change Name",
+        "OldPass":"Old password",
+        "ChangePassword":"Change Password",
+        "NewPass":"New password",
+        "ChangeBtn":"Change data",
+        "DeleteUser":"Delete account",
+        "noOrders":"There are no orders..",
+
         "errors": {
             "required": "Is a required field",
             "email": "Invalid Email",
             "minLen": "Minimum 5 characters",
             "maxLen": "Minimum 20 characters"
         }
+    },
+    "Order_Page":{
+        "DateOfOrder":"Order date",
+        "FullName":"Full Number",
+        "Status":"Status",
+        "City":"City",
+        "Phone":"Phone",
+        "Packaging":"Packaging",
+        "OrderList":"Order list",
+        "Card":"Credit Card",
+        "Discount":"Discount",
+        "AllPrice":"All price",
+        "SettPhone":"Tech. number",
+        "DeleteOrder":"Delete order",
+        "Details":"Details"
     }
 }

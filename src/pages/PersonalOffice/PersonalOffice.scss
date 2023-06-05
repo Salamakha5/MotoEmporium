@@ -8,6 +8,9 @@
     padding: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
+    .col_border{
+        border-right:2px solid black;
+    }
     .fs-italic{
         font-style: italic;
         font-size: 20px;
@@ -33,6 +36,17 @@
     .postError{
         font-size: 20px;
         color: brown;
+    }
+    @media(max-width:993px){
+        .col_border{
+            border:none;
+        }  
+        padding-left: 0px; 
+        padding-right: 0px; 
+    }
+    @media(max-width:700px){
+        padding-left: 0px; 
+        padding-right: 0px; 
     }
 
 }

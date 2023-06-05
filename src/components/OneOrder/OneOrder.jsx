@@ -1,4 +1,5 @@
 import './OneOrder.scss'
+import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite'
 
 import React, { useState } from 'react'
@@ -13,6 +14,7 @@ const OneOrder = observer((props) => {
         if (FullOrderInfo) { setFullOrderInfo(!FullOrderInfo) }
         else { setFullOrderInfo(!FullOrderInfo) }
     }
+    const { t } = useTranslation();
 
     function DeleteOrder() {
         axios.post("https://moto-server.onrender.com/api/deleteOrderById", { id: props.data._id })
@@ -47,7 +49,7 @@ const OneOrder = observer((props) => {
                             </div>
                         </div>
                         <div className="col">
-                            <div className="text-end">Дата зам.- <span className='date_order'>{props.data.DateOfBuy}</span></div>
+                            <div className="text-end">{t("Order_Page.DateOfOrder")}- <span className='date_order'>{props.data.DateOfBuy}</span></div>
                             <div className='d-flex mt-2 justify-content-end align-items-center'>
 
                                 {FullOrderInfo ?
@@ -58,7 +60,7 @@ const OneOrder = observer((props) => {
                                     :
                                     <button className='mainButton | btn justify-content-end align-items-center'
                                         onClick={OpenFullOrder}>
-                                        <i className="bi bi-gear-fill me-1"></i> <span>Детальніше</span>
+                                        <i className="bi bi-gear-fill me-1"></i> <span>{t("Order_Page.Details")}</span>
                                     </button>
                                 }
                             </div>
@@ -67,13 +69,13 @@ const OneOrder = observer((props) => {
                         {
                             FullOrderInfo ?
                                 <div className='orderFull'>
-                                    <div className='d-flex justify-content-between'>
-                                        <p className='pb-2 fs-5'>ПІБ : {props.data.fullName}</p>
-                                        <p className='pb-2 fs-5'>Номер : {props.data.PhoneNumber}</p>
+                                    <div className='d-block d-md-flex justify-content-between'>
+                                        <p className='pb-2 fs-5'>{t("Order_Page.FullName")} : {props.data.fullName}</p>
+                                        <p className='pb-2 fs-5'>{t("Order_Page.Phone")} : {props.data.PhoneNumber}</p>
                                     </div>
-                                    <p className='fs-5 mb-2'>Статус - Пакування...</p>
-                                    <p className='fs-5 mb-2'>Місто - {props.data.City}/{props.data.PostOffice}</p>
-                                    <span>Список замовлення:</span>
+                                    <p className='fs-5 mb-2'>{t("Order_Page.Status")} - {t("Order_Page.Packaging")}...</p>
+                                    <p className='fs-5 mb-2'>{t("Order_Page.City")} - {props.data.City}/{props.data.PostOffice}</p>
+                                    <span>{t("Order_Page.OrderList")}:</span>
                                     <ol className='mt-2'>
                                         {
                                             props.data.BuyedMoto.map((data) => {
@@ -82,14 +84,14 @@ const OneOrder = observer((props) => {
                                         }
 
                                     </ol>
-                                    <p className='fs-5 mb-2'>Карта - {props.data.CreditCard}</p>
-                                    <div className='text_Discount | text-end mb-2'>Знижка 20%</div>
-                                    <div className='text-end'>Загальна сумма - <span className='text_Price'>{clientStore.formatPrice(props.data.AllPrice)}</span></div>
+                                    <p className='fs-5 mb-2'>{t("Order_Page.Card")} - {props.data.CreditCard}</p>
+                                    <div className='text_Discount | text-end mb-2'>{t("Order_Page.Discount")} 20%</div>
+                                    <div className='text-end'>{t("Order_Page.AllPrice")} - <span className='text_Price'>{clientStore.formatPrice(props.data.AllPrice)}</span></div>
                                     <div className='d-flex mt-3 justify-content-between align-items-center'>
-                                        <p>Тех. Нормер - +38012345678</p>
+                                        <p className='d-none d-sm-block'>{t("Order_Page.SettPhone")} - +38012345678</p>
                                         <button className='mainButton p-2'
                                             onClick={sureWantDeleteOrder}
-                                        >Відмінити замовлення</button>
+                                        >{t("Order_Page.DeleteOrder")}</button>
                                     </div>
                                 </div>
                                 :
