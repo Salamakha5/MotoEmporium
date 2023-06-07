@@ -1,0 +1,89 @@
+@import '../../scss/variables.scss';
+
+.admin {
+    min-height: 90vh;
+    padding: 20px;
+
+    .tabsContainer {
+        width: 100%;
+
+        .nav-tabs {
+            border-bottom: 1px solid $mainColor;
+            width: 99%;
+
+            .nav-link {
+                background-color: $mainColor2;
+                border-bottom: 1px solid $mainColor;
+                border-left: 1px solid white;
+                border-right: 1px solid white;
+                border-top: 1px solid white;
+                color: $mainColor;
+                opacity: 0.5;
+            }
+
+            .nav-link.active {
+                background-color: $mainColor2;
+                border-bottom: 1px solid $mainColor;
+                color: $mainColor;
+                opacity: 1;
+            }
+
+            .nav-item:has(.nav-link.disabled) {
+                cursor: not-allowed;
+            }
+        }
+
+    }
+
+    .tab-content {
+        width: 100%;
+    }
+
+    .tab-pane,
+    .tab-pane.active {
+        border: 0;
+    }
+
+    &__controlsWrap {
+        background-color: $mainColor2;
+        border-radius: 0 10px 10px 10px;
+
+        .controls-btnFind {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px 0 0;
+
+            @media (max-width: 575px) {
+                margin: 10px 0 20px 0;
+            }
+        }
+    }
+
+    .admin__supControls {
+        width: 100%;
+        padding-top: 20px;
+        padding-left: 20px;
+
+        .col,
+        .col-12,
+        .col-sm-12,
+        .col-md-6,
+        .col-lg-6,
+        .col-xl-6 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .error-shop {
+        color: brown;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+        @include fontSettings($mainFont, 35px, 700);
+        line-height: 50px;
+    }
+
+
+}

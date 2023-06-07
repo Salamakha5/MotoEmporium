@@ -42,6 +42,12 @@ body {
     line-height: 29px;
 }
 
+.italic-text {
+    font-family: "Courier New", Courier, monospace;
+    font-style: italic;
+    font-weight: 900;
+}
+
 // * start loader
 .loader-pageWrap {
     display: none;

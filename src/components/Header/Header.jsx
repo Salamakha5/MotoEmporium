@@ -3,17 +3,17 @@ import './Header.scss'
 import Home from '../../pages/Home/Home.jsx'
 import Login from '../../pages/Login/Login'
 import Shop from '../../pages/Shop/Shop'
-import serverStore from '../../store/serverStore.js'
 import Blog from '../../pages/Blog/Blog'
+import Contact from '../../pages/Contact/Contact'
+import BasketPage from '../../pages/Basket/BasketPage'
+import serverStore from '../../store/serverStore.js'
+import clientStore from '../../store/clientStore'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import alertify from 'alertifyjs'
-import Contact from '../../pages/Contact/Contact'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
-import clientStore from '../../store/clientStore'
-import BasketPage from '../../pages/Basket/BasketPage'
 
 const Header = observer(() => {
 
@@ -26,7 +26,6 @@ const Header = observer(() => {
 
     useEffect(() => {
         if (localStorage.i18nextLng !== 'ua') {
-            // ! цей іф потрібен, щоб мова змінювалась із першого кліку
             changeLanguage("en")
         }
     }, [])
@@ -39,11 +38,11 @@ const Header = observer(() => {
 
     const activeLink = ({ isActive }) => (isActive ? 'nav-item main-link active' : 'nav-item main-link')
 
-    const langSwitchHandler = () => { 
-        if(i18n.language == 'en'){
+    const langSwitchHandler = () => {
+        if (i18n.language == 'en') {
             changeLanguage("ua")
-        }else{
-            changeLanguage("en") 
+        } else {
+            changeLanguage("en")
         }
     };
 
@@ -69,6 +68,7 @@ const Header = observer(() => {
                             }
                         </div>
                         <div className="loader active" id="loader-2">
+                            {/* то малесенький лоадер */}
                             <span></span>
                             <span></span>
                             <span></span>
@@ -77,7 +77,9 @@ const Header = observer(() => {
                     : false
             }
 
-            <div className="header__logo" onClick={logoLink}>Moto Emporium</div>
+            <div className="header__logo" onClick={logoLink}>{
+                window.location.pathname === '/admin' ? "ME Admin" : "Moto Emporium"
+            }</div>
 
             <button className="header__mobileBtn | navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerToggler" aria-controls="headerToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -105,13 +107,23 @@ const Header = observer(() => {
                                 data-bs-toggle="dropdown" aria-expanded="false"
                             >{t('header.actions.actionsBtnName')}</button>
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                
-                            {
-                                serverStore.userIsAuth?
-                                <li className='dropdown-item d-flex justify-content-center align-items-center fs-4'><NavLink className="navlink_header" to="office" ><i className="bi bi-terminal-fill me-2"></i>{t("header.actions.actionsOffis")}</NavLink></li>
-                                :
-                                <li className='dropdown-item d-flex justify-content-center align-items-center fs-4'><NavLink className="navlink_header" to="login" ><i className="bi bi-terminal-fill me-2"></i>{t("header.actions.actionsOffis")}</NavLink></li>
-                            }
+                                <li className='dropdown-item'>
+                                    {
+                                        serverStore.userIsAuth ?
+                                            <NavLink className="dropdown-navLink" to="office" ><i className="bi bi-person-square me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
+                                            :
+                                            <NavLink className="dropdown-navLink" to="login" ><i className="bi bi-person-circle me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
+                                    }
+                                </li>
+                                {/* перехід на адміна */}
+                                <li className='dropdown-item'>
+                                    {
+                                        serverStore.userIsAuth ?
+                                            <NavLink className="dropdown-navLink" to="admin" ><i className="bi bi-person-fill-gear me-2"></i>Адмінка</NavLink>
+                                            :
+                                            <NavLink className="dropdown-navLink" to="login" ><i className="bi bi-person-fill-exclamation me-2"></i>Пішов ти в логін!</NavLink>
+                                    }
+                                </li>
                                 <li className='d-flex justify-content-center'>
                                     <div className="lang-switcher | form-switch">
                                         <div className='lang lang-en'>EN</div>
@@ -141,16 +153,6 @@ const Header = observer(() => {
                                     <button className='mainButton header__login-btn py-3 px-5'>{t('header.loginBtn')}</button>
                                 </NavLink>
                             </div>
-
-                        // (localStorage.getItem("IsAuthMOTO") != null && serverStore.tokenDecoded == false) ?
-                        //     <NavLink to='/#' element={<Login />}>
-                        //         <button className='mainButton header__login-btn | py-3 px-5 btn disabled'>{t('header.loginBtn')}</button>
-                        //     </NavLink>
-                        //     :
-                        //     <NavLink to='/login' element={<Login />}>
-                        //         <button className='mainButton header__login-btn | py-3 px-5'>{t('header.loginBtn')}</button>
-                        //     </NavLink>
-                        // }
                     }
                 </div>
             </div>

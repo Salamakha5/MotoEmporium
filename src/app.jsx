@@ -12,6 +12,7 @@ import serverStore from './store/serverStore'
 import OneMoto from "./pages/OneMoto/OneMoto"
 import BasketPage from "./pages/Basket/BasketPage"
 import Payment from "./pages/Payment/Payment"
+import Admin from "./pages/Admin/Admin"
 
 import alertify from 'alertifyjs'
 import { observer } from 'mobx-react-lite'
@@ -34,7 +35,7 @@ const App = observer(() => {
                     alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
                     serverStore.tokenDecoded = true
                 }
-                
+
             })
         } else {
             serverStore.tokenDecoded = true
@@ -53,13 +54,16 @@ const App = observer(() => {
                     <Route path='*' element={<NotFound />} />
                     {
                         serverStore.userIsAuth === true ?
-                            <Route path="/" element={<Layot />}>
-                                <Route path='shop' element={<Shop />} />
-                                <Route path='moto' element={<OneMoto />} />
-                                <Route path='basket' element={<BasketPage />} />
-                                <Route path='payment' element={<Payment />} />
-                                <Route path='office' element={<PersonalOffice />} />
-                            </Route>
+                            <>
+                                <Route path="/" element={<Layot />}>
+                                    <Route path='shop' element={<Shop />} />
+                                    <Route path='moto' element={<OneMoto />} />
+                                    <Route path='basket' element={<BasketPage />} />
+                                    <Route path='payment' element={<Payment />} />
+                                    <Route path='office' element={<PersonalOffice />} />
+                                    <Route path='admin' element={<Admin />} />
+                                </Route>
+                            </>
                             :
                             <Route>
                                 <Route path="/" element={<Layot />}>

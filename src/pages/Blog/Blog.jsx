@@ -16,7 +16,7 @@ const Blog = observer(() => {
     useEffect(() => {
 
         document.title = "Blog | MotoEmporium";
-        
+
         setShowPageLoader(true)
         newsStore.getAllNews(() => {
             setShowPageLoader(false)

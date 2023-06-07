@@ -1,0 +1,1 @@
+export { default as AdminNewsItem } from "./AdminNewsItem"
