@@ -110,7 +110,7 @@ const Header = observer(() => {
                                 <li className='dropdown-item'>
                                     {
                                         serverStore.userIsAuth ?
-                                            <NavLink className="dropdown-navLink" to="office" ><i className="bi bi-person-square me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
+                                            <NavLink className="dropdown-navLink" to="office" ><i className="bi bi-person-circle me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
                                             :
                                             <NavLink className="dropdown-navLink" to="login" ><i className="bi bi-person-circle me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
                                     }
@@ -121,7 +121,7 @@ const Header = observer(() => {
                                         serverStore.userIsAuth ?
                                             <NavLink className="dropdown-navLink" to="admin" ><i className="bi bi-person-fill-gear me-2"></i>Адмінка</NavLink>
                                             :
-                                            <NavLink className="dropdown-navLink" to="login" ><i className="bi bi-person-fill-exclamation me-2"></i>Пішов ти в логін!</NavLink>
+                                            <div className="dropdown-navLink disabled-admin"><i className="bi bi-person-fill-exclamation me-2"></i>Адмінка</div>
                                     }
                                 </li>
                                 <li className='d-flex justify-content-center'>

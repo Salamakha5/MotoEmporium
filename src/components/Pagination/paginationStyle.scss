@@ -1,6 +1,9 @@
 @import '../../scss/variables.scss';
 
 .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
     .page-link {
         color: $mainColor;

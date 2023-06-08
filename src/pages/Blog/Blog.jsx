@@ -10,11 +10,10 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from "react-router-dom";
 
 const Blog = observer(() => {
-    const navigate = useNavigate()
+
     const { t } = useTranslation();
 
     useEffect(() => {
-
         document.title = "Blog | MotoEmporium";
 
         setShowPageLoader(true)
@@ -24,17 +23,6 @@ const Blog = observer(() => {
     }, [])
 
     const [showPageLoader, setShowPageLoader] = useState(false)
-    const [currentPage, setcurrentPage] = useState(1)
-    const [NewsPerPage] = useState(3)
-
-    const lastNewsIndex = currentPage * NewsPerPage
-    const firstNewsIndex = lastNewsIndex - NewsPerPage
-    const currentNews = newsStore.newsData.slice(firstNewsIndex, lastNewsIndex)
-    const paginate = (pageNumber) => {
-        setcurrentPage(pageNumber)
-        newsStore.setActiveLink(pageNumber)
-    }
-
     let selectSort = createRef()
 
     function sortNews() {
@@ -45,19 +33,11 @@ const Blog = observer(() => {
             newsStore.newsData.sort((a, b) => (+b.status) - (+a.status))
         }
     }
-    const nextPage = () => {
-        if (currentPage < newsStore.lengthPageNumber) {
-            setcurrentPage(currentPage + 1)
-            newsStore.setActiveLink(newsStore.activeLink + 1)
-            // navigate(`${window.location.href}/#pagination`)
-        }
-    }
-    const prevPage = () => {
-        if (currentPage > 1) {
-            setcurrentPage(currentPage - 1)
-            newsStore.setActiveLink(newsStore.activeLink - 1)
-        }
-    }
+
+    // news pagination
+    const lastNewsIndex = newsStore.newsActivePage * newsStore.newsObjectsPerPage
+    const firstNewsIndex = lastNewsIndex - newsStore.newsObjectsPerPage
+    const currentNews = newsStore.newsData.slice(firstNewsIndex, lastNewsIndex)
 
     return (
         <div className='blog | pt-5'>
@@ -88,11 +68,8 @@ const Blog = observer(() => {
 
                 <div className='d-flex justify-content-center align-items-center'>
                     <NewsPagination
-                        NewsPerPage={NewsPerPage}
-                        totalNews={newsStore.newsData.length}
-                        paginate={paginate}
-                        nextPage={nextPage}
-                        prevPage={prevPage}
+                        shortPagination={true}
+                        dataLength={newsStore.newsData.length}
                     ></NewsPagination>
                 </div>
             </div>

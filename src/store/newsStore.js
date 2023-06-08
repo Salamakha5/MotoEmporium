@@ -7,7 +7,6 @@ class NewsStore {
     }
     URL = 'https://moto-server.onrender.com/api'
     newsData = []
-    lengthPageNumber = 0
     getAllNews(callback) {
         axios.get(this.URL + "/getAllNews")
             .then((response) => {
@@ -19,15 +18,16 @@ class NewsStore {
                 callback()
             })
     }
-    setlengthPagNumber(number) {
-        this.lengthPageNumber = number
-    }
-    
-    activeLink = 1
-    setActiveLink(number) {
-        this.activeLink = number
-    }
 
+    newsCountPages = 0
+    setNewsCountPages(n) {
+        this.newsCountPages = n
+    }
+    newsActivePage = 1
+    setNewsActivePage(n) {
+        this.newsActivePage = n
+    }
+    newsObjectsPerPage = 5
 }
 
 export default new NewsStore()

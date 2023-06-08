@@ -181,6 +181,32 @@
                     padding: 10px;
                 }
 
+                .disabled-admin {
+                    background-color: mix(gray, $mainColor, 50%);
+                    color: mix(gray, black, 50%);
+                    cursor: not-allowed;
+                    position: relative;
+
+                    &::before {
+                        content: 'You not have roots!';
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        background-color: $mainColor;
+                        padding: 5px;
+                        color: black;
+                        transition: 0.3s;
+                        opacity: 0;
+                    }
+
+                    &:hover {
+                        &::before {
+                            transition: 0.3s;
+                            opacity: 1;
+                        }
+                    }
+                }
+
                 .lang-switcher {
                     position: relative;
                     display: flex;

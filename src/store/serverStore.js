@@ -23,11 +23,6 @@ class ServerStore {
     }
 
 
-    
-    setlengthPagNumber(number) {
-        this.lengthPageNumber = number
-    }
-
     getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -78,17 +73,12 @@ class ServerStore {
                     this.userIsAuth = false
                     localStorage.removeItem('IsAuthMOTO')
                     decodedResult = 'error'
-                    // console.log('log er');
 
-                    console.log(error);
-
-                    // callback in app.jsx
                     appCallback(decodedResult)
                 });
         }
     }
 
-    // Shop
     getAllMoto(callbackAfterDownloading) {
 
         // axios.get("http://localhost:4000/api" + "/getAllMoto")
@@ -106,7 +96,6 @@ class ServerStore {
     }
 
     updateThreeMotos(MotoData) {
-
         this.threeMotoCard = []
         for (let i = 0; i < 3; i++) {
             if (this.threeMotoCard.length <= 2) {
@@ -122,11 +111,16 @@ class ServerStore {
     }
 
     // shop pagination
-    activeLink = 1
-    setActiveLink(number) {
-        this.activeLink = number
+    motoCountPages = 0
+    setMotoCountPages(n) {
+        this.motoCountPages = n
     }
-    // end Shop
+    motoActivePage = 1
+    setMotoActivePage(n) {
+        this.motoActivePage = n
+    }
+    motoObjectsPerPage = 8
+
 }
 
 export default new ServerStore()

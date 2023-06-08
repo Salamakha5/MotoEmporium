@@ -2,16 +2,15 @@ import './Admin.scss'
 
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 import AdminProduct from '../../components/adminItems/AdminProduct/AdminProduct'
+import AdminProductsPagination from '../../components/Pagination/AdminProductsPagination'
 import serverStore from '../../store/serverStore.js'
-import clientStore from '../../store/clientStore'
+import adminStore from '../../store/adminStore'
 
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import alertify from 'alertifyjs'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, createRef } from 'react'
 import { toJS } from 'mobx'
-
 
 const Admin = observer(() => {
 
@@ -20,8 +19,8 @@ const Admin = observer(() => {
 
     const [showProductsLoader, setShowProductsLoader] = useState(true)
     const [showNewsLoader, setShowNewsLoader] = useState(true)
-    const [showOrdersLoader, setShowOrdersLoader] = useState(true)
-    const [showUsersLoader, setShowUsersLoader] = useState(true)
+    // const [showOrdersLoader, setShowOrdersLoader] = useState(true)
+    // const [showUsersLoader, setShowUsersLoader] = useState(true)
 
     useEffect(() => {
         document.title = "Admin page | MotoEmporium";
@@ -31,6 +30,7 @@ const Admin = observer(() => {
         })
     }, [])
 
+    // start sort products
     let BrandValue = createRef()
     let ModelValue = createRef()
     let SelectType = createRef()
@@ -59,10 +59,9 @@ const Admin = observer(() => {
         serverStore.ArrTypeName = res
     }
 
-
     function sortData() {
         //Пагінація на першу сторінку
-        // setcurrentPage(1)
+        adminStore.setProductsActivePage(1)
 
         let SortToBrand = BrandValue.current.value
         let SortToModel = ModelValue.current.value
@@ -120,12 +119,18 @@ const Admin = observer(() => {
         ModelValue.current.value = ""
         SelectType.current.value = "0"
         SelectModel.current.value = "0"
-        // setcurrentPage(1)
+        adminStore.setProductsActivePage(1)
     }
+    // end sort products
+
+    // products pagination
+    const lastMotoIndex = adminStore.productsActivePage * adminStore.productsObjectsPerPage
+    const firstMotoIndex = lastMotoIndex - adminStore.productsObjectsPerPage
+    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
 
     return (
         <div className="admin">
-            <BackUpBtn whenShow='700' debugLine='false'></BackUpBtn>
+            <BackUpBtn whenShow='900' debugLine='false'></BackUpBtn>
 
             <div className="tabsContainer">
 
@@ -160,10 +165,12 @@ const Admin = observer(() => {
                         <div>
                             {
                                 showProductsLoader ?
-                                    <div className="loader active" id="loader-2">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
+                                    <div style={{ height: '300px', display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <div className="loader active" id="loader-2">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
                                     </div>
                                     :
                                     <>
@@ -209,7 +216,7 @@ const Admin = observer(() => {
                                         </div>
                                         <div className='admin__supControls | row align-items-center'>
                                             <div className='col admin__supControls-nowDisplay'>
-                                                <span>{t('shop_page.sup-controls.isDisplayed', { currentPage: 666, allPages: 999 })}</span>
+                                                <span>{t('shop_page.sup-controls.isDisplayed', { currentPage: adminStore.productsActivePage, allPages: adminStore.productsCountPages })}</span>
                                             </div>
 
                                             <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end'>
@@ -221,9 +228,17 @@ const Admin = observer(() => {
                                             </div>
                                         </div>
                                         <div className='error-shop'>{ErrorMotoSort}</div>
-                                        {toJS(serverStore.MotoDataCopy).map((p) => {
-                                            return <AdminProduct key={p._id} data={p}></AdminProduct>
-                                        })}
+                                        {
+                                            <>
+                                                {currentMoto.map((p) => {
+                                                    return <AdminProduct key={p._id} data={p}></AdminProduct>
+                                                })}
+                                                <AdminProductsPagination
+                                                    shortPagination={true}
+                                                    dataLength={serverStore.MotoDataCopy.length}
+                                                ></AdminProductsPagination>
+                                            </>
+                                        }
                                     </>
                             }
                         </div>
@@ -242,9 +257,9 @@ const Admin = observer(() => {
                         role="tabpanel" aria-labelledby="users-tab" tabIndex="0">Користувачі</div>
                 </div>
 
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 })
 

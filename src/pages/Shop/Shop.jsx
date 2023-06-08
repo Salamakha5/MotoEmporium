@@ -27,7 +27,6 @@ const Shop = observer(() => {
             serverStore.getAllMoto(() => {
                 setSpinerShop("d-none")
             })
-            serverStore.setActiveLink(1)
         } else if (localStorage.getItem("IsAuthMOTO") == null) {
             youNeedToLogin();
         }
@@ -79,7 +78,7 @@ const Shop = observer(() => {
 
     function sortData() {
         //Пагінація на першу сторінку
-        setcurrentPage(1)
+        serverStore.setMotoActivePage(1)
 
         let SortToBrand = BrandValue.current.value
         let SortToModel = ModelValue.current.value
@@ -137,33 +136,13 @@ const Shop = observer(() => {
         ModelValue.current.value = ""
         SelectType.current.value = "0"
         SelectModel.current.value = "0"
-        setcurrentPage(1)
+        serverStore.setMotoActivePage(1)
     }
 
     // pagination
-    const [currentPage, setcurrentPage] = useState(1)
-    const [MotoPerPage] = useState(8)
-
-    const lastMotoIndex = currentPage * MotoPerPage
-    const firstMotoIndex = lastMotoIndex - MotoPerPage
-    let currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
-
-    const paginate = pageNumber => {
-        setcurrentPage(pageNumber)
-        serverStore.setActiveLink(pageNumber)
-    }
-    const nextPage = () => {
-        if (currentPage < serverStore.lengthPageNumber) {
-            setcurrentPage(currentPage + 1)
-            serverStore.setActiveLink(serverStore.activeLink + 1)
-        }
-    }
-    const prevPage = () => {
-        if (currentPage > 1) {
-            setcurrentPage(currentPage - 1)
-            serverStore.setActiveLink(serverStore.activeLink - 1)
-        }
-    }
+    const lastMotoIndex = serverStore.motoActivePage * serverStore.motoObjectsPerPage
+    const firstMotoIndex = lastMotoIndex - serverStore.motoObjectsPerPage
+    const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
 
     return (
         <div className='moto-shop | pt-5 pb-3'>
@@ -215,7 +194,7 @@ const Shop = observer(() => {
                 <div className='error-shop'>{ErrorMotoSort}</div>
                 <div className='moto-shop__supControls | row align-items-center pt-5 pb-4 mb-4'>
                     <div className='col moto-shop__supControls-nowDisplay'>
-                        <span>{t('shop_page.sup-controls.isDisplayed', { currentPage: currentPage, allPages: serverStore.lengthPageNumber })}</span>
+                        <span>{t('shop_page.sup-controls.isDisplayed', { currentPage: serverStore.motoActivePage, allPages: serverStore.motoCountPages })}</span>
                     </div>
 
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end'>
@@ -246,11 +225,8 @@ const Shop = observer(() => {
 
                 <div className='d-flex justify-content-center align-items-center'>
                     <ShopPagination
-                        MotoPerPage={MotoPerPage}
-                        totalMoto={serverStore.MotoDataCopy.length}
-                        paginate={paginate}
-                        nextPage={nextPage}
-                        prevPage={prevPage}
+                        shortPagination={true}
+                        dataLength={serverStore.MotoDataCopy.length}
                     ></ShopPagination>
                 </div>
             </div>

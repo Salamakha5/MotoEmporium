@@ -18,7 +18,7 @@
                 border-right: 1px solid white;
                 border-top: 1px solid white;
                 color: $mainColor;
-                opacity: 0.5;
+                opacity: 0.7;
             }
 
             .nav-link.active {
@@ -41,7 +41,9 @@
 
     .tab-pane,
     .tab-pane.active {
-        border: 0;
+        border-radius: 0 15px 10px 10px;
+        border: 0 !important;
+        border: none !important;
     }
 
     &__controlsWrap {
@@ -61,9 +63,8 @@
     }
 
     .admin__supControls {
-        width: 100%;
-        padding-top: 20px;
-        padding-left: 20px;
+        padding: 20px 0 0 0;
+        margin: 0 15px;
 
         .col,
         .col-12,
