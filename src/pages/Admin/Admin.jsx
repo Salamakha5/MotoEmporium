@@ -3,7 +3,7 @@ import './Admin.scss'
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 import AdminProduct from '../../components/adminItems/AdminProduct/AdminProduct'
 import AdminProductsPagination from '../../components/Pagination/AdminProductsPagination'
-import serverStore from '../../store/serverStore.js'
+import serverStore from '../../store/serverStore'
 import adminStore from '../../store/adminStore'
 
 import { useNavigate } from 'react-router-dom'

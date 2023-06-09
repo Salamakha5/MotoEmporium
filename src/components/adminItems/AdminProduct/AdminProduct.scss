@@ -23,27 +23,118 @@
         padding-right: 0;
     }
 
-    .item {
-        margin-bottom: 3px;
-
-        .data-span {
-            font-weight: 600;
-        }
-    }
-
     .img-cont {
-        img {
+        height: 100%;
+
+        &>img {
             width: 100%;
-            height: 100%;
-            min-height: 200px;
-            max-height: 400px;
+            height: 300px;
+            // max-height: 300px;
             border-radius: 5px;
             object-fit: cover;
+        }
+
+        .mini-images-cont {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+
+            .img-active1,
+            .img-active2,
+            .img-active3 {
+                display: none;
+            }
+        }
+
+        .miniImgCont {
+            position: relative;
+            width: 32%;
+
+            &>img {
+                width: 100%;
+                height: 100px;
+                border-radius: 5px;
+                object-fit: cover;
+                margin: 10px 0;
+            }
+
+            &::before {
+                content: attr(data-hover-text);
+                position: absolute;
+                left: 0px;
+                background-color: mix(rgb(255, 255, 255, 0.4), $mainColor, 40%);
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+                @include fontSettings($mainFont, 25px, 700);
+                line-height: 23px;
+                transform: scale(0) rotate(360deg);
+
+                @media (max-width: 600px) {
+                    content: '✔';
+                    width: 80%;
+                    height: 80%;
+                    left: 10px;
+                    transform: scale(0) rotate(360deg);
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+
+                &::before {
+                    transform: scale(0.8) rotate(0deg);
+                }
+            }
         }
     }
 
     .info-cont {
         padding-left: 15px;
+
+        @media (max-width: 600px) {
+            overflow-x: scroll;
+        }
+
+        .item {
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+
+            .data-span {
+                font-weight: 600;
+            }
+        }
+
+        .ifEditActive {
+            padding-bottom: 10px;
+
+            @media (max-width: 600px) {
+                border-bottom: 1px solid black;
+            }
+        }
+
+        .textarea-items {
+            textarea {
+                resize: vertical;
+                height: 60px;
+                max-height: 200px;
+            }
+
+            @media (max-width: 700px) {
+                display: flex;
+                flex-direction: column;
+
+                i {
+                    transform: rotate(90deg);
+                    margin-bottom: 10px;
+                }
+            }
+        }
     }
 
     .buttons-cont {
@@ -53,10 +144,14 @@
         align-items: end;
         height: 220px;
 
+        @media (max-width: 600px) {
+            font-size: 10px;
+        }
+
         .delete {
             background-color: $errorColor;
             width: 140px;
-            
+
             &:hover {
                 background-color: mix(black, $errorColor, 15%);
             }
@@ -77,6 +172,15 @@
 
             &:hover {
                 background-color: mix(black, $mainColor, 15%);
+            }
+        }
+
+        .save {
+            background-color: $succesColor;
+            width: 180px;
+
+            &:hover {
+                background-color: mix(black, $succesColor, 15%);
             }
         }
 

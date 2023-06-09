@@ -1,7 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx"
 import serverStore from "./serverStore"
 
-
 class adminStore {
     constructor() {
         makeAutoObservable(this)

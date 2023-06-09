@@ -31,9 +31,7 @@ const Header = observer(() => {
     }, [])
 
     const logoLink = () => {
-        alertify.alert(t('header.modal_windows.top_secret-title'),
-            `<span style="font-size: 124px;">🕵️‍♀️</span> ${t('header.modal_windows.top_secret-text')}`,
-            function () { alertify.success('+--(-_-)--+'); });
+        navigate('/')
     }
 
     const activeLink = ({ isActive }) => (isActive ? 'nav-item main-link active' : 'nav-item main-link')

@@ -4,6 +4,10 @@
     min-height: 90vh;
     padding: 20px;
 
+    @media (max-width: 600px) {
+        padding: 10px;
+    }
+
     .tabsContainer {
         width: 100%;
 
@@ -85,6 +89,4 @@
         @include fontSettings($mainFont, 35px, 700);
         line-height: 50px;
     }
-
-
 }

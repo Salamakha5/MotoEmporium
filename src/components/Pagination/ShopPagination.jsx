@@ -34,7 +34,7 @@ const ShopPagination = observer(({ shortPagination, dataLength }) => {
     }
 
     return (
-        <div className='py-5'>
+        <div className='py-3'>
             <ul className={shortPagination == true ? 'pagination pagination_short' : 'pagination'}>
                 <li className="page-item"><a className="page-link" onClick={prevPage}><i className="bi bi-arrow-left-short"></i></a></li>
                 {

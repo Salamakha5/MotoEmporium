@@ -128,6 +128,7 @@ const Login = observer(() => {
                     <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder={t('login.email-placeholder')}
                         onChange={formik.handleChange} value={formik.values.email} />
                     <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
+                    
                     <div className="password-wrap">
                         <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder={t('login.password-placeholder')}
                             onChange={formik.handleChange} value={formik.values.password} />

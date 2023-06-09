@@ -16,8 +16,6 @@
         },
         "loginBtn": "Login",
         "modal_windows": {
-            "top_secret-title": "Top secret",
-            "top_secret-text": "👈 its you",
             "exit-title": "Clarification.",
             "exit-text": "Are you sure you want to leave?",
             "exit-notify": "The exit is canceled!"
