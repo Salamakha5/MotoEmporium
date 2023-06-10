@@ -23,13 +23,19 @@
         padding-right: 0;
     }
 
+    .error-string {
+        color: brown;
+        font-size: 12px;
+        line-height: 12px;
+        margin-left: 10px;
+    }
+
     .img-cont {
         height: 100%;
 
         &>img {
             width: 100%;
             height: 300px;
-            // max-height: 300px;
             border-radius: 5px;
             object-fit: cover;
         }
@@ -95,9 +101,10 @@
 
     .info-cont {
         padding-left: 15px;
-
+        
         @media (max-width: 600px) {
             overflow-x: scroll;
+            width: 100%;
         }
 
         .item {

@@ -7,7 +7,7 @@ import clientStore from '../../store/clientStore';
 
 import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite';
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +19,7 @@ const OneMoto = observer(() => {
         })
     }, [])
 
+    const navigate = useNavigate()
     const { t } = useTranslation();
 
     const [imgNum, setImgNum] = useState(0)
@@ -115,7 +116,7 @@ const OneMoto = observer(() => {
                                         <span>{gearbox}</span></li>
                                 </ul>
                             </div>
-                            <NavLink className='goBack-left mainButton | btn p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
+                            <button onClick={() => navigate(-1)} className='goBack-left mainButton | btn p-3 mt-4' >{t('oneMoto_page.btn-goBack')}</button>
                         </div>
                     </div>
 
@@ -186,7 +187,7 @@ const OneMoto = observer(() => {
                             }
                         </div>
                         <div className='d-flex justify-content-center'>
-                            <NavLink className='goBack-right mainButton | btn p-3 mt-4' to={"/shop"} >{t('oneMoto_page.btn-goBack')}</NavLink>
+                            <button onClick={() => navigate(-1)} className='goBack-right mainButton | btn p-3 mt-4' >{t('oneMoto_page.btn-goBack')}</button>
                         </div>
                     </div>
 

@@ -251,8 +251,7 @@ const Payment = () => {
                                                 className={cardformik.errors.expirationMM
                                                     ? 'forms_bot_line input-mm | form-control invalid'
                                                     : 'forms_bot_line input-mm | form-control valid'}
-                                                onChange={cardformik.handleChange} value={cardformik.values.expirationMM}
-                                            />
+                                                onChange={cardformik.handleChange} value={cardformik.values.expirationMM} />
 
                                             <input type="number" placeholder={t('payment_page.cardDetails.expiration-yy')}
                                                 className={cardformik.errors.expirationYY
