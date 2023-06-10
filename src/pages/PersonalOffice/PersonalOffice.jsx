@@ -1,13 +1,15 @@
 import "./PersonalOffice.scss"
-import { Formik, useFormik } from "formik"
-import * as Yup from "yup"
-import { observer } from "mobx-react-lite"
-import React, { useEffect, useState } from 'react'
+
 import PersonalOfficeStore from "../../store/PersonalOfficeStore"
 import serverStore from "../../store/serverStore"
 import OneOrder from "../../components/OneOrder/OneOrder"
+import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
+
+import { useFormik } from "formik"
+import * as Yup from "yup"
+import { observer } from "mobx-react-lite"
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
-import { toJS } from "mobx"
 import axios from "axios"
 import alertify from 'alertifyjs'
 
@@ -89,6 +91,8 @@ const PersonalOffice = observer(() => {
 
     return (
         <div className="PresonalOffice_container | row m-0">
+            <BackUpBtn whenShow='750' debugLine='false'></BackUpBtn>
+
             {/* <input type="text" name="password" id="password" className="" placeholder={t('login.password-placeholder')}/> */}
             <div className="col_border || col-12 col-lg-5 pb-3">
                 <div className="fs-5">{t("office_Page.Hello")}, <span className="fs-italic">{serverStore.UserName}</span></div>
@@ -110,7 +114,7 @@ const PersonalOffice = observer(() => {
                 <div className="pt-3 fs-4 text-center ">{t("office_Page.SettingOffice")}</div>
                 <div className="row m-0 pt-4">
                     <div className="col-12 col-md-6 pb-4">
-                        <input id="email" name="email" type="text" className="form-control forms_bot_line login-form__password" 
+                        <input id="email" name="email" type="text" className="form-control forms_bot_line login-form__password"
                             value={formik.values.email}
                             onChange={() => false}
                         />

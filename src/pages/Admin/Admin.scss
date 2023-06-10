@@ -8,6 +8,12 @@
         padding: 10px;
     }
 
+    .error-string {
+        color: brown;
+        font-size: 12px;
+        line-height: 12px;
+    }
+
     .tabsContainer {
         width: 100%;
 
@@ -88,4 +94,42 @@
         @include fontSettings($mainFont, 35px, 700);
         line-height: 50px;
     }
+
+
+    .addProductForm-cont {
+        background-color: mix(rgba(255, 255, 255, 0), $mainColor, 50%);
+
+        .addFormItem,
+        .textarea-items {
+            margin-bottom: 10px;
+        }
+
+        .textarea-items {
+            textarea {
+                min-height: 100px;
+                max-height: 200px;
+            }
+        }
+
+        .form-col {
+            padding: 10px;
+        }
+
+        .third-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .save {
+            background-color: $succesColor;
+            width: 100%;
+            padding: 10px 0;
+
+            &:hover {
+                background-color: mix(black, $succesColor, 15%);
+            }
+        }
+    }
+
 }

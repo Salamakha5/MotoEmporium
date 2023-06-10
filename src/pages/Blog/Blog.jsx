@@ -1,13 +1,14 @@
 import './Blog.scss'
 
-import React, { createRef, useRef, useState } from 'react'
+import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
+import NewsPagination from '../../components/Pagination/NewsPagination'
+import newsStore from '../../store/newsStore'
+
+import React, { createRef, useState } from 'react'
 import { useEffect } from 'react'
 import BlogItem from '../../components/BlogItem/BlogItem'
 import { observer } from 'mobx-react-lite'
-import newsStore from '../../store/newsStore'
-import NewsPagination from '../../components/Pagination/NewsPagination'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from "react-router-dom";
 
 const Blog = observer(() => {
 
@@ -41,6 +42,8 @@ const Blog = observer(() => {
 
     return (
         <div className='blog | pt-5'>
+            <BackUpBtn whenShow='750' debugLine='false'></BackUpBtn>
+
             <div className="blog__container | container px-5">
                 <div className="row pt-4 d-flex justify-content-end">
                     <div className="col-12 col-lg-4">

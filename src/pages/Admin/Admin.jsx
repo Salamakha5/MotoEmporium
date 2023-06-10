@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState, createRef } from 'react'
 import { toJS } from 'mobx'
 import alertify from 'alertifyjs'
+import { useFormik } from "formik";
+import * as Yup from "yup"
 
 const Admin = observer(() => {
 
@@ -118,9 +120,83 @@ const Admin = observer(() => {
   }
   // end sort products
 
-  function addNewProduct(params) {
-    alertify.alert('succes', 'hui')
+
+  // start add product logic
+  const addProduct = useFormik({
+    initialValues: {
+      addBrand: 'Huyati',
+      addModel: 'Hueta c300',
+      addPrice: 99999,
+      addImgUrl1: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      addImgUrl2: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      addImgUrl3: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      addType: 'Sport',
+      addDisplacement: '8567 cc',
+      addBorexStroke: '450 x 7.85 mm',
+      addCompressionRatio: '17.56:07',
+      addHorsepower: '109 hp',
+      addTorque: '645 lb-ft',
+      addFuelSystem: 'Electronic fuel injection, 53 mm throttle bodies',
+      addGearbox: '6-speed with Ducati Quick Shift (DQS) up/down'
+    },
+    validationSchema: Yup.object({
+      addBrand: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addModel: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addPrice: Yup.string().min(3, t('yupErrors.valid-field', { num: 3 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addImgUrl1: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addImgUrl2: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addImgUrl3: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addType: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addDisplacement: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addBorexStroke: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addCompressionRatio: Yup.string().min(3, t('yupErrors.valid-field', { num: 3 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addHorsepower: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addTorque: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
+      addFuelSystem: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addGearbox: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+    })
+  })
+  let aF = addProduct
+
+  function oneField(width, type, placeholder, name, initialValObject, errorsObject) {
+
+    return (
+      <div className='addFormItem'>
+        <input style={{ width: width }} type={type} placeholder={placeholder} className='form-control'
+          name={name} onChange={aF.handleChange} value={initialValObject}></input>
+
+        <div className='error-string'>{errorsObject ? errorsObject : ""}</div>
+      </div >
+    )
   }
+
+  function addNewProduct(e) {
+    e.preventDefault()
+
+    let { addBrand, addModel, addPrice, addImgUrl1, addImgUrl2, addImgUrl3, addType, addDisplacement,
+      addBorexStroke, addCompressionRatio, addHorsepower, addTorque, addFuelSystem, addGearbox } = aF.values
+
+    if (aF.isValid) {
+      alertify.alert('succes', `
+      ${addBrand} </br>
+      ${addModel} </br>
+      ${addPrice} </br>
+      ${addImgUrl1} </br>
+      ${addImgUrl2} </br>
+      ${addImgUrl3} </br>
+      ${addType} </br>
+      ${addDisplacement} </br>
+      ${addBorexStroke} </br>
+      ${addCompressionRatio} </br>
+      ${addHorsepower} </br>
+      ${addTorque} </br>
+      ${addFuelSystem} </br>
+      ${addGearbox} </br>
+      `)
+    }
+  }
+  // end add product logic
+
 
   // products pagination
   const lastMotoIndex = adminStore.productsActivePage * adminStore.productsObjectsPerPage
@@ -226,12 +302,55 @@ const Admin = observer(() => {
                         </select>
                       </div>
 
-                      <button class="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      <button class="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddProduct" aria-expanded="false" aria-controls="collapseAddProduct">
                         Додати новий товар
                       </button>
-                      <div class="collapse px-0" id="collapseExample">
-                        <div class="card card-body">
-                          Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                      <div class="collapse px-0 mt-3" id="collapseAddProduct">
+                        <div class="card card-body addProductForm-cont">
+                          <form className='addProduct-form'>
+                            <div className='row'>
+
+                              <div className='form-col | col-12 col-sm-6	col-md-6 col-lg-4'>
+                                {oneField('100%', 'text', 'Бренд', 'addBrand', aF.values.addBrand, aF.errors.addBrand)}
+                                {oneField('100%', 'text', 'Модель', 'addModel', aF.values.addModel, aF.errors.addModel)}
+                                {oneField('100%', 'number', 'Ціна', 'addPrice', aF.values.addPrice, aF.errors.addPrice)}
+                                {oneField('100%', 'text', 'Тип', 'addType', aF.values.addType, aF.errors.addType)}
+                                {oneField('100%', 'text', 'Кубатура двигуна', 'addDisplacement', aF.values.addDisplacement, aF.errors.addDisplacement)}
+                                {oneField('100%', 'text', 'Діаметр поршнів', 'addBorexStroke', aF.values.addBorexStroke, aF.errors.addBorexStroke)}
+                              </div>
+
+                              <div className='form-col | col-12 col-sm-6 col-md-6 col-lg-4'>
+                                {oneField('100%', 'text', 'Крутний момент', 'addTorque', aF.values.addTorque, aF.errors.addTorque)}
+                                {oneField('100%', 'text', 'Коефіцієнт стиснення', 'addCompressionRatio', aF.values.addCompressionRatio, aF.errors.addCompressionRatio)}
+                                {oneField('100%', 'text', 'Кількість кіньських сил', 'addHorsepower', aF.values.addHorsepower, aF.errors.addHorsepower)}
+                                {oneField('100%', 'text', 'Картинка 1', 'addImgUrl1', aF.values.addImgUrl1, aF.errors.addImgUrl1)}
+                                {oneField('100%', 'text', 'Картинка 2', 'addImgUrl2', aF.values.addImgUrl2, aF.errors.addImgUrl2)}
+                                {oneField('100%', 'text', 'Картинка 3', 'addImgUrl3', aF.values.addImgUrl3, aF.errors.addImgUrl3)}
+                              </div>
+
+                              <div className="form-col third-item | col-12	col-sm-12 col-md-12	col-lg-4">
+                                <div>
+                                  <div className='textarea-items'>
+                                    <textarea className='form-control' placeholder='Паливна система'
+                                      name="addFuelSystem" onChange={aF.handleChange} value={aF.values.addFuelSystem}></textarea>
+
+                                    <div className='error-string'>{aF.errors.addFuelSystem ? aF.errors.addFuelSystem : ""}</div>
+                                  </div>
+
+                                  <div className='textarea-items'>
+                                    <textarea className='form-control' placeholder='Коробка передач'
+                                      name="addGearbox" onChange={aF.handleChange} value={aF.values.addGearbox}></textarea>
+
+                                    <div className='error-string'>{aF.errors.addGearbox ? aF.errors.addGearbox : ""}</div>
+                                  </div>
+                                </div>
+
+                                <button onClick={addNewProduct}
+                                  className={aF.isValid && aF.dirty ? "mainButton save | btn" : "mainButton save btn disabled | btn"}>Додати ggg</button>
+                              </div>
+
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>

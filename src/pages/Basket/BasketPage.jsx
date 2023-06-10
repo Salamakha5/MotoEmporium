@@ -3,6 +3,7 @@ import "./BasketPage.scss"
 import BasketCard from "../../components/BasketCard/BasketCard"
 import PriceList from "../../components/PriceList/PriceList"
 import Favorite from "../../components/Favorite/Favorite"
+import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 
 import serverStore from "../../store/serverStore"
 import clientStore from "../../store/clientStore"
@@ -41,6 +42,8 @@ const BasketPage = observer(() => {
 
     return (
         <div className="BasketPage_container">
+            <BackUpBtn whenShow='750' debugLine='false'></BackUpBtn>
+
             <div className="row d-flex justify-content-center">
                 <div className="col-12 col-lg-6 order-2 order-lg-1 p-3 pt-0 Card_Container">
                     {
