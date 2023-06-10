@@ -1,289 +1,335 @@
 {
-    "app": {
-        "alert-warning": "Warning",
-        "alert-oldToken": "Your token has expired, please log in again"
+  "app": {
+    "alert-warning": "Warning",
+    "alert-oldToken": "Your token has expired, please log in again"
+  },
+  "header": {
+    "homeLink": "Home",
+    "shopLink": "Shop",
+    "blogLink": "Blog",
+    "contactsLink": "Contact",
+    "actions": {
+      "actionsBtnName": "Actions",
+      "actionsAdmin": "Admin panel",
+      "actionsExit": "Exit",
+      "actionsOffis": "Personal office"
     },
-    "header": {
-        "homeLink": "Home",
-        "shopLink": "Shop",
-        "blogLink": "Blog",
-        "contactsLink": "Contact",
-        "actions": {
-            "actionsBtnName": "Actions",
-            "actionsAdmin": "Admin panel",
-            "actionsExit": "Exit",
-            "actionsOffis": "Personal office"
-        },
-        "loginBtn": "Login",
-        "modal_windows": {
-            "exit-title": "Clarification.",
-            "exit-text": "Are you sure you want to leave?",
-            "exit-notify": "The exit is canceled!"
-        }
-    },
-    "footer": {
-        "address": "2005 Broken Dream Blvd Daytona Beach, FL 32122",
-        "link1": "New Inventory",
-        "link2": "Used Inventory",
-        "link3": "Service Center",
-        "link4": "Custom Parts",
-        "link5": "Riding Tips",
-        "link6": "Test Ride",
-        "link7": "Finance",
-        "link8": "Our Blog",
-        "link9": "About Us",
-        "link10": "Media",
-        "storeHours": "STORE HOURS",
-        "weekdays": "Weekdays: 8 AM - 3 PM",
-        "saturday": "Saturday: 8 AM - 2 PM",
-        "whenClosed": "Sunday/National Holiday: Closed",
-        "copyright": "©{{year}} MotoEmporium.com. All rights reserved"
-    },
-    "home_page": {
-        "hero": {
-            "title": "Find your dream motorcycle here!",
-            "text": "We have 100+ collections of new and used motorcycles from companies whose names start with a capital letter, such as Honda, Kawasaki, Yamaha, Ducati, etc.",
-            "link": "Let's find him"
-        },
-        "sales": {
-            "title": "Get ready for summer driving",
-            "text": "Save yourself up to {{sale}} discounts for purchases this summer",
-            "date": "Valid until 31.06.{{date}} of the year"
-        },
-        "whyUs": {
-            "title": "Why we are?",
-            "paragraph1": "Since 2019, MotoEmporium has been selling hundreds of motorcycles that are relevant on the road at a reasonable price. From the smallest engine size to the largest - we have it all. Do you want to enjoy the sunset on the road, or do you just like to go fast, or maybe you want to compete with your friends at the speedway? We have the right motorcycle for you!",
-            "paragraph2": "Our staff are the best on the market with lots of experience on a motorcycle and tons of knowledge about it, so come see us and don't hesitate to ask us questions.We welcome those who are new to motorcycling and are excited to see how quickly you start riding with pleasure."
-        },
-        "ourShowroom": {
-            "link1": "Our showroom",
-            "link2": "Test drive",
-            "link3": "Our service",
-            "link4": "Custom details",
-            "link5": "Finance"
-        }
-    },
-    "login": {
-        "title": "Authorization",
-        "suptitle-1": "Continue without registration 👉",
-        "suptitle-toMain": "To main page",
-        "suptitle-2": "New visitor?",
-        "suptitle-2_link": "Create account",
-        "suptitle-2_p2": "here",
-        "email-placeholder": "Email",
-        "password-placeholder": "Password",
-        "form": {
-            "hint": "Click",
-            "hint_link": "here",
-            "hint_p2": "if you have forgotten your password",
-            "submitBtn": "Authorization"
-        },
-        "forgot-alert-title": "Condolences",
-        "forgot-alert-text": "For now, let's remember :(",
-        "apiAnswers": {
-            "password-wrong": "Wrong password",
-            "user-notFound": "No such user found"
-        }
-    },
-    "register": {
-        "title": "Create a new account",
-        "suptitle": "Already have an account?",
-        "suptitle_link": "Authorization",
-        "suptitle_p2": "here",
-        "form": {
-            "name-placeholder": "Full name",
-            "email-placeholder": "Email",
-            "password-placeholder": "Password",
-            "confirmPassword-placeholder": "Confirm your password",
-            "iAgree": "I agree to the terms of storage of my data",
-            "submitBtn": "Registration"
-        },
-        "apiAnswers": {
-            "success-title": "Success",
-            "success-text": "User {{name}} registered successfully!",
-            "error-title": "Error",
-            "email-alreadyExists": "A user with this email already exists!",
-            "password-notMatch": "Passwords do not match!",
-            "notAgree": "You do not agree to the terms of our service :("
-        }
-    },
-    "yupErrors": {
-        "required": "Not filled in",
-        "valid-field": "The field must contain min. {{num}} characters!",
-        "valid-maxLength": "The field must be shorter than {{num}} characters!",
-        "valid-phoneNumber": "It's not like a phone number!",
-        "valid-email": "The email address must be valid!",
-        "valid-password": "The password must contain at least {{num}} characters!",
-        "valid-cardNumber": "The card number has 12 digits!"
-    },
-    "shop_page": {
-        "controls": {
-            "title": "SEARCH SETTINGS",
-            "input-brand-placeholder": "Search by brand",
-            "input-model-placeholder": "Search by model name",
-            "select-defaultValue": "Search by category/All",
-            "select-sport": "Sport",
-            "select-adventure": "Traveling",
-            "select-cruiser": "Cruiser",
-            "select-classic": "Classic",
-            "select-motard": "Motard",
-            "select-naked": "Nikeed",
-            "select-scrambler": "Scrambler",
-            "select-retro": "Retro",
-            "select_2-defaultValue": "Here you will see motorcycles by model and category",
-            "btn_1-title": "Search",
-            "btn_2-title": "Clean the filters"
-        },
-        "shop-sortErrors": {
-            "notHaveBrand": "There is no such brand",
-            "notHaveModel": "There is no such model",
-            "notHaveMotoThisType": "There is no motorcycle of this type",
-            "notHaveMotoThisNameCategory": "There is no motorcycle with this name in this category"
-        },
-        "sup-controls": {
-            "isDisplayed": "Displayed {{ currentPage }} out of {{ allPages }} pages",
-            "selectPrice-defaultValue": "Sort by price",
-            "selectPrice-ascending": "In order of growth",
-            "selectPrice-descending": "In descending order"
-        },
-        "oneCard": {
-            "type": "Type",
-            "power": "Power",
-            "btn-title": "Read more"
-        },
-        "youNeedToLogin": {
-            "title": "Warning",
-            "text": "To go to the store you need to log in!",
-            "cancel-notify": "Sorry, you are not logged in"
-        }
-    },
-    "oneMoto_page": {
-        "added": "Already in the cart!",
-        "techChar": {
-            "btn-title": "Technical characteristics",
-            "brand": "Brand",
-            "model": "Model",
-            "type": "Type",
-            "engineCapacity": "Engine capacity",
-            "pistonDiameter": "Piston diameter",
-            "compressionRatio": "Compression ratio",
-            "horsePower": "Number of horsepower",
-            "torque": "Torque",
-            "fuelSystem": "Fuel system",
-            "gearbox": "Gearbox"
-        },
-        "btn-goBack": "Go back",
-        "status": "Status",
-        "status_new": "New",
-        "status_used": "Used",
-        "infoBlock": {
-            "type": "Type",
-            "power": "Horse power",
-            "btn-addToWishList": "Add to wish list",
-            "btn-addToCart": "Add to cart",
-            "btn-addingToCart": "Adding!",
-            "checkMore-title": "See other motorcycles"
-        },
-        "img-data-text-choose": "Choose",
-        "img-data-text-goTo": "Watch"
-    },
-    "blog_page": {
-        "selectDate-dafault": "Sort by...",
-        "selectSort-new": "Date",
-        "selectRating-mostPopular": "Popular",
-        "selectSort-old": "Older",
-        "readBtn-hide": "Hide",
-        "readBtn-readInFull": "read the full"
-    },
-    "notFound_page": {
-        "title": "Oops...",
-        "suptitle": "Page not found",
-        "text": "Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.",
-        "btn-back": "Go back to Home"
-    },
-    "basket_page": {
-        "shop_cart": "Cart",
-        "allPrice": "All Price",
-        "DiscountfirstMoto": "Discount on first purchase",
-        "btn_buyMoto": "To order",
-        "current_basket": "The cart is currently empty",
-        "addToFavorite": "Add to favorite",
-        "details": "Details"
-    },
-    "fav_page": {
-        "openBtn": "Open Favorite",
-        "added": "Added!",
-        "favorite": "Favorite",
-        "No_chosen": "Not have favorites"
-    },
-    "payment_page": {
-        "contactDetails": {
-            "title": "Contact Details",
-            "full_name": "Full Name",
-            "number_phone": "Number phone",
-            "city": "City",
-            "department": "Department"
-        },
-        "cardDetails": {
-            "method-title": "Payment details",
-            "method-credit_card": "Credit Card",
-            "card_number": "Card Number",
-            "expiration-title": "Expiration",
-            "expiration-mm": "MM",
-            "expiration-yy": "YY"
-        },
-        "preorderDetails": {
-            "title": "Your order:",
-            "suptitle": "And {{ num }} motorcycles type",
-            "payment_regulations": "By clicking “Confirm Payment”, you agree to our store regulations.",
-            "btn-cancel": "Cancel",
-            "btn-confirm": "Confirm Payment"
-        },
-        "payAlert": {
-            "title": "Succes",
-            "suptitle": "We have accepted your order, the manager will contact you soon!",
-            "contactsTitle": "Сustomer contact",
-            "name": "Name",
-            "phoneNumber": "Phone Number",
-            "city": "City",
-            "departament": "Departament",
-            "paymentMethod": "Payment method",
-            "cardNumber": "Card number",
-            "expiration": "Expiration",
-            "orderTitle": "Order information"
-        }
-    },
-    "office_Page": {
-        "Hello": "Hello",
-        "RecentOrders": "Recent Orders",
-        "SettingOffice": "Personal account settings",
-        "ChangeName": "Change Name",
-        "OldPass": "Old password",
-        "ChangePassword": "Change Password",
-        "NewPass": "New password",
-        "ChangeBtn": "Change data",
-        "DeleteUser": "Delete account",
-        "noOrders": "There are no orders..",
-        "errors": {
-            "required": "Is a required field",
-            "email": "Invalid Email",
-            "minLen": "Minimum 5 characters",
-            "maxLen": "Minimum 20 characters"
-        }
-    },
-    "Order_Page": {
-        "DateOfOrder": "Order date",
-        "FullName": "Full Number",
-        "Status": "Status",
-        "City": "City",
-        "Phone": "Phone",
-        "Packaging": "Packaging",
-        "OrderList": "Order list",
-        "Card": "Credit Card",
-        "Discount": "Discount",
-        "AllPrice": "All price",
-        "SettPhone": "Tech. number",
-        "DeleteOrder": "Delete order",
-        "Details": "Details"
+    "loginBtn": "Login",
+    "modal_windows": {
+      "exit-title": "Clarification.",
+      "exit-text": "Are you sure you want to leave?",
+      "exit-notify": "The exit is canceled!"
     }
+  },
+  "footer": {
+    "address": "2005 Broken Dream Blvd Daytona Beach, FL 32122",
+    "link1": "New Inventory",
+    "link2": "Used Inventory",
+    "link3": "Service Center",
+    "link4": "Custom Parts",
+    "link5": "Riding Tips",
+    "link6": "Test Ride",
+    "link7": "Finance",
+    "link8": "Our Blog",
+    "link9": "About Us",
+    "link10": "Media",
+    "storeHours": "STORE HOURS",
+    "weekdays": "Weekdays: 8 AM - 3 PM",
+    "saturday": "Saturday: 8 AM - 2 PM",
+    "whenClosed": "Sunday/National Holiday: Closed",
+    "copyright": "©{{year}} MotoEmporium.com. All rights reserved"
+  },
+  "home_page": {
+    "hero": {
+      "title": "Find your dream motorcycle here!",
+      "text": "We have 100+ collections of new and used motorcycles from companies whose names start with a capital letter, such as Honda, Kawasaki, Yamaha, Ducati, etc.",
+      "link": "Let's find him"
+    },
+    "sales": {
+      "title": "Get ready for summer driving",
+      "text": "Save yourself up to {{sale}} discounts for purchases this summer",
+      "date": "Valid until 31.06.{{date}} of the year"
+    },
+    "whyUs": {
+      "title": "Why we are?",
+      "paragraph1": "Since 2019, MotoEmporium has been selling hundreds of motorcycles that are relevant on the road at a reasonable price. From the smallest engine size to the largest - we have it all. Do you want to enjoy the sunset on the road, or do you just like to go fast, or maybe you want to compete with your friends at the speedway? We have the right motorcycle for you!",
+      "paragraph2": "Our staff are the best on the market with lots of experience on a motorcycle and tons of knowledge about it, so come see us and don't hesitate to ask us questions.We welcome those who are new to motorcycling and are excited to see how quickly you start riding with pleasure."
+    },
+    "ourShowroom": {
+      "link1": "Our showroom",
+      "link2": "Test drive",
+      "link3": "Our service",
+      "link4": "Custom details",
+      "link5": "Finance"
+    }
+  },
+  "login": {
+    "title": "Authorization",
+    "suptitle-1": "Continue without registration 👉",
+    "suptitle-toMain": "To main page",
+    "suptitle-2": "New visitor?",
+    "suptitle-2_link": "Create account",
+    "suptitle-2_p2": "here",
+    "email-placeholder": "Email",
+    "password-placeholder": "Password",
+    "form": {
+      "hint": "Click",
+      "hint_link": "here",
+      "hint_p2": "if you have forgotten your password",
+      "submitBtn": "Authorization"
+    },
+    "forgot-alert-title": "Condolences",
+    "forgot-alert-text": "For now, let's remember :(",
+    "apiAnswers": {
+      "password-wrong": "Wrong password",
+      "user-notFound": "No such user found"
+    }
+  },
+  "register": {
+    "title": "Create a new account",
+    "suptitle": "Already have an account?",
+    "suptitle_link": "Authorization",
+    "suptitle_p2": "here",
+    "form": {
+      "name-placeholder": "Full name",
+      "email-placeholder": "Email",
+      "password-placeholder": "Password",
+      "confirmPassword-placeholder": "Confirm your password",
+      "iAgree": "I agree to the terms of storage of my data",
+      "submitBtn": "Registration"
+    },
+    "apiAnswers": {
+      "success-title": "Success",
+      "success-text": "User {{name}} registered successfully!",
+      "error-title": "Error",
+      "email-alreadyExists": "A user with this email already exists!",
+      "password-notMatch": "Passwords do not match!",
+      "notAgree": "You do not agree to the terms of our service :("
+    }
+  },
+  "yupErrors": {
+    "required": "Not filled in",
+    "valid-field": "The field must contain min. {{num}} characters!",
+    "valid-maxLength": "The field must be shorter than {{num}} characters!",
+    "valid-phoneNumber": "It's not like a phone number!",
+    "valid-email": "The email address must be valid!",
+    "valid-password": "The password must contain at least {{num}} characters!",
+    "valid-cardNumber": "The card number has 12 digits!"
+  },
+  "shop_page": {
+    "controls": {
+      "title": "SEARCH SETTINGS",
+      "input-brand-placeholder": "Search by brand",
+      "input-model-placeholder": "Search by model name",
+      "select-defaultValue": "Search by category/All",
+      "select-sport": "Sport",
+      "select-adventure": "Traveling",
+      "select-cruiser": "Cruiser",
+      "select-classic": "Classic",
+      "select-motard": "Motard",
+      "select-naked": "Nikeed",
+      "select-scrambler": "Scrambler",
+      "select-retro": "Retro",
+      "select_2-defaultValue": "Here you will see motorcycles by model and category",
+      "btn_1-title": "Search",
+      "btn_2-title": "Clean the filters"
+    },
+    "shop-sortErrors": {
+      "notHaveBrand": "There is no such brand",
+      "notHaveModel": "There is no such model",
+      "notHaveMotoThisType": "There is no motorcycle of this type",
+      "notHaveMotoThisNameCategory": "There is no motorcycle with this name in this category"
+    },
+    "sup-controls": {
+      "isDisplayed": "Displayed {{ currentPage }} out of {{ allPages }} pages",
+      "selectPrice-defaultValue": "Sort by price",
+      "selectPrice-ascending": "In order of growth",
+      "selectPrice-descending": "In descending order"
+    },
+    "oneCard": {
+      "type": "Type",
+      "power": "Power",
+      "btn-title": "Read more"
+    },
+    "youNeedToLogin": {
+      "title": "Warning",
+      "text": "To go to the store you need to log in!",
+      "cancel-notify": "Sorry, you are not logged in"
+    }
+  },
+  "oneMoto_page": {
+    "added": "Already in the cart!",
+    "techChar": {
+      "btn-title": "Technical characteristics",
+      "brand": "Brand",
+      "model": "Model",
+      "type": "Type",
+      "engineCapacity": "Engine capacity",
+      "pistonDiameter": "Piston diameter",
+      "compressionRatio": "Compression ratio",
+      "horsePower": "Number of horsepower",
+      "torque": "Torque",
+      "fuelSystem": "Fuel system",
+      "gearbox": "Gearbox"
+    },
+    "btn-goBack": "Go back",
+    "status": "Status",
+    "status_new": "New",
+    "status_used": "Used",
+    "infoBlock": {
+      "type": "Type",
+      "power": "Horse power",
+      "btn-addToWishList": "Add to wish list",
+      "btn-addToCart": "Add to cart",
+      "btn-addingToCart": "Adding!",
+      "checkMore-title": "See other motorcycles"
+    },
+    "img-data-text-choose": "Choose",
+    "img-data-text-goTo": "Watch"
+  },
+  "blog_page": {
+    "selectDate-dafault": "Sort by...",
+    "selectSort-new": "Date",
+    "selectRating-mostPopular": "Popular",
+    "selectSort-old": "Older",
+    "readBtn-hide": "Hide",
+    "readBtn-readInFull": "read the full"
+  },
+  "notFound_page": {
+    "title": "Oops...",
+    "suptitle": "Page not found",
+    "text": "Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.",
+    "btn-back": "Go back to Home"
+  },
+  "basket_page": {
+    "shop_cart": "Cart",
+    "allPrice": "All Price",
+    "DiscountfirstMoto": "Discount on first purchase",
+    "btn_buyMoto": "To order",
+    "current_basket": "The cart is currently empty",
+    "addToFavorite": "Add to favorite",
+    "details": "Details"
+  },
+  "fav_page": {
+    "openBtn": "Open Favorite",
+    "added": "Added!",
+    "favorite": "Favorite",
+    "No_chosen": "Not have favorites"
+  },
+  "payment_page": {
+    "contactDetails": {
+      "title": "Contact Details",
+      "full_name": "Full Name",
+      "number_phone": "Number phone",
+      "city": "City",
+      "department": "Department"
+    },
+    "cardDetails": {
+      "method-title": "Payment details",
+      "method-credit_card": "Credit Card",
+      "card_number": "Card Number",
+      "expiration-title": "Expiration",
+      "expiration-mm": "MM",
+      "expiration-yy": "YY"
+    },
+    "preorderDetails": {
+      "title": "Your order:",
+      "suptitle": "And {{ num }} motorcycles type",
+      "payment_regulations": "By clicking “Confirm Payment”, you agree to our store regulations.",
+      "btn-cancel": "Cancel",
+      "btn-confirm": "Confirm Payment"
+    },
+    "payAlert": {
+      "title": "Succes",
+      "suptitle": "We have accepted your order, the manager will contact you soon!",
+      "contactsTitle": "Сustomer contact",
+      "name": "Name",
+      "phoneNumber": "Phone Number",
+      "city": "City",
+      "departament": "Departament",
+      "paymentMethod": "Payment method",
+      "cardNumber": "Card number",
+      "expiration": "Expiration",
+      "orderTitle": "Order information"
+    }
+  },
+  "office_Page": {
+    "Hello": "Hello",
+    "RecentOrders": "Recent Orders",
+    "SettingOffice": "Personal account settings",
+    "ChangeName": "Change Name",
+    "OldPass": "Old password",
+    "ChangePassword": "Change Password",
+    "NewPass": "New password",
+    "ChangeBtn": "Change data",
+    "DeleteUser": "Delete account",
+    "noOrders": "There are no orders..",
+    "errors": {
+      "required": "Is a required field",
+      "email": "Invalid Email",
+      "minLen": "Minimum 5 characters",
+      "maxLen": "Minimum 20 characters"
+    }
+  },
+  "Order_Page": {
+    "DateOfOrder": "Order date",
+    "FullName": "Full Number",
+    "Status": "Status",
+    "City": "City",
+    "Phone": "Phone",
+    "Packaging": "Packaging",
+    "OrderList": "Order list",
+    "Card": "Credit Card",
+    "Discount": "Discount",
+    "AllPrice": "All price",
+    "SettPhone": "Tech. number",
+    "DeleteOrder": "Delete order",
+    "Details": "Details"
+  },
+  "admin_page": {
+    "products_tab": {
+      "title": "Products",
+      "btnAddProduct": "Add a new product",
+      "btnAdd": "Add",
+      "adminProduct": {
+        "sureDelete": {
+          "title": "Warning",
+          "text": "Are you sure you want to delete this product?",
+          "succes": "Deleted successfully",
+          "error": "Canceled"
+        },
+        "idProduct": "Product ID",
+        "prodChanges": "Data changes",
+        "btn-delete": "Delete",
+        "btn-edit": "Edit",
+        "btn-save": "Save",
+        "btn-readFull_expand": "Expand",
+        "btn-readFull_hide": "Hide",
+        "btn-view": "View"
+      }
+    },
+    "news_tab": {
+      "title": "News"
+    },
+    "orders_tab": {
+      "title": "Orders"
+    },
+    "users_tab": {
+      "title": "Users"
+    }
+  },
+  "moto_data": {
+    "brand": "Brand",
+    "model": "Model",
+    "price": "Price",
+    "type": "Type",
+    "engineCapacity": "Engine capacity",
+    "pistonDiameter": "Piston diameter",
+    "compressionRatio": "Compression ratio",
+    "horsePower": "Number of horsepower",
+    "torque": "Torque",
+    "fuelSystem": "Fuel system",
+    "gearbox": "Gearbox",
+    "image": "Image {{ imgNum }}"
+  }
 }

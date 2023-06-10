@@ -24,20 +24,20 @@ const AdminProduct = observer((props) => {
 
     const editFormik = useFormik({
         initialValues: {
-            newBrand: brand,
-            newModel: model,
-            newPrice: price,
-            newImgUrl1: toJS(imgURL[0]),
-            newImgUrl2: toJS(imgURL[1]),
-            newImgUrl3: toJS(imgURL[2]),
-            newType: collectionType,
-            newDisplacement: displacement,
-            newBorexStroke: borexStroke,
-            newCompressionRatio: compressionRatio,
-            newHorsepower: horsepower,
-            newTorque: torque,
-            newFuelSystem: fuelSystem,
-            newGearbox: gearbox
+            // newBrand: brand,
+            // newModel: model,
+            // newPrice: price,
+            // newImgUrl1: toJS(imgURL[0]),
+            // newImgUrl2: toJS(imgURL[1]),
+            // newImgUrl3: toJS(imgURL[2]),
+            // newType: collectionType,
+            // newDisplacement: displacement,
+            // newBorexStroke: borexStroke,
+            // newCompressionRatio: compressionRatio,
+            // newHorsepower: horsepower,
+            // newTorque: torque,
+            // newFuelSystem: fuelSystem,
+            // newGearbox: gearbox
         },
         validationSchema: Yup.object({
             newBrand: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
@@ -61,7 +61,7 @@ const AdminProduct = observer((props) => {
     function oneField(title, displayData, nWidth, nType, nPlaceholder, name, initialValObject, errorsObject) {
 
         return (
-            <div className={editIsActive ? 'item ifEditActive' : 'item'} ><div>{title} <span className='data-span'>{displayData}</span></div>
+            <div className={editIsActive ? 'item ifEditActive' : 'item'} ><div>{title}: <span className='data-span'>{displayData}</span></div>
                 {editIsActive ? <>
                     <i className="bi bi-arrow-right mx-3"></i>
                     <input style={{ width: nWidth }} type={nType} placeholder={nPlaceholder} className='form-control'
@@ -75,9 +75,9 @@ const AdminProduct = observer((props) => {
     }
 
     function sureDelete() {
-        alertify.confirm('Попередження', 'Ви впевнені що хочете видалити цей товар?',
-            function () { alertify.success('Видалено успішно') },
-            function () { alertify.error('відмінено') });
+        alertify.confirm(t('admin_page.products_tab.adminProduct.sureDelete.title'), t('admin_page.products_tab.adminProduct.sureDelete.text'),
+            function () { alertify.success(t('admin_page.products_tab.adminProduct.sureDelete.succes')) },
+            function () { alertify.error(t('admin_page.products_tab.adminProduct.sureDelete.error')) });
     }
 
     function saveChanges() {
@@ -153,11 +153,9 @@ const AdminProduct = observer((props) => {
                                 </div>
                             </div>
                             {editIsActive ? <>
-                                <div className={editIsActive ? 'item ifEditActive' : 'item'} ><div>Картинка {currentImg + 1} (посилання)</div>
+                                <div className={editIsActive ? 'item ifEditActive' : 'item'} >
+                                    <div> {t('moto_data.image', { imgNum: currentImg + 1 })}</div>
                                     {editIsActive ? <>
-                                        <div className='d-flex justify-content-center'>
-                                            <i className="bi bi-arrow-down mx-3 my-2"></i>
-                                        </div>
                                         {/* 1 */}
                                         <input style={currentImg == 0 ? { width: "100%", display: 'block' } : { display: 'none' }}
                                             type='text' placeholder='new img 1' className='form-control img-active1 mb-3'
@@ -180,20 +178,20 @@ const AdminProduct = observer((props) => {
                             </> : false}
                         </div>
                         <div className="info-cont | col-12 col-md-8 col-lg-8 col-xl-6">
-                            <div className="item id">ID Товару: <span className='italic-text data-span'>{_id}</span></div>
-                            <div className='item'>Змін данних: <span className='data-span'>{__v}</span></div>
+                            <div className="item">{t('admin_page.products_tab.adminProduct.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
+                            <div className='item'>{t('admin_page.products_tab.adminProduct.prodChanges')}: <span className='data-span'>{__v}</span></div>
                             <hr />
                             <form className='editform'>
-                                {oneField('Бренд:', brand, "300px", "text", "new brand", "newBrand", eF.values.newBrand, eF.errors.newBrand)}
-                                {oneField('Модель:', model, "300px", "text", "new model", "newModel", eF.values.newModel, eF.errors.newModel)}
-                                {oneField('Ціна:', clientStore.formatPrice(price), "300px", "Number", "new price", "newPrice", eF.values.newPrice, eF.errors.newPrice)}
-                                {oneField('Тип:', collectionType, "300px", "text", "new type", "newType", eF.values.newType, eF.errors.newType)}
-                                {oneField('Кубатура двигуна:', displacement, "300px", "text", "new displacement", "newDisplacement", eF.values.newDisplacement, eF.errors.newDisplacement)}
-                                {oneField('Діаметр поршнів:', borexStroke, "300px", "text", "new borex stroke", "newBorexStroke", eF.values.newBorexStroke, eF.errors.newBorexStroke)}
-                                {oneField('Коефіцієнт стиснення:', compressionRatio, "300px", "text", "new compression ratio", "newCompressionRatio", eF.values.newCompressionRatio, eF.errors.newCompressionRatio)}
-                                {oneField('Кількість кіньських сил:', horsepower, "300px", "text", "new horsepower", "newHorsepower", eF.values.newHorsepower, eF.errors.newHorsepower)}
-                                {oneField('Крутний момент:', torque, "300px", "text", "new torque", "newTorque", eF.values.newTorque, eF.errors.newTorque)}
-                                <div className={editIsActive ? 'item ifEditActive textarea-items' : 'item textarea-items'}><div>Паливна система: <span className='data-span'>{fuelSystem}</span></div>
+                                {oneField(t('moto_data.brand'), brand, "300px", "text", "new brand", "newBrand", eF.values.newBrand, eF.errors.newBrand)}
+                                {oneField(t('moto_data.model'), model, "300px", "text", "new model", "newModel", eF.values.newModel, eF.errors.newModel)}
+                                {oneField(t('moto_data.price'), clientStore.formatPrice(price), "300px", "Number", "new price", "newPrice", eF.values.newPrice, eF.errors.newPrice)}
+                                {oneField(t('moto_data.type'), collectionType, "300px", "text", "new type", "newType", eF.values.newType, eF.errors.newType)}
+                                {oneField(t('moto_data.engineCapacity'), displacement, "300px", "text", "new displacement", "newDisplacement", eF.values.newDisplacement, eF.errors.newDisplacement)}
+                                {oneField(t('moto_data.pistonDiameter'), borexStroke, "300px", "text", "new borex stroke", "newBorexStroke", eF.values.newBorexStroke, eF.errors.newBorexStroke)}
+                                {oneField(t('moto_data.compressionRatio'), compressionRatio, "300px", "text", "new compression ratio", "newCompressionRatio", eF.values.newCompressionRatio, eF.errors.newCompressionRatio)}
+                                {oneField(t('moto_data.horsePower'), horsepower, "300px", "text", "new horsepower", "newHorsepower", eF.values.newHorsepower, eF.errors.newHorsepower)}
+                                {oneField(t('moto_data.torque'), torque, "300px", "text", "new torque", "newTorque", eF.values.newTorque, eF.errors.newTorque)}
+                                <div className={editIsActive ? 'item ifEditActive textarea-items' : 'item textarea-items'}><div>{t('moto_data.fuelSystem')}: <span className='data-span'>{fuelSystem}</span></div>
                                     {editIsActive ? <>
                                         <i className="bi bi-arrow-right mx-3"></i>
                                         <textarea className='form-control' placeholder='new fuel system'
@@ -201,7 +199,7 @@ const AdminProduct = observer((props) => {
                                         <div className='error-string'>{eF.errors.newFuelSystem ? eF.errors.newFuelSystem : ""}</div>
                                     </> : false}
                                 </div>
-                                <div className={editIsActive ? 'item ifEditActive textarea-items' : 'item textarea-items'}><div>Коробка передач: <span className='data-span'>{gearbox}</span></div>
+                                <div className={editIsActive ? 'item ifEditActive textarea-items' : 'item textarea-items'}><div>{t('moto_data.gearbox')}: <span className='data-span'>{gearbox}</span></div>
                                     {editIsActive ? <>
                                         <i className="bi bi-arrow-right mx-3"></i>
                                         <textarea className='form-control' placeholder='new gearbox'
@@ -213,14 +211,14 @@ const AdminProduct = observer((props) => {
                         </div>
                         <div className='d-flex align-items-end justify-content-end col-12 col-md-4 col-lg-4 col-xl-2'>
                             <div className="buttons-cont">
-                                <button className="mainButton delete | btn px-4 py-2" onClick={sureDelete}>Видалити</button>
+                                <button className="mainButton delete | btn px-4 py-2" onClick={sureDelete}>{t('admin_page.products_tab.adminProduct.btn-delete')}</button>
 
-                                <button onClick={() => seteditIsActive(!editIsActive)} className="mainButton edit | btn px-4 py-2">Редагувати</button>
+                                <button onClick={() => seteditIsActive(!editIsActive)} className="mainButton edit | btn px-4 py-2">{t('admin_page.products_tab.adminProduct.btn-edit')}</button>
 
                                 {editIsActive ? <button onClick={saveChanges}
-                                    className={eF.isValid && eF.dirty ? "mainButton save | btn px-4 py-2" : '"mainButton save btn disabled | btn px-4 py-2"'}>Зберегти</button> : false}
+                                    className={eF.isValid && eF.dirty ? "mainButton save | btn px-4 py-2" : '"mainButton save btn disabled | btn px-4 py-2"'}>{t('admin_page.products_tab.adminProduct.btn-save')}</button> : false}
 
-                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? 'Приховати' : 'Розкрити'}</button>
+                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? t('admin_page.products_tab.adminProduct.btn-readFull_expand') : t('admin_page.products_tab.adminProduct.btn-readFull_hide')}</button>
                             </div>
                         </div>
                     </>
@@ -230,18 +228,18 @@ const AdminProduct = observer((props) => {
                             <img style={{ height: "200px" }} src={imgURL[0]} alt="Product img" />
                         </div>
                         <div className="info-cont | col-12 col-sm-6 col-md-6 col-lg-6 col-xl-7">
-                            <div className="item id">ID Товару: <span className='italic-text data-span'>{_id}</span></div>
-                            <div className='item'>Змін данних: <span className='data-span'>{__v}</span></div>
+                            <div className="item id">{t('admin_page.products_tab.adminProduct.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
+                            <div className='item'>{t('admin_page.products_tab.adminProduct.prodChanges')}: <span className='data-span'>{__v}</span></div>
                             <hr />
-                            <div className='item'>Бренд: <span className='data-span'>{brand}</span></div>
-                            <div className='item'>Модель: <span className='data-span'>{model}</span></div>
-                            <div className='item'>Ціна: <span className='data-span'>{clientStore.formatPrice(price)}</span></div>
-                            <div className='item'>Тип: <span className='data-span'>{collectionType}</span></div>
+                            <div className='item'>{t('moto_data.brand')}: <span className='data-span'>{brand}</span></div>
+                            <div className='item'>{t('moto_data.model')}: <span className='data-span'>{model}</span></div>
+                            <div className='item'>{t('moto_data.price')}: <span className='data-span'>{clientStore.formatPrice(price)}</span></div>
+                            <div className='item'>{t('moto_data.type')}: <span className='data-span'>{collectionType}</span></div>
                         </div>
                         <div className='d-flex align-items-end justify-content-end col-12 col-sm-6 col-md-6 col-lg-2 col-xl-2'>
                             <div style={{ height: "120px" }} className="buttons-cont">
-                                <NavLink to={`/moto/?id=${_id}`} className="mainButton view | btn px-4 py-2">Переглянути</NavLink>
-                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? 'Приховати' : 'Розкрити'}</button>
+                                <NavLink to={`/moto/?id=${_id}`} className="mainButton view | btn px-4 py-2">{t('admin_page.products_tab.adminProduct.btn-view')}</NavLink>
+                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? t('admin_page.products_tab.adminProduct.btn-readFull_hide') : t('admin_page.products_tab.adminProduct.btn-readFull_expand')}</button>
                             </div>
                         </div>
                     </>

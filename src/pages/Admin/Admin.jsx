@@ -124,20 +124,20 @@ const Admin = observer(() => {
   // start add product logic
   const addProduct = useFormik({
     initialValues: {
-      addBrand: 'Huyati',
-      addModel: 'Hueta c300',
-      addPrice: 99999,
-      addImgUrl1: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      addImgUrl2: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      addImgUrl3: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      addType: 'Sport',
-      addDisplacement: '8567 cc',
-      addBorexStroke: '450 x 7.85 mm',
-      addCompressionRatio: '17.56:07',
-      addHorsepower: '109 hp',
-      addTorque: '645 lb-ft',
-      addFuelSystem: 'Electronic fuel injection, 53 mm throttle bodies',
-      addGearbox: '6-speed with Ducati Quick Shift (DQS) up/down'
+      // addBrand: 'Huyati',
+      // addModel: 'Hueta c300',
+      // addPrice: 99999,
+      // addImgUrl1: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      // addImgUrl2: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      // addImgUrl3: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      // addType: 'Sport',
+      // addDisplacement: '8567 cc',
+      // addBorexStroke: '450 x 7.85 mm',
+      // addCompressionRatio: '17.56:07',
+      // addHorsepower: '109 hp',
+      // addTorque: '645 lb-ft',
+      // addFuelSystem: 'Electronic fuel injection, 53 mm throttle bodies',
+      // addGearbox: '6-speed with Ducati Quick Shift (DQS) up/down'
     },
     validationSchema: Yup.object({
       addBrand: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
@@ -177,6 +177,7 @@ const Admin = observer(() => {
       addBorexStroke, addCompressionRatio, addHorsepower, addTorque, addFuelSystem, addGearbox } = aF.values
 
     if (aF.isValid) {
+      // ! алерт просто для провірки данних
       alertify.alert('succes', `
       ${addBrand} </br>
       ${addModel} </br>
@@ -213,22 +214,22 @@ const Admin = observer(() => {
 
           <li className="nav-item" role="presentation">
             <button className="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button"
-              role="tab" aria-controls="products" aria-selected="false">Товари</button>
+              role="tab" aria-controls="products" aria-selected="false">{t('admin_page.products_tab.title')}</button>
           </li>
 
           <li className="nav-item" role="presentation">
             <button className="nav-link" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button"
-              role="tab" aria-controls="news" aria-selected="false">Новини</button>
+              role="tab" aria-controls="news" aria-selected="false">{t('admin_page.news_tab.title')}</button>
           </li>
 
           <li className="nav-item" role="presentation">
             <button className="nav-link disabled" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button"
-              role="tab" aria-controls="orders" aria-selected="false">Замовлення</button>
+              role="tab" aria-controls="orders" aria-selected="false">{t('admin_page.orders_tab.title')}</button>
           </li>
 
           <li className="nav-item" role="presentation">
             <button className="nav-link disabled" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button"
-              role="tab" aria-controls="users" aria-selected="false">Користувачі</button>
+              role="tab" aria-controls="users" aria-selected="false">{t('admin_page.users_tab.title')}</button>
           </li>
         </ul>
 
@@ -302,8 +303,9 @@ const Admin = observer(() => {
                         </select>
                       </div>
 
-                      <button class="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddProduct" aria-expanded="false" aria-controls="collapseAddProduct">
-                        Додати новий товар
+                      <button class="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseAddProduct" aria-expanded="false" aria-controls="collapseAddProduct">
+                        {t('admin_page.products_tab.btnAddProduct')}
                       </button>
                       <div class="collapse px-0 mt-3" id="collapseAddProduct">
                         <div class="card card-body addProductForm-cont">
@@ -311,34 +313,34 @@ const Admin = observer(() => {
                             <div className='row'>
 
                               <div className='form-col | col-12 col-sm-6	col-md-6 col-lg-4'>
-                                {oneField('100%', 'text', 'Бренд', 'addBrand', aF.values.addBrand, aF.errors.addBrand)}
-                                {oneField('100%', 'text', 'Модель', 'addModel', aF.values.addModel, aF.errors.addModel)}
-                                {oneField('100%', 'number', 'Ціна', 'addPrice', aF.values.addPrice, aF.errors.addPrice)}
-                                {oneField('100%', 'text', 'Тип', 'addType', aF.values.addType, aF.errors.addType)}
-                                {oneField('100%', 'text', 'Кубатура двигуна', 'addDisplacement', aF.values.addDisplacement, aF.errors.addDisplacement)}
-                                {oneField('100%', 'text', 'Діаметр поршнів', 'addBorexStroke', aF.values.addBorexStroke, aF.errors.addBorexStroke)}
+                                {oneField('100%', 'text', t('moto_data.brand'), 'addBrand', aF.values.addBrand, aF.errors.addBrand)}
+                                {oneField('100%', 'text', t('moto_data.model'), 'addModel', aF.values.addModel, aF.errors.addModel)}
+                                {oneField('100%', 'number', t('moto_data.price'), 'addPrice', aF.values.addPrice, aF.errors.addPrice)}
+                                {oneField('100%', 'text', t('moto_data.type'), 'addType', aF.values.addType, aF.errors.addType)}
+                                {oneField('100%', 'text', t('moto_data.engineCapacity'), 'addDisplacement', aF.values.addDisplacement, aF.errors.addDisplacement)}
+                                {oneField('100%', 'text', t('moto_data.pistonDiameter'), 'addBorexStroke', aF.values.addBorexStroke, aF.errors.addBorexStroke)}
                               </div>
 
                               <div className='form-col | col-12 col-sm-6 col-md-6 col-lg-4'>
-                                {oneField('100%', 'text', 'Крутний момент', 'addTorque', aF.values.addTorque, aF.errors.addTorque)}
-                                {oneField('100%', 'text', 'Коефіцієнт стиснення', 'addCompressionRatio', aF.values.addCompressionRatio, aF.errors.addCompressionRatio)}
-                                {oneField('100%', 'text', 'Кількість кіньських сил', 'addHorsepower', aF.values.addHorsepower, aF.errors.addHorsepower)}
-                                {oneField('100%', 'text', 'Картинка 1', 'addImgUrl1', aF.values.addImgUrl1, aF.errors.addImgUrl1)}
-                                {oneField('100%', 'text', 'Картинка 2', 'addImgUrl2', aF.values.addImgUrl2, aF.errors.addImgUrl2)}
-                                {oneField('100%', 'text', 'Картинка 3', 'addImgUrl3', aF.values.addImgUrl3, aF.errors.addImgUrl3)}
+                                {oneField('100%', 'text', t('moto_data.horsePower'), 'addHorsepower', aF.values.addHorsepower, aF.errors.addHorsepower)}
+                                {oneField('100%', 'text', t('moto_data.torque'), 'addTorque', aF.values.addTorque, aF.errors.addTorque)}
+                                {oneField('100%', 'text', t('moto_data.compressionRatio'), 'addCompressionRatio', aF.values.addCompressionRatio, aF.errors.addCompressionRatio)}
+                                {oneField('100%', 'text', t('moto_data.image', { imgNum: 1 }), 'addImgUrl1', aF.values.addImgUrl1, aF.errors.addImgUrl1)}
+                                {oneField('100%', 'text', t('moto_data.image', { imgNum: 2 }), 'addImgUrl2', aF.values.addImgUrl2, aF.errors.addImgUrl2)}
+                                {oneField('100%', 'text', t('moto_data.image', { imgNum: 3 }), 'addImgUrl3', aF.values.addImgUrl3, aF.errors.addImgUrl3)}
                               </div>
 
                               <div className="form-col third-item | col-12	col-sm-12 col-md-12	col-lg-4">
                                 <div>
                                   <div className='textarea-items'>
-                                    <textarea className='form-control' placeholder='Паливна система'
+                                    <textarea className='form-control' placeholder={t('moto_data.fuelSystem')}
                                       name="addFuelSystem" onChange={aF.handleChange} value={aF.values.addFuelSystem}></textarea>
 
                                     <div className='error-string'>{aF.errors.addFuelSystem ? aF.errors.addFuelSystem : ""}</div>
                                   </div>
 
                                   <div className='textarea-items'>
-                                    <textarea className='form-control' placeholder='Коробка передач'
+                                    <textarea className='form-control' placeholder={t('moto_data.gearbox')}
                                       name="addGearbox" onChange={aF.handleChange} value={aF.values.addGearbox}></textarea>
 
                                     <div className='error-string'>{aF.errors.addGearbox ? aF.errors.addGearbox : ""}</div>
@@ -346,7 +348,8 @@ const Admin = observer(() => {
                                 </div>
 
                                 <button onClick={addNewProduct}
-                                  className={aF.isValid && aF.dirty ? "mainButton save | btn" : "mainButton save btn disabled | btn"}>Додати ggg</button>
+                                  className={aF.isValid && aF.dirty ? "mainButton save | btn" : "mainButton save btn disabled | btn"}
+                                >{t('admin_page.products_tab.btnAdd')}</button>
                               </div>
 
                             </div>
