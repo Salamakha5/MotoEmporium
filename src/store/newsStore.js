@@ -19,6 +19,7 @@ class NewsStore {
             })
     }
 
+    // pagination
     newsCountPages = 0
     setNewsCountPages(n) {
         this.newsCountPages = n
@@ -27,7 +28,7 @@ class NewsStore {
     setNewsActivePage(n) {
         this.newsActivePage = n
     }
-    newsObjectsPerPage = 5
+    newsObjectsPerPage = 3
 }
 
 export default new NewsStore()

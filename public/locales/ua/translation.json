@@ -114,7 +114,9 @@
     "valid-phoneNumber": "Це не схоже на номер телефону!",
     "valid-email": "Eлектронна адреса має бути дійсною!",
     "valid-password": "Пароль має містити від {{num}} символів!",
-    "valid-cardNumber": "Номер карти має 12 цифр!"
+    "valid-cardNumber": "Номер карти має 12 цифр!",
+    "valid-noLessThan": "Не менше за {{num}}!",
+    "valid-noMoreThan": "Не більше за {{num}}!"
   },
   "shop_page": {
     "controls": {
@@ -290,35 +292,36 @@
     "Details": "Детальніше"
   },
   "admin_page": {
+    "btn-delete": "Видалити",
+    "btn-edit": "Редагувати",
+    "btn-save": "Зберегти",
+    "btn-readFull_expand": "Розкрити",
+    "btn-readFull_hide": "Приховати",
+    "btn-view": "Переглянути",
+    "btn-add": "Добавити",
+    "just-divider": "----------",
     "products_tab": {
       "title": "Товари",
-      "btnAddProduct": "Додати новий товар",
-      "btnAdd": "Добавити",
-      "adminProduct": {
-        "sureDelete": {
-          "title": "Попередження",
-          "text": "Ви впевнені що хочете видалити цей товар?",
-          "succes": "Видалено успішно",
-          "error": "Відмінено"
-        },
-        "idProduct": "ID товару",
-        "prodChanges": "Змін данних",
-        "btn-delete": "Видалити",
-        "btn-edit": "Редагувати",
-        "btn-save": "Зберегти",
-        "btn-readFull_expand": "Розкрити",
-        "btn-readFull_hide": "Приховати",
-        "btn-view": "Переглянути"
-      }
+      "btnOpenAddProduct": "Додати новий товар",
+      "idProduct": "ID товару",
+      "prodChanges": "Змін данних"
     },
     "news_tab": {
-      "title": "Новини"
+      "title": "Новини",
+      "btnOpenAddNews": "Додати нову новину"
     },
     "orders_tab": {
       "title": "Замовлення"
     },
     "users_tab": {
       "title": "Користувачі"
+    },
+    "sureDelete": {
+      "title": "Попередження",
+      "text-product": "Ви впевнені що хочете видалити цей товар?",
+      "text-news": "Ви впевнені що хочете видалити цю новину?",
+      "succes": "Видалено успішно",
+      "error": "Відмінено"
     }
   },
   "moto_data": {

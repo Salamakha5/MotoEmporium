@@ -3,7 +3,10 @@ import './Admin.scss'
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 import AdminProduct from '../../components/adminItems/AdminProduct/AdminProduct'
 import AdminProductsPagination from '../../components/Pagination/AdminProductsPagination'
+import AdminNewsItem from '../../components/adminItems/AdminNewsItem/AdminNewsItem'
+import NewsPagination from '../../components/Pagination/NewsPagination'
 import serverStore from '../../store/serverStore'
+import newsStore from '../../store/newsStore'
 import adminStore from '../../store/adminStore'
 
 import { useNavigate } from 'react-router-dom'
@@ -17,10 +20,14 @@ import * as Yup from "yup"
 
 const Admin = observer(() => {
 
+  // global variables
   const { t, i18n } = useTranslation();
   const navigate = useNavigate()
 
+  // product variables
   const [showProductsLoader, setShowProductsLoader] = useState(true)
+
+  // news variables
   const [showNewsLoader, setShowNewsLoader] = useState(true)
 
   useEffect(() => {
@@ -29,7 +36,24 @@ const Admin = observer(() => {
     serverStore.getAllMoto(() => {
       setShowProductsLoader(false)
     })
+
+    newsStore.getAllNews(() => {
+      setShowNewsLoader(false)
+    })
+
   }, [])
+
+  function oneField(width, currentFormik, type, placeholder, name, initialValObject, errorsObject) {
+
+    return (
+      <div className='addFormItem'>
+        <input style={{ width: width }} type={type} placeholder={placeholder} className='form-control'
+          name={name} onChange={currentFormik.handleChange} value={initialValObject}></input>
+
+        <div className='error-string'>{errorsObject ? errorsObject : ""}</div>
+      </div >
+    )
+  }
 
   // start sort products
   let BrandValue = createRef()
@@ -158,18 +182,6 @@ const Admin = observer(() => {
   })
   let aF = addProduct
 
-  function oneField(width, type, placeholder, name, initialValObject, errorsObject) {
-
-    return (
-      <div className='addFormItem'>
-        <input style={{ width: width }} type={type} placeholder={placeholder} className='form-control'
-          name={name} onChange={aF.handleChange} value={initialValObject}></input>
-
-        <div className='error-string'>{errorsObject ? errorsObject : ""}</div>
-      </div >
-    )
-  }
-
   function addNewProduct(e) {
     e.preventDefault()
 
@@ -204,6 +216,76 @@ const Admin = observer(() => {
   const firstMotoIndex = lastMotoIndex - adminStore.productsObjectsPerPage
   const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
 
+
+  // start news logic
+  let selectSort = createRef()
+
+  function sortNews() {
+    if (selectSort.current.value == "new") {
+      newsStore.newsData.sort((a, b) => (+b.indexData) - (+a.indexData))
+    }
+    if (selectSort.current.value == "maxStatus") {
+      newsStore.newsData.sort((a, b) => (+b.status) - (+a.status))
+    }
+  }
+
+  const addNews = useFormik({
+    initialValues: {
+      // addImg: '',
+      // addHeaderEN: '',
+      // addHeaderUA: '',
+      // addTextEN: '',
+      // addTextUA: '',
+      // addDate: '',
+      // addStatus: ''
+    },
+    validationSchema: Yup.object({
+      addImg: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(500, t('yupErrors.valid-maxLength', { num: 500 })).required(t('yupErrors.required')),
+      addHeaderEN: Yup.string().min(15, t('yupErrors.valid-field', { num: 15 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addHeaderUA: Yup.string().min(15, t('yupErrors.valid-field', { num: 15 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addTextEN: Yup.string().min(50, t('yupErrors.valid-field', { num: 50 })).max(800, t('yupErrors.valid-maxLength', { num: 800 })).required(t('yupErrors.required')),
+      addTextUA: Yup.string().min(50, t('yupErrors.valid-field', { num: 50 })).max(800, t('yupErrors.valid-maxLength', { num: 800 })).required(t('yupErrors.required')),
+      addDate: Yup.string().min(10, t('yupErrors.valid-field', { num: 10 })).max(10, t('yupErrors.valid-maxLength', { num: 10 })).required(t('yupErrors.required')),
+      addStatus: Yup.number().min(1, t('yupErrors.valid-noLessThan', { num: 1 })).max(10, t('yupErrors.valid-noMoreThan', { num: 10 })).required(t('yupErrors.required')),
+    })
+  })
+  let aN = addNews
+
+  function addNewProduct(e) {
+    e.preventDefault()
+
+    alert('hui')
+
+    // let { addBrand, addModel, addPrice, addImgUrl1, addImgUrl2, addImgUrl3, addType, addDisplacement,
+    //   addBorexStroke, addCompressionRatio, addHorsepower, addTorque, addFuelSystem, addGearbox } = aF.values
+
+    // if (aF.isValid) {
+    //   // ! алерт просто для провірки данних
+    //   alertify.alert('succes', `
+    //   ${addBrand} </br>
+    //   ${addModel} </br>
+    //   ${addPrice} </br>
+    //   ${addImgUrl1} </br>
+    //   ${addImgUrl2} </br>
+    //   ${addImgUrl3} </br>
+    //   ${addType} </br>
+    //   ${addDisplacement} </br>
+    //   ${addBorexStroke} </br>
+    //   ${addCompressionRatio} </br>
+    //   ${addHorsepower} </br>
+    //   ${addTorque} </br>
+    //   ${addFuelSystem} </br>
+    //   ${addGearbox} </br>
+    //   `)
+    // }
+  }
+  // end news logic
+
+  // news pagination
+  const lastNewsIndex = newsStore.newsActivePage * newsStore.newsObjectsPerPage
+  const firstNewsIndex = lastNewsIndex - newsStore.newsObjectsPerPage
+  const currentNews = newsStore.newsData.slice(firstNewsIndex, lastNewsIndex)
+
   return (
     <div className="admin">
       <BackUpBtn whenShow='750' debugLine='false'></BackUpBtn>
@@ -213,12 +295,12 @@ const Admin = observer(() => {
         <ul className="nav nav-tabs" id="myTab" role="tablist">
 
           <li className="nav-item" role="presentation">
-            <button className="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button"
+            <button className="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button"
               role="tab" aria-controls="products" aria-selected="false">{t('admin_page.products_tab.title')}</button>
           </li>
 
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button"
+            <button className="nav-link active" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button"
               role="tab" aria-controls="news" aria-selected="false">{t('admin_page.news_tab.title')}</button>
           </li>
 
@@ -235,7 +317,7 @@ const Admin = observer(() => {
 
         <div className="tab-content">
           {/* ========== PRODUCTS ========== */}
-          <div className="tab-pane active" id="products"
+          <div className="tab-pane" id="products"
             role="tabpanel" aria-labelledby="products-tab" tabIndex="0">
 
             <div>
@@ -305,7 +387,7 @@ const Admin = observer(() => {
 
                       <button class="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseAddProduct" aria-expanded="false" aria-controls="collapseAddProduct">
-                        {t('admin_page.products_tab.btnAddProduct')}
+                        {t('admin_page.products_tab.btnOpenAddProduct')}
                       </button>
                       <div class="collapse px-0 mt-3" id="collapseAddProduct">
                         <div class="card card-body addProductForm-cont">
@@ -313,21 +395,21 @@ const Admin = observer(() => {
                             <div className='row'>
 
                               <div className='form-col | col-12 col-sm-6	col-md-6 col-lg-4'>
-                                {oneField('100%', 'text', t('moto_data.brand'), 'addBrand', aF.values.addBrand, aF.errors.addBrand)}
-                                {oneField('100%', 'text', t('moto_data.model'), 'addModel', aF.values.addModel, aF.errors.addModel)}
-                                {oneField('100%', 'number', t('moto_data.price'), 'addPrice', aF.values.addPrice, aF.errors.addPrice)}
-                                {oneField('100%', 'text', t('moto_data.type'), 'addType', aF.values.addType, aF.errors.addType)}
-                                {oneField('100%', 'text', t('moto_data.engineCapacity'), 'addDisplacement', aF.values.addDisplacement, aF.errors.addDisplacement)}
-                                {oneField('100%', 'text', t('moto_data.pistonDiameter'), 'addBorexStroke', aF.values.addBorexStroke, aF.errors.addBorexStroke)}
+                                {oneField('100%', aF, 'text', t('moto_data.brand'), 'addBrand', aF.values.addBrand, aF.errors.addBrand)}
+                                {oneField('100%', aF, 'text', t('moto_data.model'), 'addModel', aF.values.addModel, aF.errors.addModel)}
+                                {oneField('100%', aF, 'number', t('moto_data.price'), 'addPrice', aF.values.addPrice, aF.errors.addPrice)}
+                                {oneField('100%', aF, 'text', t('moto_data.type'), 'addType', aF.values.addType, aF.errors.addType)}
+                                {oneField('100%', aF, 'text', t('moto_data.engineCapacity'), 'addDisplacement', aF.values.addDisplacement, aF.errors.addDisplacement)}
+                                {oneField('100%', aF, 'text', t('moto_data.pistonDiameter'), 'addBorexStroke', aF.values.addBorexStroke, aF.errors.addBorexStroke)}
                               </div>
 
                               <div className='form-col | col-12 col-sm-6 col-md-6 col-lg-4'>
-                                {oneField('100%', 'text', t('moto_data.horsePower'), 'addHorsepower', aF.values.addHorsepower, aF.errors.addHorsepower)}
-                                {oneField('100%', 'text', t('moto_data.torque'), 'addTorque', aF.values.addTorque, aF.errors.addTorque)}
-                                {oneField('100%', 'text', t('moto_data.compressionRatio'), 'addCompressionRatio', aF.values.addCompressionRatio, aF.errors.addCompressionRatio)}
-                                {oneField('100%', 'text', t('moto_data.image', { imgNum: 1 }), 'addImgUrl1', aF.values.addImgUrl1, aF.errors.addImgUrl1)}
-                                {oneField('100%', 'text', t('moto_data.image', { imgNum: 2 }), 'addImgUrl2', aF.values.addImgUrl2, aF.errors.addImgUrl2)}
-                                {oneField('100%', 'text', t('moto_data.image', { imgNum: 3 }), 'addImgUrl3', aF.values.addImgUrl3, aF.errors.addImgUrl3)}
+                                {oneField('100%', aF, 'text', t('moto_data.horsePower'), 'addHorsepower', aF.values.addHorsepower, aF.errors.addHorsepower)}
+                                {oneField('100%', aF, 'text', t('moto_data.torque'), 'addTorque', aF.values.addTorque, aF.errors.addTorque)}
+                                {oneField('100%', aF, 'text', t('moto_data.compressionRatio'), 'addCompressionRatio', aF.values.addCompressionRatio, aF.errors.addCompressionRatio)}
+                                {oneField('100%', aF, 'text', t('moto_data.image', { imgNum: 1 }), 'addImgUrl1', aF.values.addImgUrl1, aF.errors.addImgUrl1)}
+                                {oneField('100%', aF, 'text', t('moto_data.image', { imgNum: 2 }), 'addImgUrl2', aF.values.addImgUrl2, aF.errors.addImgUrl2)}
+                                {oneField('100%', aF, 'text', t('moto_data.image', { imgNum: 3 }), 'addImgUrl3', aF.values.addImgUrl3, aF.errors.addImgUrl3)}
                               </div>
 
                               <div className="form-col third-item | col-12	col-sm-12 col-md-12	col-lg-4">
@@ -349,7 +431,7 @@ const Admin = observer(() => {
 
                                 <button onClick={addNewProduct}
                                   className={aF.isValid && aF.dirty ? "mainButton save | btn" : "mainButton save btn disabled | btn"}
-                                >{t('admin_page.products_tab.btnAdd')}</button>
+                                >{t('admin_page.btn-add')}</button>
                               </div>
 
                             </div>
@@ -375,8 +457,91 @@ const Admin = observer(() => {
           </div>
 
           {/* ========== NEWS ========== */}
-          <div className="tab-pane" id="news"
-            role="tabpanel" aria-labelledby="news-tab" tabIndex="0">Новини</div>
+          <div className="tab-pane active" id="news" role="tabpanel" aria-labelledby="news-tab" tabIndex="0">
+            <div>
+              {
+                showNewsLoader ?
+                  <div style={{ height: '300px', display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <div className="loader active" id="loader-2">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                  :
+                  <>
+                    <div className="row d-flex justify-content-space-between">
+                      <div className="col-12 col-sm-12 col-md-6 col-lg-6 d-flex align-items-center fs-5">{t('shop_page.sup-controls.isDisplayed',
+                        { currentPage: newsStore.newsActivePage, allPages: newsStore.newsCountPages })}</div>
+                      <div className="col-12 col-sm-12 col-md-3 col-lg-3 justify-content-end">
+                        <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
+                          <option value="default">{t('blog_page.selectDate-dafault')}</option>
+                          <option value={"new"}>{t('blog_page.selectSort-new')}</option>
+                          <option value={"maxStatus"}>{t('blog_page.selectRating-mostPopular')}</option>
+                        </select>
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
+                        <button style={{ width: "100%" }} class="mainButton | btn py-2" type="button"
+                          data-bs-toggle="collapse" data-bs-target="#collapseAddNews" aria-expanded="false" aria-controls="collapseAddNews">
+                          {t('admin_page.news_tab.btnOpenAddNews')}
+                        </button>
+                      </div>
+                      <div class="collapse px-0 mt-3" id="collapseAddNews">
+                        <div class="card card-body addProductForm-cont">
+                          <form className='addProduct-form'>
+                            <div className='row'>
+
+                              <div className='form-col | col-12 col-sm-6	col-md-6 col-lg-6'>
+                                {oneField('100%', aN, 'text', 'Зображення', 'addImg', aN.values.addImg, aN.errors.addImg)}
+                                {oneField('100%', aN, 'text', 'Заголовок (EN)', 'addHeaderEN', aN.values.addHeaderEN, aN.errors.addHeaderEN)}
+                                {oneField('100%', aN, 'text', 'Заголовок (UA)', 'addHeaderUA', aN.values.addHeaderUA, aN.errors.addHeaderUA)}
+                                {oneField('100%', aN, 'text', 'Дата', 'addDate', aN.values.addDate, aN.errors.addDate)}
+                                {oneField('100%', aN, 'text', 'Рейтинг (1-10)', 'addStatus', aN.values.addStatus, aN.errors.addStatus)}
+                              </div>
+
+                              <div className="form-col third-item | col-12 col-sm-6 col-md-6 col-lg-6">
+                                <div>
+                                  <div className='textarea-items'>
+                                    <textarea className='form-control' placeholder='Текст (EN)'
+                                      name="addTextEN" onChange={aN.handleChange} value={aN.values.addTextEN}></textarea>
+
+                                    <div className='error-string'>{aN.errors.addTextEN ? aN.errors.addTextEN : ""}</div>
+                                  </div>
+
+                                  <div className='textarea-items'>
+                                    <textarea className='form-control' placeholder='Текст (UA)'
+                                      name="addTextUA" onChange={aN.handleChange} value={aN.values.addTextUA}></textarea>
+
+                                    <div className='error-string'>{aN.errors.addTextUA ? aN.errors.addTextUA : ""}</div>
+                                  </div>
+                                </div>
+
+                                <button onClick={addNewProduct}
+                                  className={aN.isValid && aN.dirty ? "mainButton save | btn" : "mainButton save btn disabled | btn"}
+                                >{t('admin_page.btn-add')}</button>
+                              </div>
+
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    {
+                      <>
+                        {currentNews.map((p) => {
+                          return <AdminNewsItem key={p._id} data={p}></AdminNewsItem>
+                        })}
+                        <NewsPagination
+                          shortPagination={true}
+                          dataLength={newsStore.newsData.length}
+                        ></NewsPagination>
+                      </>
+                    }
+                  </>
+              }
+            </div>
+          </div>
 
           {/* ========== ORDERS ========== */}
           <div className="tab-pane" id="orders"

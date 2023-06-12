@@ -3,10 +3,10 @@ import './Blog.scss'
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 import NewsPagination from '../../components/Pagination/NewsPagination'
 import newsStore from '../../store/newsStore'
+import BlogItem from '../../components/BlogItem/BlogItem'
 
 import React, { createRef, useState } from 'react'
 import { useEffect } from 'react'
-import BlogItem from '../../components/BlogItem/BlogItem'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 
@@ -45,8 +45,10 @@ const Blog = observer(() => {
             <BackUpBtn whenShow='750' debugLine='false'></BackUpBtn>
 
             <div className="blog__container | container px-5">
-                <div className="row pt-4 d-flex justify-content-end">
-                    <div className="col-12 col-lg-4">
+                <div className="row pt-4 d-flex justify-content-space-between">
+                    <div className="col-12 col-sm-12 col-md-9 col-lg-9 d-flex align-items-center fs-5">{t('shop_page.sup-controls.isDisplayed',
+                        { currentPage: newsStore.newsActivePage, allPages: newsStore.newsCountPages })}</div>
+                    <div className="col-12 col-sm-12 col-md-3 col-lg-3 justify-content-end">
                         <select ref={selectSort} onChange={sortNews} className="form-select mt-3 mb-3 me-3" aria-label="Default select example">
                             <option value="default">{t('blog_page.selectDate-dafault')}</option>
                             <option value={"new"}>{t('blog_page.selectSort-new')}</option>

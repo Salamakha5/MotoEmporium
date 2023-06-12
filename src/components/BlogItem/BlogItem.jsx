@@ -1,8 +1,9 @@
 import './BlogItem.scss'
 
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next';
 import clientStore from '../../store/clientStore';
+
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
 const BlogItem = observer((props) => {
@@ -42,9 +43,7 @@ const BlogItem = observer((props) => {
                                 ?
                                 <p className='news_fullText'>{clientStore.currentLang == "ua" ? text.ua : text.en}</p>
                                 :
-                                <p className='news_trimText'>{clientStore.currentLang == "ua" ? text.ua.substring(0, 300) : text.en.substring(0, 300)}...
-                                    {/* <span className='threeDots'>...</span> */}
-                                </p>
+                                <p className='news_trimText'>{clientStore.currentLang == "ua" ? text.ua.substring(0, 300) : text.en.substring(0, 300)}...</p>
                         }
                     </div>
                     <div className='d-flex justify-content-end pt-2'>

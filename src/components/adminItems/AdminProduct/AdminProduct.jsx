@@ -1,7 +1,6 @@
 import './AdminProduct.scss'
 
 import clientStore from "../../../store/clientStore";
-import serverStore from '..//../../store/serverStore'
 
 import { useState } from 'react'
 import { NavLink, useNavigate } from "react-router-dom";
@@ -16,6 +15,7 @@ const AdminProduct = observer((props) => {
 
     const navigate = useNavigate()
     const { t } = useTranslation();
+
     const { _id, brand, model, price, imgURL, collectionType, displacement, borexStroke,
         compressionRatio, horsepower, torque, fuelSystem, gearbox, __v } = toJS(props.data);
     const [btnOpen, setbtnOpen] = useState(false)
@@ -24,28 +24,28 @@ const AdminProduct = observer((props) => {
 
     const editFormik = useFormik({
         initialValues: {
-            // newBrand: brand,
-            // newModel: model,
-            // newPrice: price,
-            // newImgUrl1: toJS(imgURL[0]),
-            // newImgUrl2: toJS(imgURL[1]),
-            // newImgUrl3: toJS(imgURL[2]),
-            // newType: collectionType,
-            // newDisplacement: displacement,
-            // newBorexStroke: borexStroke,
-            // newCompressionRatio: compressionRatio,
-            // newHorsepower: horsepower,
-            // newTorque: torque,
-            // newFuelSystem: fuelSystem,
-            // newGearbox: gearbox
+            newBrand: brand,
+            newModel: model,
+            newPrice: price,
+            newImgUrl1: toJS(imgURL[0]),
+            newImgUrl2: toJS(imgURL[1]),
+            newImgUrl3: toJS(imgURL[2]),
+            newType: collectionType,
+            newDisplacement: displacement,
+            newBorexStroke: borexStroke,
+            newCompressionRatio: compressionRatio,
+            newHorsepower: horsepower,
+            newTorque: torque,
+            newFuelSystem: fuelSystem,
+            newGearbox: gearbox
         },
         validationSchema: Yup.object({
             newBrand: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
             newModel: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
             newPrice: Yup.string().min(3, t('yupErrors.valid-field', { num: 3 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
-            newImgUrl1: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })),
-            newImgUrl2: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })),
-            newImgUrl3: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })),
+            newImgUrl1: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(500, t('yupErrors.valid-maxLength', { num: 500 })),
+            newImgUrl2: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(500, t('yupErrors.valid-maxLength', { num: 500 })),
+            newImgUrl3: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(500, t('yupErrors.valid-maxLength', { num: 500 })),
             newType: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
             newDisplacement: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
             newBorexStroke: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
@@ -75,9 +75,9 @@ const AdminProduct = observer((props) => {
     }
 
     function sureDelete() {
-        alertify.confirm(t('admin_page.products_tab.adminProduct.sureDelete.title'), t('admin_page.products_tab.adminProduct.sureDelete.text'),
-            function () { alertify.success(t('admin_page.products_tab.adminProduct.sureDelete.succes')) },
-            function () { alertify.error(t('admin_page.products_tab.adminProduct.sureDelete.error')) });
+        alertify.confirm(t('admin_page.products_tab.adminProduct.sureDelete.title'), t('admin_page.sureDelete.text-product'),
+            function () { alertify.success(t('admin_page.sureDelete.succes')) },
+            function () { alertify.error(t('admin_page.sureDelete.error')) });
     }
 
     function saveChanges() {
@@ -89,8 +89,8 @@ const AdminProduct = observer((props) => {
 
         function rowBuilder(order, title, boldSpan, type, fieldVal, defaultVal, isNeedBr) {
             console.log(type);
-            return (`${order}.${title}: <span ${boldSpan ? "class='fw-bold'" : false}>
-            ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = defaultVal : fieldVal)
+            return (`${order}.${title}: <span ${boldSpan ? "className='fw-bold'" : false}>
+            ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = 'Без змін' : fieldVal)
                     :
                     (type == 'number' ? fieldVal <= 0 ? fieldVal = clientStore.formatPrice(defaultVal) : clientStore.formatPrice(fieldVal)
                         :
@@ -104,17 +104,20 @@ const AdminProduct = observer((props) => {
             ${rowBuilder('1', titlesArr[1], true, "string", newBrand, brand, true)}
             ${rowBuilder('2', titlesArr[2], true, "string", newModel, model, true)}
             ${rowBuilder('3', titlesArr[3], true, "number", newPrice, price, true)}
-            ${rowBuilder('4', titlesArr[4], true, "string", newImgUrl1, imgURL[0], true)}
-            ${rowBuilder('5', titlesArr[5], true, "string", newImgUrl2, imgURL[1], true)}
-            ${rowBuilder('6', titlesArr[6], true, "string", newImgUrl3, imgURL[2], true)}
-            ${rowBuilder('7', titlesArr[7], true, "string", newType, collectionType, true)}
-            ${rowBuilder('8', titlesArr[8], true, "string", newDisplacement, displacement, true)}
-            ${rowBuilder('9', titlesArr[9], true, "string", newBorexStroke, borexStroke, true)}
-            ${rowBuilder('10', titlesArr[10], true, "string", newCompressionRatio, compressionRatio, true)}
-            ${rowBuilder('11', titlesArr[11], true, "string", newHorsepower, horsepower, true)}
-            ${rowBuilder('12', titlesArr[12], true, "string", newTorque, torque, true)}
-            ${rowBuilder('13', titlesArr[13], true, "string", newFuelSystem, fuelSystem, true)}
-            ${rowBuilder('14', titlesArr[14], true, "string", newGearbox, gearbox, true)}
+            4.Зображення: 
+            <br>
+            <img style='width: 32%; height: 150px;' src='${newImgUrl1 == 0 ? newImgUrl1 = imgURL[0] : newImgUrl1}' alt="img 1 wrong" />
+            <img style='width: 32%; height: 150px;' src='${newImgUrl2 == 0 ? newImgUrl2 = imgURL[1] : newImgUrl2}' alt="img 2 wrong" />
+            <img style='width: 32%; height: 150px;' src='${newImgUrl3 == 0 ? newImgUrl3 = imgURL[2] : newImgUrl3}' alt="img 3 wrong" />
+            <br>
+            ${rowBuilder('5', titlesArr[7], true, "string", newType, collectionType, true)}
+            ${rowBuilder('6', titlesArr[8], true, "string", newDisplacement, displacement, true)}
+            ${rowBuilder('7', titlesArr[9], true, "string", newBorexStroke, borexStroke, true)}
+            ${rowBuilder('8', titlesArr[10], true, "string", newCompressionRatio, compressionRatio, true)}
+            ${rowBuilder('9', titlesArr[11], true, "string", newHorsepower, horsepower, true)}
+            ${rowBuilder('10', titlesArr[12], true, "string", newTorque, torque, true)}
+            ${rowBuilder('11', titlesArr[13], true, "string", newFuelSystem, fuelSystem, true)}
+            ${rowBuilder('12', titlesArr[14], true, "string", newGearbox, gearbox, true)}
             <hr/>
             ! - Ви можете залишити поле пустим щоб залишити данні без змін - !
             `,
@@ -178,7 +181,7 @@ const AdminProduct = observer((props) => {
                             </> : false}
                         </div>
                         <div className="info-cont | col-12 col-md-8 col-lg-8 col-xl-6">
-                            <div className="item">{t('admin_page.products_tab.adminProduct.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
+                            <div className="item">{t('admin_page.products_tab.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
                             <div className='item'>{t('admin_page.products_tab.adminProduct.prodChanges')}: <span className='data-span'>{__v}</span></div>
                             <hr />
                             <form className='editform'>
@@ -211,14 +214,14 @@ const AdminProduct = observer((props) => {
                         </div>
                         <div className='d-flex align-items-end justify-content-end col-12 col-md-4 col-lg-4 col-xl-2'>
                             <div className="buttons-cont">
-                                <button className="mainButton delete | btn px-4 py-2" onClick={sureDelete}>{t('admin_page.products_tab.adminProduct.btn-delete')}</button>
+                                <button className="mainButton delete | btn px-4 py-2" onClick={sureDelete}>{t('admin_page.btn-delete')}</button>
 
-                                <button onClick={() => seteditIsActive(!editIsActive)} className="mainButton edit | btn px-4 py-2">{t('admin_page.products_tab.adminProduct.btn-edit')}</button>
+                                <button onClick={() => seteditIsActive(!editIsActive)} className="mainButton edit | btn px-4 py-2">{t('admin_page.btn-edit')}</button>
 
                                 {editIsActive ? <button onClick={saveChanges}
-                                    className={eF.isValid && eF.dirty ? "mainButton save | btn px-4 py-2" : '"mainButton save btn disabled | btn px-4 py-2"'}>{t('admin_page.products_tab.adminProduct.btn-save')}</button> : false}
+                                    className={eF.isValid && eF.dirty ? "mainButton save | btn px-4 py-2" : '"mainButton save btn disabled | btn px-4 py-2"'}>{t('admin_page.btn-save')}</button> : false}
 
-                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? t('admin_page.products_tab.adminProduct.btn-readFull_expand') : t('admin_page.products_tab.adminProduct.btn-readFull_hide')}</button>
+                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? t('admin_page.btn-readFull_hide') : t('admin_page.btn-readFull_expand')}</button>
                             </div>
                         </div>
                     </>
@@ -228,7 +231,7 @@ const AdminProduct = observer((props) => {
                             <img style={{ height: "200px" }} src={imgURL[0]} alt="Product img" />
                         </div>
                         <div className="info-cont | col-12 col-sm-6 col-md-6 col-lg-6 col-xl-7">
-                            <div className="item id">{t('admin_page.products_tab.adminProduct.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
+                            <div className="item id">{t('admin_page.products_tab.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
                             <div className='item'>{t('admin_page.products_tab.adminProduct.prodChanges')}: <span className='data-span'>{__v}</span></div>
                             <hr />
                             <div className='item'>{t('moto_data.brand')}: <span className='data-span'>{brand}</span></div>
@@ -238,8 +241,8 @@ const AdminProduct = observer((props) => {
                         </div>
                         <div className='d-flex align-items-end justify-content-end col-12 col-sm-6 col-md-6 col-lg-2 col-xl-2'>
                             <div style={{ height: "120px" }} className="buttons-cont">
-                                <NavLink to={`/moto/?id=${_id}`} className="mainButton view | btn px-4 py-2">{t('admin_page.products_tab.adminProduct.btn-view')}</NavLink>
-                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? t('admin_page.products_tab.adminProduct.btn-readFull_hide') : t('admin_page.products_tab.adminProduct.btn-readFull_expand')}</button>
+                                <NavLink to={`/moto/?id=${_id}`} className="mainButton view | btn px-4 py-2">{t('admin_page.btn-view')}</NavLink>
+                                <button className='mainButton btn-readFull' onClick={() => setbtnOpen(!btnOpen)}>{btnOpen ? t('admin_page.btn-readFull_hide') : t('admin_page.btn-readFull_expand')}</button>
                             </div>
                         </div>
                     </>

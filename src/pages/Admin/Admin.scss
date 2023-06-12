@@ -19,7 +19,7 @@
 
         .nav-tabs {
             border-bottom: 1px solid $mainColor;
-            width: 99%;
+            width: 100%;
 
             .nav-link {
                 background-color: $mainColor2;
@@ -58,7 +58,7 @@
 
     &__controlsWrap {
         background-color: $mainColor2;
-        border-radius: 0 10px 10px 10px;
+        border-radius: 0 0 10px 10px;
 
         .controls-btnFind {
             display: flex;

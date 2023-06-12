@@ -114,7 +114,9 @@
     "valid-phoneNumber": "It's not like a phone number!",
     "valid-email": "The email address must be valid!",
     "valid-password": "The password must contain at least {{num}} characters!",
-    "valid-cardNumber": "The card number has 12 digits!"
+    "valid-cardNumber": "The card number has 12 digits!",
+    "valid-noLessThan": "Not less than {{num}}!",
+    "valid-noMoreThan": "No more than {{num}}!"
   },
   "shop_page": {
     "controls": {
@@ -287,35 +289,36 @@
     "Details": "Details"
   },
   "admin_page": {
+    "btn-delete": "Delete",
+    "btn-edit": "Edit",
+    "btn-save": "Save",
+    "btn-readFull_expand": "Expand",
+    "btn-readFull_hide": "Hide",
+    "btn-view": "View",
+    "btn-add": "Add",
+    "just-divider": "----------------",
     "products_tab": {
       "title": "Products",
-      "btnAddProduct": "Add a new product",
-      "btnAdd": "Add",
-      "adminProduct": {
-        "sureDelete": {
-          "title": "Warning",
-          "text": "Are you sure you want to delete this product?",
-          "succes": "Deleted successfully",
-          "error": "Canceled"
-        },
-        "idProduct": "Product ID",
-        "prodChanges": "Data changes",
-        "btn-delete": "Delete",
-        "btn-edit": "Edit",
-        "btn-save": "Save",
-        "btn-readFull_expand": "Expand",
-        "btn-readFull_hide": "Hide",
-        "btn-view": "View"
-      }
+      "btnOpenAddProduct": "Add a new product",
+      "idProduct": "Product ID",
+      "prodChanges": "Data changes"
     },
     "news_tab": {
-      "title": "News"
+      "title": "News",
+      "btnOpenAddNews": "Add new news"
     },
     "orders_tab": {
       "title": "Orders"
     },
     "users_tab": {
       "title": "Users"
+    },
+    "sureDelete": {
+      "title": "Warning",
+      "text-product": "Are you sure you want to delete this product?",
+      "text-news": "Are you sure you want to delete this news?",
+      "succes": "Deleted successfully",
+      "error": "Canceled"
     }
   },
   "moto_data": {
