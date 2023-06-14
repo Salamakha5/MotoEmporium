@@ -14,7 +14,9 @@ class ServerStore {
     IsStorageId = false
     IsFavoriteMoto = false
     tokenDecoded = false
-    lengthPageNumber = 0
+    haveAdminRoots = false
+    // тимчасов закоментовано здається що ця зміна не використовується
+    // lengthPageNumber = 0
     ArrTypeName = []
     UserName = "dafault"
     spinerInfo = "d-block"
@@ -108,6 +110,29 @@ class ServerStore {
                 }
             }
         }
+    }
+
+    // чек на адміна
+    checkAdminRoots(userEmail) {
+
+        console.log('stor:', userEmail);
+
+        // 1 спосіб
+        // axios.get(`${this.URL}/isAdmin?email='romastal915@gmail.com'`)
+        // axios.get(`${this.URL}/isAdmin?email=${userEmail}`)
+
+        // 2 спосіб
+        axios.get(`${this.URL}/isAdmin`, {
+            email: userEmail
+        })
+            .then((response) => {
+                // console.log('успіх', response.data.massage);
+                // console.log(response);
+            })
+            .catch((error) => {
+                // console.log('не успіх', error.data.massage);
+                // console.log(error);
+            });
     }
 
     // shop pagination

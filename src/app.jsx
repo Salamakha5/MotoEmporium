@@ -13,33 +13,46 @@ import OneMoto from "./pages/OneMoto/OneMoto"
 import BasketPage from "./pages/Basket/BasketPage"
 import Payment from "./pages/Payment/Payment"
 import Admin from "./pages/Admin/Admin"
+import PersonalOffice from "./pages/PersonalOffice/PersonalOffice"
 
 import alertify from 'alertifyjs'
 import { observer } from 'mobx-react-lite'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from "react"
 import { useTranslation } from 'react-i18next';
-import PersonalOffice from "./pages/PersonalOffice/PersonalOffice"
+import { toJS } from 'mobx'
 
 const App = observer(() => {
 
     const { t } = useTranslation();
     useEffect(() => {
+
         if (localStorage.getItem("IsAuthMOTO") != null) {
             serverStore.tokenDecoded = false
-            serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), (decodedResult) => {
 
+            serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), (decodedResult) => {
                 if (decodedResult === 'succes') {
                     serverStore.tokenDecoded = true
+
+                    // чек на адміна
+                    serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
                 } else {
                     alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
                     serverStore.tokenDecoded = true
                 }
-
             })
         } else {
             serverStore.tokenDecoded = true
         }
+
+        // serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
+
+        if (serverStore.tokenDecoded = true) {
+            // чек на адміна
+            // console.log(serverStore.UserData.user.email);
+            // console.log(serverStore.UserData.user.email);
+        }
+
     }, [])
 
     return (

@@ -1,6 +1,7 @@
 import './AdminProduct.scss'
 
 import clientStore from "../../../store/clientStore";
+import serverStore from '../../../store/serverStore'
 
 import { useState } from 'react'
 import { NavLink, useNavigate } from "react-router-dom";
@@ -10,6 +11,7 @@ import alertify from 'alertifyjs'
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import { toJS } from 'mobx'
+import axios from 'axios';
 
 const AdminProduct = observer((props) => {
 
@@ -75,24 +77,36 @@ const AdminProduct = observer((props) => {
     }
 
     function sureDelete() {
-        alertify.confirm(t('admin_page.products_tab.adminProduct.sureDelete.title'), t('admin_page.sureDelete.text-product'),
-            function () { alertify.success(t('admin_page.sureDelete.succes')) },
+        alertify.confirm(t('admin_page.sureDelete.title'), t('admin_page.sureDelete.text-product'),
+            function () {
+
+                axios.delete(`${serverStore.URL}/deleteMoto`, {
+                    email: serverStore.UserData.user.email,
+                    id: _id
+                })
+                    .then(function (response) {
+                        alertify.success('Успіх')
+                    })
+                    .catch(function (error) {
+                        alertify.error('щось пішло не так')
+                        console.log(error);
+                    });
+
+            },
             function () { alertify.error(t('admin_page.sureDelete.error')) });
     }
 
     function saveChanges() {
+
         let { newBrand, newModel, newPrice, newImgUrl1, newImgUrl2, newImgUrl3, newType, newDisplacement,
             newBorexStroke, newCompressionRatio, newHorsepower, newTorque, newFuelSystem, newGearbox } = eF.values
 
-        let titlesArr = ['0', 'Бренд', 'Модель', 'Ціна', 'картинка 1', 'картинка 2', 'картинка 3', 'Тип', 'Кубатура двигуна',
-            'Діаметр поршнів', 'Коефіцієнт стиснення', 'Кількість кіньських сил', 'Крутний момент', 'Паливна система', 'Коробка передач']
-
         function rowBuilder(order, title, boldSpan, type, fieldVal, defaultVal, isNeedBr) {
             console.log(type);
-            return (`${order}.${title}: <span ${boldSpan ? "className='fw-bold'" : false}>
-            ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = 'Без змін' : fieldVal)
+            return (`${order}.${title}: <span ${boldSpan ? 'class="fw-bold"' : false}>
+            ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = t('admin_page.noChages') : fieldVal)
                     :
-                    (type == 'number' ? fieldVal <= 0 ? fieldVal = clientStore.formatPrice(defaultVal) : clientStore.formatPrice(fieldVal)
+                    (type == 'price' ? (fieldVal <= 0) ? clientStore.formatPrice(fieldVal) : clientStore.formatPrice(fieldVal)
                         :
                         fieldVal = 'TYPE ERROR')}</span> 
             ${isNeedBr ? "</br>" : false}`)
@@ -100,26 +114,26 @@ const AdminProduct = observer((props) => {
 
         if (eF.isValid) {
 
-            alertify.confirm('Підтвердити зміни?', `
-            ${rowBuilder('1', titlesArr[1], true, "string", newBrand, brand, true)}
-            ${rowBuilder('2', titlesArr[2], true, "string", newModel, model, true)}
-            ${rowBuilder('3', titlesArr[3], true, "number", newPrice, price, true)}
-            4.Зображення: 
+            alertify.confirm(t('admin_page.saveAlert.title'), `
+            ${rowBuilder('1', t('moto_data.brand'), true, "string", newBrand, brand, true)}
+            ${rowBuilder('2', t('moto_data.model'), true, "string", newModel, model, true)}
+            ${rowBuilder('3', t('moto_data.price'), true, "price", newPrice, price, true)}
+            4.${t('moto_data.image', { imgNum: '' })}: 
             <br>
             <img style='width: 32%; height: 150px;' src='${newImgUrl1 == 0 ? newImgUrl1 = imgURL[0] : newImgUrl1}' alt="img 1 wrong" />
             <img style='width: 32%; height: 150px;' src='${newImgUrl2 == 0 ? newImgUrl2 = imgURL[1] : newImgUrl2}' alt="img 2 wrong" />
             <img style='width: 32%; height: 150px;' src='${newImgUrl3 == 0 ? newImgUrl3 = imgURL[2] : newImgUrl3}' alt="img 3 wrong" />
             <br>
-            ${rowBuilder('5', titlesArr[7], true, "string", newType, collectionType, true)}
-            ${rowBuilder('6', titlesArr[8], true, "string", newDisplacement, displacement, true)}
-            ${rowBuilder('7', titlesArr[9], true, "string", newBorexStroke, borexStroke, true)}
-            ${rowBuilder('8', titlesArr[10], true, "string", newCompressionRatio, compressionRatio, true)}
-            ${rowBuilder('9', titlesArr[11], true, "string", newHorsepower, horsepower, true)}
-            ${rowBuilder('10', titlesArr[12], true, "string", newTorque, torque, true)}
-            ${rowBuilder('11', titlesArr[13], true, "string", newFuelSystem, fuelSystem, true)}
-            ${rowBuilder('12', titlesArr[14], true, "string", newGearbox, gearbox, true)}
+            ${rowBuilder('5', t('moto_data.type'), true, "string", newType, collectionType, true)}
+            ${rowBuilder('6', t('moto_data.engineCapacity'), true, "string", newDisplacement, displacement, true)}
+            ${rowBuilder('7', t('moto_data.pistonDiameter'), true, "string", newBorexStroke, borexStroke, true)}
+            ${rowBuilder('8', t('moto_data.compressionRatio'), true, "string", newCompressionRatio, compressionRatio, true)}
+            ${rowBuilder('9', t('moto_data.horsePower'), true, "string", newHorsepower, horsepower, true)}
+            ${rowBuilder('10', t('moto_data.torque'), true, "string", newTorque, torque, true)}
+            ${rowBuilder('11', t('moto_data.fuelSystem'), true, "string", newFuelSystem, fuelSystem, true)}
+            ${rowBuilder('12', t('moto_data.gearbox'), true, "string", newGearbox, gearbox, true)}
             <hr/>
-            ! - Ви можете залишити поле пустим щоб залишити данні без змін - !
+            ${t('admin_page.saveAlert.suptext')}
             `,
                 function () {
 
@@ -182,7 +196,7 @@ const AdminProduct = observer((props) => {
                         </div>
                         <div className="info-cont | col-12 col-md-8 col-lg-8 col-xl-6">
                             <div className="item">{t('admin_page.products_tab.idProduct')}: <span className='italic-text data-span'>{_id}</span></div>
-                            <div className='item'>{t('admin_page.products_tab.adminProduct.prodChanges')}: <span className='data-span'>{__v}</span></div>
+                            <div className='item'>{t('admin_page.products_tab.prodChanges')}: <span className='data-span'>{__v}</span></div>
                             <hr />
                             <form className='editform'>
                                 {oneField(t('moto_data.brand'), brand, "300px", "text", "new brand", "newBrand", eF.values.newBrand, eF.errors.newBrand)}

@@ -58,6 +58,7 @@ const Header = observer(() => {
         <header className="header navbar navbar-expand-xl" id='headerArchor'>
 
             {
+                // авторизація при декодуванні
                 serverStore.tokenDecoded == false ?
                     <div className='decodedInfo-cont'>
                         <div className='decodedInfo'>
@@ -113,9 +114,10 @@ const Header = observer(() => {
                                             <NavLink className="dropdown-navLink" to="login" ><i className="bi bi-person-circle me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
                                     }
                                 </li>
-                                {/* перехід на адміна */}
+                                {/* чек на адміна */}
                                 <li className='dropdown-item'>
                                     {
+                                        // serverStore.haveAdminRoots ?
                                         serverStore.userIsAuth ?
                                             <NavLink className="dropdown-navLink" to="admin" ><i className="bi bi-person-fill-gear me-2"></i>{t("header.actions.actionsAdmin")}</NavLink>
                                             :

@@ -66,12 +66,12 @@ const AdminNewsItem = (props) => {
   function saveChanges() {
     let { newHeaderEN, newHeaderUA, newTextEN, newTextUA, newDate, newStatus, newImg } = eF.values
 
-    function rowBuilder(order, title, boldSpan, type, fieldVal, defaultVal, isNeedBr) {
+    function rowBuilder(order, title, boldTitle, type, fieldVal, isNeedBr) {
       console.log(type);
-      return (`${order}.${title}: <span ${boldSpan ? "className='fw-bold'" : false}>
-      ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = 'Без змін' : fieldVal)
+      return (`<span ${boldTitle ? "class=fw-bold" : false}>${order}.${title}</span>: <span>
+      ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = t('admin_page.noChages') : fieldVal)
           :
-          (type == 'number' ? fieldVal <= 0 ? fieldVal = clientStore.formatPrice(defaultVal) : clientStore.formatPrice(fieldVal)
+          (type == 'price' ? (fieldVal <= 0) ? clientStore.formatPrice(fieldVal) : clientStore.formatPrice(fieldVal)
             :
             fieldVal = 'TYPE ERROR')}</span> 
       ${isNeedBr ? "</br>" : false}`)
@@ -79,19 +79,19 @@ const AdminNewsItem = (props) => {
 
     if (eF.isValid) {
 
-      alertify.confirm('Підтвердити зміни?', `
-      ${rowBuilder('1', 'Заголовок (EN)', true, "string", newHeaderEN, header.en, true)}
-      ${rowBuilder('2', 'Заголовок (UA)', true, "string", newHeaderUA, header.ua, true)}
+      alertify.confirm(t('admin_page.saveAlert.title'), `
+      ${rowBuilder('1', t('admin_page.news_tab.news_data.header', { countryCode: '(EN)' }), true, "string", newHeaderEN, header.en, true)}
+      ${rowBuilder('2', t('admin_page.news_tab.news_data.header', { countryCode: '(UA)' }), true, "string", newHeaderUA, header.ua, true)}
       <hr/>
-      ${rowBuilder('3', 'Дата', true, "string", newDate, data, true)}
-      ${rowBuilder('4', 'Рейтинг', true, "string", newStatus, status, true)}
-      5.Картинка:
+      ${rowBuilder('3', t('admin_page.news_tab.news_data.date'), true, "string", newDate, data, true)}
+      ${rowBuilder('4', t('admin_page.news_tab.news_data.rating'), true, "string", newStatus, status, true)}
+      5.${t('admin_page.news_tab.news_data.image')}:
       <img style='width: 100%; max-height: 200px;' src='${newImg.length == 0 ? newImg = img : newImg}' alt="somethig wrong" />
       <hr/>
-      ${rowBuilder('6', 'Текст (EN)', true, "string", newTextEN, text.en, true)}
-      ${rowBuilder('7', 'Текст (UA)', true, "string", newTextUA, text.ua, true)}
+      ${rowBuilder('6', t('admin_page.news_tab.news_data.text', { countryCode: '(EN)' }), true, "string", newTextEN, text.en, true)}
+      ${rowBuilder('7', t('admin_page.news_tab.news_data.text', { countryCode: '(UA)' }), true, "string", newTextUA, text.ua, true)}
       <hr/>
-      ! - Ви можете залишити поле пустим щоб залишити данні без змін - !
+      ${t('admin_page.saveAlert.suptext')}
       `,
         function () {
 
@@ -124,7 +124,7 @@ const AdminNewsItem = (props) => {
               <img src={img} alt="blog picture" />
             </div>
         }
-        <div className="col ">
+        <div className="col">
           <div className="textInfo row m-0">
             {
               btnOpen

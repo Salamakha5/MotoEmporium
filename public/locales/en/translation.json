@@ -200,6 +200,8 @@
   "notFound_page": {
     "title": "Oops...",
     "suptitle": "Page not found",
+    "waitPlease": "Please wait a moment",
+    "orTry": "Or try it manually ¯\\_(ツ)_/¯",
     "text": "Unfortunately, the page you’re looking for is either under maintenance, unaccessible, or there’s a server problem in our site. Please go back to home page.",
     "btn-back": "Go back to Home"
   },
@@ -296,6 +298,7 @@
     "btn-readFull_hide": "Hide",
     "btn-view": "View",
     "btn-add": "Add",
+    "noChages": "No changes",
     "just-divider": "----------------",
     "products_tab": {
       "title": "Products",
@@ -305,7 +308,14 @@
     },
     "news_tab": {
       "title": "News",
-      "btnOpenAddNews": "Add new news"
+      "btnOpenAddNews": "Add new news",
+      "news_data": {
+        "header": "Header {{countryCode}}",
+        "date": "Date",
+        "rating": "Rating",
+        "text": "Text {{countryCode}}",
+        "image": "Image"
+      }
     },
     "orders_tab": {
       "title": "Orders"
@@ -319,12 +329,18 @@
       "text-news": "Are you sure you want to delete this news?",
       "succes": "Deleted successfully",
       "error": "Canceled"
+    },
+    "saveAlert": {
+      "title": "Confirm the changes?",
+      "suptext": "You can leave the field blank to leave the data unchanged"
     }
   },
   "moto_data": {
     "brand": "Brand",
     "model": "Model",
     "price": "Price",
+    "image": "Image {{ imgNum }}",
+    "images": "Images",
     "type": "Type",
     "engineCapacity": "Engine capacity",
     "pistonDiameter": "Piston diameter",
@@ -332,7 +348,6 @@
     "horsePower": "Number of horsepower",
     "torque": "Torque",
     "fuelSystem": "Fuel system",
-    "gearbox": "Gearbox",
-    "image": "Image {{ imgNum }}"
+    "gearbox": "Gearbox"
   }
 }

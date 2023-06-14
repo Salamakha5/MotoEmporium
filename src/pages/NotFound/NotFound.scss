@@ -45,6 +45,7 @@
     &__title {
         @include fontSettings($mainFont, 55px, 700);
         line-height: 66px;
+        position: relative;
     }
 
     &__suptitle {
@@ -67,7 +68,6 @@
         line-height: 29px;
         margin-top: 60px;
         padding: 20px 0;
-        text-decoration: underline;
         display: flex;
         justify-content: center;
         background-color: mix(rgba(255, 255, 255, 0), $mainColor, 80%);
@@ -86,4 +86,46 @@
         }
     }
 
+    .decodedInfo-cont {
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        padding: 10px 40px 10px 10px;
+        border-radius: 2px;
+        background-color: white;
+        color: black;
+        display: flex;
+        z-index: 5;
+        animation: shadowPulse 1s infinite linear;
+
+        font-size: 20px;
+        line-height: 23px;
+
+        .loader {
+            position: absolute;
+            top: -25px;
+            right: -30px;
+            transform: scale(0.3);
+        }
+
+        @keyframes shadowPulse {
+            0% {
+                box-shadow: 0 0 2px 1.5px transparent,
+                    0 0 0 0 transparent,
+                    0 0 0 0 transparent;
+            }
+
+            10% {
+                box-shadow: 0 0 2px 1.5px $mainColor,
+                    0 0 3px 2.5px transparent,
+                    0 0 3px 1.3px $mainColor;
+            }
+
+            100% {
+                box-shadow: 0 0 2px 1.5px transparent,
+                    0 0 0 10px transparent,
+                    0 0 0 10px transparent;
+            }
+        }
+    }
 }

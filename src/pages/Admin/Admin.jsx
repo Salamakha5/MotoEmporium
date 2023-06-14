@@ -17,6 +17,7 @@ import { toJS } from 'mobx'
 import alertify from 'alertifyjs'
 import { useFormik } from "formik";
 import * as Yup from "yup"
+import axios from 'axios';
 
 const Admin = observer(() => {
 
@@ -148,20 +149,20 @@ const Admin = observer(() => {
   // start add product logic
   const addProduct = useFormik({
     initialValues: {
-      // addBrand: 'Huyati',
-      // addModel: 'Hueta c300',
-      // addPrice: 99999,
-      // addImgUrl1: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      // addImgUrl2: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      // addImgUrl3: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      // addType: 'Sport',
-      // addDisplacement: '8567 cc',
-      // addBorexStroke: '450 x 7.85 mm',
-      // addCompressionRatio: '17.56:07',
-      // addHorsepower: '109 hp',
-      // addTorque: '645 lb-ft',
-      // addFuelSystem: 'Electronic fuel injection, 53 mm throttle bodies',
-      // addGearbox: '6-speed with Ducati Quick Shift (DQS) up/down'
+      addBrand: 'Huyati',
+      addModel: 'Hueta c300',
+      addPrice: 99999,
+      addImgUrl1: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      addImgUrl2: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      addImgUrl3: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      addType: 'Sport',
+      addDisplacement: '8567 cc',
+      addBorexStroke: '450 x 7.85 mm',
+      addCompressionRatio: '17.56:07',
+      addHorsepower: '109 hp',
+      addTorque: '645 lb-ft',
+      addFuelSystem: 'Electronic fuel injection, 53 mm throttle bodies',
+      addGearbox: '6-speed with Ducati Quick Shift (DQS) up/down'
     },
     validationSchema: Yup.object({
       addBrand: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
@@ -189,23 +190,64 @@ const Admin = observer(() => {
       addBorexStroke, addCompressionRatio, addHorsepower, addTorque, addFuelSystem, addGearbox } = aF.values
 
     if (aF.isValid) {
-      // ! алерт просто для провірки данних
-      alertify.alert('succes', `
-      ${addBrand} </br>
-      ${addModel} </br>
-      ${addPrice} </br>
-      ${addImgUrl1} </br>
-      ${addImgUrl2} </br>
-      ${addImgUrl3} </br>
-      ${addType} </br>
-      ${addDisplacement} </br>
-      ${addBorexStroke} </br>
-      ${addCompressionRatio} </br>
-      ${addHorsepower} </br>
-      ${addTorque} </br>
-      ${addFuelSystem} </br>
-      ${addGearbox} </br>
-      `)
+
+      alertify.confirm('Добавити цей товар?', `
+      <span class='fw-bold'>1.${t('moto_data.brand')}</span>: ${addBrand}; </br>
+      <span class='fw-bold'>2.${t('moto_data.model')}</span>: ${addModel}; </br>
+      <span class='fw-bold'>3.${t('moto_data.Price')}</span>: ${addPrice}; </br>
+      <span class='fw-bold'>4.${t('moto_data.image', { imgNum: '' })}</span>: </br>
+      <img style='width: 32%; height: 130px;' src='${addImgUrl1}' alt="img 1 wrong" />
+      <img style='width: 32%; height: 130px;' src='${addImgUrl2}' alt="img 2 wrong" />
+      <img style='width: 32%; height: 130px;' src='${addImgUrl3}' alt="img 3 wrong" />
+      </br>
+      <span class='fw-bold'>5.${t('moto_data.type')}</span>: ${addType}; </br>
+      <span class='fw-bold'>6.${t('moto_data.engineCapacity')}</span>: ${addDisplacement}; </br>
+      <span class='fw-bold'>7.${t('moto_data.pistonDiameter')}</span>: ${addBorexStroke}; </br>
+      <span class='fw-bold'>8.${t('moto_data.compressionRatio')}</span>: ${addCompressionRatio}; </br>
+      <span class='fw-bold'>9.${t('moto_data.horsePower')}</span>: ${addHorsepower}; </br>
+      <span class='fw-bold'>10.${t('moto_data.torque')}</span>: ${addTorque}; </br>
+      <span class='fw-bold'>11.${t('moto_data.fuelSystem')}</span>: ${addFuelSystem}; </br>
+      <span class='fw-bold'>12.${t('moto_data.gearbox')}</span>: ${addGearbox}; </br>`,
+        function () {
+          // ADD
+
+          // https://moto-server.onrender.com/api/addNewMoto
+          axios.post(`${serverStore.URL}/addNewMoto`, {
+            email: serverStore.UserData.user.email,
+            moto: {
+              brand: "Macubisi2",
+              model: "1",
+              price: 1,
+              imgURL: [
+                "https://kartinkin.net/uploads/posts/2022-03/1646535309_2-kartinkin-net-p-kartinki-s-mototsiklami-2.jpg",
+                "https://ua.e-scooter.co/i/86/a0/65/40ea1c5cfac477b300035c9a8a.jpg",
+                "https://img.poki.com/cdn-cgi/image/quality=78,width=600,height=600,fit=cover,f=auto/c28eee5a5924e8a70afb2c1490d9b571.jpeg"
+              ],
+              collectionType: "1",
+              displacement: "1",
+              borexStroke: "1",
+              compressionRatio: "1",
+              horsepower: "1",
+              torque: "1",
+              fuelSystem: "1",
+              gearbox: "1"
+            }
+          })
+            .then(function (response) {
+              console.log(response);
+              alertify.alert('succes', response.data.massage.ua)
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              alertify.alert(error.data.massage.ua)
+            });
+        },
+        function () {
+          // CANCEL
+          alertify.error('Cancel')
+        })
+
     }
   }
   // end add product logic
@@ -251,33 +293,22 @@ const Admin = observer(() => {
   })
   let aN = addNews
 
-  function addNewProduct(e) {
+  function addNewNews(e) {
     e.preventDefault()
 
-    alert('hui')
+    let { } = aN.values
 
-    // let { addBrand, addModel, addPrice, addImgUrl1, addImgUrl2, addImgUrl3, addType, addDisplacement,
-    //   addBorexStroke, addCompressionRatio, addHorsepower, addTorque, addFuelSystem, addGearbox } = aF.values
+    if (aN.isValid) {
 
-    // if (aF.isValid) {
-    //   // ! алерт просто для провірки данних
-    //   alertify.alert('succes', `
-    //   ${addBrand} </br>
-    //   ${addModel} </br>
-    //   ${addPrice} </br>
-    //   ${addImgUrl1} </br>
-    //   ${addImgUrl2} </br>
-    //   ${addImgUrl3} </br>
-    //   ${addType} </br>
-    //   ${addDisplacement} </br>
-    //   ${addBorexStroke} </br>
-    //   ${addCompressionRatio} </br>
-    //   ${addHorsepower} </br>
-    //   ${addTorque} </br>
-    //   ${addFuelSystem} </br>
-    //   ${addGearbox} </br>
-    //   `)
-    // }
+      alertify.confirm(t('admin_page.saveAlert.title'), `
+              щось
+            `,
+        function () {
+          alertify.success('Зміни збережено!')
+        },
+        function () { });
+
+    }
   }
   // end news logic
 
@@ -295,12 +326,12 @@ const Admin = observer(() => {
         <ul className="nav nav-tabs" id="myTab" role="tablist">
 
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button"
+            <button className="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button"
               role="tab" aria-controls="products" aria-selected="false">{t('admin_page.products_tab.title')}</button>
           </li>
 
           <li className="nav-item" role="presentation">
-            <button className="nav-link active" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button"
+            <button className="nav-link" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button"
               role="tab" aria-controls="news" aria-selected="false">{t('admin_page.news_tab.title')}</button>
           </li>
 
@@ -317,7 +348,7 @@ const Admin = observer(() => {
 
         <div className="tab-content">
           {/* ========== PRODUCTS ========== */}
-          <div className="tab-pane" id="products"
+          <div className="tab-pane active" id="products"
             role="tabpanel" aria-labelledby="products-tab" tabIndex="0">
 
             <div>
@@ -385,12 +416,12 @@ const Admin = observer(() => {
                         </select>
                       </div>
 
-                      <button class="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button"
+                      <button className="mainButton | btn py-2 | ms-sm-0 ms-md-4 ms-lg-4 ms-xl-4 | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseAddProduct" aria-expanded="false" aria-controls="collapseAddProduct">
                         {t('admin_page.products_tab.btnOpenAddProduct')}
                       </button>
-                      <div class="collapse px-0 mt-3" id="collapseAddProduct">
-                        <div class="card card-body addProductForm-cont">
+                      <div className="collapse px-0 mt-3" id="collapseAddProduct">
+                        <div className="card card-body addProductForm-cont">
                           <form className='addProduct-form'>
                             <div className='row'>
 
@@ -457,7 +488,7 @@ const Admin = observer(() => {
           </div>
 
           {/* ========== NEWS ========== */}
-          <div className="tab-pane active" id="news" role="tabpanel" aria-labelledby="news-tab" tabIndex="0">
+          <div className="tab-pane" id="news" role="tabpanel" aria-labelledby="news-tab" tabIndex="0">
             <div>
               {
                 showNewsLoader ?
@@ -481,42 +512,42 @@ const Admin = observer(() => {
                         </select>
                       </div>
                       <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                        <button style={{ width: "100%" }} class="mainButton | btn py-2" type="button"
+                        <button style={{ width: "100%" }} className="mainButton | btn py-2" type="button"
                           data-bs-toggle="collapse" data-bs-target="#collapseAddNews" aria-expanded="false" aria-controls="collapseAddNews">
                           {t('admin_page.news_tab.btnOpenAddNews')}
                         </button>
                       </div>
-                      <div class="collapse px-0 mt-3" id="collapseAddNews">
-                        <div class="card card-body addProductForm-cont">
+                      <div className="collapse px-0 mt-3" id="collapseAddNews">
+                        <div className="card card-body addProductForm-cont">
                           <form className='addProduct-form'>
                             <div className='row'>
 
                               <div className='form-col | col-12 col-sm-6	col-md-6 col-lg-6'>
-                                {oneField('100%', aN, 'text', 'Зображення', 'addImg', aN.values.addImg, aN.errors.addImg)}
-                                {oneField('100%', aN, 'text', 'Заголовок (EN)', 'addHeaderEN', aN.values.addHeaderEN, aN.errors.addHeaderEN)}
-                                {oneField('100%', aN, 'text', 'Заголовок (UA)', 'addHeaderUA', aN.values.addHeaderUA, aN.errors.addHeaderUA)}
-                                {oneField('100%', aN, 'text', 'Дата', 'addDate', aN.values.addDate, aN.errors.addDate)}
-                                {oneField('100%', aN, 'text', 'Рейтинг (1-10)', 'addStatus', aN.values.addStatus, aN.errors.addStatus)}
+                                {oneField('100%', aN, 'text', t('admin_page.news_tab.news_data.image'), 'addImg', aN.values.addImg, aN.errors.addImg)}
+                                {oneField('100%', aN, 'text', t('admin_page.news_tab.news_data.header', { countryCode: '(EN)' }), 'addHeaderEN', aN.values.addHeaderEN, aN.errors.addHeaderEN)}
+                                {oneField('100%', aN, 'text', t('admin_page.news_tab.news_data.header', { countryCode: '(UA)' }), 'addHeaderUA', aN.values.addHeaderUA, aN.errors.addHeaderUA)}
+                                {oneField('100%', aN, 'text', t('admin_page.news_tab.news_data.date'), 'addDate', aN.values.addDate, aN.errors.addDate)}
+                                {oneField('100%', aN, 'text', `${t('admin_page.news_tab.news_data.rating')} (1-10)`, 'addStatus', aN.values.addStatus, aN.errors.addStatus)}
                               </div>
 
                               <div className="form-col third-item | col-12 col-sm-6 col-md-6 col-lg-6">
                                 <div>
                                   <div className='textarea-items'>
-                                    <textarea className='form-control' placeholder='Текст (EN)'
+                                    <textarea className='form-control' placeholder={t('admin_page.news_tab.news_data.text', { countryCode: '(EN)' })}
                                       name="addTextEN" onChange={aN.handleChange} value={aN.values.addTextEN}></textarea>
 
                                     <div className='error-string'>{aN.errors.addTextEN ? aN.errors.addTextEN : ""}</div>
                                   </div>
 
                                   <div className='textarea-items'>
-                                    <textarea className='form-control' placeholder='Текст (UA)'
+                                    <textarea className='form-control' placeholder={t('admin_page.news_tab.news_data.text', { countryCode: '(UA)' })}
                                       name="addTextUA" onChange={aN.handleChange} value={aN.values.addTextUA}></textarea>
 
                                     <div className='error-string'>{aN.errors.addTextUA ? aN.errors.addTextUA : ""}</div>
                                   </div>
                                 </div>
 
-                                <button onClick={addNewProduct}
+                                <button onClick={addNewNews}
                                   className={aN.isValid && aN.dirty ? "mainButton save | btn" : "mainButton save btn disabled | btn"}
                                 >{t('admin_page.btn-add')}</button>
                               </div>
