@@ -1,12 +1,11 @@
-import { observer } from "mobx-react-lite"
 import "./BasketCard.scss"
-import { useTranslation } from 'react-i18next';
 
 import clientStore from "../../store/clientStore"
-import { NavLink } from "react-router-dom"
 import basketStore from "../../store/basketStore"
-import { useEffect } from "react";
-import { toJS } from "mobx";
+
+import { useTranslation } from 'react-i18next'
+import { observer } from "mobx-react-lite"
+import { NavLink } from "react-router-dom"
 
 const BasketCard = observer((props) => {
   const { brand, model, price, collectionType, displacement, borexStroke,
@@ -58,18 +57,18 @@ const BasketCard = observer((props) => {
     localStorage.setItem("BasketMoto", JSON.stringify(storage))
     basketStore.getBasketMoto()
   }
-  
-  function AddingToFavorite(){
+
+  function AddingToFavorite() {
     let storage = localStorage.getItem("FavoriteMoto")
-    if(storage){
-      if(!JSON.parse(storage).includes(_id)){
+    if (storage) {
+      if (!JSON.parse(storage).includes(_id)) {
         storage = JSON.parse(storage)
         storage.push(_id)
-        localStorage.setItem("FavoriteMoto",JSON.stringify(storage))
+        localStorage.setItem("FavoriteMoto", JSON.stringify(storage))
         basketStore.getFavoriteMoto()
       }
-    }else{
-      localStorage.setItem("FavoriteMoto",JSON.stringify([_id]))
+    } else {
+      localStorage.setItem("FavoriteMoto", JSON.stringify([_id]))
       basketStore.getFavoriteMoto()
     }
 
@@ -105,10 +104,10 @@ const BasketCard = observer((props) => {
               <div className="d-flex align-items-center">
                 <i className="bi bi-heart p-0 m-0 fs-4 me-1"></i>
                 {
-                  basketStore.FavData.some(obj=>obj["_id"] === _id)?
-                  t("fav_page.added") 
-                  :
-                  t("basket_page.addToFavorite") 
+                  basketStore.FavData.some(obj => obj["_id"] === _id) ?
+                    t("fav_page.added")
+                    :
+                    t("basket_page.addToFavorite")
                 }
               </div>
             </button>

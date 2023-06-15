@@ -26,7 +26,7 @@ const PersonalOffice = observer(() => {
 
         axios.post("https://moto-server.onrender.com/api/getOrdersToEmail", { email: serverStore.UserData.user.email })
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 setorderArray(response.data)
             })
             .catch((error) => {
@@ -53,7 +53,7 @@ const PersonalOffice = observer(() => {
             axios.post("https://moto-server.onrender.com/api/changeUserSetting", { formValue: value })
                 .then((response) => {
                     // console.log(response);
-                    alertify.alert("Успіх", 'Зміна данних пройшла успішно.')
+                    alertify.alert(t('app.succes'), t('office_Page.dataChangeSuccess'))
                     setSetPostErrors({ UA: "", EN: "" })
                     localStorage.setItem("IsAuthMOTO", "")
                     window.location.href = "/login"
@@ -74,26 +74,23 @@ const PersonalOffice = observer(() => {
                 window.location.href = "/login"
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
     }
 
     function sureWantDeleteAccount() {
-        alertify.confirm('Попередження', `Ви впевнені що хочете видалити аккаунт?
-        <br/> <br/> Це незворотня дія, без аккаунту ви не зможете повноцінно користуватись нашими послугами!
-        <hr/> Замовлення які ви оформили видалені не будуть, наші менеджери зв'яжуться із вами найближчим часом.`,
+        alertify.confirm(t('office_Page.sureWantDelAcc.title'), t('office_Page.sureWantDelAcc.text'),
             function () {
-                alertify.error('Ви видалили свій аккаунт!')
+                alertify.error(t('office_Page.sureWantDelAcc.succesDeleted'))
                 deleteUser()
             },
-            function () { alertify.success('Видалення скасовано') });
+            function () { alertify.success(t('office_Page.sureWantDelAcc.notDeleted')) });
     }
 
     return (
         <div className="PresonalOffice_container | row m-0">
             <BackUpBtn whenShow='750' debugLine='false'></BackUpBtn>
 
-            {/* <input type="text" name="password" id="password" className="" placeholder={t('login.password-placeholder')}/> */}
             <div className="col_border || col-12 col-lg-5 pb-3">
                 <div className="fs-5">{t("office_Page.Hello")}, <span className="fs-italic">{serverStore.UserName}</span></div>
                 <div className="pt-3 pb-1 fs-4 text-center">{t("office_Page.RecentOrders")}</div>

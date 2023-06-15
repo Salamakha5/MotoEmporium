@@ -89,13 +89,13 @@ const AdminProduct = observer((props) => {
         })
           .then(function (response) {
             // console.log(response);
-            alertify.success(response.data.massage.en)
+            alertify.success(t('admin_page.sureDelete.succes'))
             serverStore.getAllMoto(() => { })
             props.productsSmallLoader(false)
           })
           .catch(function (error) {
             // console.log(error);
-            alertify.error('error')
+            alertify.error(t('admin_page.sureDelete.error'))
             props.productsSmallLoader(false)
           });
       },
@@ -174,13 +174,13 @@ const AdminProduct = observer((props) => {
           })
             .then(function (response) {
               // console.log(response);
-              alertify.success('succes')
+              alertify.success(t('app.succes'))
               serverStore.getAllMoto(() => { })
               props.productsSmallLoader(false)
             })
             .catch(function (error) {
               // console.log(error);
-              alertify.error('error')
+              alertify.error(t('app.error'))
               props.productsSmallLoader(false)
             });
 

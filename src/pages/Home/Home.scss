@@ -147,6 +147,7 @@
             width: 400px;
             height: 300px;
             position: relative;
+            cursor: pointer;
 
             &::before {
                 content: attr(text-on-img);
@@ -179,6 +180,7 @@
                 height: 125px;
                 margin: 0 50px 50px 0;
                 position: relative;
+                cursor: pointer;
 
                 &::before {
                     content: attr(text-on-img);

@@ -8,22 +8,27 @@ import test_ride from '../../images/test_ride.png'
 import our_service from '../../images/our_service.png'
 import custom_parts from '../../images/custom_parts.png'
 import our_finance from '../../images/finance.png'
+
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 
 import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
+import alertify from 'alertifyjs'
 
 const Home = () => {
     useEffect(() => {
         document.title = "Home | MotoEmporium";
-
     }, [])
 
     const { t } = useTranslation();
 
     const now = new Date();
     const currentYear = now.getFullYear();
+
+    function pathInaccessible() {
+        alertify.alert(t('app.oops'), t('footer.textOnClick'))
+    }
 
     return (
         <div className="home">
@@ -60,16 +65,16 @@ const Home = () => {
 
             <div className="our-showroom">
                 <div className="our-showroom__left">
-                    <div className="big-img" text-on-img={t('home_page.ourShowroom.link1')}>
+                    <div className="big-img" onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link1')}>
                         <img src={our_showroom} />
                     </div>
                 </div>
                 <div className="our-showroom__right">
                     <div className="small-imgGroup">
-                        <div className='small-imgCont' text-on-img={t('home_page.ourShowroom.link2')}><img src={test_ride} /></div>
-                        <div className='small-imgCont' text-on-img={t('home_page.ourShowroom.link3')}><img src={our_service} /></div>
-                        <div className='small-imgCont' text-on-img={t('home_page.ourShowroom.link4')}><img src={custom_parts} /></div>
-                        <div className='small-imgCont' text-on-img={t('home_page.ourShowroom.link5')}><img src={our_finance} /></div>
+                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link2')}><img src={test_ride} /></div>
+                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link3')}><img src={our_service} /></div>
+                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link4')}><img src={custom_parts} /></div>
+                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link5')}><img src={our_finance} /></div>
                     </div>
                 </div>
             </div>

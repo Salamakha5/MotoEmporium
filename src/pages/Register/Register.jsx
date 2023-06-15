@@ -5,8 +5,8 @@ import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Login from '../Login/Login'
-
 import serverStore from '../../store/serverStore.js';
+
 import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFormik } from "formik";

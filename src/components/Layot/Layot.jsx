@@ -7,10 +7,6 @@ const Layot = () => {
     return (
         <div>
             <Header />
-            {/* <div style={{ paddingTop: "55px" }}> */}
-            {/* якщо хедер позиціонується як fixed то усі елементи 
-                які відштовхувались від нього стали ваще на восоту хедера */}
-            {/* </div> */}
             <Outlet></Outlet>
             <Footer />
         </div>

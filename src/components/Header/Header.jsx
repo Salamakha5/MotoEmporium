@@ -114,7 +114,6 @@ const Header = observer(() => {
                                             <NavLink className="dropdown-navLink" to="login" ><i className="bi bi-person-circle me-2"></i>{t("header.actions.actionsOffis")}</NavLink>
                                     }
                                 </li>
-                                {/* чек на адміна */}
                                 <li className='dropdown-item'>
                                     {
                                         serverStore.haveAdminRoots == true ?

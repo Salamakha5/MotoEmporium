@@ -2,10 +2,10 @@ import './Blog.scss'
 
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
 import NewsPagination from '../../components/Pagination/NewsPagination'
-import newsStore from '../../store/newsStore'
 import BlogItem from '../../components/BlogItem/BlogItem'
+import newsStore from '../../store/newsStore'
 
-import React, { createRef, useState } from 'react'
+import { createRef, useState } from 'react'
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'

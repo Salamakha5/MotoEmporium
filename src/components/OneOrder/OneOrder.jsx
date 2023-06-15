@@ -1,28 +1,31 @@
 import './OneOrder.scss'
+
+import clientStore from '../../store/clientStore'
+
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite'
-
-import React, { useState } from 'react'
-import clientStore from '../../store/clientStore'
+import { useState } from 'react'
 import axios from 'axios'
 import alertify from 'alertifyjs'
 
 const OneOrder = observer((props) => {
+
     const [FullOrderInfo, setFullOrderInfo] = useState()
     const [isOrderActive, setisOrderActive] = useState(true)
+    const { t } = useTranslation();
+
     function OpenFullOrder() {
         if (FullOrderInfo) { setFullOrderInfo(!FullOrderInfo) }
         else { setFullOrderInfo(!FullOrderInfo) }
     }
-    const { t } = useTranslation();
 
     function DeleteOrder() {
         axios.post("https://moto-server.onrender.com/api/deleteOrderById", { id: props.data._id })
-            .then((response) => {
+            .then(() => {
                 setisOrderActive(false)
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
     }
 
@@ -33,8 +36,6 @@ const OneOrder = observer((props) => {
                 alertify.success('Ви відмінили замовлення!')
             },
             function () { alertify.success('Відміну скасовано') })
-
-        // console.log(alertify.alert().set("class", 'ggg'));
     }
 
     return (
@@ -98,8 +99,6 @@ const OneOrder = observer((props) => {
                                 false
                         }
                         {/* orderFull */}
-
-
                     </div>
                     :
                     false

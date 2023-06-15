@@ -78,10 +78,6 @@ const StarCanvas = ({ ...props }) => {
 
     }, [])
 
-    // function handleResize() {
-    //     console.log(`width ${window.innerWidth} | heigth ${window.innerHeight}`);
-    // }
-
     return (
         <canvas ref={canvasRef} style={{ height: props.setHeight, width: props.setWidth }} />
     )

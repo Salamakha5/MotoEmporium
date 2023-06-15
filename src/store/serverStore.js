@@ -1,6 +1,5 @@
-import { makeAutoObservable, toJS } from "mobx"
+import { makeAutoObservable } from "mobx"
 import axios from 'axios';
-// import { decodeToken, useJwt } from "react-jwt";
 
 class ServerStore {
     URL = 'https://moto-server.onrender.com/api'
@@ -15,8 +14,6 @@ class ServerStore {
     IsFavoriteMoto = false
     tokenDecoded = false
     haveAdminRoots = false
-    // тимчасов закоментовано здається що ця зміна не використовується
-    // lengthPageNumber = 0
     ArrTypeName = []
     UserName = "dafault"
     spinerInfo = "d-block"
@@ -31,7 +28,7 @@ class ServerStore {
 
     getMotoById(id) {
         this.spinerInfo = "d-block"
-        // axios.post("http://localhost:4000/api" + "/getMotoById", { id: id })
+
         axios.post(this.URL + "/getMotoById", { id: id })
             .then((response) => {
                 this.OneMoto = response.data
@@ -83,7 +80,6 @@ class ServerStore {
 
     getAllMoto(callbackAfterDownloading) {
 
-        // axios.get("http://localhost:4000/api" + "/getAllMoto")
         axios.get(this.URL + "/getAllMoto")
             .then((response) => {
                 this.MotoData = response.data

@@ -2,21 +2,20 @@ import './AdminNewsItem.scss'
 
 import newsStore from '../../../store/newsStore'
 import clientStore from '../../../store/clientStore';
+import serverStore from '../../../store/serverStore'
 
 import { useState } from 'react'
-import { NavLink, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useTranslation } from 'react-i18next';
 import alertify from 'alertifyjs'
 import { useFormik } from "formik";
 import * as Yup from "yup"
-import { toJS } from 'mobx'
+import axios from 'axios';
 
-const AdminNewsItem = (props) => {
+const AdminNewsItem = observer((props) => {
 
-  const navigate = useNavigate()
   const { t } = useTranslation();
-  let { img, text, header, data, status } = props.data
+  const { img, text, header, data, status, _id, __v } = props.data
   const [btnOpen, setbtnOpen] = useState(false)
   const [editIsActive, seteditIsActive] = useState(false)
 
@@ -59,8 +58,27 @@ const AdminNewsItem = (props) => {
 
   function sureDelete() {
     alertify.confirm(t('admin_page.sureDelete.title'), t('admin_page.sureDelete.text-news'),
-      function () { alertify.success(t('admin_page.sureDelete.succes')) },
-      function () { alertify.error(t('admin_page.sureDelete.error')) });
+      function () {
+
+        props.newsSmallLoader(true)
+
+        axios.post(`${serverStore.URL}/deleteNews`, {
+          email: serverStore.UserData.user.email,
+          id: _id
+        })
+          .then(function (response) {
+            console.log(response);
+            alertify.success(t('admin_page.sureDelete.succes'))
+            newsStore.getAllNews(() => { })
+            props.newsSmallLoader(false)
+          })
+          .catch(function (error) {
+            console.log(error);
+            alertify.error(t('admin_page.sureDelete.error'))
+            props.newsSmallLoader(false)
+          });
+      },
+      function () { });
   }
 
   function saveChanges() {
@@ -71,10 +89,13 @@ const AdminNewsItem = (props) => {
       return (`<span ${boldTitle ? "class=fw-bold" : false}>${order}.${title}</span>: <span>
       ${type == 'string' ? (fieldVal.length == 0 ? fieldVal = t('admin_page.noChages') : fieldVal)
           :
-          (type == 'price' ? (fieldVal <= 0) ? clientStore.formatPrice(fieldVal) : clientStore.formatPrice(fieldVal)
-            :
-            fieldVal = 'TYPE ERROR')}</span> 
+          (fieldVal = 'TYPE ERROR')}</span> 
       ${isNeedBr ? "</br>" : false}`)
+    }
+
+    function checkNewData(formVal, defaultVal, type) {
+      if (type == 'string') { return formVal.length == 0 ? formVal = defaultVal : formVal; }
+      if (type == 'price') { return formVal <= 0 ? formVal = defaultVal : formVal; }
     }
 
     if (eF.isValid) {
@@ -85,7 +106,7 @@ const AdminNewsItem = (props) => {
       <hr/>
       ${rowBuilder('3', t('admin_page.news_tab.news_data.date'), true, "string", newDate, data, true)}
       ${rowBuilder('4', t('admin_page.news_tab.news_data.rating'), true, "string", newStatus, status, true)}
-      5.${t('admin_page.news_tab.news_data.image')}:
+      <span class="fw-bold">5.${t('admin_page.news_tab.news_data.image')}</span>:
       <img style='width: 100%; max-height: 200px;' src='${newImg.length == 0 ? newImg = img : newImg}' alt="somethig wrong" />
       <hr/>
       ${rowBuilder('6', t('admin_page.news_tab.news_data.text', { countryCode: '(EN)' }), true, "string", newTextEN, text.en, true)}
@@ -95,10 +116,38 @@ const AdminNewsItem = (props) => {
       `,
         function () {
 
-          // То по ідеї оновить данні в нашій таблиці
-          // newsStore.getAllNews(() => {})
+          props.newsSmallLoader(true)
 
-          alertify.success('Зміни збережено!')
+          axios.patch(`${serverStore.URL}/changeNews`, {
+            email: serverStore.UserData.user.email,
+            news: {
+              id: _id,
+              header: {
+                ua: checkNewData(newHeaderUA, header.ua, 'string'),
+                en: checkNewData(newHeaderEN, header.en, 'string')
+              },
+              img: checkNewData(newImg, img, 'string'),
+              text: {
+                ua: checkNewData(newTextUA, text.ua, 'string'),
+                en: checkNewData(newTextEN, text.en, 'string')
+              },
+              status: checkNewData(newStatus, status, 'string'),
+              data: checkNewData(newDate, data, 'string')
+              // indexData: ""
+            }
+          })
+            .then(function (response) {
+              // console.log(response);
+              alertify.success(t('app.succes'))
+              newsStore.getAllNews(() => { })
+              props.newsSmallLoader(false)
+            })
+            .catch(function (error) {
+              // console.log(error);
+              alertify.error(t('app.error'))
+              props.newsSmallLoader(false)
+            });
+
         },
         function () { });
     }
@@ -112,13 +161,13 @@ const AdminNewsItem = (props) => {
             ?
             <>
               <div className="col-img | col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex align-items-center justify-content-center">
-                <img src={img} alt="blog picture" />
+                <img style={{ maxHeight: "500px" }} src={img} alt="blog picture" />
                 <div style={{ width: "100%" }}>{editIsActive ? oneField("100%", "text", "new img", "newImg", eF.values.newImg, eF.errors.newImg) : null}</div>
               </div>
             </>
             :
             <div className="col-img | col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
-              <img src={img} alt="blog picture" />
+              <img style={{ maxHeight: "300px" }} src={img} alt="blog picture" />
             </div>
         }
         <div className="col">
@@ -128,6 +177,8 @@ const AdminNewsItem = (props) => {
                 ?
                 <>
                   <div className='col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 ps-0'>
+                    <div className='fs-5 ps-0 pe-0'>ID: <span className='italic-text data-span'>{_id}</span></div>
+                    <div className='ps-0 pe-0 pb-3'>{t('admin_page.products_tab.prodChanges')}: {__v}</div>
                     <div className="blogTitle | text-start">EN: {header.en}
                       {editIsActive ? oneField("100%", "text", "new EN header", "newHeaderEN", eF.values.newHeaderEN, eF.errors.newHeaderEN) : null}
                     </div>
@@ -164,6 +215,8 @@ const AdminNewsItem = (props) => {
                 </>
                 :
                 <>
+                  <div className='fs-5 ps-0 pe-0'>ID: <span className='italic-text data-span'>{_id}</span></div>
+                  <div className='ps-0 pe-0 pb-3'>{t('admin_page.products_tab.prodChanges')}: {__v}</div>
                   <div className="blogTitle | col-8 text-start">{clientStore.currentLang == "ua" ? header.ua : header.en}</div>
                   <div className="textInfo__text col-4 text-end mb-1">
                     <div>{data}</div>
@@ -238,6 +291,6 @@ const AdminNewsItem = (props) => {
       </div>
     </div >
   )
-}
+})
 
 export default AdminNewsItem

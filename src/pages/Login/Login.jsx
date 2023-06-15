@@ -6,7 +6,6 @@ import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
 import Home from '../Home/Home';
-
 import Register from '../Register/Register'
 import serverStore from '../../store/serverStore';
 
@@ -38,8 +37,7 @@ const Login = observer(() => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            // password: ''
-            password: 'testpassword'
+            password: ''
         },
         validationSchema: Yup.object({
             email: Yup.string().required(t('yupErrors.required')).email(t('yupErrors.valid-email')).max(50, t('yupErrors.valid-maxLength', { num: 50 })),
@@ -76,8 +74,6 @@ const Login = observer(() => {
 
             }, (error) => {
                 setShowPageLoader(false);
-
-                console.log(error.response.data.massage);
 
                 switch (error.response.data.massage) {
                     case 'Не правильний пароль':
@@ -131,7 +127,7 @@ const Login = observer(() => {
                     <input type="text" name="email" id="email" className="form-control forms_bot_line login-form__email" placeholder={t('login.email-placeholder')}
                         onChange={formik.handleChange} value={formik.values.email} />
                     <label className='error'>{formik.errors.email ? formik.errors.email : ""}</label>
-                    
+
                     <div className="password-wrap">
                         <input type={iconsLock1 == "bi bi-eye-fill" ? "password" : "text"} name="password" id="password" className="form-control forms_bot_line login-form__password" placeholder={t('login.password-placeholder')}
                             onChange={formik.handleChange} value={formik.values.password} />

@@ -28,7 +28,7 @@ class NewsStore {
     setNewsActivePage(n) {
         this.newsActivePage = n
     }
-    newsObjectsPerPage = 3
+    newsObjectsPerPage = 5
 }
 
 export default new NewsStore()

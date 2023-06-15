@@ -22,7 +22,6 @@ const OtherMoto = observer((props) => {
         <div className='col-12 col-sm-6 col-md-4 '>
             {
                 props.data ?
-                    // <NavLink onClick={() => serverStore.getMotoById(props.data._id)} to={`/moto/?id=${props.data._id}`} >
                     <NavLink onClick={clickHandler} to={`/moto/?id=${props.data._id}`} >
                         <div className="OtherMoto" data-hover-text={t('oneMoto_page.img-data-text-goTo')}>
                             <div className='OtherMoto__imgCont'>

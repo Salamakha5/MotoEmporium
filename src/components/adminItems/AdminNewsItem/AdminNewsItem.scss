@@ -9,6 +9,9 @@
     margin-top: 20px;
 
     .textInfo {
+        @media (max-width: 500px) {
+            overflow-x: scroll;
+        }
 
         .col-8,
         .col-4 {

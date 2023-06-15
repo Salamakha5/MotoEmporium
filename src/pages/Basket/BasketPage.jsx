@@ -4,11 +4,11 @@ import BasketCard from "../../components/BasketCard/BasketCard"
 import PriceList from "../../components/PriceList/PriceList"
 import Favorite from "../../components/Favorite/Favorite"
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
-
 import serverStore from "../../store/serverStore"
 import clientStore from "../../store/clientStore"
 import basketStore from "../../store/basketStore"
-import { useEffect, useState } from 'react'
+
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router-dom"

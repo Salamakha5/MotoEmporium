@@ -1,7 +1,10 @@
 {
   "app": {
     "alert-warning": "Warning",
-    "alert-oldToken": "Your token has expired, please log in again"
+    "alert-oldToken": "Your token has expired, please log in again",
+    "succes": "Success",
+    "error": "Error",
+    "oops": "Oops"
   },
   "header": {
     "homeLink": "Home",
@@ -37,7 +40,8 @@
     "weekdays": "Weekdays: 8 AM - 3 PM",
     "saturday": "Saturday: 8 AM - 2 PM",
     "whenClosed": "Sunday/National Holiday: Closed",
-    "copyright": "©{{year}} MotoEmporium.com. All rights reserved"
+    "copyright": "©{{year}} MotoEmporium.com. All rights reserved",
+    "textOnClick": "This link is not active |---(￣︿￣ *)---//"
   },
   "home_page": {
     "hero": {
@@ -273,7 +277,14 @@
       "email": "Invalid Email",
       "minLen": "Minimum 5 characters",
       "maxLen": "Minimum 20 characters"
-    }
+    },
+    "sureWantDelAcc": {
+      "title": "Warning",
+      "text": "Are you sure you want to delete your account? <br/> <br/> This is an irreversible action, without an account you will not be able to fully use our services! <br/> The orders you have placed will not be deleted, our managers will contact you shortly.",
+      "succesDeleted": "You have deleted your account!",
+      "notDeleted": "Delete canceled"
+    },
+    "dataChangeSuccess": "Data change was successful"
   },
   "Order_Page": {
     "DateOfOrder": "Order date",

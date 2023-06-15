@@ -9,7 +9,6 @@ import serverStore from '../../store/serverStore'
 import newsStore from '../../store/newsStore'
 import adminStore from '../../store/adminStore'
 
-import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, createRef } from 'react'
@@ -22,8 +21,7 @@ import axios from 'axios';
 const Admin = observer(() => {
 
   // global variables
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate()
+  const { t } = useTranslation();
 
   // product variables
   const [showProductsLoader, setShowProductsLoader] = useState(true)
@@ -31,6 +29,7 @@ const Admin = observer(() => {
 
   // news variables
   const [showNewsLoader, setShowNewsLoader] = useState(true)
+  const [showNewsSmallLoader, setShowNewsSmallLoader] = useState(false)
 
   useEffect(() => {
     document.title = "Admin page | MotoEmporium";
@@ -209,7 +208,7 @@ const Admin = observer(() => {
       <span class='fw-bold'>11.${t('moto_data.fuelSystem')}</span>: ${addFuelSystem}; </br>
       <span class='fw-bold'>12.${t('moto_data.gearbox')}</span>: ${addGearbox}; </br>`,
         function () {
-          // ADD
+          // ADD Product
           setShowProductsSmallLoader(true)
 
           axios.post(`${serverStore.URL}/addNewMoto`, {
@@ -233,13 +232,13 @@ const Admin = observer(() => {
           })
             .then(function (response) {
               // console.log(response);
-              alertify.success(response.data.massage.ua)
+              alertify.success(t('app.succes'))
               serverStore.getAllMoto(() => { })
               setShowProductsSmallLoader(false)
             })
             .catch(function (error) {
               // console.log(error);
-              alertify.error(error.data.massage.ua)
+              alertify.error(t('app.error'))
               setShowProductsSmallLoader(false)
             });
 
@@ -271,13 +270,13 @@ const Admin = observer(() => {
 
   const addNews = useFormik({
     initialValues: {
-      // addImg: '',
-      // addHeaderEN: '',
-      // addHeaderUA: '',
-      // addTextEN: '',
-      // addTextUA: '',
-      // addDate: '',
-      // addStatus: ''
+      addImg: 'https://w.forfun.com/fetch/df/dfebcde107df64095663af2569af0afd.jpeg?h=900&r=0.5',
+      addHeaderEN: 'I think I\'m not needed here...',
+      addHeaderUA: 'Здається я тут зайвий...',
+      addTextEN: 'Once upon a time there was a guy on a bike, and somehow he got the news in a bike shop.',
+      addTextUA: 'Жив був собі чувак на велосипеді, і якогось хріна про нього зробили новину в магазині мотициклів.',
+      addDate: '15.06.2023',
+      addStatus: '9'
     },
     validationSchema: Yup.object({
       addImg: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(1000, t('yupErrors.valid-maxLength', { num: 1000 })).required(t('yupErrors.required')),
@@ -294,15 +293,60 @@ const Admin = observer(() => {
   function addNewNews(e) {
     e.preventDefault()
 
-    let { } = aN.values
+    let { addImg, addHeaderEN, addHeaderUA, addTextEN, addTextUA, addDate, addStatus } = aN.values
 
     if (aN.isValid) {
 
       alertify.confirm(t('admin_page.saveAlert.title'), `
-              щось
-            `,
+
+      <span class='fw-bold'>1.${t('admin_page.news_tab.news_data.header', { countryCode: '(EN)' })}</span>: ${addHeaderEN} </br>
+      <span class='fw-bold'>2.${t('admin_page.news_tab.news_data.header', { countryCode: '(UA)' })}</span>: ${addHeaderUA} </br>
+      </hr>
+      <span class='fw-bold'>3.${t('admin_page.news_tab.news_data.date')}</span>: ${addDate} </br>
+      <span class='fw-bold'>4.${t('admin_page.news_tab.news_data.rating')}</span>: ${addStatus} </br>
+      </hr>
+      <span class='fw-bold'>5.${t('admin_page.news_tab.news_data.image')}</span>: </br>
+      <img style='width: 100%; height: 150px;' src='${addImg}' alt="img wrong" /> </br> 
+      </hr>
+      <span class='fw-bold'>6.${t('admin_page.news_tab.news_data.text', { countryCode: '(EN)' })}</span>: ${addTextEN} </br>
+      <span class='fw-bold'>7.${t('admin_page.news_tab.news_data.text', { countryCode: '(UA)' })}</span>: ${addTextUA} </br>      
+      `,
         function () {
-          alertify.success('Зміни збережено!')
+          setShowNewsSmallLoader(true)
+
+          setTimeout(() => {
+
+            axios.post(`${serverStore.URL}/addNewNews`, {
+              email: serverStore.UserData.user.email,
+              news: {
+                header: {
+                  ua: addHeaderUA,
+                  en: addHeaderEN
+                },
+                img: addImg,
+                text: {
+                  ua: addTextUA,
+                  en: addTextEN
+                },
+                status: addStatus,
+                data: addDate
+                // indexData: ""
+              }
+            })
+              .then(function (response) {
+                // console.log(response);
+                alertify.success(t('app.succes'))
+                newsStore.getAllNews(() => { })
+                setShowNewsSmallLoader(false)
+              })
+              .catch(function (error) {
+                // console.log(error);
+                alertify.error(t('app.error'))
+                setShowNewsSmallLoader(false)
+              });
+          }, 3000);
+
+
         },
         function () { });
 
@@ -569,8 +613,18 @@ const Admin = observer(() => {
                     {
                       <>
                         {currentNews.map((p) => {
-                          return <AdminNewsItem key={p._id} data={p}></AdminNewsItem>
+                          return <AdminNewsItem key={p._id} data={p} newsSmallLoader={setShowNewsSmallLoader}></AdminNewsItem>
                         })}
+                        {
+                          showNewsSmallLoader == true ?
+                            <div style={{ height: '80px', paddingTop: "20px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                              <div className="loader active" id="loader-2">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                              </div>
+                            </div> : null
+                        }
                         <NewsPagination
                           shortPagination={true}
                           dataLength={newsStore.newsData.length}

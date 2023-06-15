@@ -2,13 +2,13 @@ import './OneMoto.scss'
 
 import ducatiImg from '../../images/ducati_background.png'
 
+import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import serverStore from '../../store/serverStore';
 import clientStore from '../../store/clientStore';
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from "react-router-dom";
-import OtherMoto from "../../components/OtherMoto/OtherMoto";
 import { useTranslation } from 'react-i18next';
 
 const OneMoto = observer(() => {

@@ -19,7 +19,6 @@ const NotFound = () => {
     }, [])
 
     return (
-
         <div className="notFound">
             <div className="notFound__wrap">
                 <div>
