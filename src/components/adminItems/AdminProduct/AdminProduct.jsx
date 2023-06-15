@@ -79,22 +79,30 @@ const AdminProduct = observer((props) => {
 
   function sureDelete() {
 
+
     alertify.confirm(t('admin_page.sureDelete.title'), t('admin_page.sureDelete.text-product'),
       function () {
         props.productsSmallLoader(true)
 
         axios.post(`${serverStore.URL}/deleteMoto`, {
-          email: serverStore.UserData.user.email,
+    email: serverStore.UserData.user.email,
           id: _id
         })
           .then(function (response) {
-            // console.log(response);
+            let motoStorage = JSON.parse(localStorage.getItem("BasketMoto"))
+            motoStorage = motoStorage.filter(motoObj => motoObj.id !== _id)
+            localStorage.setItem("BasketMoto", JSON.stringify(motoStorage))
+        
+            let motoFav = JSON.parse(localStorage.getItem("FavoriteMoto"))
+            motoFav = motoFav.filter(motoObj => motoObj !== _id)
+            localStorage.setItem("FavoriteMoto", JSON.stringify(motoFav))
+            
             alertify.success(response.data.massage.en)
+
             serverStore.getAllMoto(() => { })
             props.productsSmallLoader(false)
           })
           .catch(function (error) {
-            // console.log(error);
             alertify.error('error')
             props.productsSmallLoader(false)
           });
