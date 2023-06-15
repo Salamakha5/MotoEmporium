@@ -31,7 +31,7 @@ const AdminNewsItem = (props) => {
       newStatus: status
     },
     validationSchema: Yup.object({
-      newImg: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(500, t('yupErrors.valid-maxLength', { num: 500 })),
+      newImg: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(1000, t('yupErrors.valid-maxLength', { num: 1000 })),
       newHeaderEN: Yup.string().min(15, t('yupErrors.valid-field', { num: 15 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })),
       newHeaderUA: Yup.string().min(15, t('yupErrors.valid-field', { num: 15 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })),
       newTextEN: Yup.string().min(50, t('yupErrors.valid-field', { num: 50 })).max(800, t('yupErrors.valid-maxLength', { num: 800 })),
@@ -97,9 +97,6 @@ const AdminNewsItem = (props) => {
 
           // То по ідеї оновить данні в нашій таблиці
           // newsStore.getAllNews(() => {})
-
-          // Якщо getAllNews не спрацює тоді це перезагрузить сторінку
-          // navigate(0)
 
           alertify.success('Зміни збережено!')
         },

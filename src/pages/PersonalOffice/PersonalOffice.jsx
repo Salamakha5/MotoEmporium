@@ -1,6 +1,6 @@
 import "./PersonalOffice.scss"
 
-import PersonalOfficeStore from "../../store/PersonalOfficeStore"
+import personalOfficeStore from "../../store/personalOfficeStore"
 import serverStore from "../../store/serverStore"
 import OneOrder from "../../components/OneOrder/OneOrder"
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'
@@ -110,7 +110,7 @@ const PersonalOffice = observer(() => {
                     {/* Замовлення */}
                 </div>
             </div>
-            <form onSubmit={formik.handleSubmit} className={"col-12 col-lg-7 " + PersonalOfficeStore.test}>
+            <form onSubmit={formik.handleSubmit} className={"col-12 col-lg-7 " + personalOfficeStore.test}>
                 <div className="pt-3 fs-4 text-center ">{t("office_Page.SettingOffice")}</div>
                 <div className="row m-0 pt-4">
                     <div className="col-12 col-md-6 pb-4">

@@ -27,6 +27,7 @@ const Admin = observer(() => {
 
   // product variables
   const [showProductsLoader, setShowProductsLoader] = useState(true)
+  const [showProductsSmallLoader, setShowProductsSmallLoader] = useState(false)
 
   // news variables
   const [showNewsLoader, setShowNewsLoader] = useState(true)
@@ -145,11 +146,10 @@ const Admin = observer(() => {
   }
   // end sort products
 
-
   // start add product logic
   const addProduct = useFormik({
     initialValues: {
-      addBrand: 'Huyati',
+      addBrand: 'TestMoto',
       addModel: 'Hueta c300',
       addPrice: 99999,
       addImgUrl1: 'https://images.unsplash.com/photo-1589122350591-964f4987a296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
@@ -168,9 +168,9 @@ const Admin = observer(() => {
       addBrand: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
       addModel: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
       addPrice: Yup.string().min(3, t('yupErrors.valid-field', { num: 3 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
-      addImgUrl1: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
-      addImgUrl2: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
-      addImgUrl3: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
+      addImgUrl1: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(1000, t('yupErrors.valid-maxLength', { num: 1000 })).required(t('yupErrors.required')),
+      addImgUrl2: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(1000, t('yupErrors.valid-maxLength', { num: 1000 })).required(t('yupErrors.required')),
+      addImgUrl3: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(1000, t('yupErrors.valid-maxLength', { num: 1000 })).required(t('yupErrors.required')),
       addType: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
       addDisplacement: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
       addBorexStroke: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(50, t('yupErrors.valid-maxLength', { num: 50 })).required(t('yupErrors.required')),
@@ -210,54 +210,52 @@ const Admin = observer(() => {
       <span class='fw-bold'>12.${t('moto_data.gearbox')}</span>: ${addGearbox}; </br>`,
         function () {
           // ADD
+          setShowProductsSmallLoader(true)
 
-          // https://moto-server.onrender.com/api/addNewMoto
           axios.post(`${serverStore.URL}/addNewMoto`, {
             email: serverStore.UserData.user.email,
             moto: {
-              brand: "Macubisi2",
-              model: "1",
-              price: 1,
+              brand: addBrand,
+              model: addModel,
+              price: addPrice,
               imgURL: [
-                "https://kartinkin.net/uploads/posts/2022-03/1646535309_2-kartinkin-net-p-kartinki-s-mototsiklami-2.jpg",
-                "https://ua.e-scooter.co/i/86/a0/65/40ea1c5cfac477b300035c9a8a.jpg",
-                "https://img.poki.com/cdn-cgi/image/quality=78,width=600,height=600,fit=cover,f=auto/c28eee5a5924e8a70afb2c1490d9b571.jpeg"
+                addImgUrl1, addImgUrl2, addImgUrl3
               ],
-              collectionType: "1",
-              displacement: "1",
-              borexStroke: "1",
-              compressionRatio: "1",
-              horsepower: "1",
-              torque: "1",
-              fuelSystem: "1",
-              gearbox: "1"
+              collectionType: addType,
+              displacement: addDisplacement,
+              borexStroke: addBorexStroke,
+              compressionRatio: addCompressionRatio,
+              horsepower: addHorsepower,
+              torque: addTorque,
+              fuelSystem: addFuelSystem,
+              gearbox: addGearbox
             }
           })
             .then(function (response) {
-              console.log(response);
-              alertify.alert('succes', response.data.massage.ua)
-
+              // console.log(response);
+              alertify.success(response.data.massage.ua)
+              serverStore.getAllMoto(() => { })
+              setShowProductsSmallLoader(false)
             })
             .catch(function (error) {
-              console.log(error);
-              alertify.alert(error.data.massage.ua)
+              // console.log(error);
+              alertify.error(error.data.massage.ua)
+              setShowProductsSmallLoader(false)
             });
+
         },
         function () {
           // CANCEL
-          alertify.error('Cancel')
         })
 
     }
   }
   // end add product logic
 
-
   // products pagination
   const lastMotoIndex = adminStore.productsActivePage * adminStore.productsObjectsPerPage
   const firstMotoIndex = lastMotoIndex - adminStore.productsObjectsPerPage
   const currentMoto = serverStore.MotoDataCopy.slice(firstMotoIndex, lastMotoIndex)
-
 
   // start news logic
   let selectSort = createRef()
@@ -282,7 +280,7 @@ const Admin = observer(() => {
       // addStatus: ''
     },
     validationSchema: Yup.object({
-      addImg: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(500, t('yupErrors.valid-maxLength', { num: 500 })).required(t('yupErrors.required')),
+      addImg: Yup.string().min(5, t('yupErrors.valid-field', { num: 5 })).max(1000, t('yupErrors.valid-maxLength', { num: 1000 })).required(t('yupErrors.required')),
       addHeaderEN: Yup.string().min(15, t('yupErrors.valid-field', { num: 15 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
       addHeaderUA: Yup.string().min(15, t('yupErrors.valid-field', { num: 15 })).max(200, t('yupErrors.valid-maxLength', { num: 200 })).required(t('yupErrors.required')),
       addTextEN: Yup.string().min(50, t('yupErrors.valid-field', { num: 50 })).max(800, t('yupErrors.valid-maxLength', { num: 800 })).required(t('yupErrors.required')),
@@ -474,8 +472,18 @@ const Admin = observer(() => {
                     {
                       <>
                         {currentMoto.map((p) => {
-                          return <AdminProduct key={p._id} data={p}></AdminProduct>
+                          return <AdminProduct key={p._id} data={p} productsSmallLoader={setShowProductsSmallLoader}></AdminProduct>
                         })}
+                        {
+                          showProductsSmallLoader == true ?
+                            <div style={{ height: '80px', paddingBottom: "60px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                              <div className="loader active" id="loader-2">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                              </div>
+                            </div> : null
+                        }
                         <AdminProductsPagination
                           shortPagination={true}
                           dataLength={serverStore.MotoDataCopy.length}

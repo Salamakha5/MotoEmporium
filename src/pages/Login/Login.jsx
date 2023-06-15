@@ -5,6 +5,8 @@ import moto_bg from '../../images/logReg_bg.png';
 import flag_en from '../../images/icons/choice_flag-en.png';
 import flag_ua from '../../images/icons/choice_flag-ua.png';
 
+import Home from '../Home/Home';
+
 import Register from '../Register/Register'
 import serverStore from '../../store/serverStore';
 
@@ -16,8 +18,8 @@ import * as Yup from "yup"
 import alertify from 'alertifyjs'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import Home from '../Home/Home';
 import { useTranslation } from 'react-i18next';
+import { toJS } from 'mobx'
 
 
 const Login = observer(() => {
@@ -61,14 +63,15 @@ const Login = observer(() => {
                 setShowPageLoader(false);
                 localStorage.setItem("IsAuthMOTO", response.data.token)
                 navigate('/')
+                serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
 
                 serverStore.decodedToken(localStorage.getItem("IsAuthMOTO"), (decodedResult) => {
                     if (decodedResult === 'succes') {
                         serverStore.tokenDecoded = true
+
                     } else {
-                        alertify.alert("Я помилка логіну");
+                        alertify.alert("decoded login error");
                     }
-                    console.log('помилка в логіні:', decodedResult);
                 });
 
             }, (error) => {

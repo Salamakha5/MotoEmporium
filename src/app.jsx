@@ -35,7 +35,9 @@ const App = observer(() => {
                     serverStore.tokenDecoded = true
 
                     // чек на адміна
-                    serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
+                    if (serverStore.userIsAuth == true) {
+                        serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
+                    }
                 } else {
                     alertify.alert(t('app.alert-warning'), t('app.alert-oldToken'));
                     serverStore.tokenDecoded = true
@@ -45,12 +47,9 @@ const App = observer(() => {
             serverStore.tokenDecoded = true
         }
 
-        // serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
-
-        if (serverStore.tokenDecoded = true) {
-            // чек на адміна
-            // console.log(serverStore.UserData.user.email);
-            // console.log(serverStore.UserData.user.email);
+        // чек на адміна
+        if (serverStore.userIsAuth == true) {
+            serverStore.checkAdminRoots(toJS(serverStore.UserData.user.email))
         }
 
     }, [])
@@ -74,7 +73,6 @@ const App = observer(() => {
                                     <Route path='basket' element={<BasketPage />} />
                                     <Route path='payment' element={<Payment />} />
                                     <Route path='office' element={<PersonalOffice />} />
-                                    <Route path='admin' element={<Admin />} />
                                 </Route>
                             </>
                             :
@@ -85,6 +83,12 @@ const App = observer(() => {
                                 <Route path='login' element={<Login />} />
                                 <Route path='register' element={<Register />} />
                             </Route>
+                    }
+                    {
+                        serverStore.haveAdminRoots == true ?
+                            <Route path="/" element={<Layot />}>
+                                <Route path='admin' element={<Admin />} />
+                            </Route> : null
                     }
                 </Routes>
             </BrowserRouter>

@@ -115,23 +115,16 @@ class ServerStore {
     // чек на адміна
     checkAdminRoots(userEmail) {
 
-        console.log('stor:', userEmail);
-
-        // 1 спосіб
-        // axios.get(`${this.URL}/isAdmin?email='romastal915@gmail.com'`)
-        // axios.get(`${this.URL}/isAdmin?email=${userEmail}`)
-
-        // 2 спосіб
-        axios.get(`${this.URL}/isAdmin`, {
+        axios.post(`${this.URL}/isAdmin`, {
             email: userEmail
         })
             .then((response) => {
                 // console.log('успіх', response.data.massage);
-                // console.log(response);
+                this.haveAdminRoots = response.data.massage
             })
             .catch((error) => {
                 // console.log('не успіх', error.data.massage);
-                // console.log(error);
+                this.haveAdminRoots = error.data.massage
             });
     }
 
