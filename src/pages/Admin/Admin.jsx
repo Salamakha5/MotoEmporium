@@ -261,12 +261,16 @@ const Admin = observer(() => {
 
   function sortNews() {
     if (selectSort.current.value == "new") {
-      newsStore.newsData.sort((a, b) => (+b.indexData) - (+a.indexData))
+        for (let i = 0; i < newsStore.newsData.length; i++) {
+            const [day, month, year] = newsStore.newsData[i].data.split('.');
+            newsStore.newsData[i].date = new Date(`${year}-${month}-${day}`);
+        }
+        newsStore.newsData = newsStore.newsData.sort((a, b) => b.date - a.date);
     }
     if (selectSort.current.value == "maxStatus") {
-      newsStore.newsData.sort((a, b) => (+b.status) - (+a.status))
+        newsStore.newsData.sort((a, b) => (+b.status) - (+a.status))
     }
-  }
+}
 
   const addNews = useFormik({
     initialValues: {
