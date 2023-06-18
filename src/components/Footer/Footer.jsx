@@ -59,7 +59,7 @@ const Footer = () => {
                         <div onClick={pathInaccessible} className="main-link socials__item"><i className="bi bi-facebook"></i></div>
                         <div onClick={pathInaccessible} className="main-link socials__item"><i className="bi bi-instagram"></i></div>
                         <div onClick={pathInaccessible} className="main-link socials__item"><i className="bi bi-linkedin"></i></div>
-                        <div onClick={pathInaccessible} className="main-link socials__item"><i className="bi bi-youtube"></i></div>
+                        <a target='blank' href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" className="main-link socials__item"><i className="bi bi-youtube"></i></a>
                     </div>
                 </div>
             </div>

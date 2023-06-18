@@ -24,6 +24,9 @@ const Contact = () => {
                     <div className="dev-item">
 
                         <div><i className="bi bi-terminal"></i>Roman Shavala</div>
+                        <div className="email_dev || m-1 ms-0 fs-5 d-flex">
+                        <i className="bi bi-envelope-at"></i>    
+                            romastal915@gmail.com</div>
 
                         <div className="btn-cont">
                             <a href="https://github.com/Romasta915" target="_blank">
@@ -43,6 +46,10 @@ const Contact = () => {
                     <div className="dev-item">
 
                         <div><i className="bi bi-terminal"></i>Vladyslav Salamakha</div>
+                        <div className=" email_dev || m-1 ms-0 d-flex">
+                        <i className="bi bi-envelope-at"></i>
+                            vladyslavsalamakhapr@gmail.com
+                            </div>
 
                         <div className="btn-cont">
                             <a href="https://github.com/Salamakha5" target="_blank">

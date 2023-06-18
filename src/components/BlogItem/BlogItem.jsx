@@ -19,11 +19,11 @@ const BlogItem = observer((props) => {
                     btnOpenNews
                         ?
                         <div className="d-none d-lg-flex col-4 col-img d-flex align-items-center justify-content-center">
-                            <img src={img} alt="blog picture" />
+                            <img className='fullImg' src={img} alt="blog picture" />
                         </div>
                         :
                         <div className="d-none d-lg-flex col-3  col-img d-flex align-items-center justify-content-center">
-                            <img src={img} alt="blog picture" />
+                            <img className='smallImg' src={img} alt="blog picture" />
                         </div>
                 }
                 <div className="col ">

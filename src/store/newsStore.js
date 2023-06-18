@@ -7,6 +7,8 @@ class NewsStore {
     }
     URL = 'https://moto-server.onrender.com/api'
     newsData = []
+    newsCountPages = 0
+    newsCountPages1 = 0
     getAllNews(callback) {
         axios.get(this.URL + "/getAllNews")
             .then((response) => {
@@ -20,7 +22,6 @@ class NewsStore {
     }
 
     // pagination
-    newsCountPages = 0
     setNewsCountPages(n) {
         this.newsCountPages = n
     }
