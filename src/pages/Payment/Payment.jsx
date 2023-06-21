@@ -51,9 +51,15 @@ const Payment = () => {
             city: Yup.string().required(t('yupErrors.required'))
                 .min(4, t('yupErrors.valid-field', { num: 4 })).max(20, t('yupErrors.valid-maxLength', { num: 20 })),
             departament: Yup.string().required(t('yupErrors.required'))
-                .min(4, t('yupErrors.valid-field', { num: 4 })).max(10, t('yupErrors.valid-maxLength', { num: 10 })),
+                .min(2, t('yupErrors.valid-field', { num: 2 })).max(10, t('yupErrors.valid-maxLength', { num: 10 })),
         })
     })
+
+ 
+   // ..card..
+
+
+
     const cardformik = useFormik({
         initialValues: {
             // cardNumber: '458796235689',
@@ -63,13 +69,10 @@ const Payment = () => {
         },
         validationSchema: Yup.object({
             cardNumber: Yup.string().required(t('yupErrors.required'))
-                .min(12, t('yupErrors.valid-cardNumber')).max(12, t('yupErrors.valid-maxLength', { num: 12 })),
-            expirationMM: Yup.string().required(t('yupErrors.required'))
-                .min(2, t('yupErrors.valid-field', { num: 2 })).max(2, t('yupErrors.valid-maxLength', { num: 2 })),
-            expirationYY: Yup.string().required(t('yupErrors.required'))
-                .min(2, t('yupErrors.valid-field', { num: 2 })).max(2, t('yupErrors.valid-maxLength', { num: 2 })),
-            cvv: Yup.string().required(t('yupErrors.required'))
-                .min(3, t('yupErrors.valid-field', { num: 3 })).max(3, t('yupErrors.valid-maxLength', { num: 3 })),
+                .min(16, t('yupErrors.valid-cardNumber')).max(16, t('yupErrors.valid-maxLength', { num: 16 })),
+            expirationMM: Yup.string().required(t('yupErrors.required')).matches(/^[0-9]{2}$/gm , 'Invalid YY'),
+            expirationYY: Yup.string().required(t('yupErrors.required')).matches(/^[0-9]{2}$/gm , 'Invalid YY'),
+            cvv: Yup.string().required(t('yupErrors.required')).matches(/^[0-9]{3}$/gm , 'Invalid CVC')
         })
     })
 
@@ -248,13 +251,13 @@ const Payment = () => {
                                         <div className="title">{t('payment_page.cardDetails.expiration-title')}</div>
 
                                         <div className='inputs-cont'>
-                                            <input type="number" placeholder={t('payment_page.cardDetails.expiration-mm')} name="expirationMM"
+                                            <input type="text" placeholder={t('payment_page.cardDetails.expiration-mm')} name="expirationMM"
                                                 className={cardformik.errors.expirationMM
                                                     ? 'forms_bot_line input-mm | form-control invalid'
                                                     : 'forms_bot_line input-mm | form-control valid'}
                                                 onChange={cardformik.handleChange} value={cardformik.values.expirationMM} />
 
-                                            <input type="number" placeholder={t('payment_page.cardDetails.expiration-yy')}
+                                            <input type="text" placeholder={t('payment_page.cardDetails.expiration-yy')}
                                                 className={cardformik.errors.expirationYY
                                                     ? 'forms_bot_line input-yy | form-control invalid'
                                                     : 'forms_bot_line input-yy | form-control valid'}
@@ -263,8 +266,8 @@ const Payment = () => {
                                     </div>
 
                                     <div className="right">
-                                        <div className="title">CVV</div>
-                                        <input type="number" placeholder='nnn'
+                                        <div className="title">CVC</div>
+                                        <input type="text" placeholder='nnn'
                                             className={cardformik.errors.cvv
                                                 ? 'forms_bot_line | form-control invalid'
                                                 : 'forms_bot_line | form-control valid'}

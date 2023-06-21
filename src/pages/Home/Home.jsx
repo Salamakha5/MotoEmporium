@@ -26,9 +26,7 @@ const Home = () => {
     const now = new Date();
     const currentYear = now.getFullYear();
 
-    function pathInaccessible() {
-        alertify.alert(t('app.oops'), t('footer.textOnClick'))
-    }
+ 
 
     return (
         <div className="home">
@@ -65,16 +63,16 @@ const Home = () => {
 
             <div className="our-showroom">
                 <div className="our-showroom__left">
-                    <div className="big-img" onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link1')}>
+                    <NavLink to="/shop" className="navlink big-img" text-on-img={t('home_page.ourShowroom.link1')}>
                         <img src={our_showroom} />
-                    </div>
+                    </NavLink>
                 </div>
                 <div className="our-showroom__right">
                     <div className="small-imgGroup">
-                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link2')}><img src={test_ride} /></div>
-                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link3')}><img src={our_service} /></div>
-                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link4')}><img src={custom_parts} /></div>
-                        <div className='small-imgCont' onClick={pathInaccessible} text-on-img={t('home_page.ourShowroom.link5')}><img src={our_finance} /></div>
+                        <NavLink to="/blog" className='navlink small-imgCont' text-on-img={t('home_page.ourShowroom.link2')}><img src={test_ride} /></NavLink>
+                        <NavLink to="/blog" className='navlink small-imgCont' text-on-img={t('home_page.ourShowroom.link3')}><img src={our_service} /></NavLink>
+                        <NavLink to="/shop" className='navlink small-imgCont' text-on-img={t('home_page.ourShowroom.link4')}><img src={custom_parts} /></NavLink>
+                        <NavLink to="/shop" className='navlink small-imgCont' text-on-img={t('home_page.ourShowroom.link5')}><img src={our_finance} /></NavLink>
                     </div>
                 </div>
             </div>

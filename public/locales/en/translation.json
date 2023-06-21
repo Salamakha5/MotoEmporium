@@ -118,7 +118,7 @@
     "valid-phoneNumber": "It's not like a phone number!",
     "valid-email": "The email address must be valid!",
     "valid-password": "The password must contain at least {{num}} characters!",
-    "valid-cardNumber": "The card number has 12 digits!",
+    "valid-cardNumber": "The card number has 16 digits!",
     "valid-noLessThan": "Not less than {{num}}!",
     "valid-noMoreThan": "No more than {{num}}!"
   },

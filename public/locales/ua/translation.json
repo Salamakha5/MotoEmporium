@@ -118,7 +118,7 @@
     "valid-phoneNumber": "Це не схоже на номер телефону!",
     "valid-email": "Eлектронна адреса має бути дійсною!",
     "valid-password": "Пароль має містити від {{num}} символів!",
-    "valid-cardNumber": "Номер карти має 12 цифр!",
+    "valid-cardNumber": "Номер карти має 16 цифр!",
     "valid-noLessThan": "Не менше за {{num}}!",
     "valid-noMoreThan": "Не більше за {{num}}!"
   },

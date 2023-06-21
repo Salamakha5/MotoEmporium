@@ -127,7 +127,9 @@
         }
     }
 }
-
+.navlink:hover{
+    color: $mainColorDarken;
+}   
 .our-showroom {
     display: flex;
     justify-content: center;
@@ -148,7 +150,6 @@
             height: 300px;
             position: relative;
             cursor: pointer;
-
             &::before {
                 content: attr(text-on-img);
                 position: absolute;
