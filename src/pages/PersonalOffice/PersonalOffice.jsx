@@ -1,6 +1,6 @@
 import "./PersonalOffice.scss"
 
-import personalOfficeStore from "../../store/PersonalOfficeStore"
+import personalOfficeStore from "../../store/personalOfficeStore"
 import serverStore from "../../store/serverStore"
 import OneOrder from "../../components/OneOrder/OneOrder"
 import BackUpBtn from '../../components/BackUpBtn/BackUpBtn'

@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 // * main yellow
-$mainColor: #D3AF37;
-$mainColorDarken: mix(black, $mainColor, 20%);
+// $mainColor: #D3AF37;
+// $mainColorDarken: mix(black, $mainColor, 20%);
 
-// $mainColor: #10a19d;
+$mainColor: #10a19d;
 // $mainColor: #66dffa;
 // $mainColor: #6d67e4;
 // $mainColor: violet;
 // $mainColor: darkviolet;
 // $mainColor: orange;
-// $mainColorDarken: mix(black, $mainColor, 30%);
+$mainColorDarken: mix(black, $mainColor, 30%);
 
 
 $mainColor2: #252C33;
